@@ -1,64 +1,33 @@
+/* eslint max-len: 0 */
 
+import React from 'react';
+// import PropTypes from 'prop-types';
+import Header from '../components/Header';
+import config from '../../config/website';
+import theme from '../../config/theme';
+import styled from 'react-emotion';
 
-import React from "react";
-import Link from "gatsby-link";
-
-const IndexPage = ({ data }) => (
-  <div>
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <ul>
-      {data.allStrapiBlog.edges.map(document => (
-        <li key={document.node.id}>
-          <h2>
-            <Link to={`/${document.node.id}`}>{document.node.title}</Link>
-          </h2>
-          <p>{document.node.text}</p>
-        </li>
-      ))}
-    </ul>
-    <Link to="/page-2/">Go to page 2</Link>
-  </div>
-);
-
-export default IndexPage;
-
-export const pageQuery = graphql`
-  query IndexQuery {
-    allStrapiBlog {
-      edges {
-        node {
-          id
-          title
-          text
-          author {
-            id
-            username
-          }
-          date
-          images {
-            url
-          }
-          header_image {
-            url
-          }
-        }
-      }
-    }
-    allStrapiPrograma {
-      edges {
-        node {
-          from
-          to
-          description
-          sreda
-          cetvrtok
-          petok
-          sabota
-        }
-      }
-    }
+const Heading = styled.div`
+  margin: 3rem;
+  color: ${props => props.theme.colors.white.base};
+  text-shadow: ${theme.shadow.text.big};
+  @media (max-width: 500px) {
+    display: none;
   }
 `;
 
+const Index = () => (
+  <div>
+    <Header>
+      <Heading>
+        Web site comming soon...<br/>
+        #ourgoalisthefuture
+      </Heading>
+      <a href="https://www.facebook.com/sektor909/" >
+        <img src={config.siteBanner} />
+      </a>
+    </Header>
+  </div>
+);
+
+export default Index;

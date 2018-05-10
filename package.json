@@ -1,22 +1,28 @@
 {
   "name": "gatsby-starter-default",
-  "description": "Gatsby default starter",
+  "description": "Club Sektor909 web-site",
   "version": "1.0.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Bozhidar Hristovv <bozidar.hristov@gmail.com>",
   "dependencies": {
+    "emotion": "^9.1.3",
+    "emotion-server": "^9.1.3",
+    "emotion-theming": "^9.1.2",
     "gatsby": "^1.9.247",
+    "gatsby-image": "^1.0.51",
     "gatsby-link": "^1.6.40",
     "gatsby-plugin-react-helmet": "^2.0.10",
     "gatsby-plugin-typography": "^1.7.18",
     "gatsby-source-strapi": "0.0.3",
+    "polished": "^1.9.2",
+    "prop-types": "^15.6.1",
+    "react-emotion": "^9.1.3",
     "react-helmet": "^5.2.0",
     "typography": "^0.16.17",
     "typography-theme-de-young": "^0.16.9"
   },
   "keywords": [
-    "gatsby"
+    "sektor909, sektor, skopje, clubbing, gatsby"
   ],
-  "license": "MIT",
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
@@ -24,6 +30,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
+    "gatsby-plugin-emotion": "^1.1.16",
     "prettier": "^1.12.0"
   }
 }

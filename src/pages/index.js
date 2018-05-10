@@ -11,9 +11,6 @@ const Heading = styled.div`
   margin: 3rem;
   color: ${props => props.theme.colors.white.base};
   text-shadow: ${theme.shadow.text.big};
-  @media (max-width: 500px) {
-    display: none;
-  }
 `;
 
 const Index = () => (

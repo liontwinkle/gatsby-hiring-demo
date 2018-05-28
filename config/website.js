@@ -6,7 +6,7 @@ module.exports = {
   siteTitle: 'Club Sektor909',
   siteTitleAlt: 'Electronic Music Club Sektor909 based in Skopje',
   siteShortName: 'Sektor909',
-  siteLogo: '/social/avatar.png',
+  siteLogo: '/social/909_white.svg',
   siteBanner: '/social/sektor_2.png',
   siteUrl: 'https://www.sektor909.mk',
   pathPrefix: '/',

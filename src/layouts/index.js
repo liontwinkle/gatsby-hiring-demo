@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import { injectGlobal } from 'emotion';
 import { ThemeProvider } from 'emotion-theming';
 import theme from '../../config/theme';
+import Navigation from '../components/Navigation';
+import SEO from '../components/SEO';
 
 injectGlobal`
   *, *:before, *:after {
@@ -181,6 +183,8 @@ injectGlobal`
 const MainLayout = ({ children }) => (
   <ThemeProvider theme={theme}>
     <div>
+      <SEO />
+      <Navigation />
       {children()}
     </div>
   </ThemeProvider>

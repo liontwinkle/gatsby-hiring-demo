@@ -20,7 +20,7 @@ const Text = styled.div`
   color: ${props => props.theme.colors.white.base};
   z-index: 1000;
   position: absolute;
-  top: 35%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   display: flex;

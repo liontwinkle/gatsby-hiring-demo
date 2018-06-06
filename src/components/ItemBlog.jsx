@@ -84,12 +84,12 @@ const Excerpt = styled.div`
   margin-top: 2rem;
 `;
 
-const ItemBlog = ({ path, cover, title, date, text, images, author, }) => (
+const ItemBlog = ({ path, cover, title, date, text, author, }) => (
   <Wrapper>
     <Image>
       <Link to={`blog/${path}`}>
-        {/* <Img sizes={cover} /> */}
-        <img src={`http://localhost:1337${cover.url}`} />
+        <Img sizes={cover} />
+        {/* <img src={`http://localhost:1337${cover.url}`} /> */}
       </Link>
     </Image>
     <Information>
@@ -97,7 +97,7 @@ const ItemBlog = ({ path, cover, title, date, text, images, author, }) => (
         <h1>{title}</h1>
       </Link>
       <Statistics>
-        {date} &mdash; <span className={hideS}>Автор: {author.username}</span>
+        {date} &mdash; <span className={hideS}>Автор: {author}</span>
         {/* <Link to={`/categories/${kebabCase(category)}`}>{category}</Link> */}
       </Statistics>
       <Excerpt>{text}</Excerpt>
@@ -116,6 +116,6 @@ ItemBlog.propTypes = {
   // timeToRead: PropTypes.number.isRequired,
   // tags: PropTypes.array.isRequired,
   text: PropTypes.string.isRequired,
-  images: PropTypes.arrayOf(PropTypes.object),
-  author: PropTypes.object.isRequired,
+  // images: PropTypes.arrayOf(PropTypes.object),
+  author: PropTypes.string.isRequired,
 };

@@ -42,7 +42,6 @@ const Wrapper = styled.article`
   max-width: 851px;
   width: 851px;
   height: 315px;
-  margin-top: 2rem;
   @media (max-width: 1000px) {
     flex-basis: 100%;
     max-width: 100%;
@@ -146,18 +145,18 @@ const Description = styled.h2`
   margin-bottom: 0;
 `;
 
-const FeaturedPost = ({ cover, path, from, to, description }) => (
+const FeaturedPost = ({ cover, path, from, to, naslov }) => (
   <Wrapper>
     <Image>
-      {/* <Img sizes={cover} /> */}
-      <EventPic src={cover} />
+      <Img sizes={cover} />
+      {/* <EventPic src={cover} /> */}
     </Image>
     <Link to={path} className={styledLink}>
       <Information>
         <Date>{from}</Date>
         <Date>{to}</Date>
       </Information>
-      <Description>{description}</Description>
+      <Description>{naslov}</Description>
     </Link>
     <ImageOverlay />
   </Wrapper>
@@ -170,7 +169,8 @@ FeaturedPost.propTypes = {
   path: PropTypes.string.isRequired,
   from: PropTypes.string.isRequired,
   to: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  // description: PropTypes.string.isRequired,
+  naslov: PropTypes.string.isRequired,
 };
 
 FeaturedPost.defaultProps = {

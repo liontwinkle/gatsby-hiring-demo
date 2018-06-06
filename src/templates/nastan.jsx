@@ -125,11 +125,12 @@ const CardWrapper = styled.div`
   }
 `
 
-const Post = ({ pathContext: { slug }, data: { strapiPrograma: post } }) => {
+const Post = ({ pathContext: { uid }, data: { prismicPrograma: post } }) => {
   //   const { sizes } = post.cover.childImageSharp;
   if (!post.id) {
-    post.id = slug
+    post.id = uid
   }
+  console.log(post.data.photo.url)
 
   return (
     <div className="post-container">
@@ -137,60 +138,54 @@ const Post = ({ pathContext: { slug }, data: { strapiPrograma: post } }) => {
       {/* <SEO postPath={slug} postNode={postNode} postSEO /> */}
       <Wrapper>
         <Hero>
-          <h1>{post.description}</h1>
+          <h1>{post.data.naslov.text}</h1>
           <Information>
-            {post.from} &mdash; {post.to}{' '}
-            {/* &mdash; <span className={hideS}>Kategorie: </span> */}
-            <Link to={`/categories/${kebabCase(post.category)}`}>
-              {post.category}
-            </Link>
+            {post.data.from} &mdash; {post.data.to}{' '}
+            &mdash;
+            <a href={post.data.facebook_link.url}>
+              Facebook Event
+            </a>
           </Information>
         </Hero>
         <Wave />
-        {/* <Img sizes={sizes} /> */}
-        <img
-          className="gatsby-image-wrapper"
-          src={`http://localhost:1337${post.flyer.url}`}
-        />
+        <Img sizes={post.data.photo.localFile.childImageSharp.sizes} />
       </Wrapper>
       <Container type="article">
-        <Content input={post.description} />
+        <Content input={post.data.description.html} />
         <CardWrapper>
           <Card>
             <h2>Среда</h2>
-            {post.sreda}
+            <div dangerouslySetInnerHTML={{__html: post.data.sreda.html}} />
           </Card>
           <Card>
             <h2>Четврток</h2>
-            {post.cetvrtok}
+            <div dangerouslySetInnerHTML={{__html: post.data.cetvrtok.html}} />
           </Card>
           <Card>
             <h2>Петок</h2>
-            {post.petok}
+            <div dangerouslySetInnerHTML={{__html: post.data.petok.html}} />
           </Card>
           <Card>
             <h2>Сабота</h2>
-            {post.sabota}
+            <div dangerouslySetInnerHTML={{__html: post.data.sabota.html}} />
           </Card>
         </CardWrapper>
         <Line />
         {/* <Tags tags={post.tags} /> */}
         <p>
           <span className={fontBold}>Повеќе: </span>
-          <a href={post.fblink}>
-            Фејсбук Настан
-          </a>
+          <a href={post.data.facebook_link.url}>Фејсбук Настан</a>
         </p>
       </Container>
       <Footer>
-        <h2>Lust auf mehr Tutorials & Goodies? Werde ein Patron.</h2>
+        {/* <h2>Lust auf mehr Tutorials & Goodies? Werde ein Patron.</h2>
         <a
           href="https://www.patreon.com/lekoarts"
           target="_blank"
           rel="noopener noreferrer"
         >
           <Button type="secondary">Patreon</Button>
-        </a>
+        </a> */}
       </Footer>
     </div>
   )
@@ -209,21 +204,58 @@ export default Post
 
 /* eslint no-undef: "off" */
 export const Nastan = graphql`
-  query SingleEvent($slug: String!) {
-    strapiPrograma(path: { eq: $slug }) {
+  query SingleEvent($uid: String!) {
+    prismicPrograma(uid: { eq: $uid }) {
       id
-      path
-      description
-      from(formatString: "MMMM DD, YYYY")
-      to(formatString: "MMMM DD, YYYY")
-      sreda
-      cetvrtok
-      petok
-      sabota
-      path
-      fblink
-      flyer {
-        url
+      uid
+      slugs
+      data {
+        naslov {
+          html
+          text
+        }
+        from
+        to
+        description {
+          html
+          text
+        }
+        naslov {
+          html
+          text
+        }
+        sreda {
+          html
+          text
+        }
+        cetvrtok {
+          html
+          text
+        }
+        petok {
+          html
+          text
+        }
+        sabota {
+          html
+          text
+        }
+        photo {
+          url
+          localFile {
+            childImageSharp {
+              sizes(maxWidth: 1920, quality: 85, duotone: { highlight: "#EE9338", shadow: "#BE7123" }) {
+                ...GatsbyImageSharpSizes_withWebp
+              }
+              resize(width: 1200) {
+                src
+              }
+            }
+          }
+        }
+        facebook_link {
+          url
+        }
       }
     }
   }

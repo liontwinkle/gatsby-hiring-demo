@@ -16,28 +16,26 @@ const Base = styled.div`
 `
 
 const Nastan = ({
-    data: {
-      allStrapiPrograma: { edges: events },
-    },
-  }) => (
+  data: {
+    allPrismicPrograma: { edges: events },
+  },
+}) => (
   <div className="container blog-container">
     <Helmet title={`Nastani | ${config.siteTitle}`} />
-    <Header
-      slim
-      subtitle="Идни и Претходни Настани во Клуб Сектор909"
-    >
+    <Header slim subtitle="Идни и Претходни Настани во Клуб Сектор909">
       Настани
     </Header>
     <Container type="big">
       <Base>
         {events.map(post => (
           <NastanPost
-            key={post.node.description}
-            cover="social/sektor_2.png"
-            from={post.node.from}
-            to={post.node.to}
-            path={post.node.path}
-            description={post.node.description}
+            key={post.node.id}
+            cover={post.node.data.photo.localFile.childImageSharp.sizes}
+            from={post.node.data.from}
+            to={post.node.data.to}
+            path={post.node.slugs[0]}
+            naslov={post.node.data.naslov.text}
+            description={post.node.data.description.text}
             sreda={post.node.sreda}
             cetvrtok={post.node.cetvrtok}
             petok={post.node.petok}
@@ -64,21 +62,37 @@ Nastan.propTypes = {
 /* eslint no-undef: "off" */
 export const EventsQuery = graphql`
   query EventsQuery {
-    allStrapiPrograma(limit: 2, sort: { fields: [from], order: DESC }) {
+    allPrismicPrograma {
       edges {
         node {
-          from(formatString: "MMMM DD, YYYY")
-          to(formatString: "MMMM DD, YYYY")
-          flyer {
-            url
+          id
+          slugs
+          data {
+            from
+            to
+            photo {
+              url
+              localFile {
+                childImageSharp {
+                  sizes(
+                    maxWidth: 900
+                    quality: 90
+                    traceSVG: { color: "#2B2B2F" }
+                  ) {
+                    ...GatsbyImageSharpSizes_withWebp_tracedSVG
+                  }
+                }
+              }
+            }
+            naslov {
+              html
+              text
+            }
+            description {
+              html
+              text
+            }
           }
-          description
-          sreda
-          cetvrtok
-          petok
-          sabota
-          path
-          fblink
         }
       }
     }

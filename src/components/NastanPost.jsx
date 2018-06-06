@@ -90,6 +90,7 @@ const NastanPost = ({
   from,
   to,
   description,
+  naslov,
   sreda,
   cetvrtok,
   petok,
@@ -98,14 +99,14 @@ const NastanPost = ({
 }) => (
   <Wrapper>
     <Image>
-      <Link to={`programa/${path}`}>
-        {/* <Img sizes={cover} /> */}
-        <img src={cover} />
+      <Link to={`nedelna-programa/${path}`}>
+        <Img sizes={cover} />
+        {/* <img src={cover} /> */}
       </Link>
     </Image>
     <Information>
-      <Link to={`programa/${path}`}>
-        <h1>{description}</h1>
+      <Link to={`nedelna-programa/${path}`}>
+        <h1>{naslov}</h1>
       </Link>
       <Statistics>
         {from} &mdash; {to} {/*Min. &mdash;{' '}*/}
@@ -125,6 +126,7 @@ NastanPost.propTypes = {
   from: PropTypes.string.isRequired,
   to: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
+  naslov: PropTypes.string.isRequired,
 }
 
 NastanPost.defaultProps = {

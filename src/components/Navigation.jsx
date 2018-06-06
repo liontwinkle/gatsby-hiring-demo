@@ -117,8 +117,8 @@ const Navigation = () => (
       <Logo />
     </StyledLink>
     <Nav>
-      <Link to="/nastani" activeClassName="active">
-        Настани
+      <Link to="/nedelna-programa" activeClassName="active">
+        Програма
       </Link>
       <Link to="/blog" activeClassName="active">
         Блог

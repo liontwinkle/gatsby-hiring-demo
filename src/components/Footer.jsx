@@ -10,7 +10,7 @@ const Wrapper = styled.footer`
   position: relative;
   padding-top: 10rem;
   padding-bottom: 2rem;
-  background: ${props => props.theme.gradient.leftToRight};
+  background: ${props => props.theme.gradient.rightToLeft};
   font-family: ${props => props.theme.fontFamily.heading};
 `;
 
@@ -85,32 +85,32 @@ const Footer = ({ children }) => {
         <OptionalContent>{children}</OptionalContent>
         <Content>
           <Important>
-            <a href="https://www.patreon.com/lekoarts" target="_blank" rel="noopener noreferrer">
-              Patreon
-            </a>
-            <Link to="/categories/tutorial">Tutorials</Link>
-            <Link to="/categories/freebie">Freebies</Link>
+            <Link to="/label">
+              Лејбл
+            </Link>
+            <Link to="/residents">Резидент Диџеи</Link>
+            <Link to="/podcast">Подкаст</Link>
           </Important>
-          <Item>
+          {/* <Item>
             <Link to="/impressum">Impressum</Link>
             <Link to="/datenschutz">Datenschutzerklärung</Link>
-          </Item>
+          </Item> */}
           <Item>
-            <a href="https://www.behance.net/lekoarts" target="_blank" rel="noopener noreferrer">
-              Behance
-            </a>
-            <a href="https://dribbble.com/LekoArts" target="_blank" rel="noopener noreferrer">
-              Dribbble
-            </a>
-            <a href="https://www.facebook.com/lekoarts.de" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.facebook.com/sektor909" target="_blank" rel="noopener noreferrer">
               Facebook
             </a>
-            <a href="https://www.instagram.com/lekoarts.de" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.mixcloud.com/sektor909/" target="_blank" rel="noopener noreferrer">
+              Mixcloud
+            </a>
+            <a href="https://www.twitter.com/sektor909" target="_blank" rel="noopener noreferrer">
+              Twitter
+            </a>
+            <a href="https://www.instagram.com/sektor909" target="_blank" rel="noopener noreferrer">
               Instagram
             </a>
           </Item>
         </Content>
-        <Copyright>{`Copyright © ${date}. LekoArts. Alle Rechte vorbehalten.`}</Copyright>
+        <Copyright>{`Copyright © ${date}. Сектор909, Скопје, Македонија. Сите права се задржани.`}</Copyright>
       </Container>
     </Wrapper>
   );

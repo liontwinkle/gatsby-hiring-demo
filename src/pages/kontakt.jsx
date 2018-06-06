@@ -83,7 +83,7 @@ const Kontakt = () => (
           <Facebook />
           Facebook
         </MyLinkCard>
-        <MyLinkCard link="https://www.instagram.com/lekoarts.de" instagram>
+        <MyLinkCard link="https://www.instagram.com/sektor909" instagram>
           <Instagram />
           Insta
         </MyLinkCard>

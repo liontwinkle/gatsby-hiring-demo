@@ -10,3 +10,4 @@ yarn-error.log
 
 #Other
 plugins/
+.env.development

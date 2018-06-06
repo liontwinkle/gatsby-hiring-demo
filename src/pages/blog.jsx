@@ -17,29 +17,25 @@ const Base = styled.div`
 
 const Blog = ({
   data: {
-    allStrapiBlog: { edges: posts },
+    allPrismicBlog: { edges: posts },
   },
 }) => (
   <div className="container blog-container">
     <Helmet title={`Blog | ${config.siteTitle}`} />
-    <Header
-      slim
-      subtitle="Новости и информации"
-    >
+    <Header slim subtitle="Новости и информации">
       Блог
     </Header>
     <Container type="big">
       <Base>
         {posts.map(post => (
           <ItemBlog
-            key={post.node.title}
-            cover={post.node.header_image}
-            date={post.node.date}
-            path={`blog/${post.node.path}`}
-            title={post.node.title}
-            text={post.node.text}
-            images={post.node.images}
-            author={post.node.author}
+            key={post.node.data.title.text}
+            cover={post.node.data.image.localFile.childImageSharp.sizes}
+            date={post.node.data.date}
+            path={`blog/${post.node.slugs}`}
+            title={post.node.data.title.text}
+            text={post.node.data.text.text}
+            author={post.node.data.author.document[0].data.name}
           />
         ))}
       </Base>
@@ -60,27 +56,49 @@ Blog.propTypes = {
 
 /* eslint no-undef: "off" */
 export const blogQuery = graphql`
-  query StrapiBlog {
-    allStrapiBlog {
+  query AllPrismicBlog {
+    allPrismicBlog {
       edges {
         node {
           id
-          title
-          text
-          date(formatString: "MMMM DD, YYYY")
-          path
-          author {
-            username
-            provider
-          }
-          images {
-            id
-            url
-          }
-          header_image {
-            id
-            url
-            size
+          slugs
+          data {
+            date
+            title {
+              html
+              text
+            }
+            text {
+              html
+              text
+            }
+            author {
+              document {
+                data {
+                  name
+                }
+              }
+            }
+            image {
+              localFile {
+                childImageSharp {
+                sizes(maxWidth: 900, quality: 85, traceSVG: { color: "#2B2B2F" }) {
+                  ...GatsbyImageSharpSizes_withWebp_tracedSVG
+                }
+              }
+              }
+            }
+            gallery {
+              image1 {
+                localFile {
+                  childImageSharp {
+                    sizes(maxWidth: 900, quality: 85, traceSVG: { color: "#2B2B2F" }) {
+                      ...GatsbyImageSharpSizes_withWebp_tracedSVG
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }

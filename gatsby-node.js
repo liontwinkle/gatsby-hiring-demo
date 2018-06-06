@@ -14,45 +14,47 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
     const blogPage = path.resolve('src/templates/post.jsx')
     resolve(
       graphql(`
-        {
-          allStrapiPrograma(sort: { fields: [from], order: DESC }) {
-            edges {
-              node {
-                path
-              }
-            }
-          }
-          allStrapiBlog {
-            edges {
-              node {
-                id
-                path
-              }
+      {
+        allPrismicPrograma(sort: {fields: [data___from], order: DESC}) {
+          edges {
+            node {
+              id
+              uid
+              slugs
             }
           }
         }
+        allPrismicBlog {
+          edges {
+            node {
+              id
+              uid
+              slugs
+            }
+          }
+        }
+      }
       `).then(result => {
         if (result.errors) {
           /* eslint no-console: "off" */
           console.log(result.errors)
           reject(result.errors)
         }
-
-        result.data.allStrapiPrograma.edges.forEach(edge => {
+        result.data.allPrismicPrograma.edges.forEach(edge => {
           createPage({
-            path: `programa/${edge.node.path}`,
+            path: `nedelna-programa/${edge.node.slugs}`,
             component: postPage,
             context: {
-              slug: edge.node.path,
+              uid: edge.node.uid,
             },
           })
         })
-        result.data.allStrapiBlog.edges.forEach(edge => {
+        result.data.allPrismicBlog.edges.forEach(edge => {
           createPage({
-            path: `blog/${edge.node.path}`,
+            path: `blog/${edge.node.uid}`,
             component: blogPage,
             context: {
-              slug: edge.node.path,
+              uid: edge.node.uid,
             },
           })
         })

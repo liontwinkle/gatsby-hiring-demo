@@ -59,7 +59,7 @@ const Index = ({
         ))}
       </PostsWrapper>
       <Text>
-        Дознај повеќе за идни и претходни настани во клубот Сектор909 <br />
+        Сите настани <br />
         <Link to="/nedelna-programa">
           <Button type="secondary">Програма</Button>
         </Link>
@@ -85,7 +85,11 @@ export const pageQuery = graphql`
               url
               localFile {
                 childImageSharp {
-                  sizes(maxWidth: 1400, quality: 85, traceSVG: { color: "#2B2B2F" }) {
+                  sizes(
+                    maxWidth: 1400
+                    quality: 85
+                    traceSVG: { color: "#2B2B2F" }
+                  ) {
                     ...GatsbyImageSharpSizes_withWebp_tracedSVG
                   }
                 }

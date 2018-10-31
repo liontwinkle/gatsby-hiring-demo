@@ -32,7 +32,7 @@ const Blog = ({
             key={post.node.data.title.text}
             cover={post.node.data.image.localFile.childImageSharp.sizes}
             date={post.node.data.date}
-            path={`blog/${post.node.slugs}`}
+            path={`blog/${post.node.uid}`}
             title={post.node.data.title.text}
             text={post.node.data.text.text}
             author={post.node.data.author.document[0].data.name}
@@ -61,6 +61,7 @@ export const blogQuery = graphql`
       edges {
         node {
           id
+          uid
           slugs
           data {
             date
@@ -82,17 +83,25 @@ export const blogQuery = graphql`
             image {
               localFile {
                 childImageSharp {
-                sizes(maxWidth: 900, quality: 85, traceSVG: { color: "#2B2B2F" }) {
-                  ...GatsbyImageSharpSizes_withWebp_tracedSVG
+                  sizes(
+                    maxWidth: 900
+                    quality: 85
+                    traceSVG: { color: "#2B2B2F" }
+                  ) {
+                    ...GatsbyImageSharpSizes_withWebp_tracedSVG
+                  }
                 }
-              }
               }
             }
             gallery {
               image1 {
                 localFile {
                   childImageSharp {
-                    sizes(maxWidth: 900, quality: 85, traceSVG: { color: "#2B2B2F" }) {
+                    sizes(
+                      maxWidth: 900
+                      quality: 85
+                      traceSVG: { color: "#2B2B2F" }
+                    ) {
                       ...GatsbyImageSharpSizes_withWebp_tracedSVG
                     }
                   }

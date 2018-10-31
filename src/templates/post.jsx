@@ -106,13 +106,10 @@ const Line = styled.div`
   margin-bottom: 1rem;
 `
 
-const Post = ({ pathContext: { slug }, data: { prismicBlog: post } }) => {
+const Post = ({ data: { prismicBlog: post } }) => {
   // const post = postNode.frontmatter;
   // const { sizes } = post.cover.childImageSharp;
   const { gallery } = post.data
-  if (!post.id) {
-    post.id = slug
-  }
 
   return (
     <div className="post-container">
@@ -131,11 +128,14 @@ const Post = ({ pathContext: { slug }, data: { prismicBlog: post } }) => {
       </Wrapper>
       <Container type="article">
         <Content input={post.data.text.html} />
-          <Grid width={320} gap={24}>
-            {gallery.map(image => 
-              <Img sizes={image.image1.localFile.childImageSharp.sizes} />
-            )}
-          </Grid>
+        <Grid width={320} gap={24}>
+          {gallery.map(image => (
+            <Img
+              key={image.image1.localFile.id}
+              sizes={image.image1.localFile.childImageSharp.sizes}
+            />
+          ))}
+        </Grid>
         <Line />
         {/* <Tags tags={post.tags} /> */}
         <p>
@@ -161,9 +161,9 @@ const Post = ({ pathContext: { slug }, data: { prismicBlog: post } }) => {
 export default Post
 
 Post.propTypes = {
-  pathContext: PropTypes.shape({
-    slug: PropTypes.string.isRequired,
-  }),
+  // pathContext: PropTypes.shape({
+  //   slug: PropTypes.string.isRequired,
+  // }),
   data: PropTypes.shape({
     prismicBlog: PropTypes.object.isRequired,
   }),
@@ -196,7 +196,11 @@ export const BlogQuery = graphql`
         image {
           localFile {
             childImageSharp {
-              sizes(maxWidth: 900, quality: 85, duotone: { highlight: "#5ABDFF", shadow: "#3466DB" }) {
+              sizes(
+                maxWidth: 900
+                quality: 85
+                duotone: { highlight: "#5ABDFF", shadow: "#3466DB" }
+              ) {
                 ...GatsbyImageSharpSizes_withWebp_tracedSVG
               }
             }
@@ -205,8 +209,13 @@ export const BlogQuery = graphql`
         gallery {
           image1 {
             localFile {
+              id
               childImageSharp {
-                sizes(maxWidth: 900, quality: 85, traceSVG: { color: "#2B2B2F" }) {
+                sizes(
+                  maxWidth: 900
+                  quality: 85
+                  traceSVG: { color: "#2B2B2F" }
+                ) {
                   ...GatsbyImageSharpSizes_withWebp_tracedSVG
                 }
               }

@@ -1,6 +1,6 @@
-require("dotenv").config({
+require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
-});
+})
 
 module.exports = {
   siteMetadata: {
@@ -10,19 +10,19 @@ module.exports = {
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-emotion`,
     {
-      resolve: "gatsby-source-prismic",
+      resolve: 'gatsby-source-prismic',
       options: {
         // The name of your prismic.io repository. This is required.
         // Example: 'gatsby-source-prismic-test-site' if your prismic.io address
         // is 'gatsby-source-prismic-test-site.prismic.io'.
-        repositoryName: "sektor909",
-  
+        repositoryName: 'sektor909',
+
         // An API access token to your prismic.io repository. This is required.
         // You can generate an access token in the "API & Security" section of
         // your repository settings. Setting a "Callback URL" is not necessary.
         // The token will be listed under "Permanent access tokens".
         accessToken: process.env.PRISMIC_ACCESS_TOKEN,
-  
+
         // Set a link resolver function used to process links in your content.
         // Fields with rich text formatting or links to internal content use this
         // function to generate the correct link URL.
@@ -33,7 +33,7 @@ module.exports = {
         linkResolver: ({ node, key, value }) => doc => {
           // Your link resolver
         },
-  
+
         // Set an HTML serializer function used to process formatted content.
         // Fields with rich text formatting use this function to generate the
         // correct HTML.
@@ -42,11 +42,14 @@ module.exports = {
         // different HTML serializer logic for each field if necessary.
         // See: https://prismic.io/docs/nodejs/beyond-the-api/html-serializer
         htmlSerializer: ({ node, key, value }) => (
-          (type, element, content, children) => {
-            // Your HTML serializer
-          }
-        )
-      }
+          type,
+          element,
+          content,
+          children
+        ) => {
+          // Your HTML serializer
+        },
+      },
     },
     `gatsby-transformer-sharp`,
     // {
@@ -65,7 +68,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-favicon`,
       options: {
-        logo: "./static/social/909_favicon.png",
+        logo: './static/social/909_favicon.png',
         injectHTML: true,
         icons: {
           android: true,
@@ -77,9 +80,9 @@ module.exports = {
           facebook: true,
           twitter: false,
           yandex: false,
-          windows: false
-        }
-      }
+          windows: false,
+        },
+      },
     },
     'gatsby-plugin-sharp',
     {

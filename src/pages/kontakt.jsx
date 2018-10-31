@@ -1,18 +1,18 @@
 /* eslint max-len: 0 */
 
-import React from 'react';
-import Helmet from 'react-helmet';
-import styled from 'react-emotion';
-import Footer from '../components/Footer';
-import Container from '../components/Container';
-import { LinkCard } from '../components/Card';
-import Header from '../components/Header';
-import Button from '../components/Button';
-import config from '../../config/website';
-import Paperplane from '../icons/Paperplane';
-import Twitter from '../icons/Twitter';
-import Instagram from '../icons/Instagram';
-import Facebook from '../icons/Facebook';
+import React from 'react'
+import Helmet from 'react-helmet'
+import styled from 'react-emotion'
+import Footer from '../components/Footer'
+import Container from '../components/Container'
+import { LinkCard } from '../components/Card'
+import Header from '../components/Header'
+import Button from '../components/Button'
+import config from '../../config/website'
+import Paperplane from '../icons/Paperplane'
+import Twitter from '../icons/Twitter'
+import Instagram from '../icons/Instagram'
+import Facebook from '../icons/Facebook'
 // import YouTube from '../icons/YouTube';
 
 const CenteredContainer = styled(Container)`
@@ -20,12 +20,12 @@ const CenteredContainer = styled(Container)`
   svg {
     fill: white;
   }
-`;
+`
 
 const Wrapper = styled.div`
   margin-top: 3rem;
   margin-bottom: 2rem;
-`;
+`
 
 const MyLinkCard = styled(LinkCard)`
   flex-basis: calc(99% * 1 / 4 - 1rem);
@@ -42,7 +42,7 @@ const MyLinkCard = styled(LinkCard)`
     max-width: calc(99% * 1 / 1);
     width: calc(99% * 1 / 1);
   }
-`;
+`
 
 const CardContainer = styled(Container)`
   display: flex;
@@ -50,26 +50,19 @@ const CardContainer = styled(Container)`
   justify-content: space-between;
   margin-top: 1rem;
   margin-bottom: 4rem;
-`;
+`
 
 const Kontakt = () => (
   <div className="kontakt-container">
     <Helmet title={`Kontakt | ${config.siteTitle}`} />
-    <Header
-      slim
-      subtitle="Нешто повеќе за клубот Сектор909"
-    >
+    <Header slim subtitle="Нешто повеќе за клубот Сектор909">
       Контакт
     </Header>
     <Wrapper>
       <Container type="article">
         <h3>Инфо за клубот.</h3>
-        <p>
-          Бла бла бла историја...
-        </p>
-        <p>
-          Повеќе инфо...
-        </p>
+        <p>Бла бла бла историја...</p>
+        <p>Повеќе инфо...</p>
       </Container>
       <CenteredContainer>
         <a href="mailto:info@sektor.com">
@@ -85,7 +78,7 @@ const Kontakt = () => (
         </MyLinkCard>
         <MyLinkCard link="https://www.instagram.com/sektor909" instagram>
           <Instagram />
-          Insta
+          Instagram
         </MyLinkCard>
         <MyLinkCard link="https://www.twitter.com/sektor909" twitter>
           <Twitter />
@@ -99,6 +92,6 @@ const Kontakt = () => (
     </Wrapper>
     <Footer />
   </div>
-);
+)
 
-export default Kontakt;
+export default Kontakt

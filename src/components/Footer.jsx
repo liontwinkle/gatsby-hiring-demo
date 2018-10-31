@@ -1,10 +1,10 @@
-import React from 'react';
-import Link from 'gatsby-link';
-import PropTypes from 'prop-types';
-import format from 'date-fns/format';
-import styled from 'react-emotion';
-import Wave from './Wave';
-import Container from './Container';
+import React from 'react'
+import Link from 'gatsby-link'
+import PropTypes from 'prop-types'
+import format from 'date-fns/format'
+import styled from 'react-emotion'
+import Wave from './Wave'
+import Container from './Container'
 
 const Wrapper = styled.footer`
   position: relative;
@@ -12,7 +12,7 @@ const Wrapper = styled.footer`
   padding-bottom: 2rem;
   background: ${props => props.theme.gradient.rightToLeft};
   font-family: ${props => props.theme.fontFamily.heading};
-`;
+`
 
 const OptionalContent = styled.div`
   margin-top: 2rem;
@@ -25,7 +25,7 @@ const OptionalContent = styled.div`
     margin: 0 auto;
     display: block;
   }
-`;
+`
 
 const Content = styled.div`
   margin-top: 4rem;
@@ -43,7 +43,7 @@ const Content = styled.div`
   @media (max-width: ${props => props.theme.breakpoints.s}) {
     flex-direction: column;
   }
-`;
+`
 
 const Item = styled.div`
   display: flex;
@@ -58,7 +58,7 @@ const Item = styled.div`
       margin-right: 0.5rem;
     }
   }
-`;
+`
 
 const Important = styled(Item)`
   font-size: 1.2rem;
@@ -68,16 +68,16 @@ const Important = styled(Item)`
       color: ${props => props.theme.colors.primary.base};
     }
   }
-`;
+`
 
 const Copyright = styled.div`
   margin: 1rem 0;
   text-align: center;
   color: ${props => props.theme.colors.white.blue};
-`;
+`
 
 const Footer = ({ children }) => {
-  const date = format(new Date(), 'YYYY');
+  const date = format(new Date(), 'YYYY')
   return (
     <Wrapper>
       <Wave orientation="top" />
@@ -85,10 +85,8 @@ const Footer = ({ children }) => {
         <OptionalContent>{children}</OptionalContent>
         <Content>
           <Important>
-            <Link to="/label">
-              Лејбл
-            </Link>
-            <Link to="/residents">Резидент Диџеи</Link>
+            <Link to="/label">Лејбл</Link>
+            <Link to="/djs">Диџеи</Link>
             <Link to="/podcast">Подкаст</Link>
           </Important>
           {/* <Item>
@@ -96,28 +94,45 @@ const Footer = ({ children }) => {
             <Link to="/datenschutz">Datenschutzerklärung</Link>
           </Item> */}
           <Item>
-            <a href="https://www.facebook.com/sektor909" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://www.facebook.com/sektor909"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Facebook
             </a>
-            <a href="https://www.mixcloud.com/sektor909/" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://www.mixcloud.com/sektor909/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Mixcloud
             </a>
-            <a href="https://www.twitter.com/sektor909" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://www.twitter.com/sektor909"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Twitter
             </a>
-            <a href="https://www.instagram.com/sektor909" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://www.instagram.com/sektor909"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Instagram
             </a>
           </Item>
         </Content>
-        <Copyright>{`Copyright © ${date}. Сектор909, Скопје, Македонија. Сите права се задржани.`}</Copyright>
+        <Copyright
+        >{`Copyright © ${date}. Сектор909, Скопје, Македонија. Сите права се задржани.`}</Copyright>
       </Container>
     </Wrapper>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer
 
 Footer.propTypes = {
   children: PropTypes.node,
-};
+}

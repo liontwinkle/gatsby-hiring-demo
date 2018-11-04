@@ -111,7 +111,7 @@ const Post = ({ data: { prismicBlog: post } }) => {
   // const post = postNode.frontmatter;
   // const { sizes } = post.cover.childImageSharp;
   const { gallery } = post.data
-  const playlist = post.data.body.length > 0 ? post.data.body[0] : null
+  const playlist = post.data.body ? post.data.body[0] : null
   const PlaylistPlayer = playlist ? (
     <Player
       playlist={playlist.items}

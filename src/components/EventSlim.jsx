@@ -5,6 +5,7 @@ import Img from 'gatsby-image'
 import { css } from 'emotion'
 import styled from 'react-emotion'
 import theme from '../../config/theme'
+import EventInfo from './EventInfo'
 
 const ImageOverlay = styled.div`
   border-radius: ${props => props.theme.borderRadius.default};
@@ -146,36 +147,26 @@ const Description = styled.h2`
   margin-bottom: 0;
 `
 
-const FeaturedPost = ({ cover, path, from, to, naslov }) => (
+const EventSlim = ({ cover, path, from, to, naslov }) => (
   <Wrapper>
-    <Image>
-      <Img sizes={cover} />
-    </Image>
     <Link to={`/program/${path}`} className={styledLink}>
       <Information>
         <Date>{from}</Date>
         <Date>{to}</Date>
       </Information>
-      <Description>{naslov}</Description>
+      {/* <Description>{naslov}</Description> */}
     </Link>
-    <ImageOverlay />
   </Wrapper>
 )
 
-export default FeaturedPost
+export default EventSlim
 
-FeaturedPost.propTypes = {
+EventSlim.propTypes = {
   cover: PropTypes.any.isRequired,
   path: PropTypes.string.isRequired,
-  from: PropTypes.string.isRequired,
-  to: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
   // description: PropTypes.string.isRequired,
   naslov: PropTypes.string.isRequired,
 }
 
-FeaturedPost.defaultProps = {
-  sreda: '',
-  cetvrtok: '',
-  petok: '',
-  sabota: '',
-}
+EventSlim.defaultProps = {}

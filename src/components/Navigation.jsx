@@ -1,12 +1,12 @@
 /* eslint no-unused-expressions: 0 */
 
-import React from 'react';
-import Link from 'gatsby-link';
-import { injectGlobal } from 'emotion';
-import styled from 'react-emotion';
-import Headroom from 'react-headroom';
-import Logo from '../icons/Logo';
-import theme from '../../config/theme';
+import React from 'react'
+import Link from 'gatsby-link'
+import { injectGlobal } from 'emotion'
+import styled from 'react-emotion'
+import Headroom from 'react-headroom'
+import Logo from '../icons/Logo'
+import theme from '../../config/theme'
 
 injectGlobal`
   .headroom-wrapper {
@@ -66,7 +66,7 @@ injectGlobal`
       color: ${theme.colors.black.base};
     }
   }
-`;
+`
 
 const StyledLink = styled(Link)`
   display: flex;
@@ -77,7 +77,7 @@ const StyledLink = styled(Link)`
     margin-bottom: 0;
     width: 2.5rem;
   }
-`;
+`
 
 const LogoText = styled.span`
   text-transform: uppercase;
@@ -88,7 +88,7 @@ const LogoText = styled.span`
   @media (max-width: 500px) {
     display: none;
   }
-`;
+`
 
 const Nav = styled.nav`
   display: flex;
@@ -108,7 +108,7 @@ const Nav = styled.nav`
       color: white;
     }
   }
-`;
+`
 
 const Navigation = () => (
   <Headroom calcHeightOnResize disableInlineStyles>
@@ -117,7 +117,7 @@ const Navigation = () => (
       <Logo />
     </StyledLink>
     <Nav>
-      <Link to="/nedelna-programa" activeClassName="active">
+      <Link to="/program" activeClassName="active">
         Програма
       </Link>
       <Link to="/blog" activeClassName="active">
@@ -128,6 +128,6 @@ const Navigation = () => (
       </Link>
     </Nav>
   </Headroom>
-);
+)
 
-export default Navigation;
+export default Navigation

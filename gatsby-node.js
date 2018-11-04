@@ -14,26 +14,26 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
     const blogPage = path.resolve('src/templates/post.jsx')
     resolve(
       graphql(`
-      {
-        allPrismicPrograma(sort: {fields: [data___from], order: DESC}) {
-          edges {
-            node {
-              id
-              uid
-              slugs
+        {
+          allPrismicPrograma(sort: { fields: [data___from], order: DESC }) {
+            edges {
+              node {
+                id
+                uid
+                slugs
+              }
+            }
+          }
+          allPrismicBlog {
+            edges {
+              node {
+                id
+                uid
+                slugs
+              }
             }
           }
         }
-        allPrismicBlog {
-          edges {
-            node {
-              id
-              uid
-              slugs
-            }
-          }
-        }
-      }
       `).then(result => {
         if (result.errors) {
           /* eslint no-console: "off" */
@@ -42,7 +42,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         }
         result.data.allPrismicPrograma.edges.forEach(edge => {
           createPage({
-            path: `nedelna-programa/${edge.node.slugs}`,
+            path: `program/${edge.node.uid}`,
             component: postPage,
             context: {
               uid: edge.node.uid,

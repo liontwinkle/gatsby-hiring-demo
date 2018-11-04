@@ -16,6 +16,7 @@ import Footer from '../components/Footer'
 import { hideS } from '../utils/hide'
 import config from '../../config/website'
 import Grid from 'react-css-grid'
+import Player from '../components/Player'
 
 // import '../utils/prism-okaida.css';
 
@@ -110,6 +111,8 @@ const Post = ({ data: { prismicBlog: post } }) => {
   // const post = postNode.frontmatter;
   // const { sizes } = post.cover.childImageSharp;
   const { gallery } = post.data
+  const playlist = post.data.body[0]
+  console.log(playlist)
 
   return (
     <div className="post-container">
@@ -128,6 +131,10 @@ const Post = ({ data: { prismicBlog: post } }) => {
       </Wrapper>
       <Container type="article">
         <Content input={post.data.text.html} />
+        <Player
+          playlist={playlist.items}
+          name={playlist.primary.playlist_name.text}
+        />
         <Grid width={320} gap={24}>
           {gallery.map(image => (
             <Img
@@ -171,12 +178,30 @@ Post.propTypes = {
 
 /* eslint no-undef: "off" */
 export const BlogQuery = graphql`
-  query StrapiSingleBlog($uid: String!) {
+  query SingleBlog($uid: String!) {
     prismicBlog(uid: { eq: $uid }) {
       id
       uid
       slugs
       data {
+        body {
+          ... on PrismicBlogBodyPlaylist {
+            slice_type
+            primary {
+              playlist_name {
+                html
+                text
+              }
+            }
+            items {
+              out_link {
+                url
+              }
+              artist
+              track
+            }
+          }
+        }
         date
         title {
           html

@@ -111,7 +111,13 @@ const Post = ({ data: { prismicBlog: post } }) => {
   // const post = postNode.frontmatter;
   // const { sizes } = post.cover.childImageSharp;
   const { gallery } = post.data
-  const playlist = post.data.body[0]
+  const playlist = post.data.body.length > 0 ? post.data.body[0] : null
+  const PlaylistPlayer = playlist ? (
+    <Player
+      playlist={playlist.items}
+      name={playlist.primary.playlist_name.text}
+    />
+  ) : null
   console.log(playlist)
 
   return (
@@ -131,10 +137,7 @@ const Post = ({ data: { prismicBlog: post } }) => {
       </Wrapper>
       <Container type="article">
         <Content input={post.data.text.html} />
-        <Player
-          playlist={playlist.items}
-          name={playlist.primary.playlist_name.text}
-        />
+        {PlaylistPlayer}
         <Grid width={320} gap={24}>
           {gallery.map(image => (
             <Img

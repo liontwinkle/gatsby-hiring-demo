@@ -1,4 +1,4 @@
-import { rgba } from 'polished';
+import { rgba } from 'polished'
 
 const colors = {
   white: {
@@ -26,18 +26,22 @@ const colors = {
     light: '#46507a',
     dark: '#262c41',
   },
-};
+}
 
 const tint = {
   black: rgba(colors.black.base, 0.1),
   white: rgba(colors.white.base, 0.75),
   blue: rgba(colors.primary.base, 0.35),
-};
+}
 
 const gradient = {
-  leftToRight: `linear-gradient(-45deg, ${colors.background.dark} 0%, ${colors.background.light} 100%)`,
-  rightToLeft: `linear-gradient(45deg, ${colors.black.base} 0%, ${colors.black.blue} 100%)`,
-};
+  leftToRight: `linear-gradient(-45deg, ${colors.background.dark} 0%, ${
+    colors.background.light
+  } 100%)`,
+  rightToLeft: `linear-gradient(45deg, ${colors.black.base} 0%, ${
+    colors.black.blue
+  } 100%)`,
+}
 
 const shadow = {
   button: {
@@ -47,11 +51,11 @@ const shadow = {
   card: '0 20px 30px rgba(0, 0, 0, 0.1)',
   feature: {
     big: {
-      default: '0 40px 40px rgba(0, 0, 0, 0.2)',
+      default: '0 40px 40px rgba(0, 0, 0, 0.1)',
       hover: '0 50px 50px rgba(0, 0, 0, 0.1)',
     },
     small: {
-      default: '0 15px 25px rgba(0, 0, 0, 0.2)',
+      default: '0 1px 5px rgba(27,31,35,0.15)',
       hover: '0 40px 45px rgba(0, 0, 0, 0.1)',
     },
   },
@@ -59,7 +63,7 @@ const shadow = {
     small: '0 5px 10px rgba(0, 0, 0, 0.13)',
     big: '0 15px 20px rgba(0, 0, 0, 0.13)',
   },
-};
+}
 
 const button = {
   default: {
@@ -70,26 +74,30 @@ const button = {
     },
   },
   primary: {
-    background: `linear-gradient(30deg, ${colors.primary.light} 0%, ${colors.primary.dark} 100%)`,
+    background: `linear-gradient(30deg, ${colors.primary.light} 0%, ${
+      colors.primary.dark
+    } 100%)`,
     boxShadow: `${shadow.button.default} ${rgba(colors.primary.base, 0.4)}`,
     hover: {
       boxShadow: `${shadow.button.hover} ${rgba(colors.primary.base, 0.3)}`,
     },
   },
   secondary: {
-    background: `linear-gradient(30deg, ${colors.secondary.light} 0%, ${colors.secondary.dark} 100%)`,
+    background: `linear-gradient(30deg, ${colors.secondary.light} 0%, ${
+      colors.secondary.dark
+    } 100%)`,
     boxShadow: `${shadow.button.default} ${rgba(colors.secondary.base, 0.4)}`,
     hover: {
       boxShadow: `${shadow.button.hover} ${rgba(colors.secondary.base, 0.3)}`,
     },
   },
-};
+}
 
 const transition = {
   easeInOutCubic: 'cubic-bezier(0.645, 0.045, 0.355, 1)',
   easeOutBack: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
   duration: '0.4s',
-};
+}
 
 const theme = {
   colors,
@@ -113,7 +121,7 @@ const theme = {
     big: '83.33333rem',
   },
   borderRadius: {
-    default: '0.4rem',
+    default: '0.2rem',
     round: '100rem',
   },
   transitions: {
@@ -131,6 +139,6 @@ const theme = {
       transition: 'all 0.25s ease-in-out',
     },
   },
-};
+}
 
-export default theme;
+export default theme

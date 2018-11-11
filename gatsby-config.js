@@ -84,6 +84,13 @@ module.exports = {
         },
       },
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `social`,
+        path: `${__dirname}/static/social`,
+      },
+    },
     'gatsby-plugin-sharp',
     {
       resolve: `gatsby-plugin-typography`,

@@ -6,6 +6,9 @@ import Link from 'gatsby-link'
 import kebabCase from 'lodash/kebabCase'
 import { hideS } from '../elements/Hide'
 import Tags from './Tags'
+import { FaCalendar } from 'react-icons/fa'
+import { MdLocationOn } from 'react-icons/md'
+const djMixer = require('../icons/dj-mixer.svg')
 
 const Wrapper = styled.article`
   position: relative;
@@ -58,6 +61,15 @@ const Statistics = styled.div`
   h4 {
     color: ${props => props.theme.colors.black.base};
   }
+  span {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+  img {
+    width: 40px;
+    height: 35px;
+    margin-right: 0.5rem;
+  }
 `
 
 const Excerpt = styled.div`
@@ -84,11 +96,14 @@ const EventInfo = ({
           <h2>{title}</h2>
         </Link>
         <Statistics className={marginBottom}>
+          <img src={djMixer} />
           <u>LINE UP:</u>
           <h3 style={{ display: 'inline' }}>{` ${lineup}`}</h3>
         </Statistics>
         <Statistics>
-          <u>{date} &mdash; ЛОКАЦИЈА:</u>
+          <FaCalendar size={20} />
+          <span>{date}</span>
+          <MdLocationOn size={20} />
           <h4 style={{ display: 'inline' }}>{` ${location}`}</h4>
         </Statistics>
         {tags && <Tags tags={tags} />}

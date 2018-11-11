@@ -25,6 +25,12 @@ function secondsToTime(secs) {
   return time
 }
 
+const Wrapper = styled.div`
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+`
+
 const PlayerControler = styled.div`
   height: 200;
   width: 800;
@@ -40,7 +46,7 @@ const PlayerControler = styled.div`
   .seek {
     height: 6px;
     background-color: ${props => props.theme.colors.white.blue};
-    width: 100%;
+    width: 650px;
     border-radius: 4px;
     display: flex;
     margin-left: 0.5rem;
@@ -79,8 +85,8 @@ const PlayerControler = styled.div`
   }
   div.timer {
     margin-left: 0.5rem;
-    width: 140px;
-    max-width: 140px;
+    width: 200px;
+    max-width: 200px;
     display: inline-block;
   }
 `
@@ -236,7 +242,7 @@ class Player extends React.Component {
     const nowPlaying = playlist[index]
 
     return (
-      <div>
+      <Wrapper>
         <h3>{this.props.name}</h3>
         <Info>
           {nowPlaying
@@ -309,7 +315,7 @@ class Player extends React.Component {
           activeUrl={this.state.url}
           playing={this.state.playing}
         />
-      </div>
+      </Wrapper>
     )
   }
 }

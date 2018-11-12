@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'react-emotion';
+import React from 'react'
+import PropTypes from 'prop-types'
+import styled from 'react-emotion'
 
 const Wrapper = styled.div`
   padding: 2rem 0 1rem 0;
@@ -45,13 +45,15 @@ const Wrapper = styled.div`
       }
     }
   }
-`;
+`
 
-const Content = ({ input }) => <Wrapper dangerouslySetInnerHTML={{ __html: input }} />;
+const Content = ({ input }) => (
+  <Wrapper dangerouslySetInnerHTML={{ __html: input }} />
+)
 // const Content = ({ input }) => <Wrapper>{input}</Wrapper>;
 
-export default Content;
+export default Content
 
 Content.propTypes = {
   input: PropTypes.any.isRequired,
-};
+}

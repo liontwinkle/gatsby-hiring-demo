@@ -32,10 +32,8 @@ const Wrapper = styled.div`
 `
 
 const PlayerControler = styled.div`
-  height: 200;
-  width: 800;
-  margin: 0.5em;
-  padding: 0.5rem;
+  margin: 0.3em;
+  padding: 0.2rem;
   display: flex;
   -webkit-box-align: center;
   align-items: center;
@@ -46,7 +44,21 @@ const PlayerControler = styled.div`
   .seek {
     height: 6px;
     background-color: ${props => props.theme.colors.white.blue};
-    width: 650px;
+    @media (max-width: ${props => props.theme.breakpoints.l}) {
+      width: 84%;
+    }
+    @media (max-width: ${props => props.theme.breakpoints.m}) {
+      width: 60%;
+    }
+    @media (max-width: ${props => props.theme.breakpoints.s}) {
+      width: 48%;
+    }
+    @media (max-width: ${props => props.theme.breakpoints.xs}) {
+      width: 65%;
+    }
+    @media (min-width: ${props => props.theme.breakpoints.l}) {
+      width: 90%;
+    }
     border-radius: 4px;
     display: flex;
     margin-left: 0.5rem;
@@ -73,25 +85,68 @@ const PlayerControler = styled.div`
     background: ${props => props.theme.colors.black.light};
     cursor: pointer;
   }
-  .timer {
-    color: ${props => props.theme.colors.black.light};
-  }
-  .playButton {
-    margin-left: 1rem;
-    margin-right: 1rem;
-  }
-  input {
+  .playPauseButton {
+    color: ${props => props.theme.colors.white.blue};
     cursor: pointer;
+    @media (max-width: ${props => props.theme.breakpoints.l}) {
+      width: 6%;
+      height: 6%;
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+    }
+    @media (max-width: ${props => props.theme.breakpoints.m}) {
+      width: 10%;
+      height: 10%;
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+    }
+    @media (max-width: ${props => props.theme.breakpoints.s}) {
+      width: 15%;
+      height: 15%;
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+    }
+    @media (max-width: ${props => props.theme.breakpoints.xs}) {
+      width: 20%;
+      height: 20%;
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+    }
+    @media (min-width: ${props => props.theme.breakpoints.l}) {
+      width: 6%;
+      height: 6%;
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+    }
   }
-  div.timer {
-    margin-left: 0.5rem;
-    width: 200px;
-    max-width: 200px;
-    display: inline-block;
+  .nextPrevButton {
+    @media (max-width: ${props => props.theme.breakpoints.l}) {
+      width: 4%;
+      height: 4%;
+    }
+    @media (max-width: ${props => props.theme.breakpoints.m}) {
+      width: 8%;
+      height: 8%;
+    }
+    @media (max-width: ${props => props.theme.breakpoints.s}) {
+      width: 10%;
+      height: 10%;
+    }
+    @media (max-width: ${props => props.theme.breakpoints.xs}) {
+      width: 12%;
+      height: 12%;
+    }
+    @media (min-width: ${props => props.theme.breakpoints.l}) {
+      width: 4%;
+      height: 4%;
+    }
   }
 `
 const Info = styled.div`
   text-align: center;
+  div.timer {
+    color: ${props => props.theme.colors.black.light};
+  }
 `
 
 class Player extends React.Component {
@@ -186,16 +241,7 @@ class Player extends React.Component {
   }
 
   findNextUrl = (playlist, index) => {
-    console.log('Here', index)
     const maxIndex = playlist.length
-    // switch (index) {
-    //   case index == -1 || index == playlist.length - 1:
-    //     console.log('First case')
-    //     return playlist[0].out_link.url
-    //   case index >= 0 && index < maxIndex:
-    //     console.log('Second case')
-    //     return playlist[index].out_link.url
-    // }
     if (index == -1 || index == maxIndex) {
       console.log('First case')
       return playlist[0].out_link.url
@@ -215,9 +261,7 @@ class Player extends React.Component {
       index = playlist.findIndex(el => el.out_link.url == this.state.url) - 1
     }
 
-    console.log('Index', index)
     const url = this.findNextUrl(playlist, index)
-    console.log('URL', url)
     this.setState({ url: url })
   }
 
@@ -236,6 +280,16 @@ class Player extends React.Component {
     const playlist = this.props.playlist
     const PlayPauseButton = this.state.playing ? FaPause : FaPlay
     const MuteSoundButton = this.state.muted ? FaVolumeOff : FaVolumeUp
+    const Timer =
+      this.state.playing || this.state.played > 0.0 ? (
+        <div className="timer">
+          {secondsToTime(duration * this.state.played)}&nbsp;/&nbsp;{secondsToTime(
+            duration
+          )}
+        </div>
+      ) : (
+        <div className="timer">-</div>
+      )
     const index = this.state.url
       ? playlist.findIndex(el => el.out_link.url == this.state.url)
       : -1
@@ -248,18 +302,23 @@ class Player extends React.Component {
           {nowPlaying
             ? `${nowPlaying.artist} - ${nowPlaying.track}`
             : `Artist - Track`}
+
+          {Timer}
         </Info>
         <PlayerControler>
           <FaFastBackward
-            size={30}
             onClick={() => this.onPlayNext('backward')}
+            className="nextPrevButton"
           />
           <PlayPauseButton
-            className="playButton"
-            size={40}
+            className="playPauseButton"
             onClick={this.playPause}
+            // viewBox={'0 0 448 512'}
           />
-          <FaFastForward size={30} onClick={() => this.onPlayNext('forward')} />
+          <FaFastForward
+            className="nextPrevButton"
+            onClick={() => this.onPlayNext('forward')}
+          />
           <input
             step="any"
             type="range"
@@ -280,12 +339,8 @@ class Player extends React.Component {
           <MuteSoundButton
             size={this.state.muted ? 20 : 25}
             onClick={this.toggleMuted}
+            className="muteButton"
           />
-          <div className="timer">
-            {secondsToTime(duration * this.state.played)}&nbsp;/&nbsp;{secondsToTime(
-              duration
-            )}
-          </div>
         </PlayerControler>
         <ReactPlayer
           ref={this.ref}

@@ -9,6 +9,7 @@ import {
   FaSoundcloud,
   FaYoutube,
 } from 'react-icons/fa'
+import { GoLinkExternal } from 'react-icons/go'
 
 const Table = styled.table`
   background: transparent;
@@ -16,6 +17,12 @@ const Table = styled.table`
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
+  .center {
+    text-align: center;
+  }
+  .thinColumn {
+    width: 20px;
+  }
   a.linkSource {
     color: ${props => props.theme.colors.black.light};
   }
@@ -40,7 +47,7 @@ const Playlist = ({ playlist, getActiveTrack, activeUrl, playing }) => {
     <Table>
       <thead>
         <tr>
-          <th>
+          <th className="center">
             <h4>
               <FaList size={23} />
             </h4>
@@ -53,30 +60,32 @@ const Playlist = ({ playlist, getActiveTrack, activeUrl, playing }) => {
             <h4>Track</h4>
           </th>
           <th>
-            <h4>Source</h4>
+            <h4>
+              <GoLinkExternal size={23} />
+            </h4>
           </th>
         </tr>
       </thead>
       <tbody className="body">
         {playlist.map((track, index) => (
           <tr key={track.out_link.url}>
-            <td>{index + 1}</td>
+            <td className="center">{index + 1}</td>
             <td>
               <div
                 onClick={() => getActiveTrack(track.out_link.url)}
                 style={{ cursor: 'pointer' }}
               >
                 {(track.out_link.url == activeUrl) & playing ? (
-                  <FaPause size={23} />
+                  <FaPause size={20} />
                 ) : (
-                  <FaPlay size={23} />
+                  <FaPlay size={20} />
                 )}
               </div>
             </td>
             <td>{track.artist}</td>
             <td>{track.track}</td>
             {console.log(track.out_link.url.includes('soundcloud'))}
-            <td>
+            <td className="center">
               <a
                 className="linkSource"
                 href={track.out_link.url}

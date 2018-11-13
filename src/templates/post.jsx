@@ -118,7 +118,6 @@ const Post = ({ data: { prismicBlog: post } }) => {
       name={playlist.primary.playlist_name.text}
     />
   ) : null
-  console.log(playlist)
 
   return (
     <div className="post-container">

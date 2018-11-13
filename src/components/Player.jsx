@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'react-emotion'
+import styled, { css } from 'react-emotion'
 import ReactPlayer from 'react-player'
 import {
   FaPlay,
@@ -10,6 +10,8 @@ import {
   FaVolumeOff,
 } from 'react-icons/fa'
 import Playlist from './Playlist'
+import Slider from 'rc-slider'
+import './Slider.css'
 
 function secondsToTime(secs) {
   secs = Math.round(secs)
@@ -197,6 +199,7 @@ class Player extends React.Component {
     this.setState({ muted: !this.state.muted })
   }
   setPlaybackRate = e => {
+    console.log('Setting Playback Rate: ', parseFloat(e.target.value))
     this.setState({ playbackRate: parseFloat(e.target.value) })
   }
   onPlay = () => {
@@ -211,16 +214,23 @@ class Player extends React.Component {
     this.setState({ seeking: true })
   }
   onSeekChange = e => {
+    console.log('On seek change', parseFloat(e.target.value), e.target.value)
     this.setState({ played: parseFloat(e.target.value) })
   }
-  onSeekMouseUp = e => {
+  onSliderChange = value => {
+    console.log('On slider change', parseFloat(value))
+    this.setState({ played: parseFloat(value) })
+  }
+  onSeekMouseUp = value => {
     this.setState({ seeking: false })
-    this.player.seekTo(parseFloat(e.target.value))
+    this.player.seekTo(parseFloat(value))
   }
   onProgress = state => {
     console.log('onProgress', state)
+    console.log('YES Seeking')
     // We only want to update time slider if we are not currently seeking
     if (!this.state.seeking) {
+      console.log('NOT Seeking')
       this.setState(state)
     }
   }
@@ -251,7 +261,6 @@ class Player extends React.Component {
     }
   }
   onPlayNext = direction => {
-    console.log(direction)
     const playlist = this.props.playlist
     let index
     if (direction == 'forward') {
@@ -277,6 +286,7 @@ class Player extends React.Component {
       duration,
       playbackRate,
     } = this.state
+    console.log('Muted: ', muted)
     const playlist = this.props.playlist
     const PlayPauseButton = this.state.playing ? FaPause : FaPlay
     const MuteSoundButton = this.state.muted ? FaVolumeOff : FaVolumeUp
@@ -319,7 +329,7 @@ class Player extends React.Component {
             className="nextPrevButton"
             onClick={() => this.onPlayNext('forward')}
           />
-          <input
+          {/* <input
             step="any"
             type="range"
             className="seek"
@@ -335,6 +345,20 @@ class Player extends React.Component {
             onProgress={this.onProgress}
             onPlay={this.onPlay}
             onPause={this.onPause}
+          /> */}
+          <Slider
+            // step="any"
+            type="range"
+            className="seek"
+            min={0}
+            max={1}
+            step={0.000001}
+            value={played}
+            allowCross={false}
+            defaultValue={0}
+            onChange={this.onSliderChange}
+            onAfterChange={this.onSeekMouseUp}
+            onBeforeChange={this.onSeekMouseDown}
           />
           <MuteSoundButton
             size={this.state.muted ? 20 : 25}

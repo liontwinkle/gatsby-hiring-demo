@@ -39,7 +39,7 @@ const Wrapper = styled.article`
   @media (max-width: ${props => props.theme.breakpoints.m}) {
     flex-basis: 100%;
     max-width: 100%;
-    height: 22rem;
+    height: 20rem;
     &:first-child {
       margin-bottom: 2rem;
     }
@@ -47,7 +47,7 @@ const Wrapper = styled.article`
   @media (max-width: ${props => props.theme.breakpoints.s}) {
     flex-basis: 100%;
     max-width: 100%;
-    height: 25rem;
+    height: 23rem;
     &:first-child {
       margin-bottom: 2rem;
     }

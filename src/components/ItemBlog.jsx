@@ -79,9 +79,13 @@ const Information = styled.div`
 
 const Statistics = styled.div`
   color: ${props => props.theme.colors.black.lighter};
-  span {
+  span.date {
     margin-left: 0.5rem;
-    margin-right: 0.5rem;
+    margin-right: 1rem;
+  }
+  span.author {
+    margin-left: 0.5rem;
+    margin-right: 1rem;
   }
 `
 
@@ -103,8 +107,9 @@ const ItemBlog = ({ path, cover, title, date, text, author }) => (
       </Link>
       <Statistics>
         <GoCalendar size={20} />
-        <span>{date}</span> &mdash; <GoPencil size={20} />
-        <span className={hideS}>{author}</span>
+        <span className="date">{date}</span>
+        <GoPencil size={20} />
+        <span className={'author'}>{author}</span>
         {/* <Link to={`/categories/${kebabCase(category)}`}>{category}</Link> */}
       </Statistics>
       <Excerpt>{text}</Excerpt>

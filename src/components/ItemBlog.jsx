@@ -5,7 +5,6 @@ import Link from 'gatsby-link'
 import Img from 'gatsby-image'
 import kebabCase from 'lodash/kebabCase'
 import { hideS } from '../utils/hide'
-import { FaCalendar } from 'react-icons/fa'
 import { GoCalendar, GoPencil } from 'react-icons/go'
 
 const Wrapper = styled.article`

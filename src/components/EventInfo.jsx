@@ -6,8 +6,10 @@ import Link from 'gatsby-link'
 import kebabCase from 'lodash/kebabCase'
 import { hideS } from '../elements/Hide'
 import Tags from './Tags'
-import { FaCalendar } from 'react-icons/fa'
-import { MdLocationOn } from 'react-icons/md'
+// import { FaCalendar } from 'react-icons/fa'
+// import { MdLocationOn } from 'react-icons/md'
+import { GoCalendar, GoLocation } from 'react-icons/go'
+
 const djMixer = require('../icons/dj-mixer.svg')
 
 const Wrapper = styled.article`
@@ -16,6 +18,7 @@ const Wrapper = styled.article`
   border-radius: ${props => props.theme.borderRadius.default};
   box-shadow: ${props => props.theme.shadow.feature.small.default};
   transition: ${props => props.theme.transitions.boom.transition};
+  background-color: ${props => props.theme.colors.white.base};
   height: 20rem;
   margin: 0 auto;
   margin-bottom: 2rem;
@@ -33,8 +36,29 @@ const Wrapper = styled.article`
       margin-bottom: 2rem;
     }
   }
-  @media (max-width: ${props => props.theme.breakpoints.s}) {
+  @media (max-width: ${props => props.theme.breakpoints.m}) {
+    flex-basis: 100%;
+    max-width: 100%;
     height: 22rem;
+    &:first-child {
+      margin-bottom: 2rem;
+    }
+  }
+  @media (max-width: ${props => props.theme.breakpoints.s}) {
+    flex-basis: 100%;
+    max-width: 100%;
+    height: 25rem;
+    &:first-child {
+      margin-bottom: 2rem;
+    }
+  }
+  @media (max-width: ${props => props.theme.breakpoints.xs}) {
+    flex-basis: 100%;
+    max-width: 100%;
+    height: 30rem;
+    &:first-child {
+      margin-bottom: 2rem;
+    }
   }
 `
 
@@ -101,9 +125,9 @@ const EventInfo = ({
           <h3 style={{ display: 'inline' }}>{` ${lineup}`}</h3>
         </Statistics>
         <Statistics>
-          <FaCalendar size={20} />
+          <GoCalendar size={20} />
           <span>{date}</span>
-          <MdLocationOn size={20} />
+          <GoLocation size={20} />
           <h4 style={{ display: 'inline' }}>{` ${location}`}</h4>
         </Statistics>
         {tags && <Tags tags={tags} />}

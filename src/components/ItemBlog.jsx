@@ -1,10 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'react-emotion';
-import Link from 'gatsby-link';
-import Img from 'gatsby-image';
-import kebabCase from 'lodash/kebabCase';
-import { hideS } from '../utils/hide';
+import React from 'react'
+import PropTypes from 'prop-types'
+import styled from 'react-emotion'
+import Link from 'gatsby-link'
+import Img from 'gatsby-image'
+import kebabCase from 'lodash/kebabCase'
+import { hideS } from '../utils/hide'
+import { FaCalendar } from 'react-icons/fa'
+import { GoCalendar, GoPencil } from 'react-icons/go'
 
 const Wrapper = styled.article`
   display: flex;
@@ -12,7 +14,7 @@ const Wrapper = styled.article`
   flex-wrap: wrap;
   justify-content: space-between;
   margin-bottom: 4rem;
-`;
+`
 
 const Image = styled.div`
   position: relative;
@@ -52,7 +54,7 @@ const Image = styled.div`
   @media (max-width: 500px) {
     min-height: 200px;
   }
-`;
+`
 
 const Information = styled.div`
   h1 {
@@ -74,17 +76,21 @@ const Information = styled.div`
     max-width: 100%;
     width: 100%;
   }
-`;
+`
 
 const Statistics = styled.div`
   color: ${props => props.theme.colors.black.lighter};
-`;
+  span {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+`
 
 const Excerpt = styled.div`
   margin-top: 2rem;
-`;
+`
 
-const ItemBlog = ({ path, cover, title, date, text, author, }) => (
+const ItemBlog = ({ path, cover, title, date, text, author }) => (
   <Wrapper>
     <Image>
       <Link to={`blog/${path}`}>
@@ -93,19 +99,21 @@ const ItemBlog = ({ path, cover, title, date, text, author, }) => (
       </Link>
     </Image>
     <Information>
-      <Link to={path}>
+      <Link to={`blog/${path}`}>
         <h1>{title}</h1>
       </Link>
       <Statistics>
-        {date} &mdash; <span className={hideS}>Автор: {author}</span>
+        <GoCalendar size={20} />
+        <span>{date}</span> &mdash; <GoPencil size={20} />
+        <span className={hideS}>{author}</span>
         {/* <Link to={`/categories/${kebabCase(category)}`}>{category}</Link> */}
       </Statistics>
       <Excerpt>{text}</Excerpt>
     </Information>
   </Wrapper>
-);
+)
 
-export default ItemBlog;
+export default ItemBlog
 
 ItemBlog.propTypes = {
   path: PropTypes.string.isRequired,
@@ -118,4 +126,4 @@ ItemBlog.propTypes = {
   text: PropTypes.string.isRequired,
   // images: PropTypes.arrayOf(PropTypes.object),
   author: PropTypes.string.isRequired,
-};
+}

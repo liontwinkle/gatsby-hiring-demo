@@ -17,8 +17,7 @@ import { hideS } from '../utils/hide'
 import config from '../../config/website'
 import Grid from 'react-css-grid'
 import Player from '../components/Player'
-
-// import '../utils/prism-okaida.css';
+import Lightbox from 'react-images'
 
 const pulse = keyframes`
   0% {
@@ -107,54 +106,123 @@ const Line = styled.div`
   margin-bottom: 1rem;
 `
 
-const Post = ({ data: { prismicBlog: post } }) => {
-  // const post = postNode.frontmatter;
-  // const { sizes } = post.cover.childImageSharp;
-  const { gallery } = post.data
-  const playlist = post.data.body ? post.data.body[0] : null
-  const PlaylistPlayer = playlist ? (
-    <Player
-      playlist={playlist.items}
-      name={playlist.primary.playlist_name.text}
-    />
-  ) : null
+class Post extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      lightboxIsOpen: false,
+      currentImage: 0,
+    }
+    this.closeLightbox = this.closeLightbox.bind(this)
+    this.openLightbox = this.openLightbox.bind(this)
+    this.gotoPrevious = this.gotoPrevious.bind(this)
+    this.gotoNext = this.gotoNext.bind(this)
+    this.gotoImage = this.gotoImage.bind(this)
+    this.handleClickImage = this.handleClickImage.bind(this)
+  }
 
-  return (
-    <div className="post-container">
-      <Helmet title={`${post.data.title.text} | ${config.siteTitle}`} />
-      {/* <SEO postPath={slug} postNode={postNode} postSEO /> */}
-      <Wrapper>
-        <Hero>
-          <h1>{post.data.title.text}</h1>
-          {/* <Information>
+  openLightbox(index, event) {
+    event.preventDefault()
+    console.log('Index: ', index)
+    this.setState({
+      currentImage: index,
+      lightboxIsOpen: true,
+    })
+  }
+  closeLightbox() {
+    this.setState({
+      currentImage: 0,
+      lightboxIsOpen: false,
+    })
+  }
+  gotoPrevious() {
+    this.setState({
+      currentImage: this.state.currentImage - 1,
+    })
+  }
+  gotoNext() {
+    this.setState({
+      currentImage: this.state.currentImage + 1,
+    })
+  }
+  gotoImage(index) {
+    this.setState({
+      currentImage: index,
+    })
+  }
+  handleClickImage() {
+    if (
+      this.state.currentImage ===
+      this.props.data.prismicBlog.data.gallery.length - 1
+    )
+      return
+
+    this.gotoNext()
+  }
+  render() {
+    const post = this.props.data.prismicBlog
+    const { gallery } = post.data
+    const playlist = post.data.body ? post.data.body[0] : null
+    const PlaylistPlayer = playlist ? (
+      <Player
+        playlist={playlist.items}
+        name={playlist.primary.playlist_name.text}
+      />
+    ) : null
+    const images = gallery.map(image => {
+      return { src: image.image1.localFile.childImageSharp.sizes.src }
+    })
+    return (
+      <div className="post-container">
+        <Helmet title={`${post.data.title.text} | ${config.siteTitle}`} />
+        {/* <SEO postPath={slug} postNode={postNode} postSEO /> */}
+        <Wrapper>
+          <Hero>
+            <h1>{post.data.title.text}</h1>
+            {/* <Information>
             {post.date} &mdash; Lesezeit: {postNode.timeToRead} Min. &mdash; <span className={hideS}>Kategorie: </span>
             <Link to={`/categories/${kebabCase(post.category)}`}>{post.category}</Link>
           </Information> */}
-        </Hero>
-        <Wave />
-        <Img sizes={post.data.image.localFile.childImageSharp.sizes} />
-      </Wrapper>
-      <Container type="article">
-        <Content input={post.data.text.html} />
-        {PlaylistPlayer}
-        <Grid width={320} gap={24}>
-          {gallery.map(image => (
-            <Img
-              key={image.image1.localFile.id}
-              sizes={image.image1.localFile.childImageSharp.sizes}
-            />
-          ))}
-        </Grid>
-        <Line />
-        {/* <Tags tags={post.tags} /> */}
-        <p>
-          <span className={fontBold}>Interesse geweckt?</span> Lies alle
-          Beiträge in der Kategorie{' '}
-          {/* <Link to={`/categories/${kebabCase(post.category)}`}>{post.category}</Link> */}
-        </p>
-      </Container>
-      <Footer>
-        {/* <h2>Lust auf mehr Tutorials & Goodies? Werde ein Patron.</h2>
+          </Hero>
+          <Wave />
+          <Img sizes={post.data.image.localFile.childImageSharp.sizes} />
+        </Wrapper>
+        <Container type="article">
+          <Content input={post.data.text.html} />
+          {PlaylistPlayer}
+          <Grid width={320} gap={24}>
+            {gallery.map((image, index) => (
+              <a
+                key={image.image1.localFile.id}
+                href={image.image1.localFile.childImageSharp.sizes.src}
+                onClick={e => this.openLightbox(index, e)}
+              >
+                <Img
+                  key={image.image1.localFile.id}
+                  sizes={image.image1.localFile.childImageSharp.sizes}
+                />
+              </a>
+            ))}
+          </Grid>
+          <Lightbox
+            images={images}
+            isOpen={this.state.lightboxIsOpen}
+            onClickPrev={this.gotoPrevious}
+            onClickNext={this.gotoNext}
+            onClose={this.closeLightbox}
+            currentImage={this.state.currentImage}
+            onClickImage={this.handleClickImage}
+          />
+          <Line />
+          {/* <Tags tags={post.tags} /> */}
+          <p>
+            <span className={fontBold}>Interesse geweckt?</span> Lies alle
+            Beiträge in der Kategorie{' '}
+            {/* <Link to={`/categories/${kebabCase(post.category)}`}>{post.category}</Link> */}
+          </p>
+        </Container>
+        <Footer>
+          {/* <h2>Lust auf mehr Tutorials & Goodies? Werde ein Patron.</h2>
         <a
           href="https://www.patreon.com/lekoarts"
           target="_blank"
@@ -162,9 +230,10 @@ const Post = ({ data: { prismicBlog: post } }) => {
         >
           <Button type="secondary">Patreon</Button>
         </a> */}
-      </Footer>
-    </div>
-  )
+        </Footer>
+      </div>
+    )
+  }
 }
 
 export default Post

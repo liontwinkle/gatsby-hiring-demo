@@ -26,6 +26,7 @@
     "react-headroom": "^2.2.2",
     "react-helmet": "^5.2.0",
     "react-icons": "^3.2.2",
+    "react-images": "^0.5.19",
     "react-player": "^1.6.6",
     "typography": "^0.16.17",
     "typography-theme-de-young": "^0.16.9"

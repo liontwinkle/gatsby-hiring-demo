@@ -1,4 +1,5 @@
 import React from 'react'
+import Img from 'gatsby-image'
 import styled from 'react-emotion'
 import { css } from 'emotion'
 import PropTypes from 'prop-types'
@@ -26,20 +27,28 @@ const Wrapper = styled.article`
   flex-basis: 851px;
   max-width: 851px;
   width: 851px;
-  height: 315px;
+  height: 630px;
+  .flyer {
+    height: 300px;
+    margin-bottom: 1rem;
+  }
   @media (max-width: 1000px) {
     flex-basis: 100%;
     max-width: 100%;
     width: 851px;
-    height: 18rem;
+    height: 36rem;
     &:first-child {
       margin-bottom: 2rem;
+    }
+    .flyer {
+      height: 300px;
+      margin-bottom: 1rem;
     }
   }
   @media (max-width: ${props => props.theme.breakpoints.m}) {
     flex-basis: 100%;
     max-width: 100%;
-    height: 20rem;
+    height: 39rem;
     &:first-child {
       margin-bottom: 2rem;
     }
@@ -47,7 +56,7 @@ const Wrapper = styled.article`
   @media (max-width: ${props => props.theme.breakpoints.s}) {
     flex-basis: 100%;
     max-width: 100%;
-    height: 23rem;
+    height: 43rem;
     &:first-child {
       margin-bottom: 2rem;
     }
@@ -55,7 +64,7 @@ const Wrapper = styled.article`
   @media (max-width: ${props => props.theme.breakpoints.xs}) {
     flex-basis: 100%;
     max-width: 100%;
-    height: 30rem;
+    height: 50rem;
     &:first-child {
       margin-bottom: 2rem;
     }
@@ -98,6 +107,7 @@ const Statistics = styled.div`
 
 const Excerpt = styled.div`
   margin-top: 1rem;
+  margin-bottom: 1rem;
 `
 
 const EventInfo = ({
@@ -108,6 +118,7 @@ const EventInfo = ({
   location,
   inputTags,
   excerpt,
+  image,
 }) => {
   let tags = false
   if (inputTags[0].tag) {
@@ -115,6 +126,7 @@ const EventInfo = ({
   }
   return (
     <Wrapper>
+      <Img className="flyer" sizes={image.childImageSharp.sizes} />
       <Information>
         <Link to={path}>
           <h2>{title}</h2>
@@ -147,4 +159,5 @@ EventInfo.propTypes = {
   location: PropTypes.string.isRequired,
   inputTags: PropTypes.array.isRequired,
   excerpt: PropTypes.string.isRequired,
+  image: PropTypes.object.isRequired,
 }

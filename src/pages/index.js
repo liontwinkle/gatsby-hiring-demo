@@ -113,21 +113,6 @@ const Index = ({
     <Container>
       <Text>Тековна програма</Text>
       <PostsWrapper>
-        {/* {events.map(post => (
-          <FeaturedPost
-            key={post.node.id}
-            cover={post.node.data.photo.localFile.childImageSharp.sizes}
-            from={post.node.data.from}
-            to={post.node.data.to}
-            path={post.node.uid}
-            naslov={post.node.data.naslov.text}
-            sreda={post.node.sreda}
-            cetvrtok={post.node.cetvrtok}
-            petok={post.node.petok}
-            sabota={post.node.sabota}
-            fblink={post.node.fblink}
-          />
-        ))} */}
         {nastani.map(post => (
           <EventInfo
             key={post.node.uid}
@@ -138,6 +123,7 @@ const Index = ({
             location={post.node.data.location.text}
             inputTags={['журки', 'жмурки', 'ќурќи']}
             excerpt={post.node.data.info.text.substring(0, EXCERPT_LENGTH)}
+            image={post.node.data.photo.localFile}
           />
         ))}
       </PostsWrapper>

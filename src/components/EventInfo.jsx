@@ -12,6 +12,7 @@ import Tags from './Tags'
 import { GoCalendar, GoLocation } from 'react-icons/go'
 
 const djMixer = require('../icons/dj-mixer.svg')
+const dj = require('../icons/dj.svg')
 
 const Wrapper = styled.article`
   position: relative;
@@ -132,8 +133,8 @@ const EventInfo = ({
           <h2>{title}</h2>
         </Link>
         <Statistics className={marginBottom}>
-          <img src={djMixer} />
-          <u>LINE UP:</u>
+          <img src={dj} />
+          {/* <u>LINE UP:</u> */}
           <h3 style={{ display: 'inline' }}>{` ${lineup}`}</h3>
         </Statistics>
         <Statistics>

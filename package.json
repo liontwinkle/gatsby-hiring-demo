@@ -18,6 +18,8 @@
     "gatsby-source-filesystem": "^1.5.36",
     "gatsby-source-prismic": "^1.0.0",
     "gatsby-transformer-sharp": "^1.6.24",
+    "install": "^0.12.2",
+    "npm": "^6.4.1",
     "polished": "^1.9.2",
     "prop-types": "^15.6.1",
     "rc-slider": "^8.6.3",
@@ -28,6 +30,8 @@
     "react-icons": "^3.2.2",
     "react-images": "^0.5.19",
     "react-player": "^1.6.6",
+    "rebass": "^3.0.0-11",
+    "reflexbox": "^3.0.1",
     "typography": "^0.16.17",
     "typography-theme-de-young": "^0.16.9"
   },

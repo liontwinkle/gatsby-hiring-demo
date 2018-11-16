@@ -17,7 +17,7 @@ const Base = styled.div`
 
 const Nastan = ({
   data: {
-    allPrismicPrograma: { edges: events },
+    allPrismicNastan: { edges: nastani },
   },
 }) => (
   <div className="container blog-container">
@@ -27,20 +27,16 @@ const Nastan = ({
     </Header>
     <Container type="big">
       <Base>
-        {events.map(post => (
+        {nastani.map(post => (
           <NastanPost
             key={post.node.id}
             cover={post.node.data.photo.localFile.childImageSharp.sizes}
-            from={post.node.data.from}
-            to={post.node.data.to}
-            path={post.node.slugs[0]}
+            date={post.node.data.date}
+            path={post.node.uid}
             naslov={post.node.data.naslov.text}
-            description={post.node.data.description.text}
-            sreda={post.node.sreda}
-            cetvrtok={post.node.cetvrtok}
-            petok={post.node.petok}
-            sabota={post.node.sabota}
-            fblink={post.node.fblink}
+            info={post.node.data.info.text}
+            lineup={post.node.data.lineup.text}
+            location={post.node.data.location.text}
           />
         ))}
       </Base>
@@ -62,35 +58,45 @@ Nastan.propTypes = {
 /* eslint no-undef: "off" */
 export const EventsQuery = graphql`
   query EventsQuery {
-    allPrismicPrograma {
+    allPrismicNastan {
       edges {
         node {
           id
-          slugs
+          uid
           data {
-            from
-            to
+            naslov {
+              html
+              text
+            }
+            info {
+              html
+              text
+            }
+            date
+            location {
+              html
+              text
+            }
+            lineup {
+              html
+              text
+            }
             photo {
               url
               localFile {
                 childImageSharp {
                   sizes(
-                    maxWidth: 900
-                    quality: 90
-                    traceSVG: { color: "#2B2B2F" }
+                    maxWidth: 1400
+                    quality: 85
+                    traceSVG: { color: "#52555e" }
                   ) {
                     ...GatsbyImageSharpSizes_withWebp_tracedSVG
                   }
+                  resolutions(width: 140, height: 140) {
+                    src
+                  }
                 }
               }
-            }
-            naslov {
-              html
-              text
-            }
-            description {
-              html
-              text
             }
           }
         }

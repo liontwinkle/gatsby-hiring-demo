@@ -1,22 +1,12 @@
-/* eslint max-len: 0 */
-
 import React from 'react'
-import PropTypes from 'prop-types'
 import Link from 'gatsby-link'
-import Img from 'gatsby-image'
-import Header from '../components/Header'
-import config from '../../config/website'
-import theme from '../../config/theme'
 import styled, { keyframes } from 'react-emotion'
-import Button from '../components/Button'
-import Container from '../components/Container'
-import FeaturedPost from '../components/FeaturedPost'
-// import EventSlim from '../components/EventSlim'
-import EventInfo from '../components/EventInfo'
+import Img from 'gatsby-image'
 import Footer from '../components/Footer'
 import Wave from '../components/Wave'
-
-const EXCERPT_LENGTH = 140
+import Container from '../components/Container'
+import { Box, Card, Heading, Text } from 'rebass'
+import theme from '../../config/theme'
 
 const pulse = keyframes`
   0% {
@@ -76,15 +66,7 @@ const Hero = styled.div`
   padding: 0 2rem;
   text-align: center;
 `
-
-const PostsWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-`
-
-const Text = styled.p`
+const DescriptionText = styled.p`
   text-align: center;
   font-family: ${props => props.theme.fontFamily.heading};
   font-weight: 700;
@@ -94,54 +76,90 @@ const Text = styled.p`
   margin: 3rem auto;
   text-shadow: ${props => props.theme.shadow.text.big};
 `
+const CardWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+  ${Card} {
+    color: ${props => props.theme.colors.black.base} !important;
+    margin-bottom: 2rem;
+    text-align: center;
+    flex-basis: calc(99.9% * 1 / 2.15 - 1rem);
+    max-width: calc(99.9% * 1 / 2.15 - 1rem);
+    width: calc(99.9% * 1 / 2.15 - 1rem);
+    @media (max-width: 750px) {
+      flex-basis: 100%;
+      max-width: 100%;
+      width: 100%;
+      margin-bottom: 1.5rem;
+    }
+  }
+`
+const Image = styled.div`
+  .gatsby-image {
+    max-width: 100%;
+    height: auto;
+    margin: 0px;
+  }
+`
 
-const Index = ({
+const PlainLink = styled(Link)`
+  color: ${theme.colors.black.base};
+`
+
+const Djs = ({
   data: {
-    allPrismicNastan: { edges: nastani },
     file,
+    allPrismicDj: { edges: djs },
   },
 }) => (
   <div>
     <Wrapper>
       <Hero>
-        <h1>#OURGOALISTHEFUTURE</h1>
+        <h1>#Resident DJs</h1>
       </Hero>
       <Wave />
       <Img sizes={file.childImageSharp.sizes} />
     </Wrapper>
-    <Container>
-      <Text>Тековна програма</Text>
-      <PostsWrapper>
-        {nastani.map(post => (
-          <EventInfo
-            key={post.node.uid}
-            title={post.node.data.naslov.text}
-            lineup={post.node.data.lineup.text}
-            path={post.node.uid}
-            date={post.node.data.date}
-            location={post.node.data.location.text}
-            inputTags={['журки', 'жмурки', 'ќурќи']}
-            excerpt={post.node.data.info.text.substring(0, EXCERPT_LENGTH)}
-            image={post.node.data.photo.localFile}
-          />
-        ))}
-      </PostsWrapper>
-      <Text>
-        Сите настани <br />
-        <Link to="/program">
-          <Button type="secondary">Програма</Button>
-        </Link>
-      </Text>
-    </Container>
 
+    <Container>
+      <DescriptionText>Sektor DJs</DescriptionText>
+      {djs.map(dj => (
+        <Box key={dj.node.id} width={[1, 1, 1 / 2]}>
+          <Card
+            m={1}
+            p={1}
+            borderRadius={2}
+            boxShadow={theme.shadow.feature.small.default}
+          >
+            <PlainLink to={`djs/${dj.node.data.name}`}>
+              <Img
+                className="gatsby-image"
+                sizes={dj.node.data.avatar.localFile.childImageSharp.sizes}
+              />
+            </PlainLink>
+            <Box width={256} px={2}>
+              <PlainLink to={`djs/${dj.node.data.name}`}>
+                <Heading className="title" as="h3">
+                  {dj.node.data.name}
+                </Heading>
+              </PlainLink>
+              <Text fontSize={0}>{dj.node.data.punchline}</Text>
+            </Box>
+          </Card>
+        </Box>
+      ))}
+    </Container>
     <Footer />
   </div>
 )
 
-export default Index
+export default Djs
 
-export const pageQuery = graphql`
-  query IndexQuery {
+export const djsQuery = graphql`
+  query DjsQuery {
     file(relativePath: { eq: "sektor_2.png" }) {
       childImageSharp {
         sizes(
@@ -153,36 +171,25 @@ export const pageQuery = graphql`
         }
       }
     }
-    allPrismicNastan {
+    allPrismicDj {
       edges {
         node {
           id
-          uid
           data {
-            naslov {
+            name
+            punchline
+            bio {
               html
               text
             }
-            info {
-              html
-              text
-            }
-            date
-            location {
-              html
-              text
-            }
-            lineup {
-              html
-              text
-            }
-            photo {
+            avatar {
               url
+
               localFile {
                 childImageSharp {
                   sizes(
-                    maxWidth: 1400
-                    quality: 85
+                    maxWidth: 800
+                    quality: 70
                     traceSVG: { color: "#52555e" }
                   ) {
                     ...GatsbyImageSharpSizes_withWebp_tracedSVG

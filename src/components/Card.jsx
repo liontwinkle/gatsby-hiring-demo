@@ -1,21 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { css, cx } from 'emotion';
-import styled from 'react-emotion';
-import theme from '../../config/theme';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { css, cx } from 'emotion'
+import styled from 'react-emotion'
+import theme from '../../config/theme'
 
 const twitter = css`
   svg {
-    fill: #1DA1F2;
+    fill: #1da1f2;
   }
   &:hover {
-    background-color: #1DA1F2;
+    background-color: #1da1f2;
     color: ${theme.colors.white.light};
     svg {
       fill: ${theme.colors.white.light};
     }
   }
-`;
+`
 
 const instagram = css`
   &:after {
@@ -34,7 +34,12 @@ const instagram = css`
   &:before {
     content: '';
     background-color: ${theme.colors.white.light};
-    background-image: linear-gradient(45deg, #f7eb4c 0%, #ee2a7b 29%, #4c6aff 100%);
+    background-image: linear-gradient(
+      45deg,
+      #f7eb4c 0%,
+      #ee2a7b 29%,
+      #4c6aff 100%
+    );
     position: absolute;
     top: 0;
     right: 0;
@@ -57,7 +62,7 @@ const instagram = css`
       opacity: 0;
     }
   }
-`;
+`
 
 const facebook = css`
   svg {
@@ -71,7 +76,7 @@ const facebook = css`
       fill: ${theme.colors.white.light};
     }
   }
-`;
+`
 
 const youtube = css`
   svg {
@@ -85,16 +90,17 @@ const youtube = css`
       fill: ${theme.colors.white.light};
     }
   }
-`;
+`
 
 const generalStyle = css`
+  background-color: ${theme.colors.white.base};
   display: flex;
   flex-direction: column;
   padding: 2rem;
   align-items: center;
   color: ${theme.colors.black.base};
   border-radius: ${theme.borderRadius.default};
-  box-shadow: ${theme.shadow.card};
+  box-shadow: ${theme.shadow.feature.small.default};
   position: relative;
   transition: background-color ${theme.transitions.default.duration};
   svg {
@@ -113,32 +119,37 @@ const generalStyle = css`
     border-radius: ${theme.borderRadius.default};
     background-color: ${theme.colors.white.light};
   }
-`;
+`
 
 const Card = styled.div`
   ${generalStyle};
-`;
+`
 
-export { Card };
+export { Card }
 
 export const LinkCard = props => {
-  const { children } = props;
+  const { children } = props
   const color = cx(generalStyle, props.className, {
     [twitter]: props.twitter,
     [instagram]: props.instagram,
     [facebook]: props.facebook,
     [youtube]: props.youtube,
-  });
+  })
   return (
-    <a href={props.link} rel="noreferrer noopener" target="_blank" className={color}>
+    <a
+      href={props.link}
+      rel="noreferrer noopener"
+      target="_blank"
+      className={color}
+    >
       {children}
     </a>
-  );
-};
+  )
+}
 
 Card.propTypes = {
   children: PropTypes.node.isRequired,
-};
+}
 
 LinkCard.propTypes = {
   children: PropTypes.node.isRequired,
@@ -148,11 +159,11 @@ LinkCard.propTypes = {
   instagram: PropTypes.bool,
   behance: PropTypes.bool,
   youtube: PropTypes.bool,
-};
+}
 
 LinkCard.defaultProps = {
   discord: false,
   instagram: false,
   behance: false,
   youtube: false,
-};
+}

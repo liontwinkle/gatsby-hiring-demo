@@ -15,7 +15,9 @@ import Button from '../components/Button'
 import Footer from '../components/Footer'
 import { hideS } from '../utils/hide'
 import config from '../../config/website'
-import { Card } from '../components/Card'
+// import { Card } from '../components/Card'
+import { GoCalendar, GoLocation, GoLinkExternal } from 'react-icons/go'
+const dj = require('../icons/dj.svg')
 
 const pulse = keyframes`
   0% {
@@ -78,7 +80,10 @@ const Hero = styled.div`
 const Information = styled.div`
   margin-top: 2rem;
   font-family: ${props => props.theme.fontFamily.heading};
-  a {
+  a.fblink {
+    white-space: nowrap;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
     color: ${props => props.theme.colors.white.base};
     transition: all 0.4s;
     border-bottom: 1px solid transparent;
@@ -88,6 +93,21 @@ const Information = styled.div`
     }
     &:focus {
       color: white;
+    }
+  }
+  .date {
+    svg {
+      margin-right: 0.5rem;
+    }
+  }
+  div.location {
+    white-space: nowrap;
+    @media (min-width: 500px) {
+      display: inline;
+    }
+    h3,
+    h4 {
+      display: inline;
     }
   }
 `
@@ -125,7 +145,42 @@ const CardWrapper = styled.div`
   }
 `
 
-const Post = ({ pathContext: { uid }, data: { prismicPrograma: post } }) => {
+const Card = styled.div`
+  background-color: ${props => props.theme.colors.white.base};
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  align-items: center;
+  color: ${props => props.theme.colors.black.base};
+  border-radius: ${props => props.theme.borderRadius.default};
+  box-shadow: ${props => props.theme.shadow.feature.small.default};
+  position: relative;
+  transition: background-color
+    ${props => props.theme.transitions.default.duration};
+  img {
+    height: 4rem;
+    fill: ${props => props.theme.colors.black.blue};
+    margin-bottom: 0.5rem;
+    margin-right: 0.5rem;
+  }
+  &:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: -1;
+    border-radius: ${props => props.theme.borderRadius.default};
+    background-color: ${props => props.theme.colors.white.light};
+  }
+`
+
+// const Card = styled.div`
+//   ${generalStyle};
+// `
+
+const Post = ({ pathContext: { uid }, data: { prismicNastan: post } }) => {
   //   const { sizes } = post.cover.childImageSharp;
   if (!post.id) {
     post.id = uid
@@ -140,41 +195,40 @@ const Post = ({ pathContext: { uid }, data: { prismicPrograma: post } }) => {
         <Hero>
           <h1>{post.data.naslov.text}</h1>
           <Information>
-            {post.data.from} &mdash; {post.data.to}{' '}
-            &mdash;
-            <a href={post.data.facebook_link.url}>
-              Facebook Event
+            <span className="date">
+              <GoCalendar size={20} /> {post.data.date}
+            </span>
+            <a
+              className="fblink"
+              target="_blank"
+              href={post.data.facebook_event.url}
+            >
+              <GoLinkExternal size={20} /> Facebook Event
             </a>
+            <div className="location">
+              <GoLocation size={20} />
+              <h4>{` ${post.data.location.text}`}</h4>
+            </div>
           </Information>
         </Hero>
         <Wave />
         <Img sizes={post.data.photo.localFile.childImageSharp.sizes} />
       </Wrapper>
       <Container type="article">
-        <Content input={post.data.description.html} />
-        <CardWrapper>
-          <Card>
-            <h2>Среда</h2>
-            <div dangerouslySetInnerHTML={{__html: post.data.sreda.html}} />
-          </Card>
-          <Card>
-            <h2>Четврток</h2>
-            <div dangerouslySetInnerHTML={{__html: post.data.cetvrtok.html}} />
-          </Card>
-          <Card>
-            <h2>Петок</h2>
-            <div dangerouslySetInnerHTML={{__html: post.data.petok.html}} />
-          </Card>
-          <Card>
-            <h2>Сабота</h2>
-            <div dangerouslySetInnerHTML={{__html: post.data.sabota.html}} />
-          </Card>
-        </CardWrapper>
+        <Card>
+          <h2>
+            <img src={dj} />Line Up:
+          </h2>
+          <div dangerouslySetInnerHTML={{ __html: post.data.lineup.html }} />
+        </Card>
+        <Content input={post.data.info.html} />
         <Line />
         {/* <Tags tags={post.tags} /> */}
         <p>
           <span className={fontBold}>Повеќе: </span>
-          <a href={post.data.facebook_link.url}>Фејсбук Настан</a>
+          <a target="_blank" href={post.data.facebook_event.url}>
+            Фејсбук Настан
+          </a>
         </p>
       </Container>
       <Footer>
@@ -205,38 +259,24 @@ export default Post
 /* eslint no-undef: "off" */
 export const Nastan = graphql`
   query SingleEvent($uid: String!) {
-    prismicPrograma(uid: { eq: $uid }) {
+    prismicNastan(uid: { eq: $uid }) {
       id
       uid
-      slugs
       data {
         naslov {
           html
           text
         }
-        from
-        to
-        description {
+        info {
           html
           text
         }
-        naslov {
+        date
+        location {
           html
           text
         }
-        sreda {
-          html
-          text
-        }
-        cetvrtok {
-          html
-          text
-        }
-        petok {
-          html
-          text
-        }
-        sabota {
+        lineup {
           html
           text
         }
@@ -244,16 +284,25 @@ export const Nastan = graphql`
           url
           localFile {
             childImageSharp {
-              sizes(maxWidth: 1920, quality: 85, duotone: { highlight: "#EE9338", shadow: "#BE7123" }) {
-                ...GatsbyImageSharpSizes_withWebp
+              sizes(
+                maxWidth: 1400
+                quality: 85
+                traceSVG: { color: "#52555e" }
+                duotone: {
+                  highlight: "#262c41"
+                  shadow: "#46507a"
+                  opacity: 78
+                }
+              ) {
+                ...GatsbyImageSharpSizes_withWebp_tracedSVG
               }
-              resize(width: 1200) {
+              resolutions(width: 140, height: 140) {
                 src
               }
             }
           }
         }
-        facebook_link {
+        facebook_event {
           url
         }
       }

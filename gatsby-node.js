@@ -12,10 +12,11 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
   return new Promise((resolve, reject) => {
     const postPage = path.resolve('src/templates/nastan.jsx')
     const blogPage = path.resolve('src/templates/post.jsx')
+    const djpage = path.resolve('src/templates/dj.jsx')
     resolve(
       graphql(`
         {
-          allPrismicPrograma(sort: { fields: [data___from], order: DESC }) {
+          allPrismicNastan(sort: { fields: [data___date], order: DESC }) {
             edges {
               node {
                 id
@@ -33,6 +34,17 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
               }
             }
           }
+          allPrismicDj {
+            edges {
+              node {
+                id
+                uid
+                data {
+                  name
+                }
+              }
+            }
+          }
         }
       `).then(result => {
         if (result.errors) {
@@ -40,7 +52,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           console.log(result.errors)
           reject(result.errors)
         }
-        result.data.allPrismicPrograma.edges.forEach(edge => {
+        result.data.allPrismicNastan.edges.forEach(edge => {
           createPage({
             path: `program/${edge.node.uid}`,
             component: postPage,
@@ -53,6 +65,15 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           createPage({
             path: `blog/${edge.node.uid}`,
             component: blogPage,
+            context: {
+              uid: edge.node.uid,
+            },
+          })
+        })
+        result.data.allPrismicDj.edges.forEach(edge => {
+          createPage({
+            path: `djs/${edge.node.data.name}`,
+            component: djpage,
             context: {
               uid: edge.node.uid,
             },

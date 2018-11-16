@@ -1,10 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'react-emotion'
+import styled, { css } from 'react-emotion'
 import Link from 'gatsby-link'
 import Img from 'gatsby-image'
+import { GoCalendar, GoLocation } from 'react-icons/go'
 import kebabCase from 'lodash/kebabCase'
 import { hideS } from '../utils/hide'
+const dj = require('../icons/dj.svg')
 
 const Wrapper = styled.article`
   display: flex;
@@ -19,7 +21,8 @@ const Image = styled.div`
   box-shadow: ${props => props.theme.shadow.feature.small.default};
   transition: ${props => props.theme.transitions.boom.transition};
   border-radius: ${props => props.theme.borderRadius.default};
-  min-height: 300px;
+  min-height: 150px;
+  min-width: 300px;
   img {
     border-radius: ${props => props.theme.borderRadius.default};
   }
@@ -50,7 +53,10 @@ const Image = styled.div`
     margin-bottom: 1.5rem;
   }
   @media (max-width: 500px) {
-    min-height: 200px;
+    height: 220px;
+    img {
+      min-height: 200px;
+    }
   }
 `
 
@@ -78,42 +84,55 @@ const Information = styled.div`
 
 const Statistics = styled.div`
   color: ${props => props.theme.colors.black.lighter};
+  h3,
+  h4 {
+    color: ${props => props.theme.colors.black.base};
+    display: inline;
+  }
+  span {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+  img {
+    width: 40px;
+    height: 35px;
+    margin-right: 0.5rem;
+  }
 `
 
 const Excerpt = styled.div`
   margin-top: 2rem;
 `
+const marginBottom = css`
+  margin-bottom: 0.5rem;
+`
 
-const NastanPost = ({
-  cover,
-  path,
-  from,
-  to,
-  description,
-  naslov,
-  sreda,
-  cetvrtok,
-  petok,
-  sabota,
-  fblink,
-}) => (
+const NastanPost = ({ cover, path, date, info, naslov, location, lineup }) => (
   <Wrapper>
     <Image>
-      <Link to={`nedelna-programa/${path}`}>
-        <Img sizes={cover} />
+      <Link to={`program/${path}`}>
+        <Img className="flyer" sizes={cover} />
         {/* <img src={cover} /> */}
       </Link>
     </Image>
     <Information>
-      <Link to={`nedelna-programa/${path}`}>
+      <Link to={`program/${path}`}>
         <h1>{naslov}</h1>
       </Link>
+      <Statistics className={marginBottom}>
+        <img src={dj} />
+        {/* <u>LINE UP:</u> */}
+        <h3 style={{ display: 'inline' }}>{` ${lineup}`}</h3>
+      </Statistics>
       <Statistics>
-        {from} &mdash; {to} {/*Min. &mdash;{' '}*/}
+        <GoCalendar size={20} />
+        <span>{date}</span>
+        <GoLocation size={20} />
+        <h4>{` ${location}`}</h4>
         {/* <span className={hideS}>Kategorie: </span> */}
         {/* <Link to={`/categories/${kebabCase(category)}`}>{category}</Link> */}
       </Statistics>
-      <Excerpt>{description}</Excerpt>
+      <Excerpt>{info}</Excerpt>
     </Information>
   </Wrapper>
 )
@@ -123,15 +142,16 @@ export default NastanPost
 NastanPost.propTypes = {
   cover: PropTypes.any.isRequired,
   path: PropTypes.string.isRequired,
-  from: PropTypes.string.isRequired,
-  to: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  info: PropTypes.string.isRequired,
   naslov: PropTypes.string.isRequired,
+  location: PropTypes.string.isRequired,
+  lineup: PropTypes.string.isRequired,
 }
 
-NastanPost.defaultProps = {
-  sreda: '',
-  cetvrtok: '',
-  petok: '',
-  sabota: '',
-}
+// NastanPost.defaultProps = {
+//   sreda: '',
+//   cetvrtok: '',
+//   petok: '',
+//   sabota: '',
+// }

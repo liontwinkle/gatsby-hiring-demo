@@ -67,7 +67,7 @@ const SEO = props => {
   return (
     <Helmet>
       {/* General Tags */}
-      <html lang="de" />
+      <html lang="mk" />
       <title>{title}</title>
       <meta name="description" content={description} />
       <meta name="image" content={image} />

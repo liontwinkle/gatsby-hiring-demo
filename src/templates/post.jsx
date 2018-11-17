@@ -265,7 +265,7 @@ export const BlogQuery = graphql`
               }
             }
             items {
-              link {
+              out_link {
                 url
               }
               artist

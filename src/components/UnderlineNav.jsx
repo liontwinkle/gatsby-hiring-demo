@@ -1,8 +1,6 @@
 import React from 'react'
 import styled from 'react-emotion'
-// import Wrapper from './layout/Wrapper'
-// import { Text } from 'rebass'
-import { Flex } from 'reflexbox'
+import { Flex } from '@rebass/grid/emotion'
 import { IoIosBook, IoMdStats, IoMdCalendar } from 'react-icons/io'
 import { TiHeadphones } from 'react-icons/ti'
 
@@ -42,7 +40,7 @@ const UnderlineNav = ({ handleClick, selected }) => {
   const selectedEvents = selected === 'events' ? 'selected' : null
   return (
     <Nav>
-      <Flex justify="flex-end">
+      <Flex justifyContent="flex-end">
         <Flex className="nav-body">
           <a
             onClick={() => handleClick('bio')}

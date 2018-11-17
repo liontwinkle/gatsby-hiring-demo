@@ -3,13 +3,11 @@ import styled, { keyframes } from 'react-emotion'
 import Img from 'gatsby-image'
 import Footer from '../components/Footer'
 import Wave from '../components/Wave'
-import Container from '../components/Container'
-import { Box, Card, Heading, Text } from 'rebass'
-import { Flex } from 'reflexbox'
-import LongText from '../components/LongText'
+import { Card, Heading, Text } from 'rebass'
+import { Flex } from '@rebass/grid/emotion'
+import { Box } from '@rebass/grid'
 import { darken } from 'polished'
 import SocialLink from '../components/SocialLink'
-// import UnderlineNav from '../components/UnderlineNav'
 import DjContent from '../components/DjContent'
 
 const pulse = keyframes`
@@ -93,7 +91,7 @@ const Dj = ({ data: { prismicDj: dj, prismicChart: chart } }) => (
       <Wave />
       <Img sizes={dj.data.background_image.localFile.childImageSharp.sizes} />
     </Wrapper>
-    <Flex px={2} justify="center" wrap>
+    <Flex px={2} justifyContent="center" wrap>
       <Box mr={4} width={[1, 1, 1 / 4]}>
         <Card>
           <Image>

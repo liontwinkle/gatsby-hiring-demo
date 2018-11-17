@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'react-emotion'
 import UnerlineNav from './UnderlineNav'
 import { Text } from 'rebass'
+import DjChart from './DjChart'
 
 class DjContent extends React.Component {
   state = {
@@ -17,6 +18,7 @@ class DjContent extends React.Component {
     const dj = this.props.dj
     const bio = <Text>{dj.data.bio.text}</Text>
     const selected = this.state.selected
+    const djChart = this.props.chart
     return (
       <div>
         <UnerlineNav
@@ -25,7 +27,7 @@ class DjContent extends React.Component {
         />
         {(() => {
           if (selected === 'bio') return bio
-          if (selected == 'charts') return <span>Charts</span>
+          if (selected == 'charts') return <DjChart chart={djChart} />
           if (selected == 'mixes') return <span>Mixes</span>
           else selected === 'events'
           return <span>Events</span>

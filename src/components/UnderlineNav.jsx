@@ -1,10 +1,9 @@
 import React from 'react'
 import styled from 'react-emotion'
-import Wrapper from './layout/Wrapper'
-import { Text } from 'rebass'
+// import Wrapper from './layout/Wrapper'
+// import { Text } from 'rebass'
 import { Flex } from 'reflexbox'
 import { IoIosBook, IoMdStats, IoMdCalendar } from 'react-icons/io'
-import Headphones from '../icons/headphones.jsx'
 import { TiHeadphones } from 'react-icons/ti'
 
 const Nav = styled.nav`
@@ -23,6 +22,7 @@ const Nav = styled.nav`
     text-align: center;
     border-bottom: 2px solid;
     border-bottom-color: transparent;
+    cursor: pointer;
     svg {
       margin-right: 5px;
       vertical-align: text-top;

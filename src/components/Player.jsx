@@ -10,6 +10,7 @@ import {
   FaVolumeOff,
 } from 'react-icons/fa'
 import Playlist from './Playlist'
+import PlaylistChart from './PlaylistChart'
 import Slider from 'rc-slider'
 import './Slider.css'
 
@@ -28,7 +29,7 @@ function secondsToTime(secs) {
 }
 
 const Wrapper = styled.div`
-  max-width: 1200px;
+  max-width: 900px;
   margin-left: auto;
   margin-right: auto;
 `
@@ -63,8 +64,8 @@ const PlayerControler = styled.div`
     }
     border-radius: 4px;
     display: flex;
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
     -webkit-appearance: none;
     border-radius: 5px;
     outline: none;
@@ -183,7 +184,7 @@ class Player extends React.Component {
   playPause = () => {
     this.setState({ playing: !this.state.playing })
     if (!this.state.url) {
-      this.setState({ url: this.props.playlist[0].out_link.url })
+      this.setState({ url: this.props.playlist[0].link.url })
     }
   }
   stop = () => {
@@ -254,10 +255,10 @@ class Player extends React.Component {
     const maxIndex = playlist.length
     if (index == -1 || index == maxIndex) {
       console.log('First case')
-      return playlist[0].out_link.url
+      return playlist[0].link.url
     } else if (index >= 0 && index < maxIndex) {
       console.log('Second case')
-      return playlist[index].out_link.url
+      return playlist[index].link.url
     }
   }
   onPlayNext = direction => {
@@ -265,9 +266,9 @@ class Player extends React.Component {
     let index
     if (direction == 'forward') {
       // + 1 because next track
-      index = playlist.findIndex(el => el.out_link.url == this.state.url) + 1
+      index = playlist.findIndex(el => el.link.url == this.state.url) + 1
     } else if (direction == 'backward') {
-      index = playlist.findIndex(el => el.out_link.url == this.state.url) - 1
+      index = playlist.findIndex(el => el.link.url == this.state.url) - 1
     }
 
     const url = this.findNextUrl(playlist, index)
@@ -286,7 +287,9 @@ class Player extends React.Component {
       duration,
       playbackRate,
     } = this.state
-    console.log('Muted: ', muted)
+    const playlistTitle = this.props
+    const PlaylistElement =
+      this.props.type === 'chart' ? PlaylistChart : Playlist
     const playlist = this.props.playlist
     const PlayPauseButton = this.state.playing ? FaPause : FaPlay
     const MuteSoundButton = this.state.muted ? FaVolumeOff : FaVolumeUp
@@ -301,7 +304,7 @@ class Player extends React.Component {
         <div className="timer">-</div>
       )
     const index = this.state.url
-      ? playlist.findIndex(el => el.out_link.url == this.state.url)
+      ? playlist.findIndex(el => el.link.url == this.state.url)
       : -1
     const nowPlaying = playlist[index]
 
@@ -383,12 +386,14 @@ class Player extends React.Component {
           onPause={this.onPause}
           onBuffer={() => console.log('onBuffer')}
           onSeek={e => console.log('onSeek', e)}
-          onEnded={this.onEnded}
+          onEnded={() => this.onPlayNext('forward')}
           onError={e => console.log('onError', e)}
           onProgress={this.onProgress}
           onDuration={this.onDuration}
+          youtubeConfig={{ preload: true }}
+          soundcloudConfig={{ preload: true }}
         />
-        <Playlist
+        <PlaylistElement
           playlist={playlist}
           getActiveTrack={this.getActiveTrack}
           activeUrl={this.state.url}

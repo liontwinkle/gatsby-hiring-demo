@@ -84,7 +84,7 @@ const Line = styled.div`
   margin-bottom: 1rem;
 `
 
-const Dj = ({ data: { prismicDj: dj } }) => (
+const Dj = ({ data: { prismicDj: dj, prismicChart: chart } }) => (
   <div>
     <Wrapper>
       <Hero>
@@ -143,7 +143,7 @@ const Dj = ({ data: { prismicDj: dj } }) => (
         // }}
         width={[1, 1, 0.7]}
       >
-        <DjContent dj={dj} />
+        <DjContent dj={dj} chart={chart} />
       </Box>
     </Flex>
     <Footer />

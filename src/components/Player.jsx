@@ -402,8 +402,10 @@ class Player extends React.Component {
               onError={e => console.log('onError', e)}
               onProgress={this.onProgress}
               onDuration={this.onDuration}
-              youtubeConfig={{ preload: true }}
-              soundcloudConfig={{ preload: true }}
+              config={{
+                youtube: { preload: true },
+                soundcloud: { preload: true },
+              }}
               onDuration={this.onDuration}
             />
             <PlaylistElement

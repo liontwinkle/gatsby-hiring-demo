@@ -4,6 +4,7 @@ import { Flex } from '@rebass/grid/emotion'
 import { Box } from 'rebass'
 import { IoIosBook, IoMdStats, IoMdCalendar } from 'react-icons/io'
 import { TiHeadphones } from 'react-icons/ti'
+import Link from 'gatsby-link'
 
 const Nav = styled.nav`
   border-bottom: 1px solid #e1e4e8;
@@ -43,28 +44,30 @@ const UnderlineNav = ({ handleClick, selected }) => {
     <Nav>
       <Flex justifyContent="flex-start" className="nav-body" flexWrap="wrap">
         <a
-          onClick={() => handleClick('bio')}
+          onClick={e => handleClick(e, '#bio')}
           className={`menu-item ${selectedBio}`}
+          // href="#bio"
         >
           <IoIosBook size={19} />
           Bio
         </a>
         <a
-          onClick={() => handleClick('charts')}
+          onClick={e => handleClick(e, '#charts')}
           className={`menu-item ${selectedCharts}`}
+          // href="#charts"
         >
           <IoMdStats size={19} />
           Charts
         </a>
         <a
-          onClick={() => handleClick('mixes')}
+          onClick={e => handleClick(e, '#mixes')}
           className={`menu-item ${selectedMixes}`}
         >
           <TiHeadphones size={19} />
           Mixes
         </a>
         <a
-          onClick={() => handleClick('events')}
+          onClick={e => handleClick(e, '#events')}
           className={`menu-item ${selectedEvents}`}
         >
           <IoMdCalendar size={19} />

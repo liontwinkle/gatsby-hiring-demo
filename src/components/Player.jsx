@@ -404,7 +404,7 @@ class Player extends React.Component {
               onDuration={this.onDuration}
               config={{
                 youtube: { preload: true },
-                soundcloud: { preload: true },
+                soundcloud: { preload: true, options: { auto_play: true } },
               }}
               onDuration={this.onDuration}
             />

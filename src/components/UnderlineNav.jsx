@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'react-emotion'
 import { Flex } from '@rebass/grid/emotion'
+import { Box } from 'rebass'
 import { IoIosBook, IoMdStats, IoMdCalendar } from 'react-icons/io'
 import { TiHeadphones } from 'react-icons/ti'
 
@@ -40,37 +41,35 @@ const UnderlineNav = ({ handleClick, selected }) => {
   const selectedEvents = selected === 'events' ? 'selected' : null
   return (
     <Nav>
-      <Flex justifyContent="flex-end">
-        <Flex className="nav-body">
-          <a
-            onClick={() => handleClick('bio')}
-            className={`menu-item ${selectedBio}`}
-          >
-            <IoIosBook size={19} />
-            Bio
-          </a>
-          <a
-            onClick={() => handleClick('charts')}
-            className={`menu-item ${selectedCharts}`}
-          >
-            <IoMdStats size={19} />
-            Charts
-          </a>
-          <a
-            onClick={() => handleClick('mixes')}
-            className={`menu-item ${selectedMixes}`}
-          >
-            <TiHeadphones size={19} />
-            Mixes
-          </a>
-          <a
-            onClick={() => handleClick('events')}
-            className={`menu-item ${selectedEvents}`}
-          >
-            <IoMdCalendar size={19} />
-            Events
-          </a>
-        </Flex>
+      <Flex justifyContent="flex-start" className="nav-body" flexWrap="wrap">
+        <a
+          onClick={() => handleClick('bio')}
+          className={`menu-item ${selectedBio}`}
+        >
+          <IoIosBook size={19} />
+          Bio
+        </a>
+        <a
+          onClick={() => handleClick('charts')}
+          className={`menu-item ${selectedCharts}`}
+        >
+          <IoMdStats size={19} />
+          Charts
+        </a>
+        <a
+          onClick={() => handleClick('mixes')}
+          className={`menu-item ${selectedMixes}`}
+        >
+          <TiHeadphones size={19} />
+          Mixes
+        </a>
+        <a
+          onClick={() => handleClick('events')}
+          className={`menu-item ${selectedEvents}`}
+        >
+          <IoMdCalendar size={19} />
+          Events
+        </a>
       </Flex>
     </Nav>
   )

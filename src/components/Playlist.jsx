@@ -31,7 +31,7 @@ const Table = styled.table`
   }
 `
 
-const Playlist = ({ playlist, getActiveTrack, activeUrl, playing }) => {
+const Playlist = ({ playlist, getActiveTrack, activeUrl, playing, djName }) => {
   const getSourceIcon = url => {
     if (url.includes('soundcloud.com')) {
       return <FaSoundcloud />
@@ -68,30 +68,26 @@ const Playlist = ({ playlist, getActiveTrack, activeUrl, playing }) => {
       </thead>
       <tbody className="body">
         {playlist.map((track, index) => (
-          <tr key={track.out_link.url}>
+          <tr key={track.link.url}>
             <td className="center">{index + 1}</td>
             <td>
               <div
-                onClick={() => getActiveTrack(track.out_link.url)}
+                onClick={() => getActiveTrack(track.link.url)}
                 style={{ cursor: 'pointer' }}
               >
-                {(track.out_link.url == activeUrl) & playing ? (
+                {(track.link.url == activeUrl) & playing ? (
                   <FaPause size={20} />
                 ) : (
                   <FaPlay size={20} />
                 )}
               </div>
             </td>
-            <td>{track.artist}</td>
-            <td>{track.track}</td>
-            {console.log(track.out_link.url.includes('soundcloud'))}
+            <td>{track.artist ? track.artist : djName}</td>
+            <td>{track.track ? track.track : track.title}</td>
+            {console.log(track.link.url.includes('soundcloud'))}
             <td className="center">
-              <a
-                className="linkSource"
-                href={track.out_link.url}
-                target={'blank'}
-              >
-                {getSourceIcon(track.out_link.url)}
+              <a className="linkSource" href={track.link.url} target={'blank'}>
+                {getSourceIcon(track.link.url)}
               </a>
             </td>
           </tr>

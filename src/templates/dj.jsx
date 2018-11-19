@@ -3,9 +3,9 @@ import styled, { keyframes } from 'react-emotion'
 import Img from 'gatsby-image'
 import Footer from '../components/Footer'
 import Wave from '../components/Wave'
-import { Card, Heading, Text } from 'rebass'
+import { Card, Heading, Text, Box } from 'rebass'
 import { Flex } from '@rebass/grid/emotion'
-import { Box } from '@rebass/grid'
+// import { Box } from '@rebass/grid'
 import { darken } from 'polished'
 import SocialLink from '../components/SocialLink'
 import DjContent from '../components/DjContent'
@@ -91,8 +91,8 @@ const Dj = ({ data: { prismicDj: dj, prismicChart: chart } }) => (
       <Wave />
       <Img sizes={dj.data.background_image.localFile.childImageSharp.sizes} />
     </Wrapper>
-    <Flex px={2} justifyContent="center" wrap>
-      <Box mr={4} width={[1, 1, 1 / 4]}>
+    <Flex px={2} flexWrap="wrap">
+      <Box mr={4} width={[1, 1 / 4]}>
         <Card>
           <Image>
             <Img
@@ -139,7 +139,8 @@ const Dj = ({ data: { prismicDj: dj, prismicChart: chart } }) => (
         // style={{
         //   boxShadow: 'inset 0 0 0 2px',
         // }}
-        width={[1, 1, 0.7]}
+        width={[1, 0.7]}
+        // p={2}
       >
         <DjContent dj={dj} chart={chart} />
       </Box>
@@ -179,6 +180,16 @@ export const DjQuery = graphql`
           text
         }
         punchline
+        mixes {
+          title
+          link {
+            url
+          }
+          tracklist {
+            text
+            html
+          }
+        }
         avatar {
           localFile {
             childImageSharp {

@@ -11,8 +11,11 @@ import {
 } from 'react-icons/fa'
 import Playlist from './Playlist'
 import PlaylistChart from './PlaylistChart'
+import Tracklist from './MixTracklist'
 import Slider from 'rc-slider'
 import './Slider.css'
+import { Flex } from '@rebass/grid/emotion'
+import { Box } from 'rebass'
 
 function secondsToTime(secs) {
   secs = Math.round(secs)
@@ -30,8 +33,6 @@ function secondsToTime(secs) {
 
 const Wrapper = styled.div`
   max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
 `
 
 const PlayerControler = styled.div`
@@ -165,7 +166,7 @@ class Player extends React.Component {
       duration: 0,
       playbackRate: 1.0,
       loop: false,
-      // index: -1,
+      index: -1,
     }
     this.findNextUrl = this.findNextUrl.bind(this)
   }
@@ -205,7 +206,7 @@ class Player extends React.Component {
   }
   onPlay = () => {
     console.log('onPlay')
-    this.setState({ playing: true })
+    this.setState({ playing: true, duration: this.player.getDuration() })
   }
   onPause = () => {
     console.log('onPause')
@@ -274,6 +275,10 @@ class Player extends React.Component {
     const url = this.findNextUrl(playlist, index)
     this.setState({ url: url })
   }
+  onDuration = duration => {
+    console.log('onDuration', duration)
+    this.setState({ duration })
+  }
 
   render() {
     const {
@@ -287,6 +292,8 @@ class Player extends React.Component {
       duration,
       playbackRate,
     } = this.state
+
+    // console.log()
     const playlistTitle = this.props
     const PlaylistElement =
       this.props.type === 'chart' ? PlaylistChart : Playlist
@@ -307,98 +314,108 @@ class Player extends React.Component {
       ? playlist.findIndex(el => el.link.url == this.state.url)
       : -1
     const nowPlaying = playlist[index]
+    const artist = nowPlaying
+      ? nowPlaying.artist
+        ? nowPlaying.artist
+        : this.props.name
+      : null
+    const track = nowPlaying
+      ? nowPlaying.track
+        ? nowPlaying.track
+        : nowPlaying.title
+      : null
+    const tracklistElement = nowPlaying ? (
+      nowPlaying.tracklist ? (
+        <Box width={[1, 1, 1, 0.35]} mx={3}>
+          <Tracklist tracklist={nowPlaying.tracklist} mixName={track} />
+        </Box>
+      ) : null
+    ) : null
 
     return (
       <Wrapper>
-        <h3>{this.props.name}</h3>
-        <Info>
-          {nowPlaying
-            ? `${nowPlaying.artist} - ${nowPlaying.track}`
-            : `Artist - Track`}
+        <Flex flexWrap="wrap">
+          <Box width={[1, 1, 1, 0.6]}>
+            <h3>
+              {this.props.type !== 'mixes'
+                ? this.props.name
+                : `Миксови од ${this.props.name}`}
+            </h3>
+            <Info>
+              {nowPlaying ? `${artist} - ${track}` : `Artist - Track`}
 
-          {Timer}
-        </Info>
-        <PlayerControler>
-          <FaFastBackward
-            onClick={() => this.onPlayNext('backward')}
-            className="nextPrevButton"
-          />
-          <PlayPauseButton
-            className="playPauseButton"
-            onClick={this.playPause}
-            // viewBox={'0 0 448 512'}
-          />
-          <FaFastForward
-            className="nextPrevButton"
-            onClick={() => this.onPlayNext('forward')}
-          />
-          {/* <input
-            step="any"
-            type="range"
-            className="seek"
-            type="range"
-            min={0}
-            max={1}
-            step="any"
-            value={played}
-            onMouseDown={this.onSeekMouseDown}
-            onChange={this.onSeekChange}
-            onMouseUp={this.onSeekMouseUp}
-            onEnded={this.onEnded}
-            onProgress={this.onProgress}
-            onPlay={this.onPlay}
-            onPause={this.onPause}
-          /> */}
-          <Slider
-            // step="any"
-            type="range"
-            className="seek"
-            min={0}
-            max={1}
-            step={0.000001}
-            value={played}
-            allowCross={false}
-            defaultValue={0}
-            onChange={this.onSliderChange}
-            onAfterChange={this.onSeekMouseUp}
-            onBeforeChange={this.onSeekMouseDown}
-          />
-          <MuteSoundButton
-            size={this.state.muted ? 20 : 25}
-            onClick={this.toggleMuted}
-            className="muteButton"
-          />
-        </PlayerControler>
-        <ReactPlayer
-          ref={this.ref}
-          className="react-player"
-          width="0"
-          height="0"
-          url={this.state.url}
-          playing={playing}
-          loop={loop}
-          playbackRate={playbackRate}
-          volume={volume}
-          muted={muted}
-          onReady={() => console.log('onReady')}
-          onStart={() => console.log('onStart')}
-          onPlay={this.onPlay}
-          onPause={this.onPause}
-          onBuffer={() => console.log('onBuffer')}
-          onSeek={e => console.log('onSeek', e)}
-          onEnded={() => this.onPlayNext('forward')}
-          onError={e => console.log('onError', e)}
-          onProgress={this.onProgress}
-          onDuration={this.onDuration}
-          youtubeConfig={{ preload: true }}
-          soundcloudConfig={{ preload: true }}
-        />
-        <PlaylistElement
-          playlist={playlist}
-          getActiveTrack={this.getActiveTrack}
-          activeUrl={this.state.url}
-          playing={this.state.playing}
-        />
+              {Timer}
+            </Info>
+            <PlayerControler>
+              <FaFastBackward
+                onClick={() => this.onPlayNext('backward')}
+                className="nextPrevButton"
+              />
+              <PlayPauseButton
+                className="playPauseButton"
+                onClick={this.playPause}
+                // viewBox={'0 0 448 512'}
+              />
+              <FaFastForward
+                className="nextPrevButton"
+                onClick={() => this.onPlayNext('forward')}
+              />
+              <Slider
+                // step="any"
+                type="range"
+                className="seek"
+                min={0}
+                max={1}
+                step={0.000001}
+                value={played}
+                allowCross={false}
+                defaultValue={0}
+                onChange={this.onSliderChange}
+                onAfterChange={this.onSeekMouseUp}
+                onBeforeChange={this.onSeekMouseDown}
+              />
+              <MuteSoundButton
+                size={this.state.muted ? 20 : 25}
+                onClick={this.toggleMuted}
+                className="muteButton"
+              />
+            </PlayerControler>
+            <ReactPlayer
+              ref={this.ref}
+              className="react-player"
+              width="0"
+              height="0"
+              url={this.state.url}
+              playing={playing}
+              loop={loop}
+              playbackRate={playbackRate}
+              volume={volume}
+              muted={muted}
+              onReady={() => console.log('onReady')}
+              onStart={() => console.log('onStart')}
+              onPlay={this.onPlay}
+              onPause={this.onPause}
+              onBuffer={() => console.log('onBuffer')}
+              onSeek={e => console.log('onSeek', e)}
+              onEnded={() => this.onPlayNext('forward')}
+              onError={e => console.log('onError', e)}
+              onProgress={this.onProgress}
+              onDuration={this.onDuration}
+              youtubeConfig={{ preload: true }}
+              soundcloudConfig={{ preload: true }}
+              onDuration={this.onDuration}
+            />
+            <PlaylistElement
+              playlist={playlist}
+              getActiveTrack={this.getActiveTrack}
+              activeUrl={this.state.url}
+              playing={this.state.playing}
+              djName={this.props.name}
+            />
+          </Box>
+
+          {tracklistElement}
+        </Flex>
       </Wrapper>
     )
   }

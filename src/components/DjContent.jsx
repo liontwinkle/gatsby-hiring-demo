@@ -4,6 +4,7 @@ import UnerlineNav from './UnderlineNav'
 import { Text } from 'rebass'
 import DjChart from './DjChart'
 import DjMixes from './DjMixes'
+import { Box } from 'rebass'
 
 class DjContent extends React.Component {
   state = {
@@ -18,21 +19,24 @@ class DjContent extends React.Component {
   render() {
     const dj = this.props.dj
     const bio = <Text>{dj.data.bio.text}</Text>
+    const mixes = dj.data.mixes
     const selected = this.state.selected
     const djChart = this.props.chart
+    const Content = (() => {
+      if (selected === 'bio') return bio
+      if (selected == 'charts') return <DjChart chart={djChart} />
+      if (selected == 'mixes')
+        return <DjMixes djName={dj.data.name} mixes={mixes} />
+      else selected === 'events'
+      return <span>Events</span>
+    })()
     return (
       <div>
         <UnerlineNav
           handleClick={this.handleClick}
           selected={this.state.selected}
         />
-        {(() => {
-          if (selected === 'bio') return bio
-          if (selected == 'charts') return <DjChart chart={djChart} />
-          if (selected == 'mixes') return <DjMixes mixes={'mixes'} />
-          else selected === 'events'
-          return <span>Events</span>
-        })()}
+        <Box m={2}>{Content}</Box>
       </div>
     )
   }

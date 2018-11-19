@@ -169,9 +169,11 @@ class Post extends React.Component {
         name={playlist.primary.playlist_name.text}
       />
     ) : null
-    const images = gallery.map(image => {
-      return { src: image.image1.localFile.childImageSharp.sizes.src }
-    })
+    const images = gallery[0].image1.localFile
+      ? gallery.map(image => {
+          return { src: image.image1.localFile.childImageSharp.sizes.src }
+        })
+      : null
     return (
       <div className="post-container">
         <Helmet title={`${post.data.title.text} | ${config.siteTitle}`} />
@@ -190,29 +192,33 @@ class Post extends React.Component {
         <Container type="article">
           <Content input={post.data.text.html} />
           {PlaylistPlayer}
-          <Grid width={320} gap={24}>
-            {gallery.map((image, index) => (
-              <a
-                key={image.image1.localFile.id}
-                href={image.image1.localFile.childImageSharp.sizes.src}
-                onClick={e => this.openLightbox(index, e)}
-              >
-                <Img
-                  key={image.image1.localFile.id}
-                  sizes={image.image1.localFile.childImageSharp.sizes}
-                />
-              </a>
-            ))}
-          </Grid>
-          <Lightbox
-            images={images}
-            isOpen={this.state.lightboxIsOpen}
-            onClickPrev={this.gotoPrevious}
-            onClickNext={this.gotoNext}
-            onClose={this.closeLightbox}
-            currentImage={this.state.currentImage}
-            onClickImage={this.handleClickImage}
-          />
+          {images ? (
+            <div>
+              <Grid width={320} gap={24}>
+                {gallery.map((image, index) => (
+                  <a
+                    key={image.image1.localFile.id}
+                    href={image.image1.localFile.childImageSharp.sizes.src}
+                    onClick={e => this.openLightbox(index, e)}
+                  >
+                    <Img
+                      key={image.image1.localFile.id}
+                      sizes={image.image1.localFile.childImageSharp.sizes}
+                    />
+                  </a>
+                ))}
+              </Grid>
+              <Lightbox
+                images={images}
+                isOpen={this.state.lightboxIsOpen}
+                onClickPrev={this.gotoPrevious}
+                onClickNext={this.gotoNext}
+                onClose={this.closeLightbox}
+                currentImage={this.state.currentImage}
+                onClickImage={this.handleClickImage}
+              />
+            </div>
+          ) : null}
           <Line />
           {/* <Tags tags={post.tags} /> */}
           <p>
@@ -265,7 +271,7 @@ export const BlogQuery = graphql`
               }
             }
             items {
-              out_link {
+              link {
                 url
               }
               artist

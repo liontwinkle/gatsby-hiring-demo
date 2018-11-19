@@ -36,10 +36,10 @@ const Nav = styled.nav`
 `
 
 const UnderlineNav = ({ handleClick, selected }) => {
-  const selectedBio = selected === 'bio' ? 'selected' : null
-  const selectedCharts = selected === 'charts' ? 'selected' : null
-  const selectedMixes = selected === 'mixes' ? 'selected' : null
-  const selectedEvents = selected === 'events' ? 'selected' : null
+  const selectedBio = selected === '#bio' ? 'selected' : null
+  const selectedCharts = selected === '#charts' ? 'selected' : null
+  const selectedMixes = selected === '#mixes' ? 'selected' : null
+  const selectedEvents = selected === '#events' ? 'selected' : null
   return (
     <Nav>
       <Flex justifyContent="flex-start" className="nav-body" flexWrap="wrap">

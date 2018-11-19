@@ -408,13 +408,16 @@ class Player extends React.Component {
               }}
               onDuration={this.onDuration}
             />
-            <PlaylistElement
-              playlist={playlist}
-              getActiveTrack={this.getActiveTrack}
-              activeUrl={this.state.url}
-              playing={this.state.playing}
-              djName={this.props.name}
-            />
+
+            <div className="playlist">
+              <PlaylistElement
+                playlist={playlist}
+                getActiveTrack={this.getActiveTrack}
+                activeUrl={this.state.url}
+                playing={this.state.playing}
+                djName={this.props.name}
+              />
+            </div>
           </Box>
 
           {tracklistElement}

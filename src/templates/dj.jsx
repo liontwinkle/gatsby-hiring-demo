@@ -82,103 +82,72 @@ const Line = styled.div`
   margin-bottom: 1rem;
 `
 
-class Dj extends React.Component {
-  updateLocationHash(hash) {
-    console.log('Update location hash', hash)
-    // this.props.location.hash = hash
-  }
-  render() {
-    const {
-      data: { prismicDj: dj, prismicChart: chart },
-      location,
-    } = this.props
-    return (
-      <div>
-        <Wrapper>
-          <Hero>
-            <h1>{dj.data.name}</h1>
-          </Hero>
-          <Wave />
-          <Img
-            sizes={dj.data.background_image.localFile.childImageSharp.sizes}
-          />
-        </Wrapper>
-        <Flex px={2} flexWrap="wrap">
-          <Box mr={4} width={[1, 1 / 4]}>
-            <Card>
-              <Image>
-                <Img
-                  className="gatsby-image"
-                  sizes={dj.data.avatar.localFile.childImageSharp.sizes}
-                />
-              </Image>
-              <Box my={3}>
-                <Heading as="h3">{dj.data.name}</Heading>
-                <Text fontSize={0}>{dj.data.punchline}</Text>
-                <Line />
-                <Box my={3}>
-                  <Flex>
-                    <Box mr={2}>
-                      <SocialLink
-                        type="fb"
-                        link={dj.data.facebook.url}
-                        size={25}
-                      />
-                    </Box>
-                    <Box mx={2}>
-                      <SocialLink
-                        type="tw"
-                        link={dj.data.twitter.url}
-                        size={25}
-                      />
-                    </Box>
-                    <Box mx={2}>
-                      <SocialLink
-                        type="sc"
-                        link={dj.data.soundcloud.url}
-                        size={25}
-                      />
-                    </Box>
-                    <Box mx={2}>
-                      <SocialLink
-                        type="mc"
-                        link={dj.data.mixcloud.url}
-                        size={25}
-                      />
-                    </Box>
-
-                    <Box mx={2}>
-                      <SocialLink
-                        type="in"
-                        link={dj.data.instagram.url}
-                        size={25}
-                      />
-                    </Box>
-                  </Flex>
-                </Box>
-              </Box>
-            </Card>
-          </Box>
-          <Box
-            // style={{
-            //   boxShadow: 'inset 0 0 0 2px',
-            // }}
-            width={[1, 0.7]}
-            // p={2}
-          >
-            <DjContent
-              onUpdateLocation={this.updateLocationHash}
-              location={location}
-              dj={dj}
-              chart={chart}
+const Dj = ({ data: { prismicDj: dj, prismicChart: chart }, location }) => (
+  <div>
+    <Wrapper>
+      <Hero>
+        <h1>{dj.data.name}</h1>
+      </Hero>
+      <Wave />
+      <Img sizes={dj.data.background_image.localFile.childImageSharp.sizes} />
+    </Wrapper>
+    <Flex px={2} flexWrap="wrap">
+      <Box mr={4} width={[1, 1 / 4]}>
+        <Card>
+          <Image>
+            <Img
+              className="gatsby-image"
+              sizes={dj.data.avatar.localFile.childImageSharp.sizes}
             />
+          </Image>
+          <Box my={3}>
+            <Heading as="h3">{dj.data.name}</Heading>
+            <Text fontSize={0}>{dj.data.punchline}</Text>
+            <Line />
+            <Box my={3}>
+              <Flex>
+                <Box mr={2}>
+                  <SocialLink type="fb" link={dj.data.facebook.url} size={25} />
+                </Box>
+                <Box mx={2}>
+                  <SocialLink type="tw" link={dj.data.twitter.url} size={25} />
+                </Box>
+                <Box mx={2}>
+                  <SocialLink
+                    type="sc"
+                    link={dj.data.soundcloud.url}
+                    size={25}
+                  />
+                </Box>
+                <Box mx={2}>
+                  <SocialLink type="mc" link={dj.data.mixcloud.url} size={25} />
+                </Box>
+
+                <Box mx={2}>
+                  <SocialLink
+                    type="in"
+                    link={dj.data.instagram.url}
+                    size={25}
+                  />
+                </Box>
+              </Flex>
+            </Box>
           </Box>
-        </Flex>
-        <Footer />
-      </div>
-    )
-  }
-}
+        </Card>
+      </Box>
+      <Box
+        // style={{
+        //   boxShadow: 'inset 0 0 0 2px',
+        // }}
+        width={[1, 0.7]}
+        // p={2}
+      >
+        <DjContent location={location} dj={dj} chart={chart} />
+      </Box>
+    </Flex>
+    <Footer />
+  </div>
+)
 
 export default Dj
 

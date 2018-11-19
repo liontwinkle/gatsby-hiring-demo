@@ -331,11 +331,12 @@ class Player extends React.Component {
         </Box>
       ) : null
     ) : null
+    const mainBoxSize = tracklistElement ? 0.6 : 1
 
     return (
       <Wrapper>
         <Flex flexWrap="wrap">
-          <Box width={[1, 1, 1, 0.6]}>
+          <Box width={[1, 1, 1, mainBoxSize]}>
             <h3>
               {this.props.type !== 'mixes'
                 ? this.props.name

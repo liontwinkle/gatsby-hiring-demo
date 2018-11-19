@@ -6,6 +6,10 @@ import DjChart from './DjChart'
 import DjMixes from './DjMixes'
 import { Box } from 'rebass'
 
+const Bio = styled(Text)`
+  max-width: 800px;
+`
+
 class DjContent extends React.Component {
   state = {
     selected: 'bio',
@@ -18,7 +22,7 @@ class DjContent extends React.Component {
   }
   render() {
     const dj = this.props.dj
-    const bio = <Text>{dj.data.bio.text}</Text>
+    const bio = <Bio>{dj.data.bio.text}</Bio>
     const mixes = dj.data.mixes
     const selected = this.state.selected
     const djChart = this.props.chart

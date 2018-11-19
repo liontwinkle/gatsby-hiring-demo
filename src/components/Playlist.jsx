@@ -3,7 +3,6 @@ import styled from 'react-emotion'
 import {
   FaPlay,
   FaPause,
-  FaList,
   FaFileAudio,
   FaMixcloud,
   FaSoundcloud,
@@ -17,6 +16,12 @@ const Table = styled.table`
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
+  th {
+    font-weight: 500;
+    font-size: 16px;
+    color: ${props => props.theme.colors.black.light};
+    text-transform: uppercase;
+  }
   .center {
     text-align: center;
   }
@@ -47,22 +52,12 @@ const Playlist = ({ playlist, getActiveTrack, activeUrl, playing, djName }) => {
     <Table>
       <thead>
         <tr>
-          <th className="center">
-            <h4>
-              <FaList size={23} />
-            </h4>
-          </th>
+          <th className="center" />
           <th />
+          <th>Artist</th>
+          <th>Track</th>
           <th>
-            <h4>Artist</h4>
-          </th>
-          <th>
-            <h4>Track</h4>
-          </th>
-          <th>
-            <h4>
-              <GoLinkExternal size={23} />
-            </h4>
+            <GoLinkExternal size={21} />
           </th>
         </tr>
       </thead>
@@ -76,9 +71,9 @@ const Playlist = ({ playlist, getActiveTrack, activeUrl, playing, djName }) => {
                 style={{ cursor: 'pointer' }}
               >
                 {(track.link.url == activeUrl) & playing ? (
-                  <FaPause size={20} />
+                  <FaPause size={18} />
                 ) : (
-                  <FaPlay size={20} />
+                  <FaPlay size={18} />
                 )}
               </div>
             </td>

@@ -1,10 +1,10 @@
 import React from 'react'
-import styled from 'react-emotion'
-import { Flex } from '@rebass/grid/emotion'
-import { Box } from 'rebass'
+import styled from 'styled-components'
+import { Flex } from '@rebass/grid'
+// import { Box } from 'rebass'
 import { IoIosBook, IoMdStats, IoMdCalendar } from 'react-icons/io'
 import { TiHeadphones } from 'react-icons/ti'
-import Link from 'gatsby-link'
+// import { Link } from 'gatsby'
 
 const Nav = styled.nav`
   border-bottom: 1px solid #e1e4e8;

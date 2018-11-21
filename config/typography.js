@@ -1,4 +1,4 @@
-import Typography from 'typography';
+import Typography from 'typography'
 import deYoungTheme from 'typography-theme-de-young'
 
 const typography = new Typography({
@@ -16,7 +16,7 @@ const typography = new Typography({
     },
     {
       name: 'Istok Web',
-      styles: ['400', 'cyrillic',],
+      styles: ['400', 'cyrillic'],
     },
   ],
   overrideStyles: () => ({
@@ -24,6 +24,7 @@ const typography = new Typography({
       marginBottom: 0,
     },
   }),
-});
+})
 // const typography = new Typography(deYoungTheme)
-export default typography;
+const { rhythm, scale } = typography
+export { rhythm, scale, typography as default }

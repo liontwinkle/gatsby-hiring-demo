@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'react-emotion'
-import Link from 'gatsby-link'
+import styled from 'styled-components'
+import { Link } from 'gatsby'
 import Img from 'gatsby-image'
-import kebabCase from 'lodash/kebabCase'
-import { hideS } from '../utils/hide'
+// import kebabCase from 'lodash/kebabCase'
+// import { hideS } from '../utils/hide'
 import { GoCalendar, GoPencil } from 'react-icons/go'
 
 const Wrapper = styled.article`
@@ -97,7 +97,7 @@ const ItemBlog = ({ path, cover, title, date, text, author }) => (
   <Wrapper>
     <Image>
       <Link to={`blog/${path}`}>
-        <Img sizes={cover} />
+        <Img fluid={cover} />
         {/* <img src={`http://localhost:1337${cover.url}`} /> */}
       </Link>
     </Image>

@@ -1,23 +1,25 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled, { css, keyframes } from 'react-emotion'
+import styled, { css, keyframes } from 'styled-components'
 import Helmet from 'react-helmet'
 import Img from 'gatsby-image'
-import Link from 'gatsby-link'
-import kebabCase from 'lodash/kebabCase'
+// import { Link } from 'gatsby'
+// import kebabCase from 'lodash/kebabCase'
 import { darken } from 'polished'
-import Tags from '../components/Tags'
-import SEO from '../components/SEO'
+// import Tags from '../components/Tags'
+// import SEO from '../components/SEO'
 import Container from '../components/Container'
 import Content from '../components/Content'
 import Wave from '../components/Wave'
-import Button from '../components/Button'
+// import Button from '../components/Button'
 import Footer from '../components/Footer'
-import { hideS } from '../utils/hide'
+// import { hideS } from '../utils/hide'
 import config from '../../config/website'
 import Grid from 'react-css-grid'
 import Player from '../components/Player'
 import Lightbox from 'react-images'
+import { graphql } from 'gatsby'
+import Layout from '../components/Layout'
 
 const pulse = keyframes`
   0% {
@@ -77,22 +79,22 @@ const Hero = styled.div`
   text-align: center;
 `
 
-const Information = styled.div`
-  margin-top: 2rem;
-  font-family: ${props => props.theme.fontFamily.heading};
-  a {
-    color: ${props => props.theme.colors.white.base};
-    transition: all 0.4s;
-    border-bottom: 1px solid transparent;
-    &:hover {
-      border-bottom: 1px solid white;
-      color: white;
-    }
-    &:focus {
-      color: white;
-    }
-  }
-`
+// const Information = styled.div`
+//   margin-top: 2rem;
+//   font-family: ${props => props.theme.fontFamily.heading};
+//   a {
+//     color: ${props => props.theme.colors.white.base};
+//     transition: all 0.4s;
+//     border-bottom: 1px solid transparent;
+//     &:hover {
+//       border-bottom: 1px solid white;
+//       color: white;
+//     }
+//     &:focus {
+//       color: white;
+//     }
+//   }
+// `
 
 const fontBold = css`
   font-weight: 700;
@@ -171,64 +173,65 @@ class Post extends React.Component {
     ) : null
     const images = gallery[0].image1.localFile
       ? gallery.map(image => {
-          return { src: image.image1.localFile.childImageSharp.sizes.src }
+          return { src: image.image1.localFile.childImageSharp.fluid.src }
         })
       : null
     return (
-      <div className="post-container">
-        <Helmet title={`${post.data.title.text} | ${config.siteTitle}`} />
-        {/* <SEO postPath={slug} postNode={postNode} postSEO /> */}
-        <Wrapper>
-          <Hero>
-            <h1>{post.data.title.text}</h1>
-            {/* <Information>
+      <Layout>
+        <div className="post-container">
+          <Helmet title={`${post.data.title.text} | ${config.siteTitle}`} />
+          {/* <SEO postPath={slug} postNode={postNode} postSEO /> */}
+          <Wrapper>
+            <Hero>
+              <h1>{post.data.title.text}</h1>
+              {/* <Information>
             {post.date} &mdash; Lesezeit: {postNode.timeToRead} Min. &mdash; <span className={hideS}>Kategorie: </span>
             <Link to={`/categories/${kebabCase(post.category)}`}>{post.category}</Link>
           </Information> */}
-          </Hero>
-          <Wave />
-          <Img sizes={post.data.image.localFile.childImageSharp.sizes} />
-        </Wrapper>
-        <Container type="article">
-          <Content input={post.data.text.html} />
-          {PlaylistPlayer}
-          {images ? (
-            <div>
-              <Grid width={320} gap={24}>
-                {gallery.map((image, index) => (
-                  <a
-                    key={image.image1.localFile.id}
-                    href={image.image1.localFile.childImageSharp.sizes.src}
-                    onClick={e => this.openLightbox(index, e)}
-                  >
-                    <Img
+            </Hero>
+            <Wave />
+            <Img fluid={post.data.image.localFile.childImageSharp.fluid} />
+          </Wrapper>
+          <Container type="article">
+            <Content input={post.data.text.html} />
+            {PlaylistPlayer}
+            {images ? (
+              <div>
+                <Grid width={320} gap={24}>
+                  {gallery.map((image, index) => (
+                    <a
                       key={image.image1.localFile.id}
-                      sizes={image.image1.localFile.childImageSharp.sizes}
-                    />
-                  </a>
-                ))}
-              </Grid>
-              <Lightbox
-                images={images}
-                isOpen={this.state.lightboxIsOpen}
-                onClickPrev={this.gotoPrevious}
-                onClickNext={this.gotoNext}
-                onClose={this.closeLightbox}
-                currentImage={this.state.currentImage}
-                onClickImage={this.handleClickImage}
-              />
-            </div>
-          ) : null}
-          <Line />
-          {/* <Tags tags={post.tags} /> */}
-          <p>
-            <span className={fontBold}>Interesse geweckt?</span> Lies alle
-            Beiträge in der Kategorie{' '}
-            {/* <Link to={`/categories/${kebabCase(post.category)}`}>{post.category}</Link> */}
-          </p>
-        </Container>
-        <Footer>
-          {/* <h2>Lust auf mehr Tutorials & Goodies? Werde ein Patron.</h2>
+                      href={image.image1.localFile.childImageSharp.fluid.src}
+                      onClick={e => this.openLightbox(index, e)}
+                    >
+                      <Img
+                        key={image.image1.localFile.id}
+                        fluid={image.image1.localFile.childImageSharp.fluid}
+                      />
+                    </a>
+                  ))}
+                </Grid>
+                <Lightbox
+                  images={images}
+                  isOpen={this.state.lightboxIsOpen}
+                  onClickPrev={this.gotoPrevious}
+                  onClickNext={this.gotoNext}
+                  onClose={this.closeLightbox}
+                  currentImage={this.state.currentImage}
+                  onClickImage={this.handleClickImage}
+                />
+              </div>
+            ) : null}
+            <Line />
+            {/* <Tags tags={post.tags} /> */}
+            <p>
+              <span className={fontBold}>Interesse geweckt?</span> Lies alle
+              Beiträge in der Kategorie{' '}
+              {/* <Link to={`/categories/${kebabCase(post.category)}`}>{post.category}</Link> */}
+            </p>
+          </Container>
+          <Footer>
+            {/* <h2>Lust auf mehr Tutorials & Goodies? Werde ein Patron.</h2>
         <a
           href="https://www.patreon.com/lekoarts"
           target="_blank"
@@ -236,8 +239,9 @@ class Post extends React.Component {
         >
           <Button type="secondary">Patreon</Button>
         </a> */}
-        </Footer>
-      </div>
+          </Footer>
+        </div>
+      </Layout>
     )
   }
 }
@@ -245,7 +249,7 @@ class Post extends React.Component {
 export default Post
 
 Post.propTypes = {
-  // pathContext: PropTypes.shape({
+  // pageContext: PropTypes.shape({
   //   slug: PropTypes.string.isRequired,
   // }),
   data: PropTypes.shape({
@@ -298,12 +302,12 @@ export const BlogQuery = graphql`
         image {
           localFile {
             childImageSharp {
-              sizes(
+              fluid(
                 maxWidth: 900
                 quality: 85
                 duotone: { highlight: "#5ABDFF", shadow: "#3466DB" }
               ) {
-                ...GatsbyImageSharpSizes_withWebp_tracedSVG
+                ...GatsbyImageSharpFluid_withWebp_tracedSVG
               }
             }
           }
@@ -313,12 +317,12 @@ export const BlogQuery = graphql`
             localFile {
               id
               childImageSharp {
-                sizes(
+                fluid(
                   maxWidth: 900
                   quality: 85
                   traceSVG: { color: "#2B2B2F" }
                 ) {
-                  ...GatsbyImageSharpSizes_withWebp_tracedSVG
+                  ...GatsbyImageSharpFluid_withWebp_tracedSVG
                 }
               }
             }

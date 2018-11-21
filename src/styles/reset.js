@@ -1,15 +1,10 @@
-/* eslint no-unused-expressions: 0 */
+import { css } from 'styled-components'
+import theme from '../../config/theme'
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { injectGlobal } from 'emotion';
-import { ThemeProvider } from 'emotion-theming';
-import theme from '../../config/theme';
-import Navigation from '../components/Navigation';
-import SEO from '../components/SEO';
-
-injectGlobal`
-  *, *:before, *:after {
+const reset = css`
+  *,
+  *:before,
+  *:after {
     box-sizing: inherit;
   }
   html {
@@ -18,7 +13,8 @@ injectGlobal`
     box-sizing: border-box;
     -ms-overflow-style: scrollbar;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    @media (max-width: ${theme.breakpoints.m}) and (max-device-width: ${theme.breakpoints.m}) {
+    @media (max-width: ${theme.breakpoints.m}),
+      (max-device-width: ${theme.breakpoints.m}) {
       font-size: 16px !important;
       h1 {
         font-size: 2.074rem;
@@ -33,7 +29,8 @@ injectGlobal`
         font-size: 1.2rem;
       }
     }
-    @media (max-width: ${theme.breakpoints.s}) and (max-device-width: ${theme.breakpoints.s}) {
+    @media (max-width: ${theme.breakpoints.s}),
+      (max-device-width: ${theme.breakpoints.s}) {
       font-size: 14px !important;
       h1 {
         font-size: 1.602rem;
@@ -58,17 +55,19 @@ injectGlobal`
     background-color: ${theme.colors.primary.base};
   }
   a {
-    color: ${theme.colors.primary.base};
+    color: ${theme.colors.primary.dark};
     transition: ${theme.transitions.default.transition};
     text-decoration: none;
-    &:hover, &:focus {
-      color: ${theme.colors.primary.light};
+    &:hover,
+    &:focus {
+      color: ${theme.colors.primary.base};
     }
   }
   a:not([href]):not([tabindex]) {
     color: inherit;
     text-decoration: none;
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       color: inherit;
       text-decoration: none;
     }
@@ -84,24 +83,15 @@ injectGlobal`
   }
   blockquote {
     border-left: 5px solid ${theme.colors.primary.base};
-    padding-left: 1rem;
-    margin-left: 0;
-    margin-right: 0;
+    padding-left: 1rem !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
     font-style: italic;
     p {
       line-height: 1.3 !important;
     }
   }
-  .gatsby-resp-image-wrapper {
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  }
-  .gatsby-resp-iframe-wrapper {
-    margin-bottom: 2rem;
-  }
-  .gatsby-highlight {
-    margin-bottom: 2rem;
-  }
-  [tabindex="-1"]:focus {
+  [tabindex='-1']:focus {
     outline: none !important;
   }
   pre {
@@ -115,10 +105,18 @@ injectGlobal`
   img {
     vertical-align: middle;
   }
-  [role="button"] {
+  [role='button'] {
     cursor: pointer;
   }
-  a, area, button, [role="button"], input, label, select, summary, textarea {
+  a,
+  area,
+  button,
+  [role='button'],
+  input,
+  label,
+  select,
+  summary,
+  textarea {
     touch-action: manipulation;
   }
   table {
@@ -143,13 +141,16 @@ injectGlobal`
     outline: 1px dotted;
     outline: 5px auto -webkit-focus-ring-color;
   }
-  input, button, select, textarea {
+  input,
+  button,
+  select,
+  textarea {
     line-height: inherit;
   }
-  input[type="date"],
-  input[type="time"],
-  input[type="datetime-local"],
-  input[type="month"] {
+  input[type='date'],
+  input[type='time'],
+  input[type='datetime-local'],
+  input[type='month'] {
     -webkit-appearance: listbox;
   }
   textarea {
@@ -169,29 +170,19 @@ injectGlobal`
     font-size: 1.5rem;
     line-height: inherit;
   }
-  input[type="search"] {
+  input[type='search'] {
     -webkit-appearance: none;
   }
   output {
     display: inline-block;
   }
+  svg:not(:root) {
+    overflow: hidden;
+    vertical-align: middle;
+  }
   [hidden] {
     display: none !important;
   }
-`;
+`
 
-const MainLayout = ({ children }) => (
-  <ThemeProvider theme={theme}>
-    <div>
-      <SEO />
-      <Navigation />
-      {children()}
-    </div>
-  </ThemeProvider>
-);
-
-export default MainLayout;
-
-MainLayout.propTypes = {
-  children: PropTypes.func.isRequired,
-};
+export default reset

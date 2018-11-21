@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'react-emotion'
+import styled from 'styled-components'
 import {
   FaPlay,
   FaPause,
@@ -70,7 +70,7 @@ const Playlist = ({ playlist, getActiveTrack, activeUrl, playing, djName }) => {
                 onClick={() => getActiveTrack(track.link.url)}
                 style={{ cursor: 'pointer' }}
               >
-                {(track.link.url == activeUrl) & playing ? (
+                {(track.link.url === activeUrl) & playing ? (
                   <FaPause size={18} />
                 ) : (
                   <FaPlay size={18} />

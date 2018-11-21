@@ -1,8 +1,8 @@
 import React from 'react'
-import Link from 'gatsby-link'
+import { Link } from 'gatsby'
 import PropTypes from 'prop-types'
 import format from 'date-fns/format'
-import styled from 'react-emotion'
+import styled from 'styled-components'
 import Wave from './Wave'
 import Container from './Container'
 
@@ -81,7 +81,7 @@ const Footer = ({ children }) => {
   return (
     <Wrapper>
       <Wave orientation="top" />
-      <Container>
+      <Container className="footer-container" type="base">
         <OptionalContent>{children}</OptionalContent>
         <Content>
           <Important>
@@ -89,10 +89,6 @@ const Footer = ({ children }) => {
             <Link to="/djs">Диџеи</Link>
             <Link to="/podcast">Подкаст</Link>
           </Important>
-          {/* <Item>
-            <Link to="/impressum">Impressum</Link>
-            <Link to="/datenschutz">Datenschutzerklärung</Link>
-          </Item> */}
           <Item>
             <a
               href="https://www.facebook.com/sektor909"
@@ -124,8 +120,7 @@ const Footer = ({ children }) => {
             </a>
           </Item>
         </Content>
-        <Copyright
-        >{`Copyright © ${date}. Сектор909, Скопје, Македонија. Сите права се задржани.`}</Copyright>
+        <Copyright>{`Copyright © ${date}. Сектор909, Скопје, Македонија. Сите права се задржани.`}</Copyright>
       </Container>
     </Wrapper>
   )

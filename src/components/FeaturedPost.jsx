@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Link from 'gatsby-link'
+import { Link } from 'gatsby'
 import Img from 'gatsby-image'
-import { css } from 'emotion'
-import styled from 'react-emotion'
+import { css } from 'styled-components'
+import styled from 'styled-components'
 import theme from '../../config/theme'
 
 const ImageOverlay = styled.div`
@@ -117,9 +117,9 @@ const Image = styled.div`
   }
 `
 
-const EventPic = styled.img`
-  height: 100%;
-`
+// const EventPic = styled.img`
+//   height: 100%;
+// `
 
 const Information = styled.div`
   display: flex;
@@ -128,13 +128,13 @@ const Information = styled.div`
   align-items: flex-start;
 `
 
-const Category = styled.span`
-  color: ${props => props.theme.colors.black.base};
-  background-color: ${props => props.theme.colors.white.light};
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
-  border-radius: ${props => props.theme.borderRadius.round};
-  padding: 0.25rem 1rem;
-`
+// const Category = styled.span`
+//   color: ${props => props.theme.colors.black.base};
+//   background-color: ${props => props.theme.colors.white.light};
+//   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+//   border-radius: ${props => props.theme.borderRadius.round};
+//   padding: 0.25rem 1rem;
+// `
 
 const Date = styled.div`
   color: ${props => props.theme.colors.white.light};
@@ -149,7 +149,7 @@ const Description = styled.h2`
 const FeaturedPost = ({ cover, path, from, to, naslov }) => (
   <Wrapper>
     <Image>
-      <Img sizes={cover} />
+      <Img fluid={cover} />
     </Image>
     <Link to={`/program/${path}`} className={styledLink}>
       <Information>

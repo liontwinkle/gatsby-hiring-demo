@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Link from 'gatsby-link'
+import { Link } from 'gatsby'
 import Img from 'gatsby-image'
-import { css } from 'emotion'
-import styled from 'react-emotion'
+import { css } from 'styled-components'
+import styled from 'styled-components'
 import theme from '../../config/theme'
 import EventInfo from './EventInfo'
 

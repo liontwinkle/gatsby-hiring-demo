@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled, { css } from 'react-emotion'
-import Link from 'gatsby-link'
+import styled, { css } from 'styled-components'
+import { Link } from 'gatsby'
 import Img from 'gatsby-image'
 import { GoCalendar, GoLocation } from 'react-icons/go'
-import kebabCase from 'lodash/kebabCase'
-import { hideS } from '../utils/hide'
+// import kebabCase from 'lodash/kebabCase'
+// import { hideS } from '../utils/hide'
 const dj = require('../icons/dj.svg')
 
 const Wrapper = styled.article`
@@ -111,8 +111,8 @@ const NastanPost = ({ cover, path, date, info, naslov, location, lineup }) => (
   <Wrapper>
     <Image>
       <Link to={`program/${path}`}>
-        <Img className="flyer" sizes={cover} />
-        {/* <img src={cover} /> */}
+        <Img alt="" className="flyer" fluid={cover} />
+        <img src={cover} />
       </Link>
     </Image>
     <Information>
@@ -120,7 +120,7 @@ const NastanPost = ({ cover, path, date, info, naslov, location, lineup }) => (
         <h1>{naslov}</h1>
       </Link>
       <Statistics className={marginBottom}>
-        <img src={dj} />
+        <img alt="" src={dj} />
         {/* <u>LINE UP:</u> */}
         <h3 style={{ display: 'inline' }}>{` ${lineup}`}</h3>
       </Statistics>

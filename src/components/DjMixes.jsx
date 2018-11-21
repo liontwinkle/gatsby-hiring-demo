@@ -1,6 +1,6 @@
 import React from 'react'
 import Player from './Player'
-import { Flex, Box } from '@rebass/grid/emotion'
+import { Flex, Box } from '@rebass/grid'
 
 const DjMixes = ({ mixes, djName }) => (
   <div>

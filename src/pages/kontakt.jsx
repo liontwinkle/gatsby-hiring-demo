@@ -2,7 +2,7 @@
 
 import React from 'react'
 import Helmet from 'react-helmet'
-import styled from 'react-emotion'
+import styled from 'styled-components'
 import Footer from '../components/Footer'
 import Container from '../components/Container'
 import { LinkCard } from '../components/Card'
@@ -13,6 +13,7 @@ import Paperplane from '../icons/Paperplane'
 import Twitter from '../icons/Twitter'
 import Instagram from '../icons/Instagram'
 import Facebook from '../icons/Facebook'
+import Layout from '../components/Layout'
 // import YouTube from '../icons/YouTube';
 
 const CenteredContainer = styled(Container)`
@@ -53,45 +54,47 @@ const CardContainer = styled(Container)`
 `
 
 const Kontakt = () => (
-  <div className="kontakt-container">
-    <Helmet title={`Kontakt | ${config.siteTitle}`} />
-    <Header slim subtitle="Нешто повеќе за клубот Сектор909">
-      Контакт
-    </Header>
-    <Wrapper>
-      <Container type="article">
-        <h3>Инфо за клубот.</h3>
-        <p>Бла бла бла историја...</p>
-        <p>Повеќе инфо...</p>
-      </Container>
-      <CenteredContainer>
-        <a href="mailto:info@sektor.com">
-          <Button type="primary">
-            <Paperplane /> E-Mail
-          </Button>
-        </a>
-      </CenteredContainer>
-      <CardContainer>
-        <MyLinkCard link="https://www.facebook.com/sektor909" facebook>
-          <Facebook />
-          Facebook
-        </MyLinkCard>
-        <MyLinkCard link="https://www.instagram.com/sektor909" instagram>
-          <Instagram />
-          Instagram
-        </MyLinkCard>
-        <MyLinkCard link="https://www.twitter.com/sektor909" twitter>
-          <Twitter />
-          Tweeter
-        </MyLinkCard>
-        {/* <MyLinkCard link="https://youtube.de/LekoArtsDE" youtube>
+  <Layout>
+    <div className="kontakt-container">
+      <Helmet title={`Kontakt | ${config.siteTitle}`} />
+      <Header slim subtitle="Нешто повеќе за клубот Сектор909">
+        Контакт
+      </Header>
+      <Wrapper>
+        <Container type="article">
+          <h3>Инфо за клубот.</h3>
+          <p>Бла бла бла историја...</p>
+          <p>Повеќе инфо...</p>
+        </Container>
+        <CenteredContainer>
+          <a href="mailto:info@sektor.com">
+            <Button type="primary">
+              <Paperplane /> E-Mail
+            </Button>
+          </a>
+        </CenteredContainer>
+        <CardContainer>
+          <MyLinkCard link="https://www.facebook.com/sektor909" facebook>
+            <Facebook />
+            Facebook
+          </MyLinkCard>
+          <MyLinkCard link="https://www.instagram.com/sektor909" instagram>
+            <Instagram />
+            Instagram
+          </MyLinkCard>
+          <MyLinkCard link="https://www.twitter.com/sektor909" twitter>
+            <Twitter />
+            Tweeter
+          </MyLinkCard>
+          {/* <MyLinkCard link="https://youtube.de/LekoArtsDE" youtube>
           <YouTube />
           Speedarts
         </MyLinkCard> */}
-      </CardContainer>
-    </Wrapper>
-    <Footer />
-  </div>
+        </CardContainer>
+      </Wrapper>
+      <Footer />
+    </div>
+  </Layout>
 )
 
 export default Kontakt

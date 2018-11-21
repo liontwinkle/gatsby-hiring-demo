@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, { css } from 'react-emotion'
+import styled from 'styled-components'
 import ReactPlayer from 'react-player'
 import {
   FaPlay,
@@ -14,7 +14,7 @@ import PlaylistChart from './PlaylistChart'
 import Tracklist from './MixTracklist'
 import Slider from 'rc-slider'
 import './Slider.css'
-import { Flex } from '@rebass/grid/emotion'
+import { Flex } from '@rebass/grid'
 import { Box } from 'rebass'
 
 function secondsToTime(secs) {
@@ -247,14 +247,14 @@ class Player extends React.Component {
 
   getActiveTrack = url => {
     this.setState({ url: url })
-    this.state.url == url
+    this.state.url === url
       ? this.setState({ playing: !this.state.playing })
       : this.setState({ playing: true })
   }
 
   findNextUrl = (playlist, index) => {
     const maxIndex = playlist.length
-    if (index == -1 || index == maxIndex) {
+    if (index === -1 || index === maxIndex) {
       console.log('First case')
       return playlist[0].link.url
     } else if (index >= 0 && index < maxIndex) {
@@ -265,11 +265,11 @@ class Player extends React.Component {
   onPlayNext = direction => {
     const playlist = this.props.playlist
     let index
-    if (direction == 'forward') {
+    if (direction === 'forward') {
       // + 1 because next track
-      index = playlist.findIndex(el => el.link.url == this.state.url) + 1
-    } else if (direction == 'backward') {
-      index = playlist.findIndex(el => el.link.url == this.state.url) - 1
+      index = playlist.findIndex(el => el.link.url === this.state.url) + 1
+    } else if (direction === 'backward') {
+      index = playlist.findIndex(el => el.link.url === this.state.url) - 1
     }
 
     const url = this.findNextUrl(playlist, index)
@@ -282,19 +282,19 @@ class Player extends React.Component {
 
   render() {
     const {
-      url,
+      // url,
       playing,
       volume,
       muted,
       loop,
       played,
-      loaded,
+      // loaded,
       duration,
       playbackRate,
     } = this.state
 
     // console.log()
-    const playlistTitle = this.props
+    // const playlistTitle = this.props
     const PlaylistElement =
       this.props.type === 'chart' ? PlaylistChart : Playlist
     const playlist = this.props.playlist
@@ -303,15 +303,14 @@ class Player extends React.Component {
     const Timer =
       this.state.playing || this.state.played > 0.0 ? (
         <div className="timer">
-          {secondsToTime(duration * this.state.played)}&nbsp;/&nbsp;{secondsToTime(
-            duration
-          )}
+          {secondsToTime(duration * this.state.played)}&nbsp;/&nbsp;
+          {secondsToTime(duration)}
         </div>
       ) : (
         <div className="timer">-</div>
       )
     const index = this.state.url
-      ? playlist.findIndex(el => el.link.url == this.state.url)
+      ? playlist.findIndex(el => el.link.url === this.state.url)
       : -1
     const nowPlaying = playlist[index]
     const artist = nowPlaying
@@ -406,7 +405,6 @@ class Player extends React.Component {
                 youtube: { preload: true },
                 soundcloud: { preload: true, options: { auto_play: true } },
               }}
-              onDuration={this.onDuration}
             />
 
             <div className="playlist">

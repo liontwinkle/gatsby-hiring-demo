@@ -1,12 +1,15 @@
 import React from 'react'
-import Link from 'gatsby-link'
-import styled, { keyframes } from 'react-emotion'
+import { Link } from 'gatsby'
+import styled, { keyframes } from 'styled-components'
 import Img from 'gatsby-image'
 import Footer from '../components/Footer'
 import Wave from '../components/Wave'
 import Container from '../components/Container'
-import { Box, Card, Heading, Text } from 'rebass'
+import { Card, Heading, Text } from 'rebass'
+import { Box } from '@rebass/grid/emotion'
 import theme from '../../config/theme'
+import { graphql } from 'gatsby'
+import Layout from '../components/Layout'
 
 const pulse = keyframes`
   0% {
@@ -76,34 +79,34 @@ const DescriptionText = styled.p`
   margin: 3rem auto;
   text-shadow: ${props => props.theme.shadow.text.big};
 `
-const CardWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin-bottom: 3rem;
-  ${Card} {
-    color: ${props => props.theme.colors.black.base} !important;
-    margin-bottom: 2rem;
-    text-align: center;
-    flex-basis: calc(99.9% * 1 / 2.15 - 1rem);
-    max-width: calc(99.9% * 1 / 2.15 - 1rem);
-    width: calc(99.9% * 1 / 2.15 - 1rem);
-    @media (max-width: 750px) {
-      flex-basis: 100%;
-      max-width: 100%;
-      width: 100%;
-      margin-bottom: 1.5rem;
-    }
-  }
-`
-const Image = styled.div`
-  .gatsby-image {
-    max-width: 100%;
-    height: auto;
-    margin: 0px;
-  }
-`
+// const CardWrapper = styled.div`
+//   display: flex;
+//   flex-direction: row;
+//   flex-wrap: wrap;
+//   justify-content: space-between;
+//   margin-bottom: 3rem;
+//   ${Card} {
+//     color: ${props => props.theme.colors.black.base} !important;
+//     margin-bottom: 2rem;
+//     text-align: center;
+//     flex-basis: calc(99.9% * 1 / 2.15 - 1rem);
+//     max-width: calc(99.9% * 1 / 2.15 - 1rem);
+//     width: calc(99.9% * 1 / 2.15 - 1rem);
+//     @media (max-width: 750px) {
+//       flex-basis: 100%;
+//       max-width: 100%;
+//       width: 100%;
+//       margin-bottom: 1.5rem;
+//     }
+//   }
+// `
+// const Image = styled.div`
+//   .gatsby-image {
+//     max-width: 100%;
+//     height: auto;
+//     margin: 0px;
+//   }
+// `
 
 const PlainLink = styled(Link)`
   color: ${theme.colors.black.base};
@@ -115,45 +118,47 @@ const Djs = ({
     allPrismicDj: { edges: djs },
   },
 }) => (
-  <div>
-    <Wrapper>
-      <Hero>
-        <h1>#Resident DJs</h1>
-      </Hero>
-      <Wave />
-      <Img sizes={file.childImageSharp.sizes} />
-    </Wrapper>
+  <Layout>
+    <div>
+      <Wrapper>
+        <Hero>
+          <h1>#Resident DJs</h1>
+        </Hero>
+        <Wave />
+        <Img fluid={file.childImageSharp.fluid} />
+      </Wrapper>
 
-    <Container>
-      <DescriptionText>Sektor DJs</DescriptionText>
-      {djs.map(dj => (
-        <Box key={dj.node.id} width={[1, 1, 1 / 2]}>
-          <Card
-            m={1}
-            p={1}
-            borderRadius={2}
-            boxShadow={theme.shadow.feature.small.default}
-          >
-            <PlainLink to={`djs/${dj.node.data.name}`}>
-              <Img
-                className="gatsby-image"
-                sizes={dj.node.data.avatar.localFile.childImageSharp.sizes}
-              />
-            </PlainLink>
-            <Box width={256} px={2}>
+      <Container>
+        <DescriptionText>Sektor DJs</DescriptionText>
+        {djs.map(dj => (
+          <Box key={dj.node.id} width={[1, 1, 1 / 2, 1 / 3]}>
+            <Card
+              m={1}
+              p={1}
+              borderRadius={2}
+              boxShadow={theme.shadow.feature.small.default}
+            >
               <PlainLink to={`djs/${dj.node.data.name}`}>
-                <Heading className="title" as="h3">
-                  {dj.node.data.name}
-                </Heading>
+                <Img
+                  className="gatsby-image"
+                  fluid={dj.node.data.avatar.localFile.childImageSharp.fluid}
+                />
               </PlainLink>
-              <Text fontSize={0}>{dj.node.data.punchline}</Text>
-            </Box>
-          </Card>
-        </Box>
-      ))}
-    </Container>
-    <Footer />
-  </div>
+              <Box width={256} px={2}>
+                <PlainLink to={`djs/${dj.node.data.name}`}>
+                  <Heading className="title" as="h3">
+                    {dj.node.data.name}
+                  </Heading>
+                </PlainLink>
+                <Text fontSize={0}>{dj.node.data.punchline}</Text>
+              </Box>
+            </Card>
+          </Box>
+        ))}
+      </Container>
+      <Footer />
+    </div>
+  </Layout>
 )
 
 export default Djs
@@ -162,12 +167,12 @@ export const djsQuery = graphql`
   query DjsQuery {
     file(relativePath: { eq: "sektor_2.png" }) {
       childImageSharp {
-        sizes(
+        fluid(
           maxWidth: 900
           quality: 85
           duotone: { highlight: "#262c41", shadow: "#46507a", opacity: 50 }
         ) {
-          ...GatsbyImageSharpSizes_withWebp_tracedSVG
+          ...GatsbyImageSharpFluid_withWebp_tracedSVG
         }
       }
     }
@@ -187,12 +192,12 @@ export const djsQuery = graphql`
 
               localFile {
                 childImageSharp {
-                  sizes(
+                  fluid(
                     maxWidth: 800
                     quality: 70
                     traceSVG: { color: "#52555e" }
                   ) {
-                    ...GatsbyImageSharpSizes_withWebp_tracedSVG
+                    ...GatsbyImageSharpFluid_withWebp_tracedSVG
                   }
                 }
               }

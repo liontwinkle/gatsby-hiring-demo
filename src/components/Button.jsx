@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'react-emotion';
-import PropTypes from 'prop-types';
+// import React from 'react';
+import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 const Button = styled.button`
   background: ${props => props.theme.button[props.type].background};
@@ -28,15 +28,15 @@ const Button = styled.button`
     box-shadow: ${props => props.theme.button[props.type].hover.boxShadow};
     transform: translateY(-8px);
   }
-`;
+`
 
-export default Button;
+export default Button
 
 Button.propTypes = {
   children: PropTypes.node.isRequired,
   type: PropTypes.oneOf(['primary', 'secondary']),
-};
+}
 
 Button.defaultProps = {
   type: 'default',
-};
+}

@@ -1,22 +1,25 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import styled, { css, keyframes } from 'react-emotion'
+import { graphql } from 'gatsby'
+// import PropTypes from 'prop-types'
+import styled, { css, keyframes } from 'styled-components'
 import Helmet from 'react-helmet'
 import Img from 'gatsby-image'
-import Link from 'gatsby-link'
-import kebabCase from 'lodash/kebabCase'
+// import { Link } from 'gatsby'
+// import kebabCase from 'lodash/kebabCase'
 import { darken } from 'polished'
 // import Tags from '../components/Tags';
-import SEO from '../components/SEO'
+// import SEO from '../components/SEO'
 import Container from '../components/Container'
 import Content from '../components/Content'
 import Wave from '../components/Wave'
-import Button from '../components/Button'
+// import Button from '../components/Button'
 import Footer from '../components/Footer'
-import { hideS } from '../utils/hide'
+// import { hideS } from '../utils/hide'
 import config from '../../config/website'
 // import { Card } from '../components/Card'
 import { GoCalendar, GoLocation, GoLinkExternal } from 'react-icons/go'
+import Layout from '../components/Layout'
+import { Box } from '@rebass/grid/emotion'
 const dj = require('../icons/dj.svg')
 
 const pulse = keyframes`
@@ -123,27 +126,27 @@ const Line = styled.div`
   margin-top: 1rem;
   margin-bottom: 1rem;
 `
-const CardWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin-bottom: 3rem;
-  ${Card} {
-    color: ${props => props.theme.colors.black.base} !important;
-    margin-bottom: 2rem;
-    text-align: center;
-    flex-basis: calc(99.9% * 1 / 2.15 - 1rem);
-    max-width: calc(99.9% * 1 / 2.15 - 1rem);
-    width: calc(99.9% * 1 / 2.15 - 1rem);
-    @media (max-width: 750px) {
-      flex-basis: 100%;
-      max-width: 100%;
-      width: 100%;
-      margin-bottom: 1.5rem;
-    }
-  }
-`
+// const CardWrapper = styled.div`
+//   display: flex;
+//   flex-direction: row;
+//   flex-wrap: wrap;
+//   justify-content: space-between;
+//   margin-bottom: 3rem;
+//   ${Card} {
+//     color: ${props => props.theme.colors.black.base} !important;
+//     margin-bottom: 2rem;
+//     text-align: center;
+//     flex-basis: calc(99.9% * 1 / 2.15 - 1rem);
+//     max-width: calc(99.9% * 1 / 2.15 - 1rem);
+//     width: calc(99.9% * 1 / 2.15 - 1rem);
+//     @media (max-width: 750px) {
+//       flex-basis: 100%;
+//       max-width: 100%;
+//       width: 100%;
+//       margin-bottom: 1.5rem;
+//     }
+//   }
+// `
 
 const Card = styled.div`
   background-color: ${props => props.theme.colors.white.base};
@@ -180,7 +183,7 @@ const Card = styled.div`
 //   ${generalStyle};
 // `
 
-const Post = ({ pathContext: { uid }, data: { prismicNastan: post } }) => {
+const Post = ({ pageContext: { uid }, data: { prismicNastan: post } }) => {
   //   const { sizes } = post.cover.childImageSharp;
   if (!post.id) {
     post.id = uid
@@ -188,51 +191,58 @@ const Post = ({ pathContext: { uid }, data: { prismicNastan: post } }) => {
   console.log(post.data.photo.url)
 
   return (
-    <div className="post-container">
-      <Helmet title={`Програма | ${config.siteTitle}`} />
-      {/* <SEO postPath={slug} postNode={postNode} postSEO /> */}
-      <Wrapper>
-        <Hero>
-          <h1>{post.data.naslov.text}</h1>
-          <Information>
-            <span className="date">
-              <GoCalendar size={20} /> {post.data.date}
-            </span>
+    <Layout>
+      <div className="post-container">
+        <Helmet title={`Програма | ${config.siteTitle}`} />
+        {/* <SEO postPath={slug} postNode={postNode} postSEO /> */}
+        <Wrapper>
+          <Hero>
+            <h1>{post.data.naslov.text}</h1>
+            <Information>
+              <span className="date">
+                <GoCalendar size={20} /> {post.data.date}
+              </span>
+              <a
+                rel="noopener noreferrer"
+                className="fblink"
+                target="_blank"
+                href={post.data.facebook_event.url}
+              >
+                <GoLinkExternal size={20} /> Facebook Event
+              </a>
+              <div className="location">
+                <GoLocation size={20} />
+                <h4>{` ${post.data.location.text}`}</h4>
+              </div>
+            </Information>
+          </Hero>
+          <Wave />
+          <Img fluid={post.data.photo.localFile.childImageSharp.fluid} />
+        </Wrapper>
+        <Container type="article">
+          <Card>
+            <h2>
+              <img alt="" src={dj} />
+              Line Up:
+            </h2>
+            <div dangerouslySetInnerHTML={{ __html: post.data.lineup.html }} />
+          </Card>
+          <Content input={post.data.info.html} />
+          <Line />
+          {/* <Tags tags={post.tags} /> */}
+          <p>
+            <span className={fontBold}>Повеќе: </span>
             <a
-              className="fblink"
+              rel="noopener noreferrer"
               target="_blank"
               href={post.data.facebook_event.url}
             >
-              <GoLinkExternal size={20} /> Facebook Event
+              Фејсбук Настан
             </a>
-            <div className="location">
-              <GoLocation size={20} />
-              <h4>{` ${post.data.location.text}`}</h4>
-            </div>
-          </Information>
-        </Hero>
-        <Wave />
-        <Img sizes={post.data.photo.localFile.childImageSharp.sizes} />
-      </Wrapper>
-      <Container type="article">
-        <Card>
-          <h2>
-            <img src={dj} />Line Up:
-          </h2>
-          <div dangerouslySetInnerHTML={{ __html: post.data.lineup.html }} />
-        </Card>
-        <Content input={post.data.info.html} />
-        <Line />
-        {/* <Tags tags={post.tags} /> */}
-        <p>
-          <span className={fontBold}>Повеќе: </span>
-          <a target="_blank" href={post.data.facebook_event.url}>
-            Фејсбук Настан
-          </a>
-        </p>
-      </Container>
-      <Footer>
-        {/* <h2>Lust auf mehr Tutorials & Goodies? Werde ein Patron.</h2>
+          </p>
+        </Container>
+        <Footer>
+          {/* <h2>Lust auf mehr Tutorials & Goodies? Werde ein Patron.</h2>
         <a
           href="https://www.patreon.com/lekoarts"
           target="_blank"
@@ -240,15 +250,16 @@ const Post = ({ pathContext: { uid }, data: { prismicNastan: post } }) => {
         >
           <Button type="secondary">Patreon</Button>
         </a> */}
-      </Footer>
-    </div>
+        </Footer>
+      </div>
+    </Layout>
   )
 }
 
 export default Post
 
 // Post.propTypes = {
-//   pathContext: PropTypes.shape({
+//   pageContext: PropTypes.shape({
 //     slug: PropTypes.string.isRequired,
 //   }),
 //   data: PropTypes.shape({
@@ -284,7 +295,7 @@ export const Nastan = graphql`
           url
           localFile {
             childImageSharp {
-              sizes(
+              fluid(
                 maxWidth: 1400
                 quality: 85
                 traceSVG: { color: "#52555e" }
@@ -294,7 +305,7 @@ export const Nastan = graphql`
                   opacity: 78
                 }
               ) {
-                ...GatsbyImageSharpSizes_withWebp_tracedSVG
+                ...GatsbyImageSharpFluid_withWebp_tracedSVG
               }
               resolutions(width: 140, height: 140) {
                 src

@@ -1,18 +1,17 @@
 import React from 'react'
 import Img from 'gatsby-image'
-import styled from 'react-emotion'
-import { css } from 'emotion'
+import styled from 'styled-components'
+import { css } from 'styled-components'
 import PropTypes from 'prop-types'
-import Link from 'gatsby-link'
-import kebabCase from 'lodash/kebabCase'
-import { hideS } from '../elements/Hide'
+import { Link } from 'gatsby'
+// import kebabCase from 'lodash/kebabCase'
+// import { hideS } from '../elements/Hide'
 import Tags from './Tags'
 // import { FaCalendar } from 'react-icons/fa'
 // import { MdLocationOn } from 'react-icons/md'
 import { GoCalendar, GoLocation } from 'react-icons/go'
 import Wrapper from './layout/Wrapper'
 
-const djMixer = require('../icons/dj-mixer.svg')
 const dj = require('../icons/dj.svg')
 
 const Information = styled.div`
@@ -71,14 +70,14 @@ const EventInfo = ({
   return (
     <Wrapper>
       <Link to={`program/${path}`}>
-        <Img className="flyer" sizes={image.childImageSharp.sizes} />
+        <Img alt="" className="flyer" fluid={image.childImageSharp.fluid} />
       </Link>
       <Information>
         <Link to={`program/${path}`}>
           <h2>{title}</h2>
         </Link>
         <Statistics className={marginBottom}>
-          <img src={dj} />
+          <img alt="" src={dj} />
           {/* <u>LINE UP:</u> */}
           <h3 style={{ display: 'inline' }}>{` ${lineup}`}</h3>
         </Statistics>

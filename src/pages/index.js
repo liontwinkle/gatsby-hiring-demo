@@ -1,20 +1,22 @@
 /* eslint max-len: 0 */
 
 import React from 'react'
-import PropTypes from 'prop-types'
-import Link from 'gatsby-link'
+// import PropTypes from 'prop-types'
+import { Link } from 'gatsby'
 import Img from 'gatsby-image'
-import Header from '../components/Header'
-import config from '../../config/website'
-import theme from '../../config/theme'
-import styled, { keyframes } from 'react-emotion'
+// import Header from '../components/Header'
+// import config from '../../config/website'
+// import theme from '../../config/theme'
+import styled, { keyframes } from 'styled-components'
 import Button from '../components/Button'
 import Container from '../components/Container'
-import FeaturedPost from '../components/FeaturedPost'
+// import FeaturedPost from '../components/FeaturedPost'
 // import EventSlim from '../components/EventSlim'
 import EventInfo from '../components/EventInfo'
 import Footer from '../components/Footer'
 import Wave from '../components/Wave'
+import Layout from '../components/Layout'
+import { graphql } from 'gatsby'
 
 const EXCERPT_LENGTH = 140
 
@@ -101,41 +103,43 @@ const Index = ({
     file,
   },
 }) => (
-  <div>
-    <Wrapper>
-      <Hero>
-        <h1>#OURGOALISTHEFUTURE</h1>
-      </Hero>
-      <Wave />
-      <Img sizes={file.childImageSharp.sizes} />
-    </Wrapper>
-    <Container>
-      <Text>Тековна програма</Text>
-      <PostsWrapper>
-        {nastani.map(post => (
-          <EventInfo
-            key={post.node.uid}
-            title={post.node.data.naslov.text}
-            lineup={post.node.data.lineup.text}
-            path={post.node.uid}
-            date={post.node.data.date}
-            location={post.node.data.location.text}
-            inputTags={['журки', 'жмурки', 'ќурќи']}
-            excerpt={post.node.data.info.text.substring(0, EXCERPT_LENGTH)}
-            image={post.node.data.photo.localFile}
-          />
-        ))}
-      </PostsWrapper>
-      <Text>
-        Сите настани <br />
-        <Link to="/program">
-          <Button type="secondary">Програма</Button>
-        </Link>
-      </Text>
-    </Container>
+  <Layout>
+    <div>
+      <Wrapper>
+        <Hero>
+          <h1>#OURGOALISTHEFUTURE</h1>
+        </Hero>
+        <Wave />
+        <Img fluid={file.childImageSharp.fluid} />
+      </Wrapper>
+      <Container>
+        <Text>Тековна програма</Text>
+        <PostsWrapper>
+          {nastani.map(post => (
+            <EventInfo
+              key={post.node.uid}
+              title={post.node.data.naslov.text}
+              lineup={post.node.data.lineup.text}
+              path={post.node.uid}
+              date={post.node.data.date}
+              location={post.node.data.location.text}
+              inputTags={['журки', 'жмурки', 'ќурќи']}
+              excerpt={post.node.data.info.text.substring(0, EXCERPT_LENGTH)}
+              image={post.node.data.photo.localFile}
+            />
+          ))}
+        </PostsWrapper>
+        <Text>
+          Сите настани <br />
+          <Link to="/program">
+            <Button type="secondary">Програма</Button>
+          </Link>
+        </Text>
+      </Container>
 
-    <Footer />
-  </div>
+      <Footer />
+    </div>
+  </Layout>
 )
 
 export default Index
@@ -144,12 +148,12 @@ export const pageQuery = graphql`
   query IndexQuery {
     file(relativePath: { eq: "sektor_2.png" }) {
       childImageSharp {
-        sizes(
+        fluid(
           maxWidth: 900
           quality: 85
           duotone: { highlight: "#262c41", shadow: "#46507a", opacity: 50 }
         ) {
-          ...GatsbyImageSharpSizes_withWebp_tracedSVG
+          ...GatsbyImageSharpFluid_withWebp_tracedSVG
         }
       }
     }
@@ -180,12 +184,12 @@ export const pageQuery = graphql`
               url
               localFile {
                 childImageSharp {
-                  sizes(
+                  fluid(
                     maxWidth: 1400
                     quality: 85
                     traceSVG: { color: "#52555e" }
                   ) {
-                    ...GatsbyImageSharpSizes_withWebp_tracedSVG
+                    ...GatsbyImageSharpFluid_withWebp_tracedSVG
                   }
                 }
               }

@@ -8,7 +8,6 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-emotion`,
     {
       resolve: 'gatsby-source-prismic',
       options: {
@@ -65,6 +64,12 @@ module.exports = {
     //     plugins: [`gatsby-transformer-sharp`],
     //   },
     // },
+    {
+      resolve: `gatsby-plugin-styled-components`,
+      options: {
+        // Add any options here
+      },
+    },
     {
       resolve: `gatsby-plugin-favicon`,
       options: {

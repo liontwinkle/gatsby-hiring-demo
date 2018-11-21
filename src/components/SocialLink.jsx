@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, { css } from 'react-emotion'
+import { css } from 'styled-components'
 import {
   FaFacebook,
   FaTwitter,
@@ -9,9 +9,9 @@ import {
 } from 'react-icons/fa'
 import theme from '../../config/theme'
 
-const WithComponent = (WrappedComponent, data) => (
-  <WrappedComponent data={data} />
-)
+// const WithComponent = (WrappedComponent, data) => (
+//   <WrappedComponent data={data} />
+// )
 
 const renderSwitch = type => {
   switch (type) {

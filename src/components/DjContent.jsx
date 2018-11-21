@@ -1,11 +1,11 @@
 import React from 'react'
-import styled from 'react-emotion'
+import styled from 'styled-components'
 import UnerlineNav from './UnderlineNav'
 import { Text } from 'rebass'
 import DjChart from './DjChart'
 import DjMixes from './DjMixes'
 import { Box } from 'rebass'
-import { navigateTo } from 'gatsby-link'
+import { navigate } from 'gatsby'
 
 const Bio = styled(Text)`
   max-width: 800px;
@@ -24,7 +24,7 @@ class DjContent extends React.Component {
   //   })
   // }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     const hash = this.props.location.hash
     console.log('DJ Content, Component will mount', hash)
     if (hash) {
@@ -40,7 +40,7 @@ class DjContent extends React.Component {
     this.setState({
       selected: el,
     })
-    navigateTo(`${el}`)
+    navigate(`${el}`)
   }
   render() {
     const dj = this.props.dj
@@ -50,10 +50,11 @@ class DjContent extends React.Component {
     const djChart = this.props.chart
     const Content = (() => {
       if (selected === '#bio') return bio
-      if (selected == '#charts') return <DjChart id="#charts" chart={djChart} />
-      if (selected == '#mixes')
+      if (selected === '#charts')
+        return <DjChart id="#charts" chart={djChart} />
+      if (selected === '#mixes')
         return <DjMixes id="#mixes" djName={dj.data.name} mixes={mixes} />
-      else selected === 'events'
+      // else selected === 'events' // jshint ignore:line
       return <span id="#events">Events</span>
     })()
     return (

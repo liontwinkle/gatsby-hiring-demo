@@ -24,6 +24,7 @@ class Firebase {
 
     this.db = app.database()
     this.auth = app.auth()
+    // this.fbProvider = new firebase.auth.FacebookAuthProvider()
   }
 
   // *** Auth API ***
@@ -33,6 +34,8 @@ class Firebase {
 
   doSignInWithEmailAndPassword = (email, password) =>
     this.auth.signInWithEmailAndPassword(email, password)
+
+  // doSignInWithFacebook = () => this.auth.signInWithRedirect(this.fbProvider)
 
   doSignOut = () => this.auth.signOut()
 

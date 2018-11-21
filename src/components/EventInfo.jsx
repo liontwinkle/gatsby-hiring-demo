@@ -10,7 +10,7 @@ import Tags from './Tags'
 // import { FaCalendar } from 'react-icons/fa'
 // import { MdLocationOn } from 'react-icons/md'
 import { GoCalendar, GoLocation } from 'react-icons/go'
-import Wrapper from './layout/Wrapper'
+import { CardWrapper } from './LayoutComponents/Index'
 
 const dj = require('../icons/dj.svg')
 
@@ -68,7 +68,7 @@ const EventInfo = ({
     tags = inputTags.map(tag => tag.tag.document[0].data.tag)
   }
   return (
-    <Wrapper>
+    <CardWrapper>
       <Link to={`program/${path}`}>
         <Img alt="" className="flyer" fluid={image.childImageSharp.fluid} />
       </Link>
@@ -90,7 +90,7 @@ const EventInfo = ({
         {tags && <Tags tags={tags} />}
         <Excerpt>{`${excerpt}...`}</Excerpt>
       </Information>
-    </Wrapper>
+    </CardWrapper>
   )
 }
 

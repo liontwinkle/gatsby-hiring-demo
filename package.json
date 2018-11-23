@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "author": "Bozhidar Hristov <bozidar.hristov@gmail.com>",
   "dependencies": {
+    "@primer/components": "^7.0.0-beta",
     "@rebass/grid": "^6.0.0-4",
     "babel-plugin-styled-components": "^1.8.0",
     "date-fns": "^1.29.0",

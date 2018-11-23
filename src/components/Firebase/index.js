@@ -24,7 +24,8 @@ class Firebase {
 
     this.db = app.database()
     this.auth = app.auth()
-    // this.fbProvider = new firebase.auth.FacebookAuthProvider()
+    this.fbProvider = new app.auth.FacebookAuthProvider()
+    // this.loadingUser = false
   }
 
   // *** Auth API ***
@@ -35,7 +36,22 @@ class Firebase {
   doSignInWithEmailAndPassword = (email, password) =>
     this.auth.signInWithEmailAndPassword(email, password)
 
-  // doSignInWithFacebook = () => this.auth.signInWithRedirect(this.fbProvider)
+  doSignInWithFacebook = () => {
+    console.log('FB Provider', this.fbProvider)
+    console.log('Auth', this.auth)
+    return this.auth.signInWithRedirect(this.fbProvider)
+  }
+
+  doOnRedirect = () => {
+    this.auth.getRedirectResult().then(result => {
+      // If user just signed in or already signed in, hide spinner.
+      if (result.user || this.auth.currentUser) {
+        console.log('hideSpinner()')
+      } else {
+        console.log('hideSpinner() showSignInForm()')
+      }
+    })
+  }
 
   doSignOut = () => this.auth.signOut()
 

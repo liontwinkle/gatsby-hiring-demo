@@ -1,5 +1,5 @@
 import React from 'react'
-import { css } from 'styled-components'
+import { css } from 'react-emotion'
 import {
   FaFacebook,
   FaTwitter,

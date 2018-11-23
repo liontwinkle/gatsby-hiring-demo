@@ -10,6 +10,8 @@ import { reset, headroom } from '../styles'
 import { SkipNavLink } from '../elements'
 import 'typeface-montserrat'
 import 'typeface-istok-web'
+import NavigationFirebase from './NavigationFirebase'
+import LayoutFirebase from './LayoutFirebase'
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -32,10 +34,12 @@ const GlobalStyle = createGlobalStyle`
 const MainLayout = ({ children }) => (
   <ThemeProvider theme={theme}>
     <React.Fragment>
-      <GlobalStyle />
-      <SEO />
-      <Navigation />
-      {children}
+      <LayoutFirebase>
+        <GlobalStyle />
+        <SEO />
+        <Navigation />
+        {children}
+      </LayoutFirebase>
     </React.Fragment>
   </ThemeProvider>
 )

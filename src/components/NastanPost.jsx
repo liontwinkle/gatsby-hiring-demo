@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
+import { css } from 'react-emotion'
 import { Link } from 'gatsby'
 import Img from 'gatsby-image'
 import { GoCalendar, GoLocation } from 'react-icons/go'
@@ -103,8 +104,9 @@ const Statistics = styled.div`
 const Excerpt = styled.div`
   margin-top: 2rem;
 `
-const marginBottom = css`
-  margin-bottom: 0.5rem;
+const marginVertical = css`
+  margin-bottom: 1rem;
+  margin-top: 1rem;
 `
 
 const NastanPost = ({ cover, path, date, info, naslov, location, lineup }) => (
@@ -119,18 +121,18 @@ const NastanPost = ({ cover, path, date, info, naslov, location, lineup }) => (
       <Link to={`program/${path}`}>
         <h1>{naslov}</h1>
       </Link>
-      <Statistics className={marginBottom}>
-        <img alt="" src={dj} />
-        {/* <u>LINE UP:</u> */}
-        <h3 style={{ display: 'inline' }}>{` ${lineup}`}</h3>
-      </Statistics>
       <Statistics>
         <GoCalendar size={20} />
         <span>{date}</span>
         <GoLocation size={20} />
-        <h4>{` ${location}`}</h4>
+        <span>{location}</span>
         {/* <span className={hideS}>Kategorie: </span> */}
         {/* <Link to={`/categories/${kebabCase(category)}`}>{category}</Link> */}
+      </Statistics>
+      <Statistics className={marginVertical}>
+        <img alt="" src={dj} />
+        {/* <u>LINE UP:</u> */}
+        <h3 style={{ display: 'inline' }}>{` ${lineup}`}</h3>
       </Statistics>
       <Excerpt>{info}</Excerpt>
     </Information>

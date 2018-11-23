@@ -1,5 +1,4 @@
 import Typography from 'typography'
-import deYoungTheme from 'typography-theme-de-young'
 
 const typography = new Typography({
   title: 'Sektor909',
@@ -25,6 +24,5 @@ const typography = new Typography({
     },
   }),
 })
-// const typography = new Typography(deYoungTheme)
 const { rhythm, scale } = typography
 export { rhythm, scale, typography as default }

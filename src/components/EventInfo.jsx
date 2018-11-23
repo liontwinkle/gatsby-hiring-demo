@@ -1,14 +1,10 @@
 import React from 'react'
 import Img from 'gatsby-image'
 import styled from 'styled-components'
-import { css } from 'styled-components'
+import { css } from 'react-emotion'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
-// import kebabCase from 'lodash/kebabCase'
-// import { hideS } from '../elements/Hide'
 import Tags from './Tags'
-// import { FaCalendar } from 'react-icons/fa'
-// import { MdLocationOn } from 'react-icons/md'
 import { GoCalendar, GoLocation } from 'react-icons/go'
 import { CardWrapper } from './LayoutComponents/Index'
 
@@ -17,7 +13,7 @@ const dj = require('../icons/dj.svg')
 const Information = styled.div`
   h2 {
     font-size: 2rem;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1rem;
     display: inline-block;
     color: ${props => props.theme.colors.black.base};
     transition: all ${props => props.theme.transitions.default.duration};
@@ -27,8 +23,9 @@ const Information = styled.div`
   }
 `
 
-const marginBottom = css`
-  margin-bottom: 0.5rem;
+const marginVertical = css`
+  margin-bottom: 1rem;
+  margin-top: 1rem;
 `
 
 const Statistics = styled.div`
@@ -76,18 +73,17 @@ const EventInfo = ({
         <Link to={`program/${path}`}>
           <h2>{title}</h2>
         </Link>
-        <Statistics className={marginBottom}>
-          <img alt="" src={dj} />
-          {/* <u>LINE UP:</u> */}
-          <h3 style={{ display: 'inline' }}>{` ${lineup}`}</h3>
-        </Statistics>
         <Statistics>
           <GoCalendar size={20} />
           <span>{date}</span>
           <GoLocation size={20} />
-          <h4 style={{ display: 'inline' }}>{` ${location}`}</h4>
+          {` ${location}`}
         </Statistics>
-        {tags && <Tags tags={tags} />}
+        <Statistics className={marginVertical}>
+          <img alt="" src={dj} />
+          <h3 style={{ display: 'inline' }}>{` ${lineup}`}</h3>
+        </Statistics>
+        {/* {tags && <Tags tags={tags} />} */}
         <Excerpt>{`${excerpt}...`}</Excerpt>
       </Information>
     </CardWrapper>

@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 
-import Navigation from './Navigation'
+// import NavigationFirebase from './NavigationFirebase'
 import getFirebase from './Firebase'
 import FirebaseContext from './Firebase/FirebaseContext'
 import withAuthentication from './Session/withAuthentication'
@@ -33,8 +33,7 @@ class LayoutFirebase extends Component {
 
 const AppWithAuthentication = withAuthentication(props => (
   <Fragment>
-    <Navigation />
-    <hr />
+    {/* <NavigationFirebase /> */}
     {props.children}
   </Fragment>
 ))

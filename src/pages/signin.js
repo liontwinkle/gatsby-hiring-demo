@@ -8,13 +8,16 @@ import { PasswordForgetLink } from '../components/PasswordForget'
 import Footer from '../components/Footer'
 import Container from '../components/Container'
 import MainHeader from '../components/LayoutComponents/MainHeader'
+import AuthUserContext from '../components/Session/AuthUserContext'
 
 const SignInPage = () => (
   <Fragment>
-    <h1>SignIn</h1>
-    <SignInForm />
-    <PasswordForgetLink />
-    <SignUpLink />
+    {/* <h1>SignIn</h1> */}
+    <AuthUserContext.Consumer>
+      {authUser => <SignInForm authUser={authUser} />}
+    </AuthUserContext.Consumer>
+    {/* <PasswordForgetLink />
+    <SignUpLink /> */}
   </Fragment>
 )
 

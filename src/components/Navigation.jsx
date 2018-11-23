@@ -5,6 +5,9 @@ import Headroom from 'react-headroom'
 // import { LocaleConsumer } from 'elements/Layout'
 import Logo from '../icons/Logo'
 import { Link } from 'gatsby'
+import NavigationFirebase from './NavigationFirebase'
+import { TiEquals } from 'react-icons/ti'
+import { Dropdown, Box } from '@primer/components'
 
 const StyledLink = styled(Link)`
   display: flex;
@@ -33,11 +36,16 @@ const Nav = styled.nav`
   justify-content: flex-end;
   font-family: ${props => props.theme.fontFamily.heading};
   align-items: center;
-  a {
+  a,
+  .dropbtn {
     color: ${props => props.theme.colors.white.base};
     margin-left: 2rem;
+    @media (max-width: 340px) {
+      margin-left: 1.4rem;
+    }
     transition: all 0.4s;
     border-bottom: 1px solid transparent;
+    cursor: pointer;
     &:hover {
       border-bottom: 1px solid white;
       color: white;
@@ -46,9 +54,45 @@ const Nav = styled.nav`
       color: white;
     }
   }
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  .dropbtn {
+    background-color: transparent;
+    border: none;
+    outline: none;
+  }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 130px;
+    right: 0;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    margin-left: 0;
+  }
+
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+
+  /* Show the dropdown menu on click */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
 `
 
-const Navigation = () => (
+const NavMenu = () => (
   <div>
     <Headroom calcHeightOnResize disableInlineStyles>
       <StyledLink to="/">
@@ -65,9 +109,57 @@ const Navigation = () => (
         <Link to="/kontakt" activeClassName="active">
           Контакт
         </Link>
+        <span>
+          <TiEquals size={22} />
+        </span>
       </Nav>
     </Headroom>
   </div>
 )
+const INITIAL_STATE = {
+  dropdown: false,
+}
+class Navigation extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = INITIAL_STATE
+    this.onDropdown = this.onDropdown.bind(this)
+  }
+  onDropdown() {
+    console.log('Dropdown clicked!')
+    this.setState({ dropdown: !this.state.dropdown })
+  }
+  render() {
+    return (
+      <div>
+        <Headroom calcHeightOnResize disableInlineStyles>
+          <StyledLink to="/">
+            <LogoText>сектор</LogoText>
+            <Logo />
+          </StyledLink>
+          <Nav>
+            <Link to="/program" activeClassName="active">
+              Програм
+            </Link>
+            <Link to="/blog" activeClassName="active">
+              Блог
+            </Link>
+            <Link to="/kontakt" activeClassName="active">
+              Контакт
+            </Link>
+            <div className="dropdown">
+              <button className="dropbtn">
+                <TiEquals />
+              </button>
+              <div className="dropdown-content">
+                <NavigationFirebase />
+              </div>
+            </div>
+          </Nav>
+        </Headroom>
+      </div>
+    )
+  }
+}
 
 export default Navigation

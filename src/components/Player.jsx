@@ -14,8 +14,7 @@ import PlaylistChart from './PlaylistChart'
 import Tracklist from './MixTracklist'
 import Slider from 'rc-slider'
 import './Slider.css'
-import { Flex } from '@rebass/grid'
-import { Box } from 'rebass'
+import { Flex, Box } from '@rebass/grid/emotion'
 
 function secondsToTime(secs) {
   secs = Math.round(secs)

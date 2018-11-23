@@ -12,31 +12,17 @@ const Navigation = () => (
 )
 
 const NavigationAuth = () => (
-  <ul>
-    <li>
-      <Link to={routes.LANDING}>Landing</Link>
-    </li>
-    <li>
-      <Link to={routes.HOME}>Home</Link>
-    </li>
-    <li>
-      <Link to={routes.ACCOUNT}>Account</Link>
-    </li>
-    <li>
-      <SignOutButton />
-    </li>
-  </ul>
+  <React.Fragment>
+    <Link to={routes.HOME}>Home</Link>
+    <Link to={routes.ACCOUNT}>Account</Link>
+    <SignOutButton />
+  </React.Fragment>
 )
 
 const NavigationNonAuth = () => (
-  <ul>
-    <li>
-      <Link to={routes.LANDING}>Landing</Link>
-    </li>
-    <li>
-      <Link to={routes.SIGN_IN}>Sign In</Link>
-    </li>
-  </ul>
+  <React.Fragment>
+    <Link to={routes.SIGN_IN}>Sign In</Link>
+  </React.Fragment>
 )
 
 export default Navigation

@@ -3,6 +3,9 @@ import React, { Component } from 'react'
 import LayoutFirebase from '../components/LayoutFirebase'
 import Layout from '../components/Layout'
 import withAuthorization from '../components/Session/withAuthorization'
+import Footer from '../components/Footer'
+import Container from '../components/Container'
+import MainHeader from '../components/LayoutComponents/MainHeader'
 
 const fromObjectToList = object =>
   object ? Object.keys(object).map(key => ({ ...object[key], index: key })) : []
@@ -42,9 +45,11 @@ class HomePageBase extends Component {
 
     return (
       <React.Fragment>
-        <p>The Home Page is accessible by every signed in user.</p>
+        <Container>
+          <p>Содржина достапна само на регистрирани членови</p>
 
-        {!!users.length && <UserList users={users} />}
+          {!!users.length && <UserList users={users} />}
+        </Container>
       </React.Fragment>
     )
   }
@@ -52,7 +57,7 @@ class HomePageBase extends Component {
 
 const UserList = ({ users }) => (
   <div>
-    <h2>List of App User IDs (Saved on Sign Up in Firebase Database)</h2>
+    <h2>Корисничка зона</h2>
     {users.map(user => (
       <div key={user.index}>{user.index}</div>
     ))}
@@ -66,7 +71,9 @@ const HomePage = withAuthorization(authCondition)(HomePageBase)
 export default () => (
   <Layout>
     <LayoutFirebase>
+      <MainHeader />
       <HomePage />
+      <Footer />
     </LayoutFirebase>
   </Layout>
 )

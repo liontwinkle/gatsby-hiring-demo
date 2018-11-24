@@ -14,7 +14,7 @@ import MainHeader from '../components/LayoutComponents/MainHeader'
 import { Box } from '@rebass/grid/emotion'
 import { CardWrapper } from '../components/LayoutComponents/Index'
 import { MdAlarm } from 'react-icons/md'
-import { TiGift, TiNotesOutline } from 'react-icons/ti'
+import { TiGift, TiNotesOutline, TiLockClosedOutline } from 'react-icons/ti'
 import SignInForm from '../components/SignIn'
 import AuthUserContext from '../components/Session/AuthUserContext'
 import WithAuthentication from '../components/Session/withAuthentication'
@@ -74,71 +74,101 @@ const InfoTextBox = styled(CardWrapper)`
   }
 `
 
+const SignInEl = pathname => (
+  <div>
+    <PostsWrapper>
+      <Text>Најави се со Фејсбук</Text>
+      <InfoTextBox>
+        <Box m={4}>
+          <h4>Пристап до</h4>
+
+          <span className="info-text">
+            <MdAlarm size={22} />
+            Најнови информации
+          </span>
+          <br />
+          <span>
+            <TiLockClosedOutline size={22} />
+            Приватни Настани
+          </span>
+          <br />
+
+          <span>
+            <TiNotesOutline size={22} />
+            Ексклузивна содржина
+          </span>
+          <br />
+          <TiGift size={22} />
+          <span>Посебни понуди</span>
+        </Box>
+      </InfoTextBox>
+    </PostsWrapper>
+    <Text>
+      <AuthUserContext.Consumer>
+        {authUser => (
+          <SignInForm path={pathname} authUser={authUser} type="primary" />
+        )}
+      </AuthUserContext.Consumer>
+    </Text>
+  </div>
+)
 const Index = ({
   data: {
     allPrismicNastan: { edges: nastani },
   },
-}) => (
-  <Layout>
-    <div>
-      <MainHeader />
-      <Container>
-        <PostsWrapper>
-          <Text>Најави се со Фејсбук</Text>
-          <InfoTextBox>
-            <Box m={4}>
-              <h4>Пристап до</h4>
-
-              <span className="info-text">
-                <MdAlarm size={22} />
-                Најнови информации
-              </span>
-              <br />
-
-              <span>
-                <TiNotesOutline size={22} />
-                Ексклузивна содржина
-              </span>
-              <br />
-              <TiGift size={22} />
-              <span>Посебни понуди</span>
-            </Box>
-          </InfoTextBox>
-        </PostsWrapper>
-        <Text>
+  location: { pathname },
+}) => {
+  const WelcomeMessage = ({ username }) => (
+    <InfoTextBox>
+      <Text>Здраво, {username}</Text>
+      Разгледај ја тековната програма, прочитај ги последните блогови, слушај
+      добра музика и провери ја корисничката зона.
+    </InfoTextBox>
+  )
+  return (
+    <Layout>
+      <div>
+        <MainHeader />
+        <Container>
           <AuthUserContext.Consumer>
-            {authUser => <SignInForm authUser={authUser} type="primary" />}
+            {authUser =>
+              authUser ? (
+                <WelcomeMessage username={authUser.displayName} />
+              ) : (
+                <SignInEl pathname={pathname} authUser={authUser} />
+              )
+            }
           </AuthUserContext.Consumer>
-        </Text>
-      </Container>
-      <Container>
-        <Text>Тековна програма</Text>
-        <PostsWrapper>
-          {nastani.map(post => (
-            <EventInfo
-              key={post.node.uid}
-              title={post.node.data.naslov.text}
-              lineup={post.node.data.lineup.text}
-              path={post.node.uid}
-              date={post.node.data.date}
-              location={post.node.data.location.text}
-              inputTags={['журки', 'жмурки', 'ќурќи']}
-              excerpt={post.node.data.info.text.substring(0, EXCERPT_LENGTH)}
-              image={post.node.data.photo.localFile}
-            />
-          ))}
-        </PostsWrapper>
-        <Text>
-          Сите настани <br />
-          <Link to="/program">
-            <Button type="secondary">Програма</Button>
-          </Link>
-        </Text>
-      </Container>
-      <Footer />
-    </div>
-  </Layout>
-)
+        </Container>
+        <Container>
+          <Text>Тековна програма</Text>
+          <PostsWrapper>
+            {nastani.map(post => (
+              <EventInfo
+                key={post.node.uid}
+                title={post.node.data.naslov.text}
+                lineup={post.node.data.lineup.text}
+                path={post.node.uid}
+                date={post.node.data.date}
+                location={post.node.data.location.text}
+                inputTags={['журки', 'жмурки', 'ќурќи']}
+                excerpt={post.node.data.info.text.substring(0, EXCERPT_LENGTH)}
+                image={post.node.data.photo.localFile}
+              />
+            ))}
+          </PostsWrapper>
+          <Text>
+            Сите настани <br />
+            <Link to="/program">
+              <Button type="secondary">Програма</Button>
+            </Link>
+          </Text>
+        </Container>
+        <Footer />
+      </div>
+    </Layout>
+  )
+}
 
 export default WithAuthentication(Index)
 

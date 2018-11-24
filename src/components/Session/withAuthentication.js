@@ -16,9 +16,7 @@ const withAuthentication = Component => {
 
     firebaseInit = () => {
       if (this.props.firebase && !this.state.initFirebase) {
-        console.log('Init Firebase in WITH AUTH')
         this.props.firebase.auth.onAuthStateChanged(authUser => {
-          console.log('AUTH USER IN WITH AUTH: ', authUser)
           authUser
             ? this.setState(() => ({ authUser, initFirebase: true }))
             : this.setState(() => ({

@@ -43,13 +43,51 @@ class Firebase {
   }
 
   doOnRedirect = () => {
-    this.auth.getRedirectResult().then(result => {
-      // If user just signed in or already signed in, hide spinner.
-      if (result.user || this.auth.currentUser) {
-        console.log('hideSpinner()')
-      } else {
-        console.log('hideSpinner() showSignInForm()')
-      }
+    console.log('Getting Redirect result')
+    console.log('Current user: ', this.auth.currentUser)
+    this.auth
+      .getRedirectResult()
+      .then(result => {
+        // If user just signed in or already signed in, hide spinner.
+        if (result.credential) {
+          // const isNewUser = result.additionalUserInfo.isNewUser
+          console.log('Result: ', result)
+          const uid = result.user.uid
+          const providerId = result.credential.providerId
+          const firstName = result.additionalUserInfo.profile.first_name
+          const lastName = result.additionalUserInfo.profile.last_name
+          const email = result.additionalUserInfo.profile.email
+          const photoUrl = result.additionalUserInfo.profile.picture.data.url
+          console.log(uid, providerId, firstName, lastName, photoUrl, email)
+          this.doCreateUser(
+            uid,
+            providerId,
+            firstName,
+            lastName,
+            photoUrl,
+            email
+          )
+        }
+      })
+      .catch(function(error) {
+        console.log(error)
+        // Handle Errors here.
+        const errorCode = error.code
+        const errorMessage = error.message
+        // The email of the user's account used.
+        const email = error.email
+        // The firebase.auth.AuthCredential type that was used.
+        const credential = error.credential
+      })
+  }
+
+  doCreateUser = (uid, providerId, firstName, lastName, photoUrl, email) => {
+    this.db.ref(`users/${uid}`).set({
+      firstName,
+      lastName,
+      photoUrl,
+      providerId,
+      email,
     })
   }
 
@@ -58,14 +96,6 @@ class Firebase {
   doPasswordReset = email => this.auth.sendPasswordResetEmail(email)
 
   doPasswordUpdate = password => this.auth.currentUser.updatePassword(password)
-
-  // *** User API ***
-
-  doCreateUser = (id, username, email) =>
-    this.db.ref(`users/${id}`).set({
-      username,
-      email,
-    })
 
   onceGetUsers = () => this.db.ref('users').once('value')
 }

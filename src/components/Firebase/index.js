@@ -58,7 +58,6 @@ class Firebase {
           const lastName = result.additionalUserInfo.profile.last_name
           const email = result.additionalUserInfo.profile.email
           const photoUrl = result.additionalUserInfo.profile.picture.data.url
-          console.log(uid, providerId, firstName, lastName, photoUrl, email)
           this.doCreateUser(
             uid,
             providerId,

@@ -41,7 +41,6 @@ class SignInForm extends Component {
       this.props.firebase.doOnRedirect()
     }
     if (this.props.authUser) {
-      console.log('Removind loader')
       window.sessionStorage.removeItem('signInLoader')
       console.log('Navigating to home')
       navigate(routes.HOME)

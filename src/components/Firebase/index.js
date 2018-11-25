@@ -1,19 +1,19 @@
 const prodConfig = {
-  apiKey: process.env.Gatsby_Firebase_apiKey,
-  authDomain: process.env.Gatsby_Firebase_authDomain,
-  databaseURL: process.env.Gatsby_Firebase_databaseURL,
-  projectId: process.env.Gatsby_Firebase_projectId,
-  storageBucket: process.env.Gatsby_Firebase_storageBucket,
-  messagingSenderId: process.env.Gatsby_Firebase_messagingSenderId,
+  apiKey: process.env.GATSBY_Firebase_apiKey,
+  authDomain: process.env.GATSBY_Firebase_authDomain,
+  databaseURL: process.env.GATSBY_Firebase_databaseURL,
+  projectId: process.env.GATSBY_Firebase_projectId,
+  storageBucket: process.env.GATSBY_Firebase_storageBucket,
+  messagingSenderId: process.env.GATSBY_Firebase_messagingSenderId,
 }
 
 const devConfig = {
-  apiKey: process.env.Gatsby_Firebase_apiKey,
-  authDomain: process.env.Gatsby_Firebase_authDomain,
-  databaseURL: process.env.Gatsby_Firebase_databaseURL,
-  projectId: process.env.Gatsby_Firebase_projectId,
-  storageBucket: process.env.Gatsby_Firebase_storageBucket,
-  messagingSenderId: process.env.Gatsby_Firebase_messagingSenderId,
+  apiKey: process.env.GATSBY_Firebase_apiKey,
+  authDomain: process.env.GATSBY_Firebase_authDomain,
+  databaseURL: process.env.GATSBY_Firebase_databaseURL,
+  projectId: process.env.GATSBY_Firebase_projectId,
+  storageBucket: process.env.GATSBY_Firebase_storageBucket,
+  messagingSenderId: process.env.GATSBY_Firebase_messagingSenderId,
 }
 console.log('\n!!!! DEV CONFIG !!!!! ', devConfig)
 console.log('\n!!!! PROD CONFIG !!!!! ', prodConfig)

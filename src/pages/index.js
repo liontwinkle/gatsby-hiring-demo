@@ -66,10 +66,10 @@ const InfoTextBox = styled(CardWrapper)`
     }
   }
   @media (max-width: ${props => props.theme.breakpoints.s}) {
-    height: 17rem;
-    font-size: 20px;
+    height: ${props => (props.size === 'l' ? '400px' : '250px')};
+    font-size: 18px;
     div {
-      margin: 1rem;
+      margin: 0.5rem;
     }
   }
 `
@@ -79,7 +79,7 @@ const SignInEl = pathname => (
     <PostsWrapper>
       <Text>Најави се со Фејсбук</Text>
       <InfoTextBox>
-        <Box m={4}>
+        <Box>
           <h4>Пристап до</h4>
 
           <span className="info-text">
@@ -121,7 +121,7 @@ const Index = ({
 }) => {
   console.log('FILE ', file)
   const WelcomeMessage = ({ username }) => (
-    <InfoTextBox>
+    <InfoTextBox size="l">
       <Text>Здраво, {username}</Text>
       Разгледај ја тековната програма, прочитај ги последните блогови, слушај
       добра музика и провери ја корисничката зона.

@@ -33,14 +33,14 @@ class DjContent extends React.Component {
       })
     }
   }
-  handleClick = (e, el) => {
+  handleClick = (e, el, name) => {
     e.preventDefault()
 
     console.log('Navigating to: ', el)
     this.setState({
       selected: el,
     })
-    navigate(`${el}`)
+    navigate(`/djs/${name}/${el}`)
   }
   render() {
     const dj = this.props.dj
@@ -60,7 +60,7 @@ class DjContent extends React.Component {
     return (
       <div>
         <UnerlineNav
-          handleClick={this.handleClick}
+          handleClick={(e, el) => this.handleClick(e, el, dj.data.name)}
           selected={this.state.selected}
         />
         <Box m={2}>{Content}</Box>

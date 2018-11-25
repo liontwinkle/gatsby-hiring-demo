@@ -245,10 +245,10 @@ class Player extends React.Component {
   }
 
   getActiveTrack = url => {
-    this.setState({ url: url })
-    this.state.url === url
-      ? this.setState({ playing: !this.state.playing })
-      : this.setState({ playing: true })
+    this.setState({ url: url, played: 0, loaded: 0 })
+    // this.state.url === url
+    //   ? this.setState({ playing: !this.state.playing })
+    //   : this.setState({ played: 0, loaded: 0 })
   }
 
   findNextUrl = (playlist, index) => {
@@ -292,8 +292,6 @@ class Player extends React.Component {
       playbackRate,
     } = this.state
 
-    // console.log()
-    // const playlistTitle = this.props
     const PlaylistElement =
       this.props.type === 'chart' ? PlaylistChart : Playlist
     const playlist = this.props.playlist
@@ -409,7 +407,7 @@ class Player extends React.Component {
             <div className="playlist">
               <PlaylistElement
                 playlist={playlist}
-                getActiveTrack={this.getActiveTrack}
+                getActiveTrack={this.load}
                 activeUrl={this.state.url}
                 playing={this.state.playing}
                 djName={this.props.name}

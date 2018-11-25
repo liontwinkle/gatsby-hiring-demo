@@ -6,6 +6,7 @@ import withAuthorization from '../components/Session/withAuthorization'
 import Footer from '../components/Footer'
 import Container from '../components/Container'
 import MainHeader from '../components/LayoutComponents/MainHeader'
+import { graphql } from 'gatsby'
 
 const fromObjectToList = object =>
   object ? Object.keys(object).map(key => ({ ...object[key], index: key })) : []
@@ -68,12 +69,28 @@ const authCondition = authUser => !!authUser
 
 const HomePage = withAuthorization(authCondition)(HomePageBase)
 
-export default () => (
+export default ({ data: { file } }) => (
   <Layout>
     <LayoutFirebase>
-      <MainHeader />
+      <MainHeader file={file} />
       <HomePage />
       <Footer />
     </LayoutFirebase>
   </Layout>
 )
+
+export const HomeQuery = graphql`
+  query HomeQuery {
+    file(relativePath: { eq: "sektor_2.png" }) {
+      childImageSharp {
+        fluid(
+          maxWidth: 800
+          quality: 75
+          duotone: { highlight: "#262c41", shadow: "#46507a", opacity: 50 }
+        ) {
+          ...GatsbyImageSharpFluid_withWebp_tracedSVG
+        }
+      }
+    }
+  }
+`

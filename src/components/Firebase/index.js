@@ -15,8 +15,6 @@ const devConfig = {
   storageBucket: process.env.GATSBY_Firebase_storageBucket,
   messagingSenderId: process.env.GATSBY_Firebase_messagingSenderId,
 }
-console.log('\n!!!! DEV CONFIG !!!!! ', devConfig)
-console.log('\n!!!! PROD CONFIG !!!!! ', prodConfig)
 
 const config = process.env.NODE_ENV === 'production' ? prodConfig : devConfig
 

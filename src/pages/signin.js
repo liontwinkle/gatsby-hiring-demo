@@ -23,10 +23,11 @@ const SignInPage = ({ path }) => (
 
 export default data => {
   const path = data.location.pathname
+  const file = data.data.file
   return (
     <Layout>
       <LayoutFirebase>
-        <MainHeader />
+        <MainHeader file={file} />
         <Container>
           <SignInPage path={path} />
         </Container>
@@ -36,18 +37,18 @@ export default data => {
   )
 }
 
-// export const pageQuery = graphql`
-//   {
-//     file(relativePath: { eq: "sektor_2.png" }) {
-//       childImageSharp {
-//         fluid(
-//           maxWidth: 800
-//           quality: 75
-//           duotone: { highlight: "#262c41", shadow: "#46507a", opacity: 50 }
-//         ) {
-//           ...GatsbyImageSharpFluid_withWebp_tracedSVG
-//         }
-//       }
-//     }
-//   }
-// `
+export const pageQuery = graphql`
+  {
+    file(relativePath: { eq: "sektor_2.png" }) {
+      childImageSharp {
+        fluid(
+          maxWidth: 800
+          quality: 75
+          duotone: { highlight: "#262c41", shadow: "#46507a", opacity: 50 }
+        ) {
+          ...GatsbyImageSharpFluid_withWebp_tracedSVG
+        }
+      }
+    }
+  }
+`

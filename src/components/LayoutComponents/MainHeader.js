@@ -14,25 +14,26 @@ const MainHeader = ({ file }) => (
   </MainWrapper>
 )
 
-export default () => (
-  <StaticQuery
-    query={pageQuery}
-    render={data => <MainHeader file={data.file} />}
-  />
-)
+// export default props => (
+//   <StaticQuery
+//     query={pageQuery}
+//     render={data => <MainHeader {...props} file={data.file} />}
+//   />
+// )
 
-export const pageQuery = graphql`
-  {
-    file(relativePath: { eq: "sektor_2.png" }) {
-      childImageSharp {
-        fluid(
-          maxWidth: 800
-          quality: 75
-          duotone: { highlight: "#262c41", shadow: "#46507a", opacity: 50 }
-        ) {
-          ...GatsbyImageSharpFluid_withWebp_tracedSVG
-        }
-      }
-    }
-  }
-`
+// export const pageQuery = graphql`
+//   {
+//     file(relativePath: { eq: "sektor_2.png" }) {
+//       childImageSharp {
+//         fluid(
+//           maxWidth: 800
+//           quality: 75
+//           duotone: { highlight: "#262c41", shadow: "#46507a", opacity: 50 }
+//         ) {
+//           ...GatsbyImageSharpFluid_withWebp_tracedSVG
+//         }
+//       }
+//     }
+//   }
+// `
+export default MainHeader

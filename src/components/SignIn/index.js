@@ -34,10 +34,6 @@ class SignInForm extends Component {
     this.setState({ loading: loading })
     console.log('Loading: ', loading)
     if (this.props.firebase) {
-      console.log(
-        'USER DID MOUNT : ',
-        this.props.firebase.currentUser.displayName
-      )
       this.props.firebase.doOnRedirect()
     }
     if (this.props.authUser) {

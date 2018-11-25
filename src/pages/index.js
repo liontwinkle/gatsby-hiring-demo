@@ -114,10 +114,12 @@ const SignInEl = pathname => (
 )
 const Index = ({
   data: {
+    file,
     allPrismicNastan: { edges: nastani },
   },
   location: { pathname },
 }) => {
+  console.log('FILE ', file)
   const WelcomeMessage = ({ username }) => (
     <InfoTextBox>
       <Text>Здраво, {username}</Text>
@@ -128,7 +130,7 @@ const Index = ({
   return (
     <Layout>
       <div>
-        <MainHeader />
+        <MainHeader file={file} />
         <Container>
           <AuthUserContext.Consumer>
             {authUser =>
@@ -174,6 +176,17 @@ export default WithAuthentication(Index)
 
 export const pageQuery = graphql`
   query IndexQuery {
+    file(relativePath: { eq: "sektor_2.png" }) {
+      childImageSharp {
+        fluid(
+          maxWidth: 800
+          quality: 75
+          duotone: { highlight: "#262c41", shadow: "#46507a", opacity: 50 }
+        ) {
+          ...GatsbyImageSharpFluid_withWebp_tracedSVG
+        }
+      }
+    }
     allPrismicNastan {
       edges {
         node {

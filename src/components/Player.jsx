@@ -272,7 +272,15 @@ class Player extends React.Component {
     }
 
     const url = this.findNextUrl(playlist, index)
-    this.setState({ url: url })
+    this.setState({
+      url: url,
+      playing: false,
+      loaded: 0,
+      played: 0,
+    })
+  }
+  onReady = () => {
+    console.log('On Ready')
   }
   onDuration = duration => {
     console.log('onDuration', duration)
@@ -388,7 +396,7 @@ class Player extends React.Component {
               playbackRate={playbackRate}
               volume={volume}
               muted={muted}
-              onReady={() => console.log('onReady')}
+              onReady={this.onReady}
               onStart={() => console.log('onStart')}
               onPlay={this.onPlay}
               onPause={this.onPause}
@@ -400,7 +408,7 @@ class Player extends React.Component {
               onDuration={this.onDuration}
               config={{
                 youtube: { preload: true },
-                soundcloud: { preload: true, options: { auto_play: true } },
+                // soundcloud: { preload: true, options: { auto_play: true } },
               }}
             />
 

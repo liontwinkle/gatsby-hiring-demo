@@ -34,6 +34,9 @@ const Table = styled.table`
   a:hover {
     background-color: ${props => props.theme.colors.white.blue};
   }
+  .row-player {
+    cursor: pointer;
+  }
 `
 
 const Playlist = ({ playlist, getActiveTrack, activeUrl, playing, djName }) => {
@@ -53,7 +56,7 @@ const Playlist = ({ playlist, getActiveTrack, activeUrl, playing, djName }) => {
       <thead>
         <tr>
           <th className="center" />
-          <th />
+          {/* <th /> */}
           <th>Artist</th>
           <th>Track</th>
           <th>
@@ -63,11 +66,16 @@ const Playlist = ({ playlist, getActiveTrack, activeUrl, playing, djName }) => {
       </thead>
       <tbody className="body">
         {playlist.map((track, index) => (
-          <tr key={track.link.url}>
+          <tr
+            // style={{ cursor: 'pointer' }}
+            onClick={() => getActiveTrack(track.link.url)}
+            key={track.link.url}
+            className="row-player"
+          >
             <td className="center">{index + 1}</td>
-            <td>
+            {/* <td>
               <div
-                onClick={() => getActiveTrack(track.link.url)}
+                // onClick={() => getActiveTrack(track.link.url)}
                 style={{ cursor: 'pointer' }}
               >
                 {(track.link.url === activeUrl) & playing ? (
@@ -76,7 +84,7 @@ const Playlist = ({ playlist, getActiveTrack, activeUrl, playing, djName }) => {
                   <FaPlay size={18} />
                 )}
               </div>
-            </td>
+            </td> */}
             <td>{track.artist ? track.artist : djName}</td>
             <td>{track.track ? track.track : track.title}</td>
             {console.log(track.link.url.includes('soundcloud'))}

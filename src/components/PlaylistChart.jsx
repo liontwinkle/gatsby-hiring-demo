@@ -34,6 +34,9 @@ const Table = styled.table`
   a:hover {
     background-color: ${props => props.theme.colors.white.blue};
   }
+  .row-player {
+    cursor: pointer;
+  }
 `
 
 const PlaylistChart = ({ playlist, getActiveTrack, activeUrl, playing }) => {
@@ -53,7 +56,7 @@ const PlaylistChart = ({ playlist, getActiveTrack, activeUrl, playing }) => {
       <thead>
         <tr>
           <th className="center" />
-          <th />
+          {/* <th /> */}
           <th>Artist</th>
           <th>Track</th>
           <th>Album</th>
@@ -67,9 +70,13 @@ const PlaylistChart = ({ playlist, getActiveTrack, activeUrl, playing }) => {
       </thead>
       <tbody className="body">
         {playlist.map((track, index) => (
-          <tr key={track.link.url}>
+          <tr
+            className="row-player"
+            onClick={() => getActiveTrack(track.link.url)}
+            key={track.link.url}
+          >
             <td className="center">{index + 1}</td>
-            <td>
+            {/* <td>
               <div
                 onClick={() => getActiveTrack(track.link.url)}
                 style={{ cursor: 'pointer' }}
@@ -80,7 +87,7 @@ const PlaylistChart = ({ playlist, getActiveTrack, activeUrl, playing }) => {
                   <FaPlay size={18} />
                 )}
               </div>
-            </td>
+            </td> */}
             <td>{track.artist}</td>
             <td>{track.track}</td>
             <td>{track.album}</td>

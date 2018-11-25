@@ -15,7 +15,8 @@ const devConfig = {
   storageBucket: process.env.Firebase_storageBucket,
   messagingSenderId: process.env.Firebase_messagingSenderId,
 }
-
+console.log('\n!!!! DEV CONFIG !!!!! ', devConfig)
+console.log('\n!!!! PROD CONFIG !!!!! ', prodConfig)
 const config = process.env.NODE_ENV === 'production' ? prodConfig : devConfig
 
 class Firebase {

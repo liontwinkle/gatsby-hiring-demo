@@ -7,10 +7,10 @@ import Navigation from './Navigation'
 import SEO from './SEO'
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
 import { reset, headroom } from '../styles'
-import { SkipNavLink } from '../elements'
+// import { SkipNavLink } from '../elements'
 import 'typeface-montserrat'
 import 'typeface-istok-web'
-import NavigationFirebase from './NavigationFirebase'
+// import NavigationFirebase from './NavigationFirebase'
 import LayoutFirebase from './LayoutFirebase'
 
 const GlobalStyle = createGlobalStyle`

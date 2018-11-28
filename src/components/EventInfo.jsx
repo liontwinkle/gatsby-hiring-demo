@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { css } from 'react-emotion'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
-import Tags from './Tags'
+// import Tags from './Tags'
 import { GoCalendar, GoLocation } from 'react-icons/go'
 import { CardWrapper } from './LayoutComponents/Index'
 
@@ -60,10 +60,10 @@ const EventInfo = ({
   excerpt,
   image,
 }) => {
-  let tags = false
-  if (inputTags[0].tag) {
-    tags = inputTags.map(tag => tag.tag.document[0].data.tag)
-  }
+  // let tags = false
+  // if (inputTags[0].tag) {
+  //   tags = inputTags.map(tag => tag.tag.document[0].data.tag)
+  // }
   return (
     <CardWrapper>
       <Link to={`program/${path}`}>

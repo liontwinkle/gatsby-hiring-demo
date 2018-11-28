@@ -12,7 +12,7 @@ const Nav = styled.nav`
   .nav-body {
     margin-bottom: -1px;
   }
-  a.menu-item {
+  div.menu-item {
     margin-left: 16px;
     padding: 16px 8px;
     margin-right: 16px;
@@ -28,7 +28,7 @@ const Nav = styled.nav`
       vertical-align: text-top;
     }
   }
-  a.selected {
+  div.selected {
     font-weight: 600;
     color: #24292e;
     border-bottom-color: ${props => props.theme.colors.black.light};
@@ -43,36 +43,36 @@ const UnderlineNav = ({ handleClick, selected }) => {
   return (
     <Nav>
       <Flex justifyContent="flex-start" className="nav-body" flexWrap="wrap">
-        <a
+        <div
           onClick={e => handleClick(e, '#bio')}
           className={`menu-item ${selectedBio}`}
           // href="#bio"
         >
           <IoIosBook size={19} />
           Bio
-        </a>
-        <a
+        </div>
+        <div
           onClick={e => handleClick(e, '#charts')}
           className={`menu-item ${selectedCharts}`}
           // href="#charts"
         >
           <IoMdStats size={19} />
           Charts
-        </a>
-        <a
+        </div>
+        <div
           onClick={e => handleClick(e, '#mixes')}
           className={`menu-item ${selectedMixes}`}
         >
           <TiHeadphones size={19} />
           Mixes
-        </a>
-        <a
+        </div>
+        <div
           onClick={e => handleClick(e, '#events')}
           className={`menu-item ${selectedEvents}`}
         >
           <IoMdCalendar size={19} />
           Events
-        </a>
+        </div>
       </Flex>
     </Nav>
   )

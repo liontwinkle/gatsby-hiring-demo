@@ -19,7 +19,7 @@ import config from '../../config/website'
 // import { Card } from '../components/Card'
 import { GoCalendar, GoLocation, GoLinkExternal } from 'react-icons/go'
 import Layout from '../components/Layout'
-import { Box } from '@rebass/grid/emotion'
+// import { Box } from '@rebass/grid/emotion'
 const dj = require('../icons/dj.svg')
 
 const pulse = keyframes`

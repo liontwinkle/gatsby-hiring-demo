@@ -72,11 +72,13 @@ class Firebase {
         console.log(error)
         // Handle Errors here.
         const errorCode = error.code
+        console.log('Error code: ', errorCode)
         const errorMessage = error.message
+        console.log('Error message: ', errorMessage)
         // The email of the user's account used.
-        const email = error.email
+        // const email = error.email
         // The firebase.auth.AuthCredential type that was used.
-        const credential = error.credential
+        // const credential = error.credential
       })
   }
 

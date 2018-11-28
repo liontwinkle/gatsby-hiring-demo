@@ -114,7 +114,6 @@ const NastanPost = ({ cover, path, date, info, naslov, location, lineup }) => (
     <Image>
       <Link to={`program/${path}`}>
         <Img alt="" className="flyer" fluid={cover} />
-        <img src={cover} />
       </Link>
     </Image>
     <Information>

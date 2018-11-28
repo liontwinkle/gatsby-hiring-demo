@@ -1,5 +1,5 @@
 import React from 'react'
-import { StaticQuery, graphql } from 'gatsby'
+// import { StaticQuery, graphql } from 'gatsby'
 import { MainWrapper, Hero } from './Index'
 import Wave from '../Wave'
 import Img from 'gatsby-image'

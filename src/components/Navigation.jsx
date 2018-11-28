@@ -7,7 +7,7 @@ import Logo from '../icons/Logo'
 import { Link } from 'gatsby'
 import NavigationFirebase from './NavigationFirebase'
 import { TiEquals } from 'react-icons/ti'
-import { Dropdown, Box } from '@primer/components'
+// import { Dropdown, Box } from '@primer/components'
 
 const StyledLink = styled(Link)`
   display: flex;
@@ -92,30 +92,30 @@ const Nav = styled.nav`
   }
 `
 
-const NavMenu = () => (
-  <div>
-    <Headroom calcHeightOnResize disableInlineStyles>
-      <StyledLink to="/">
-        <LogoText>сектор</LogoText>
-        <Logo />
-      </StyledLink>
-      <Nav>
-        <Link to="/program" activeClassName="active">
-          Програма
-        </Link>
-        <Link to="/blog" activeClassName="active">
-          Блог
-        </Link>
-        <Link to="/kontakt" activeClassName="active">
-          Контакт
-        </Link>
-        <span>
-          <TiEquals size={22} />
-        </span>
-      </Nav>
-    </Headroom>
-  </div>
-)
+// const NavMenu = () => (
+//   <div>
+//     <Headroom calcHeightOnResize disableInlineStyles>
+//       <StyledLink to="/">
+//         <LogoText>сектор</LogoText>
+//         <Logo />
+//       </StyledLink>
+//       <Nav>
+//         <Link to="/program" activeClassName="active">
+//           Програма
+//         </Link>
+//         <Link to="/blog" activeClassName="active">
+//           Блог
+//         </Link>
+//         <Link to="/kontakt" activeClassName="active">
+//           Контакт
+//         </Link>
+//         <span>
+//           <TiEquals size={22} />
+//         </span>
+//       </Nav>
+//     </Headroom>
+//   </div>
+// )
 const INITIAL_STATE = {
   dropdown: false,
 }

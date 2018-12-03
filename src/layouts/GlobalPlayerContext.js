@@ -134,8 +134,8 @@ const PlayerControler = styled.div`
       margin-right: 0.5rem;
     }
     @media (min-width: ${theme.breakpoints.l}) {
-      width: 6%;
-      height: 6%;
+      width: 3%;
+      height: 3%;
       margin-left: 0.5rem;
       margin-right: 0.5rem;
     }
@@ -158,8 +158,8 @@ const PlayerControler = styled.div`
       height: 12%;
     }
     @media (min-width: ${theme.breakpoints.l}) {
-      width: 4%;
-      height: 4%;
+      width: 2%;
+      height: 2%;
     }
   }
 `
@@ -186,6 +186,9 @@ const defaultContextValue = {
     index: -1,
     artist: null,
     track: false,
+    playlist: null,
+    playlistName: null,
+    player: false,
   },
   set: () => {},
 }
@@ -200,6 +203,7 @@ class ContextProviderComponent extends React.Component {
     this.state = {
       ...defaultContextValue,
       set: this.setData,
+      onPlayNext: this.onPlayNext,
     }
     this.findNextUrl = this.findNextUrl.bind(this)
   }
@@ -226,6 +230,9 @@ class ContextProviderComponent extends React.Component {
 
   ref = player => {
     this.player = player
+    let data = { ...this.state.data }
+    data.player = player
+    this.setState({ data })
   }
   playPause = () => {
     let data = { ...this.state.data }
@@ -306,6 +313,7 @@ class ContextProviderComponent extends React.Component {
   }
   onEnded = () => {
     console.log('onEnded')
+    let data = this.state.data
     this.setState({ data: { playing: this.state.data.loop } })
   }
   onDuration = duration => {
@@ -354,6 +362,10 @@ class ContextProviderComponent extends React.Component {
   }
   onReady = () => {
     console.log('On Ready')
+    const duration = this.player.getDuration()
+    let data = { ...this.state.data }
+    data.duration = duration
+    this.setState({ data })
   }
   onDuration = duration => {
     let data = this.state.data
@@ -373,13 +385,11 @@ class ContextProviderComponent extends React.Component {
       // loaded,
       duration,
       playbackRate,
+      playlist,
+      playlistName,
     } = this.state.data
-    console.log('Global Player State: ', this.state)
-    console.log('Playing', playing)
-
-    // const PlaylistElement =
-    //   this.props.type === 'chart' ? PlaylistChart : Playlist
-    // const playlist = this.props.playlist
+    console.log('Playlist in global: ', playlist)
+    console.log('Playlist Name in global: ', playlistName)
     const PlayPauseButton = this.state.data.playing ? FaPause : FaPlay
     const MuteSoundButton = this.state.data.muted ? FaVolumeOff : FaVolumeUp
     const Timer =
@@ -391,29 +401,6 @@ class ContextProviderComponent extends React.Component {
       ) : (
         <div className="timer">-</div>
       )
-    // const index = this.state.url
-    //   ? playlist.findIndex(el => el.link.url === this.state.url)
-    //   : -1
-    // const nowPlaying = playlist[index]
-    // const artist = nowPlaying
-    //   ? nowPlaying.artist
-    //     ? nowPlaying.artist
-    //     : this.props.name
-    //   : null
-    // const track = nowPlaying
-    //   ? nowPlaying.track
-    //     ? nowPlaying.track
-    //     : nowPlaying.title
-    //   : null
-    // const tracklistElement = nowPlaying ? (
-    //   nowPlaying.tracklist ? (
-    //     <Box width={[1, 1, 1, 0.35]} mx={3}>
-    //       <Tracklist tracklist={nowPlaying.tracklist} mixName={track} />
-    //     </Box>
-    //   ) : null
-    // ) : null
-    // const mainBoxSize = tracklistElement ? 0.6 : 1
-    console.log('Artist in Global: ', this.state.data.artist)
     const mainBoxSize = 1
     if (this.state.data.url) {
       return (

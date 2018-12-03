@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import ReactPlayer from 'react-player'
 import {
   FaPlay,
   FaPause,
@@ -153,31 +152,8 @@ const Info = styled.div`
 `
 
 class Player extends React.Component {
-  // constructor(props) {
-  //   super(props)
-  //   this.state = {
-  //     url: null,
-  //     playing: false,
-  //     volume: 0.9,
-  //     muted: false,
-  //     played: 0,
-  //     loaded: 0,
-  //     duration: 0,
-  //     playbackRate: 1.0,
-  //     loop: false,
-  //     index: -1,
-  //   }
-  //   this.findNextUrl = this.findNextUrl.bind(this)
-  // }
-
   load = url => {
-    // this.props.setFunction({
-    //   url,
-    //   played: 0,
-    //   loaded: 0,
-    // })
     const index = this.getIndex(url)
-    console.log('Now playing index, url: ', index, url)
     const nowPlaying = this.props.playlist[index]
     const artist = nowPlaying
       ? nowPlaying.artist
@@ -189,7 +165,6 @@ class Player extends React.Component {
         ? nowPlaying.track
         : nowPlaying.title
       : null
-    console.log('Artist, track in blog: ', artist, track)
     this.props.setFunction({
       url,
       played: 0,
@@ -197,6 +172,15 @@ class Player extends React.Component {
       artist: artist,
       track: track,
     })
+    if (
+      !this.props.contextData.playlist &&
+      this.props.contextData.playlistName !== this.props.name
+    ) {
+      this.props.setFunction({
+        playlist: this.props.playlist,
+        playlistName: this.props.name,
+      })
+    }
   }
   getIndex = url =>
     url ? this.props.playlist.findIndex(el => el.link.url === url) : -1
@@ -207,7 +191,8 @@ class Player extends React.Component {
   playPause = () => {
     this.props.setFunction({ playing: !this.props.contextData.playing })
     if (!this.props.contextData.url) {
-      this.props.setFunction({ url: this.props.playlist[0].link.url })
+      const url = this.props.playlist[0].link.url
+      this.load(url)
     }
   }
   stop = () => {
@@ -230,7 +215,7 @@ class Player extends React.Component {
     console.log('onPlay')
     this.props.setFunction({
       playing: true,
-      duration: this.player.getDuration(),
+      duration: this.contextData.player.getDuration(),
     })
   }
   onPause = () => {
@@ -250,7 +235,7 @@ class Player extends React.Component {
   }
   onSeekMouseUp = value => {
     this.props.setFunction({ seeking: false })
-    this.player.seekTo(parseFloat(value))
+    this.props.contextData.player.seekTo(parseFloat(value))
   }
   onProgress = state => {
     console.log('onProgress', state)
@@ -300,12 +285,13 @@ class Player extends React.Component {
     }
 
     const url = this.findNextUrl(playlist, index)
-    this.props.setFunction({
-      url: url,
-      playing: false,
-      loaded: 0,
-      played: 0,
-    })
+    // this.props.setFunction({
+    //   url: url,
+    //   playing: false,
+    //   loaded: 0,
+    //   played: 0,
+    // })
+    this.load(url)
   }
   onReady = () => {
     console.log('On Ready')
@@ -315,18 +301,6 @@ class Player extends React.Component {
     this.props.setFunction({ duration })
   }
   render() {
-    // const {
-    //   // url,
-    //   playing,
-    //   volume,
-    //   muted,
-    //   loop,
-    //   played,
-    //   // loaded,
-    //   duration,
-    //   playbackRate,
-    // } = this.state
-
     const PlaylistElement =
       this.props.type === 'chart' ? PlaylistChart : Playlist
     const playlist = this.props.playlist
@@ -346,24 +320,13 @@ class Player extends React.Component {
       ) : (
         <div className="timer">-</div>
       )
-    const index = this.props.contextData.url
-      ? playlist.findIndex(el => el.link.url === this.props.contextData.url)
-      : -1
-    const nowPlaying = playlist[index]
-    const artist = nowPlaying
-      ? nowPlaying.artist
-        ? nowPlaying.artist
-        : this.props.name
-      : null
-    const track = nowPlaying
-      ? nowPlaying.track
-        ? nowPlaying.track
-        : nowPlaying.title
-      : null
-    const tracklistElement = nowPlaying ? (
-      nowPlaying.tracklist ? (
+    const tracklistElement = this.props.contextData.nowPlaying ? (
+      this.props.contextData.nowPlaying.tracklist ? (
         <Box width={[1, 1, 1, 0.35]} mx={3}>
-          <Tracklist tracklist={nowPlaying.tracklist} mixName={track} />
+          <Tracklist
+            tracklist={this.props.contextData.nowPlaying.tracklist}
+            mixName={this.props.contextData.track}
+          />
         </Box>
       ) : null
     ) : null
@@ -379,7 +342,11 @@ class Player extends React.Component {
                 : `Миксови од ${this.props.name}`}
             </h3>
             <Info>
-              {nowPlaying ? `${artist} - ${track}` : `Artist - Track`}
+              {this.props.contextData.url
+                ? `${this.props.contextData.artist} - ${
+                    this.props.contextData.track
+                  }`
+                : `Artist - Track`}
 
               {Timer}
             </Info>
@@ -417,32 +384,6 @@ class Player extends React.Component {
                 className="muteButton"
               />
             </PlayerControler>
-            {/* <ReactPlayer
-              ref={this.ref}
-              className="react-player"
-              width="0"
-              height="0"
-              url={this.state.url}
-              playing={playing}
-              loop={loop}
-              playbackRate={playbackRate}
-              volume={volume}
-              muted={muted}
-              onReady={this.onReady}
-              onStart={() => console.log('onStart')}
-              onPlay={this.onPlay}
-              onPause={this.onPause}
-              onBuffer={() => console.log('onBuffer')}
-              onSeek={e => console.log('onSeek', e)}
-              onEnded={() => this.onPlayNext('forward')}
-              onError={e => console.log('onError', e)}
-              onProgress={this.onProgress}
-              onDuration={this.onDuration}
-              config={{
-                youtube: { preload: true },
-                // soundcloud: { preload: true, options: { auto_play: true } },
-              }}
-            /> */}
 
             <div className="playlist">
               <PlaylistElement

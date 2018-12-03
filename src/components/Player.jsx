@@ -321,16 +321,21 @@ class Player extends React.Component {
       ) : (
         <div className="timer">-</div>
       )
-    const tracklistElement = this.props.contextData.nowPlaying ? (
-      this.props.contextData.nowPlaying.tracklist ? (
-        <Box width={[1, 1, 1, 0.35]} mx={3}>
-          <Tracklist
-            tracklist={this.props.contextData.nowPlaying.tracklist}
-            mixName={this.props.contextData.track}
-          />
-        </Box>
+    console.log('URL: ', this.props.contextData.url)
+    const index = this.getIndex(this.props.contextData.url)
+    const nowPlaying = this.props.playlist[index]
+    console.log('Nowplaying, index', nowPlaying, index)
+    const tracklistElement =
+      nowPlaying && nowPlaying !== -1 ? (
+        nowPlaying.tracklist ? (
+          <Box width={[1, 1, 1, 0.35]} mx={3}>
+            <Tracklist
+              tracklist={nowPlaying.tracklist}
+              mixName={this.props.contextData.track}
+            />
+          </Box>
+        ) : null
       ) : null
-    ) : null
     const mainBoxSize = tracklistElement ? 0.6 : 1
 
     return (

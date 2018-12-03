@@ -173,12 +173,13 @@ class Player extends React.Component {
       track: track,
     })
     if (
-      !this.props.contextData.playlist &&
+      !this.props.contextData.playlist ||
       this.props.contextData.playlistName !== this.props.name
     ) {
       this.props.setFunction({
         playlist: this.props.playlist,
         playlistName: this.props.name,
+        playlistType: this.props.type,
       })
     }
   }

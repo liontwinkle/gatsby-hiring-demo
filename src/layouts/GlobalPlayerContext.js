@@ -51,6 +51,10 @@ const Wrapper = styled.div`
   padding: 16px;
   background: ${theme.gradient.rightToLeft};
   z-index: 100;
+  h3 {
+    color: ${theme.colors.white.light};
+    text-align: center;
+  }
 `
 
 const PlayerControler = styled.div`
@@ -189,6 +193,7 @@ const defaultContextValue = {
     playlist: null,
     playlistName: null,
     player: false,
+    playlistType: false,
   },
   set: () => {},
 }
@@ -387,9 +392,10 @@ class ContextProviderComponent extends React.Component {
       playbackRate,
       playlist,
       playlistName,
+      playlistType,
     } = this.state.data
     console.log('Playlist in global: ', playlist)
-    console.log('Playlist Name in global: ', playlistName)
+    console.log('Playlist Name, Type in global: ', playlistName, playlistType)
     const PlayPauseButton = this.state.data.playing ? FaPause : FaPlay
     const MuteSoundButton = this.state.data.muted ? FaVolumeOff : FaVolumeUp
     const Timer =
@@ -411,9 +417,9 @@ class ContextProviderComponent extends React.Component {
               <Flex flexWrap="wrap">
                 <Box width={[1, 1, 1, mainBoxSize]}>
                   <h3>
-                    {this.props.type !== 'mixes'
-                      ? this.props.name
-                      : `Миксови од ${this.props.name}`}
+                    {playlistType !== 'mixes'
+                      ? playlistName
+                      : `Миксови од ${playlistName}`}
                   </h3>
                   <Info>
                     {this.state.data.artist} - {this.state.data.track}

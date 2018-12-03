@@ -10,6 +10,7 @@ import { Box } from '@rebass/grid/emotion'
 import theme from '../../config/theme'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
+import MainLayout from '../layouts'
 
 const pulse = keyframes`
   0% {
@@ -118,47 +119,49 @@ const Djs = ({
     allPrismicDj: { edges: djs },
   },
 }) => (
-  <Layout>
-    <div>
-      <Wrapper>
-        <Hero>
-          <h1>#Resident DJs</h1>
-        </Hero>
-        <Wave />
-        <Img fluid={file.childImageSharp.fluid} />
-      </Wrapper>
+  <MainLayout>
+    <Layout>
+      <div>
+        <Wrapper>
+          <Hero>
+            <h1>#Resident DJs</h1>
+          </Hero>
+          <Wave />
+          <Img fluid={file.childImageSharp.fluid} />
+        </Wrapper>
 
-      <Container>
-        <DescriptionText>Sektor DJs</DescriptionText>
-        {djs.map(dj => (
-          <Box key={dj.node.id} width={[1, 1, 1 / 2, 1 / 3]}>
-            <Card
-              m={1}
-              p={1}
-              borderRadius={2}
-              boxShadow={theme.shadow.feature.small.default}
-            >
-              <PlainLink to={`djs/${dj.node.data.name}`}>
-                <Img
-                  className="gatsby-image"
-                  fluid={dj.node.data.avatar.localFile.childImageSharp.fluid}
-                />
-              </PlainLink>
-              <Box width={256} px={2}>
+        <Container>
+          <DescriptionText>Sektor DJs</DescriptionText>
+          {djs.map(dj => (
+            <Box key={dj.node.id} width={[1, 1, 1 / 2, 1 / 3]}>
+              <Card
+                m={1}
+                p={1}
+                borderRadius={2}
+                boxShadow={theme.shadow.feature.small.default}
+              >
                 <PlainLink to={`djs/${dj.node.data.name}`}>
-                  <Heading className="title" as="h3">
-                    {dj.node.data.name}
-                  </Heading>
+                  <Img
+                    className="gatsby-image"
+                    fluid={dj.node.data.avatar.localFile.childImageSharp.fluid}
+                  />
                 </PlainLink>
-                <Text fontSize={0}>{dj.node.data.punchline}</Text>
-              </Box>
-            </Card>
-          </Box>
-        ))}
-      </Container>
-      <Footer />
-    </div>
-  </Layout>
+                <Box width={256} px={2}>
+                  <PlainLink to={`djs/${dj.node.data.name}`}>
+                    <Heading className="title" as="h3">
+                      {dj.node.data.name}
+                    </Heading>
+                  </PlainLink>
+                  <Text fontSize={0}>{dj.node.data.punchline}</Text>
+                </Box>
+              </Card>
+            </Box>
+          ))}
+        </Container>
+        <Footer />
+      </div>
+    </Layout>
+  </MainLayout>
 )
 
 export default Djs

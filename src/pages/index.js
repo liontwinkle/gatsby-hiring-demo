@@ -18,6 +18,7 @@ import { TiGift, TiNotesOutline, TiLockClosedOutline } from 'react-icons/ti'
 import SignInForm from '../components/SignIn'
 import AuthUserContext from '../components/Session/AuthUserContext'
 import WithAuthentication from '../components/Session/withAuthentication'
+// import MainLayout from '../layouts'
 
 const EXCERPT_LENGTH = 140
 
@@ -128,6 +129,7 @@ const Index = ({
     </InfoTextBox>
   )
   return (
+    // <MainLayout>
     <Layout>
       <div>
         <MainHeader file={file} />
@@ -169,6 +171,7 @@ const Index = ({
         <Footer />
       </div>
     </Layout>
+    // </MainLayout>
   )
 }
 

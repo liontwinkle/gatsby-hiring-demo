@@ -51,6 +51,7 @@ module.exports = {
       },
     },
     `gatsby-transformer-sharp`,
+    `gatsby-plugin-layout`,
     // {
     //   resolve: `gatsby-source-strapi`,
     //   options: {

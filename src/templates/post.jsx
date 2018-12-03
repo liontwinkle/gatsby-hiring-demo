@@ -20,6 +20,7 @@ import Player from '../components/Player'
 import Lightbox from 'react-images'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
+import PlayerConsumer from '../layouts/GlobalPlayerContext'
 
 const pulse = keyframes`
   0% {
@@ -166,10 +167,16 @@ class Post extends React.Component {
     const { gallery } = post.data
     const playlist = post.data.body ? post.data.body[0] : null
     const PlaylistPlayer = playlist ? (
-      <Player
-        playlist={playlist.items}
-        name={playlist.primary.playlist_name.text}
-      />
+      <PlayerConsumer>
+        {({ data, set }) => (
+          <Player
+            playlist={playlist.items}
+            name={playlist.primary.playlist_name.text}
+            contextData={data}
+            setFunction={set}
+          />
+        )}
+      </PlayerConsumer>
     ) : null
     const images = gallery[0].image1.localFile
       ? gallery.map(image => {

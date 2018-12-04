@@ -113,28 +113,28 @@ const Dj = ({ data: { prismicDj: dj, prismicChart: chart }, location }) => (
                   <Box mr={2}>
                     <SocialLink
                       type="fb"
-                      link={dj.data.facebook.url}
+                      link={dj.data.facebook ? dj.data.facebook.url : null}
                       size={25}
                     />
                   </Box>
                   <Box mx={2}>
                     <SocialLink
                       type="tw"
-                      link={dj.data.twitter.url}
+                      link={dj.data.twitter ? dj.data.twitter.url : null}
                       size={25}
                     />
                   </Box>
                   <Box mx={2}>
                     <SocialLink
                       type="sc"
-                      link={dj.data.soundcloud.url}
+                      link={dj.data.soundcloud ? dj.data.soundcloud.url : null}
                       size={25}
                     />
                   </Box>
                   <Box mx={2}>
                     <SocialLink
                       type="mc"
-                      link={dj.data.mixcloud.url}
+                      link={dj.data.mixcloud ? dj.data.mixcloud.url : null}
                       size={25}
                     />
                   </Box>
@@ -142,7 +142,7 @@ const Dj = ({ data: { prismicDj: dj, prismicChart: chart }, location }) => (
                   <Box mx={2}>
                     <SocialLink
                       type="in"
-                      link={dj.data.instagram.url}
+                      link={dj.data.instagram ? dj.data.instagram.url : null}
                       size={25}
                     />
                   </Box>

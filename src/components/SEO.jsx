@@ -11,8 +11,10 @@ const SEO = props => {
   let postURL
   if (postSEO) {
     const postMeta = postNode.frontmatter
-    title = postMeta.title // eslint-disable-line prefer-destructuring
-    description = postNode.excerpt
+    console.log('Post Node: ', postNode)
+    title = postNode.data.title.text // eslint-disable-line prefer-destructuring
+    description = postNode.data.text.text.slice(0, 200)
+    console.log(description)
     image = postMeta.cover.childImageSharp.resize.src
     postURL = config.siteUrl + config.pathPrefix + postPath
   } else {

@@ -1,13 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled, { css, keyframes } from 'styled-components'
+import styled from 'styled-components'
+import { css, keyframes } from 'react-emotion'
 import Helmet from 'react-helmet'
 import Img from 'gatsby-image'
 // import { Link } from 'gatsby'
 // import kebabCase from 'lodash/kebabCase'
 import { darken } from 'polished'
 // import Tags from '../components/Tags'
-// import SEO from '../components/SEO'
+import SEO from '../components/SEO'
 import Container from '../components/Container'
 import Content from '../components/Content'
 import Wave from '../components/Wave'
@@ -21,6 +22,7 @@ import Lightbox from 'react-images'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import PlayerConsumer from '../layouts/GlobalPlayerContext'
+import { Twitter, Facebook } from 'react-social-sharing'
 
 const pulse = keyframes`
   0% {
@@ -183,11 +185,13 @@ class Post extends React.Component {
           return { src: image.image1.localFile.childImageSharp.fluid.src }
         })
       : null
+    const postNode = this.props.data.prismicBlog
+    const uid = this.props.data.prismicBlog.uid
     return (
       <Layout>
         <div className="post-container">
           <Helmet title={`${post.data.title.text} | ${config.siteTitle}`} />
-          {/* <SEO postPath={slug} postNode={postNode} postSEO /> */}
+          <SEO postPath={uid} postNode={postNode} postSEO />
           <Wrapper>
             <Hero>
               <h1>{post.data.title.text}</h1>
@@ -231,21 +235,26 @@ class Post extends React.Component {
             ) : null}
             <Line />
             {/* <Tags tags={post.tags} /> */}
-            <p>
-              <span className={fontBold}>Interesse geweckt?</span> Lies alle
-              Beiträge in der Kategorie{' '}
+            <span>
+              <span className={fontBold}>Ти се допадна?</span> Сподели со твоите
+              пријатели
+              <Twitter
+                message={post.data.title.text}
+                link="http://www.example.com"
+              />
+              <Facebook link="http://www.example.com" />
               {/* <Link to={`/categories/${kebabCase(post.category)}`}>{post.category}</Link> */}
-            </p>
+            </span>
           </Container>
           <Footer>
             {/* <h2>Lust auf mehr Tutorials & Goodies? Werde ein Patron.</h2>
-        <a
-          href="https://www.patreon.com/lekoarts"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Button type="secondary">Patreon</Button>
-        </a> */}
+            <a
+              href="https://www.patreon.com/lekoarts"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button type="secondary">Patreon</Button>
+            </a> */}
           </Footer>
         </div>
       </Layout>

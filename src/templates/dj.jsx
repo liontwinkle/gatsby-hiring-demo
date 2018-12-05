@@ -74,7 +74,14 @@ const Image = styled.div`
   img {
     width: 100%;
     border-radius: 6px;
-    max-width: 360px;
+    max-width: 100%;
+    height: auto;
+    margin: 0px;
+    @media (max-width: ${props => props.theme.breakpoints.m}) {
+      max-width: 100%;
+      height: auto;
+      margin: 0px;
+    }
   }
 `
 const Line = styled.div`
@@ -195,6 +202,7 @@ export const DjQuery = graphql`
         }
         bio {
           text
+          html
         }
         punchline
         mixes {

@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 const Wrapper = styled.div`
   padding: 2rem 0 1rem 0;
+  max-width: 650px;
   p,
   li {
     letter-spacing: -0.003em;

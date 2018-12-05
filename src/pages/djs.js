@@ -6,7 +6,7 @@ import Footer from '../components/Footer'
 import Wave from '../components/Wave'
 import Container from '../components/Container'
 import { Card, Heading, Text } from 'rebass'
-import { Box } from '@rebass/grid/emotion'
+import { Box, Flex } from '@rebass/grid/emotion'
 import theme from '../../config/theme'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
@@ -132,31 +132,35 @@ const Djs = ({
 
         <Container>
           <DescriptionText>Sektor DJs</DescriptionText>
-          {djs.map(dj => (
-            <Box key={dj.node.id} width={[1, 1, 1 / 2, 1 / 3]}>
-              <Card
-                m={1}
-                p={1}
-                borderRadius={2}
-                boxShadow={theme.shadow.feature.small.default}
-              >
-                <PlainLink to={`djs/${dj.node.data.name}`}>
-                  <Img
-                    className="gatsby-image"
-                    fluid={dj.node.data.avatar.localFile.childImageSharp.fluid}
-                  />
-                </PlainLink>
-                <Box width={256} px={2}>
+          <Flex>
+            {djs.map(dj => (
+              <Box key={dj.node.id} m={2} width={[1, 1, 1 / 2, 1 / 3]}>
+                <Card
+                  m={1}
+                  p={1}
+                  borderRadius={2}
+                  boxShadow={theme.shadow.feature.small.default}
+                >
                   <PlainLink to={`djs/${dj.node.data.name}`}>
-                    <Heading className="title" as="h3">
-                      {dj.node.data.name}
-                    </Heading>
+                    <Img
+                      className="gatsby-image"
+                      fluid={
+                        dj.node.data.avatar.localFile.childImageSharp.fluid
+                      }
+                    />
                   </PlainLink>
-                  <Text fontSize={0}>{dj.node.data.punchline}</Text>
-                </Box>
-              </Card>
-            </Box>
-          ))}
+                  <Box width={256} px={2}>
+                    <PlainLink to={`djs/${dj.node.data.name}`}>
+                      <Heading className="title" as="h3">
+                        {dj.node.data.name}
+                      </Heading>
+                    </PlainLink>
+                    <Text fontSize={0}>{dj.node.data.punchline}</Text>
+                  </Box>
+                </Card>
+              </Box>
+            ))}
+          </Flex>
         </Container>
         <Footer />
       </div>

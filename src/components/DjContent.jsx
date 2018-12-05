@@ -1,15 +1,12 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled from 'react-emotion'
 import UnerlineNav from './UnderlineNav'
 import { Text } from 'rebass'
 import DjChart from './DjChart'
 import DjMixes from './DjMixes'
 import { Box } from 'rebass'
 import { navigate } from 'gatsby'
-
-const Bio = styled(Text)`
-  max-width: 800px;
-`
+import Content from './Content'
 
 class DjContent extends React.Component {
   state = {
@@ -44,11 +41,11 @@ class DjContent extends React.Component {
   }
   render() {
     const dj = this.props.dj
-    const bio = <Bio id="#bio">{dj.data.bio.text}</Bio>
+    const bio = <Content id="#bio" input={dj.data.bio.html} />
     const mixes = dj.data.mixes
     const selected = this.state.selected
     const djChart = this.props.chart
-    const Content = (() => {
+    const CurrentElement = (() => {
       if (selected === '#bio') return bio
       if (selected === '#charts')
         return <DjChart id="#charts" chart={djChart} />
@@ -63,7 +60,7 @@ class DjContent extends React.Component {
           handleClick={(e, el) => this.handleClick(e, el, dj.data.name)}
           selected={this.state.selected}
         />
-        <Box m={2}>{Content}</Box>
+        <Box m={2}>{CurrentElement}</Box>
       </div>
     )
   }

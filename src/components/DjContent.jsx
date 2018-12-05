@@ -48,9 +48,22 @@ class DjContent extends React.Component {
     const CurrentElement = (() => {
       if (selected === '#bio') return bio
       if (selected === '#charts')
-        return <DjChart id="#charts" chart={djChart} />
+        return (
+          <DjChart
+            id="#charts"
+            chart={djChart}
+            location={this.props.location}
+          />
+        )
       if (selected === '#mixes')
-        return <DjMixes id="#mixes" djName={dj.data.name} mixes={mixes} />
+        return (
+          <DjMixes
+            id="#mixes"
+            djName={dj.data.name}
+            mixes={mixes}
+            location={this.props.location}
+          />
+        )
       // else selected === 'events' // jshint ignore:line
       return <span id="#events">Events</span>
     })()

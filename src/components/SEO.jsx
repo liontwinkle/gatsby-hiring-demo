@@ -12,11 +12,11 @@ const SEO = props => {
   if (postSEO) {
     const postMeta = postNode.frontmatter
     console.log('Post Node: ', postNode)
-    title = postNode.data.title.text // eslint-disable-line prefer-destructuring
-    description = postNode.data.text.text.slice(0, 200)
-    console.log(description)
-    image = postMeta.cover.childImageSharp.resize.src
-    postURL = config.siteUrl + config.pathPrefix + postPath
+    const title = postNode.data.title.text // eslint-disable-line prefer-destructuring
+    const description = postNode.data.text.text.slice(0, 200)
+    image = postNode.data.image.localFile.childImageSharp.fluid.src
+    postURL = config.siteUrl + postPath
+    console.log('Post URL: ', postURL)
   } else {
     title = config.siteTitle
     description = config.siteDescription

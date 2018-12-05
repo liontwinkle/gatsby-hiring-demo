@@ -153,6 +153,7 @@ const Info = styled.div`
 
 class Player extends React.Component {
   load = url => {
+    console.log('POST URL PLAYER: ', this.props.location.pathname)
     const index = this.getIndex(url)
     const nowPlaying = this.props.playlist[index]
     const artist = nowPlaying
@@ -180,6 +181,7 @@ class Player extends React.Component {
         playlist: this.props.playlist,
         playlistName: this.props.name,
         playlistType: this.props.type,
+        playlistLink: this.props.location.pathname,
       })
     }
   }

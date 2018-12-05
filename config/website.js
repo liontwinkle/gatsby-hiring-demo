@@ -4,14 +4,14 @@ module.exports = {
   eventPostDir: 'event',
   // Meta Daten
   siteTitle: 'Club Sektor909',
-  siteTitleAlt: 'Electronic Music Club Sektor909 based in Skopje',
+  siteTitleAlt: 'Electronic Music Night Club Sektor909 based in Skopje',
   siteShortName: 'Sektor909',
   siteLogo: '/social/909_white.svg',
   siteBanner: '/social/sektor_2.png',
   siteUrl: 'https://www.sektor909.mk',
   pathPrefix: '/',
   siteDescription:
-    'Here you can find more info about the program schedule, news, music, blogs, interviews regarding Club Sektor909.',
+    'Find more info about the program schedule, news, music, blogs, interviews regarding Club Sektor909.',
   // IDs
   googleAnalyticsID: '',
   twitter: 'sektor909',
@@ -20,4 +20,4 @@ module.exports = {
   // Manifest
   themeColor: '#3498DB',
   backgroundColor: '#3498DB',
-};
+}

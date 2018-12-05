@@ -132,7 +132,7 @@ const Djs = ({
 
         <Container>
           <DescriptionText>Sektor DJs</DescriptionText>
-          <Flex>
+          <Flex flexDirection={['column', 'row']}>
             {djs.map(dj => (
               <Box key={dj.node.id} m={2} width={[1, 1, 1 / 2, 1 / 3]}>
                 <Card

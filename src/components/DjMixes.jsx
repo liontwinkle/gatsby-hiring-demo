@@ -3,7 +3,7 @@ import Player from './Player'
 import { Flex, Box } from '@rebass/grid'
 import PlayerConsumer from '../layouts/GlobalPlayerContext'
 
-const DjMixes = ({ mixes, djName }) => (
+const DjMixes = ({ mixes, djName, location }) => (
   <div>
     <Flex>
       <Box>
@@ -15,6 +15,7 @@ const DjMixes = ({ mixes, djName }) => (
               type="mixes"
               contextData={data}
               setFunction={set}
+              location={location}
             />
           )}
         </PlayerConsumer>

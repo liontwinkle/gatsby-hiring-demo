@@ -176,6 +176,7 @@ class Post extends React.Component {
             name={playlist.primary.playlist_name.text}
             contextData={data}
             setFunction={set}
+            location={this.props.location}
           />
         )}
       </PlayerConsumer>
@@ -186,12 +187,12 @@ class Post extends React.Component {
         })
       : null
     const postNode = this.props.data.prismicBlog
-    const uid = this.props.data.prismicBlog.uid
+    const pathname = this.props.location.pathname
     return (
       <Layout>
         <div className="post-container">
           <Helmet title={`${post.data.title.text} | ${config.siteTitle}`} />
-          <SEO postPath={uid} postNode={postNode} postSEO />
+          <SEO postPath={pathname} postNode={postNode} postSEO />
           <Wrapper>
             <Hero>
               <h1>{post.data.title.text}</h1>

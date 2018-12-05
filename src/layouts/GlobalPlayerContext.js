@@ -17,6 +17,7 @@ import Slider from 'rc-slider'
 import '../components/Slider.css'
 import { Flex, Box } from '@rebass/grid/emotion'
 import theme from '../../config/theme'
+import { Link } from 'gatsby'
 
 function secondsToTime(secs) {
   secs = Math.round(secs)
@@ -51,9 +52,11 @@ const Wrapper = styled.div`
   padding: 16px;
   background: ${theme.gradient.rightToLeft};
   z-index: 100;
-  h3 {
+  h3,
+  h4 {
     color: ${theme.colors.white.light};
     text-align: center;
+    margin-bottom: 16px;
   }
 `
 
@@ -170,7 +173,7 @@ const PlayerControler = styled.div`
 const Info = styled.div`
   text-align: center;
   color: ${theme.colors.white.light};
-  div.timer {
+  span.timer {
     color: ${theme.colors.white.light};
   }
 `
@@ -194,6 +197,7 @@ const defaultContextValue = {
     playlistName: null,
     player: false,
     playlistType: false,
+    playlistLink: false,
   },
   set: () => {},
 }
@@ -393,19 +397,20 @@ class ContextProviderComponent extends React.Component {
       playlist,
       playlistName,
       playlistType,
+      playlistLink,
     } = this.state.data
     console.log('Playlist in global: ', playlist)
-    console.log('Playlist Name, Type in global: ', playlistName, playlistType)
+    console.log('Playlist Linl in global: ', playlistLink)
     const PlayPauseButton = this.state.data.playing ? FaPause : FaPlay
     const MuteSoundButton = this.state.data.muted ? FaVolumeOff : FaVolumeUp
     const Timer =
       this.state.data.playing || this.state.data.played > 0.0 ? (
-        <div className="timer">
+        <span className="timer">
           {secondsToTime(duration * this.state.data.played)}&nbsp;/&nbsp;
           {secondsToTime(duration)}
-        </div>
+        </span>
       ) : (
-        <div className="timer">-</div>
+        <span className="timer">-</span>
       )
     const mainBoxSize = 1
     if (this.state.data.url) {
@@ -416,15 +421,18 @@ class ContextProviderComponent extends React.Component {
             <Wrapper>
               <Flex flexWrap="wrap">
                 <Box width={[1, 1, 1, mainBoxSize]}>
-                  <h3>
-                    {playlistType !== 'mixes'
-                      ? playlistName
-                      : `Миксови од ${playlistName}`}
-                  </h3>
-                  <Info>
-                    {this.state.data.artist} - {this.state.data.track}
-                    {Timer}
-                  </Info>
+                  <Link to={playlistLink}>
+                    <h4>
+                      {playlistType !== 'mixes'
+                        ? playlistName
+                        : `Миксови од ${playlistName}`}
+                    </h4>
+                    <Info>
+                      {this.state.data.artist} - {this.state.data.track}
+                      &nbsp;
+                      {Timer}
+                    </Info>
+                  </Link>
                   <PlayerControler>
                     <FaFastBackward
                       onClick={() => this.onPlayNext('backward')}

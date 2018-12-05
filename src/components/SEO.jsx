@@ -16,7 +16,6 @@ const SEO = props => {
     image = postNode.data.image.localFile.childImageSharp.fluid.src
     title = config.siteTitle
     description = config.siteDescription
-    image = config.siteBanner
   }
   const realPrefix = config.pathPrefix === '/' ? '' : config.pathPrefix
   image = config.siteUrl + realPrefix + image

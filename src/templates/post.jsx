@@ -187,7 +187,7 @@ class Post extends React.Component {
         })
       : null
     const postNode = this.props.data.prismicBlog
-    const pathname = this.props.location.pathname
+    const pathname = this.props.location.href
     return (
       <Layout>
         <div className="post-container">

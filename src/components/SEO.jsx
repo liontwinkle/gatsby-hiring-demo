@@ -8,22 +8,19 @@ const SEO = props => {
   let title
   let description
   let image
-  let postURL
   if (postSEO) {
     const postMeta = postNode.frontmatter
     console.log('Post Node: ', postNode)
-    const title = postNode.data.title.text // eslint-disable-line prefer-destructuring
-    const description = postNode.data.text.text.slice(0, 200)
+    title = postNode.data.title.text // eslint-disable-line prefer-destructuring
+    description = postNode.data.text.text.slice(0, 200)
     image = postNode.data.image.localFile.childImageSharp.fluid.src
-    postURL = config.siteUrl + postPath
-    console.log('Post URL: ', postURL)
-  } else {
     title = config.siteTitle
     description = config.siteDescription
     image = config.siteBanner
   }
   const realPrefix = config.pathPrefix === '/' ? '' : config.pathPrefix
   image = config.siteUrl + realPrefix + image
+  console.log('Image', image)
   const blogURL = config.siteUrl + config.pathPrefix
   const schemaOrgJSONLD = [
     {
@@ -44,7 +41,7 @@ const SEO = props => {
             '@type': 'ListItem',
             position: 1,
             item: {
-              '@id': postURL,
+              '@id': postPath,
               name: title,
               image,
             },
@@ -109,7 +106,7 @@ const SEO = props => {
       {/* OpenGraph */}
       <meta property="og:locale" content="mk_MK" />
       <meta property="og:site_name" content={config.facebook} />
-      <meta property="og:url" content={postSEO ? postURL : blogURL} />
+      <meta property="og:url" content={postSEO ? postPath : blogURL} />
       {postSEO ? <meta property="og:type" content="article" /> : null}
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />

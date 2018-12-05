@@ -4,21 +4,24 @@ import PropTypes from 'prop-types'
 import config from '../../config/website'
 
 const SEO = props => {
-  const { postNode, postPath, postSEO } = props
+  const { postNode, location, postSEO } = props
   let title
   let description
   let image
+  let postPath
   if (postSEO) {
     const postMeta = postNode.frontmatter
     console.log('Post Node: ', postNode)
     title = postNode.data.title.text // eslint-disable-line prefer-destructuring
     description = postNode.data.text.text.slice(0, 200)
-    image = postNode.data.image.localFile.childImageSharp.fluid.src
-    title = config.siteTitle
-    description = config.siteDescription
+    postPath = location.href
+    image =
+      location.origin + postNode.data.image.localFile.childImageSharp.fluid.src
+    console.log('Title, description, image', title, description, image)
   }
   const realPrefix = config.pathPrefix === '/' ? '' : config.pathPrefix
-  image = config.siteUrl + realPrefix + image
+  // image = config.siteUrl + realPrefix + image
+  // description = config.siteDescription
   console.log('Image', image)
   const blogURL = config.siteUrl + config.pathPrefix
   const schemaOrgJSONLD = [
@@ -124,6 +127,6 @@ export default SEO
 
 SEO.propTypes = {
   postNode: PropTypes.object,
-  postPath: PropTypes.string,
+  location: PropTypes.string,
   postSEO: PropTypes.bool,
 }

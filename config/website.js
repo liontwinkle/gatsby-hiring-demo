@@ -8,7 +8,7 @@ module.exports = {
   siteShortName: 'Sektor909',
   siteLogo: '/social/909_white.svg',
   siteBanner: '/social/sektor_2.png',
-  siteUrl: 'https://www.sektor909.mk',
+  siteUrl: 'https://v2--sektor909.netlify.com',
   pathPrefix: '/',
   siteDescription:
     'Find more info about the program schedule, news, music, blogs, interviews regarding Club Sektor909.',

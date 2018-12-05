@@ -16,7 +16,7 @@ const SEO = props => {
     description = postNode.data.text.text.slice(0, 200)
     postPath = location.href
     image =
-      location.origin + postNode.data.image.localFile.childImageSharp.fluid.src
+      config.siteUrl + postNode.data.image.localFile.childImageSharp.fluid.src
     console.log('Title, description, image', title, description, image)
   }
   const realPrefix = config.pathPrefix === '/' ? '' : config.pathPrefix

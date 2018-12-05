@@ -192,7 +192,7 @@ class Post extends React.Component {
       <Layout>
         <div className="post-container">
           <Helmet title={`${post.data.title.text} | ${config.siteTitle}`} />
-          <SEO postPath={pathname} postNode={postNode} postSEO />
+          <SEO location={this.props.location} postNode={postNode} postSEO />
           <Wrapper>
             <Hero>
               <h1>{post.data.title.text}</h1>

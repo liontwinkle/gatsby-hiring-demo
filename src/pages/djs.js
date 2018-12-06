@@ -11,6 +11,9 @@ import theme from '../../config/theme'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import MainLayout from '../layouts'
+import SEO from '../components/SEO'
+import Helmet from 'react-helmet'
+import config from '../../config/website'
 
 const pulse = keyframes`
   0% {
@@ -121,6 +124,8 @@ const Djs = ({
 }) => (
   <MainLayout>
     <Layout>
+      <Helmet title={`Sektor DJs | ${config.siteTitle}`} />
+      <SEO title={'Sektor DJs'} />
       <div>
         <Wrapper>
           <Hero>
@@ -149,7 +154,7 @@ const Djs = ({
                       }
                     />
                   </PlainLink>
-                  <Box width={256} px={2}>
+                  <Box width={256} m={2} px={2}>
                     <PlainLink to={`djs/${dj.node.data.name}`}>
                       <Heading className="title" as="h3">
                         {dj.node.data.name}

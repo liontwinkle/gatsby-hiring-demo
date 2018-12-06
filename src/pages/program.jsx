@@ -24,7 +24,7 @@ const Nastan = ({
 }) => (
   <Layout>
     <div className="container blog-container">
-      <Helmet title={`Nastani | ${config.siteTitle}`} />
+      <Helmet title={`Програм | ${config.siteTitle}`} />
       <Header slim subtitle="Идни и Претходни Настани во Клуб Сектор909">
         Настани
       </Header>

@@ -4,19 +4,16 @@ import PropTypes from 'prop-types'
 import config from '../../config/website'
 
 const SEO = props => {
-  const { postNode, location, postSEO } = props
-  let title
-  let description
+  const { imageSrc, title, description, location, postSEO } = props
+  // let title
+  // let description
   let image
   let postPath
   if (postSEO) {
-    const postMeta = postNode.frontmatter
-    console.log('Post Node: ', postNode)
-    title = postNode.data.title.text // eslint-disable-line prefer-destructuring
-    description = postNode.data.text.text.slice(0, 200)
+    // title = postNode.data.title.text // eslint-disable-line prefer-destructuring
+    // description = postNode.data.text.text.slice(0, 200)
     postPath = location.href
-    image =
-      config.siteUrl + postNode.data.image.localFile.childImageSharp.fluid.src
+    image = config.siteUrl + imageSrc
     console.log('Title, description, image', title, description, image)
   }
   const realPrefix = config.pathPrefix === '/' ? '' : config.pathPrefix
@@ -69,7 +66,7 @@ const SEO = props => {
     <Helmet>
       {/* General Tags */}
       <html lang="mk" />
-      <title>{title}</title>
+      <title>{`${title} | ${config.siteTitle}`}</title>
       <meta name="description" content={description} />
       <meta name="image" content={image} />
       <meta charSet="utf-8" />
@@ -126,7 +123,7 @@ const SEO = props => {
 export default SEO
 
 SEO.propTypes = {
-  postNode: PropTypes.object,
-  location: PropTypes.string,
+  // postNode: PropTypes.object,
+  location: PropTypes.object,
   postSEO: PropTypes.bool,
 }

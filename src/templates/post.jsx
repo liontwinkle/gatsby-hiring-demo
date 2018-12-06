@@ -23,6 +23,7 @@ import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import PlayerConsumer from '../layouts/GlobalPlayerContext'
 import { Twitter, Facebook } from 'react-social-sharing'
+import { Flex, Box } from '@rebass/grid/emotion'
 
 const pulse = keyframes`
   0% {
@@ -192,7 +193,13 @@ class Post extends React.Component {
       <Layout>
         <div className="post-container">
           <Helmet title={`${post.data.title.text} | ${config.siteTitle}`} />
-          <SEO location={this.props.location} postNode={postNode} postSEO />
+          <SEO
+            location={this.props.location}
+            postSEO
+            imageSrc={post.data.image.localFile.childImageSharp.fluid.src}
+            title={post.data.title.text}
+            description={post.data.text.text.slice(0, 200)}
+          />
           <Wrapper>
             <Hero>
               <h1>{post.data.title.text}</h1>
@@ -236,16 +243,20 @@ class Post extends React.Component {
             ) : null}
             <Line />
             {/* <Tags tags={post.tags} /> */}
-            <span>
-              <span className={fontBold}>Ти се допадна?</span> Сподели со твоите
-              пријатели
-              <Twitter
-                message={post.data.title.text}
-                link="http://www.example.com"
-              />
-              <Facebook link="http://www.example.com" />
-              {/* <Link to={`/categories/${kebabCase(post.category)}`}>{post.category}</Link> */}
-            </span>
+            <Flex flexDirection={['column', 'row']} alignItems="center">
+              <Box>
+                <span className={fontBold}>Ти се допадна?</span> Сподели со
+                твоите пријатели
+              </Box>
+              <Box>
+                <Twitter
+                  message={post.data.title.text}
+                  link={this.props.location.href}
+                />
+                <Facebook link={this.props.location.href} />
+                {/* <Link to={`/categories/${kebabCase(post.category)}`}>{post.category}</Link> */}
+              </Box>
+            </Flex>
           </Container>
           <Footer>
             {/* <h2>Lust auf mehr Tutorials & Goodies? Werde ein Patron.</h2>

@@ -181,7 +181,7 @@ class Player extends React.Component {
         playlist: this.props.playlist,
         playlistName: this.props.name,
         playlistType: this.props.type,
-        playlistLink: this.props.location.pathname,
+        playlistLink: this.props.location.pathname + this.props.location.search,
       })
     }
   }

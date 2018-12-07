@@ -1,10 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Flex } from '@rebass/grid'
-// import { Box } from 'rebass'
 import { IoIosBook, IoMdStats, IoMdCalendar } from 'react-icons/io'
 import { TiHeadphones } from 'react-icons/ti'
-import { Link } from 'gatsby'
 
 const Nav = styled.nav`
   border-bottom: 1px solid #e1e4e8;
@@ -36,10 +34,10 @@ const Nav = styled.nav`
 `
 
 const UnderlineNav = ({ handleClick, selected }) => {
-  const selectedBio = selected === '?tab=bio/' ? 'selected' : null
-  const selectedCharts = selected === '?tab=charts/' ? 'selected' : null
-  const selectedMixes = selected === '?tab=mixes/' ? 'selected' : null
-  const selectedEvents = selected === '?tab=events/' ? 'selected' : null
+  const selectedBio = selected === '?tab=bio' ? 'selected' : null
+  const selectedCharts = selected === '?tab=charts' ? 'selected' : null
+  const selectedMixes = selected === '?tab=mixes' ? 'selected' : null
+  const selectedEvents = selected === '?tab=events' ? 'selected' : null
   return (
     <Nav>
       <Flex justifyContent="flex-start" className="nav-body" flexWrap="wrap">

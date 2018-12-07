@@ -187,8 +187,6 @@ class Post extends React.Component {
           return { src: image.image1.localFile.childImageSharp.fluid.src }
         })
       : null
-    const postNode = this.props.data.prismicBlog
-    const pathname = this.props.location.href
     return (
       <Layout>
         <div className="post-container">

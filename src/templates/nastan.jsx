@@ -8,7 +8,7 @@ import Img from 'gatsby-image'
 // import kebabCase from 'lodash/kebabCase'
 import { darken } from 'polished'
 // import Tags from '../components/Tags';
-// import SEO from '../components/SEO'
+import SEO from '../components/SEO'
 import Container from '../components/Container'
 import Content from '../components/Content'
 import Wave from '../components/Wave'
@@ -19,7 +19,8 @@ import config from '../../config/website'
 // import { Card } from '../components/Card'
 import { GoCalendar, GoLocation, GoLinkExternal } from 'react-icons/go'
 import Layout from '../components/Layout'
-// import { Box } from '@rebass/grid/emotion'
+import { Twitter, Facebook } from 'react-social-sharing'
+import { Flex, Box } from '@rebass/grid/emotion'
 const dj = require('../icons/dj.svg')
 
 const pulse = keyframes`
@@ -183,21 +184,33 @@ const Card = styled.div`
 //   ${generalStyle};
 // `
 
-const Post = ({ pageContext: { uid }, data: { prismicNastan: post } }) => {
+const Post = ({
+  pageContext: { uid },
+  data: { prismicNastan: post },
+  location,
+}) => {
   //   const { sizes } = post.cover.childImageSharp;
   if (!post.id) {
     post.id = uid
   }
   console.log(post.data.photo.url)
-
+  const title = post.data.naslov.text
+  const description = post.data.info.text.slice(0, 200)
+  const image = post.data.photo.localFile.childImageSharp.fluid.src
   return (
     <Layout>
       <div className="post-container">
-        <Helmet title={`Програма | ${config.siteTitle}`} />
-        {/* <SEO postPath={slug} postNode={postNode} postSEO /> */}
+        <Helmet title={`Програм | ${config.siteTitle}`} />
+        <SEO
+          location={location}
+          imageSrc={image}
+          title={title}
+          description={description}
+          postSEO
+        />
         <Wrapper>
           <Hero>
-            <h1>{post.data.naslov.text}</h1>
+            <h1>{title}</h1>
             <Information>
               <span className="date">
                 <GoCalendar size={20} /> {post.data.date}
@@ -240,6 +253,16 @@ const Post = ({ pageContext: { uid }, data: { prismicNastan: post } }) => {
               Фејсбук Настан
             </a>
           </p>
+          <Line />
+          {/* <Tags tags={post.tags} /> */}
+          <Flex flexDirection={['column', 'row']} alignItems="center">
+            <Box>Сподели со твоите пријатели</Box>
+            <Box>
+              <Twitter message={title} link={location.href} />
+              <Facebook link={location.href} />
+              {/* <Link to={`/categories/${kebabCase(post.category)}`}>{post.category}</Link> */}
+            </Box>
+          </Flex>
         </Container>
         <Footer>
           {/* <h2>Lust auf mehr Tutorials & Goodies? Werde ein Patron.</h2>

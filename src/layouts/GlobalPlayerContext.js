@@ -1,6 +1,7 @@
 import React from 'react'
 // import GlobalPlayer from './GlobalPlayer'
 import styled from 'styled-components'
+import { css } from 'react-emotion'
 import ReactPlayer from 'react-player'
 import {
   FaPlay,
@@ -18,6 +19,7 @@ import '../components/Slider.css'
 import { Flex, Box } from '@rebass/grid/emotion'
 import theme from '../../config/theme'
 import { Link } from 'gatsby'
+import { FaChevronDown } from 'react-icons/fa'
 
 function secondsToTime(secs) {
   secs = Math.round(secs)
@@ -32,6 +34,12 @@ function secondsToTime(secs) {
   const time = `${hours}:${minutes}:${seconds}`
   return time
 }
+
+const lastChildLeft = css`
+  div:last-child {
+    margin-left: auto;
+  }
+`
 
 const Container = styled.div`
   display: flex;
@@ -350,7 +358,8 @@ class ContextProviderComponent extends React.Component {
     }
   }
   onPlayNext = direction => {
-    const playlist = this.props.playlist
+    const playlist = this.state.data.playlist
+    console.log('Playlist in onPlayNext: ', playlist)
     let index
     if (direction === 'forward') {
       // + 1 because next track
@@ -358,16 +367,26 @@ class ContextProviderComponent extends React.Component {
     } else if (direction === 'backward') {
       index = playlist.findIndex(el => el.link.url === this.state.data.url) - 1
     }
-
     const url = this.findNextUrl(playlist, index)
-    this.setState({
-      data: {
-        url: url,
-        playing: false,
-        loaded: 0,
-        played: 0,
-      },
-    })
+    const nowPlaying = playlist[index]
+    const artist = nowPlaying
+      ? nowPlaying.artist
+        ? nowPlaying.artist
+        : this.state.data.playlistName
+      : null
+    const track = nowPlaying
+      ? nowPlaying.track
+        ? nowPlaying.track
+        : nowPlaying.title
+      : null
+    let data = { ...this.state.data }
+    data.url = url
+    data.playing = false
+    data.loaded = 0
+    data.played = 0
+    data.artist = artist
+    data.track = track
+    this.setState({ data })
   }
   onReady = () => {
     console.log('On Ready')
@@ -394,13 +413,13 @@ class ContextProviderComponent extends React.Component {
       // loaded,
       duration,
       playbackRate,
-      playlist,
+      // playlist,
       playlistName,
       playlistType,
       playlistLink,
+      // index,
     } = this.state.data
-    console.log('Playlist in global: ', playlist)
-    console.log('Playlist Linl in global: ', playlistLink)
+    console.log('STATE: ', this.state.data)
     const PlayPauseButton = this.state.data.playing ? FaPause : FaPlay
     const MuteSoundButton = this.state.data.muted ? FaVolumeOff : FaVolumeUp
     const Timer =
@@ -412,7 +431,6 @@ class ContextProviderComponent extends React.Component {
       ) : (
         <span className="timer">-</span>
       )
-    const mainBoxSize = 1
     if (this.state.data.url) {
       return (
         <Provider value={this.state}>
@@ -420,19 +438,27 @@ class ContextProviderComponent extends React.Component {
             <Content>{this.props.children}</Content>
             <Wrapper>
               <Flex flexWrap="wrap">
-                <Box width={[1, 1, 1, mainBoxSize]}>
-                  <Link to={playlistLink}>
-                    <h4>
-                      {playlistType !== 'mixes'
-                        ? playlistName
-                        : `Миксови од ${playlistName}`}
-                    </h4>
-                    <Info>
-                      {this.state.data.artist} - {this.state.data.track}
-                      &nbsp;
-                      {Timer}
-                    </Info>
-                  </Link>
+                <Box width={1}>
+                  <Flex justifyContent="space-between">
+                    <Box />
+                    <Box>
+                      <Link to={playlistLink}>
+                        <h4>
+                          {playlistType !== 'mixes'
+                            ? playlistName
+                            : `Миксови од ${playlistName}`}
+                        </h4>
+                        <Info>
+                          {this.state.data.artist} - {this.state.data.track}
+                          &nbsp;
+                          {Timer}
+                        </Info>
+                      </Link>
+                    </Box>
+                    <Box w={1 / 7}>
+                      <FaChevronDown color="white" size={30} />
+                    </Box>
+                  </Flex>
                   <PlayerControler>
                     <FaFastBackward
                       onClick={() => this.onPlayNext('backward')}

@@ -338,6 +338,7 @@ class Player extends React.Component {
           </Box>
         ) : null
       ) : null
+    console.log('Tracklist Element: ', tracklistElement)
     const mainBoxSize = tracklistElement ? 0.6 : 1
 
     return (

@@ -12,9 +12,6 @@ import SocialLink from '../components/SocialLink'
 import DjContent from '../components/DjContent'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
-import SEO from '../components/SEO'
-import Helmet from 'react-helmet'
-import config from '../../config/website'
 
 const pulse = keyframes`
   0% {
@@ -97,15 +94,6 @@ const Line = styled.div`
 
 const Dj = ({ data: { prismicDj: dj, prismicChart: chart }, location }) => (
   <Layout>
-    <Helmet title={`${dj.data.name} | ${config.siteTitle}`} />
-    <SEO
-      location={location}
-      // postNode={dj}
-      postSEO
-      imageSrc={dj.data.avatar.localFile.childImageSharp.fluid.src}
-      title={dj.data.name}
-      description={dj.data.bio.text.slice(0, 200)}
-    />
     <div>
       <Wrapper>
         <Hero>

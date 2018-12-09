@@ -36,21 +36,10 @@ function secondsToTime(secs) {
   return time
 }
 
-const lastChildLeft = css`
-  div:last-child {
-    margin-left: auto;
-  }
-`
-
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   height: 100vh;
-`
-
-const Content = styled.div`
-  flex: 1 0 auto;
-  margin-bottom: 100px;
 `
 
 const Wrapper = styled.div`
@@ -442,16 +431,49 @@ class ContextProviderComponent extends React.Component {
         <span className="timer">-</span>
       )
     if (this.state.data.url) {
-      if (!this.state.collapse) {
-        return (
-          <Provider value={this.state}>
-            <Container>
-              <Content>{this.props.children}</Content>
+      return (
+        <Provider value={this.state}>
+          <Container>
+            {this.props.children}
+            <ReactPlayer
+              ref={this.ref}
+              className="react-player"
+              width="0"
+              height="0"
+              url={this.state.data.url}
+              playing={playing}
+              loop={loop}
+              playbackRate={playbackRate}
+              volume={volume}
+              muted={muted}
+              onReady={this.onReady}
+              onStart={() => console.log('onStart')}
+              onPlay={this.onPlay}
+              onPause={this.onPause}
+              onBuffer={() => console.log('onBuffer')}
+              onSeek={e => console.log('onSeek', e)}
+              onEnded={() => this.onPlayNext('forward')}
+              onError={e => console.log('onError', e)}
+              onProgress={this.onProgress}
+              onDuration={this.onDuration}
+              config={{
+                youtube: { preload: true },
+                // soundcloud: { preload: true, options: { auto_play: true } },
+              }}
+            />
+            {!this.state.collapse ? (
               <Wrapper>
                 <Flex flexWrap="wrap">
                   <Box width={1}>
                     <Flex justifyContent="space-between">
-                      <Box />
+                      <Box w={1 / 7}>
+                        <FaChevronRight
+                          color="white"
+                          size={26}
+                          onClick={this.onCollapse}
+                          className="collapse-arrow"
+                        />
+                      </Box>
                       <Box>
                         <Link to={playlistLink}>
                           <h4>
@@ -466,14 +488,7 @@ class ContextProviderComponent extends React.Component {
                           </Info>
                         </Link>
                       </Box>
-                      <Box w={1 / 7}>
-                        <FaChevronRight
-                          color="white"
-                          size={26}
-                          onClick={this.onCollapse}
-                          className="collapse-arrow"
-                        />
-                      </Box>
+                      <Box w={1 / 7} />
                     </Flex>
                     <PlayerControler>
                       <FaFastBackward
@@ -509,32 +524,6 @@ class ContextProviderComponent extends React.Component {
                         className="muteButton"
                       />
                     </PlayerControler>
-                    <ReactPlayer
-                      ref={this.ref}
-                      className="react-player"
-                      width="0"
-                      height="0"
-                      url={this.state.data.url}
-                      playing={playing}
-                      loop={loop}
-                      playbackRate={playbackRate}
-                      volume={volume}
-                      muted={muted}
-                      onReady={this.onReady}
-                      onStart={() => console.log('onStart')}
-                      onPlay={this.onPlay}
-                      onPause={this.onPause}
-                      onBuffer={() => console.log('onBuffer')}
-                      onSeek={e => console.log('onSeek', e)}
-                      onEnded={() => this.onPlayNext('forward')}
-                      onError={e => console.log('onError', e)}
-                      onProgress={this.onProgress}
-                      onDuration={this.onDuration}
-                      config={{
-                        youtube: { preload: true },
-                        // soundcloud: { preload: true, options: { auto_play: true } },
-                      }}
-                    />
 
                     <div className="playlist">
                       {/* <PlaylistElement
@@ -550,19 +539,14 @@ class ContextProviderComponent extends React.Component {
                   {/* {tracklistElement} */}
                 </Flex>
               </Wrapper>
-            </Container>
-          </Provider>
-        )
-      } else {
-        return (
-          <Provider value={this.state}>
-            <Content>{this.props.children}</Content>
-            <div onClick={this.onCollapse}>
-              <SpinningPlayer />
-            </div>
-          </Provider>
-        )
-      }
+            ) : (
+              <div onClick={this.onCollapse}>
+                <SpinningPlayer playing={playing} />
+              </div>
+            )}
+          </Container>
+        </Provider>
+      )
     }
     return (
       <Provider value={this.state}>

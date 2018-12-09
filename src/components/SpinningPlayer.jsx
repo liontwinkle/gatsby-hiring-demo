@@ -10,11 +10,41 @@ const LogoContainer = styled.div`
   right: 1em;
   z-index: 100;
   cursor: pointer;
+  border-radius: 50%;
+  ${props =>
+    props.playing &&
+    `box-shadow: 0 0 0 ${theme.colors.white.blue};
+  animation: pulse 2s infinite;
+  @-webkit-keyframes pulse {
+    0% {
+      -webkit-box-shadow: 0 0 0 0 ${theme.colors.white.blue};
+    }
+    70% {
+      -webkit-box-shadow: 0 0 0 10px rgba(204, 169, 44, 0);
+    }
+    100% {
+      -webkit-box-shadow: 0 0 0 0 rgba(204, 169, 44, 0);
+    }
+  }
+  @keyframes pulse {
+    0% {
+      -moz-box-shadow: 0 0 0 0 ${theme.colors.white.blue};
+      box-shadow: 0 0 0 0 ${theme.colors.white.blue};
+    }
+    70% {
+      -moz-box-shadow: 0 0 0 10px rgba(204, 169, 44, 0);
+      box-shadow: 0 0 0 10px rgba(204, 169, 44, 0);
+    }
+    100% {
+      -moz-box-shadow: 0 0 0 0 rgba(204, 169, 44, 0);
+      box-shadow: 0 0 0 0 rgba(204, 169, 44, 0);
+    }
+  }`}
 `
 
-const SpinningPlayer = () => {
+const SpinningPlayer = ({ playing }) => {
   return (
-    <LogoContainer>
+    <LogoContainer playing={playing}>
       <CircleOcticon
         icon={Play}
         size={50}

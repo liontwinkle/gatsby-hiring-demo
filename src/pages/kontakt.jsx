@@ -15,6 +15,7 @@ import Instagram from '../icons/Instagram'
 import Facebook from '../icons/Facebook'
 import Layout from '../components/Layout'
 // import YouTube from '../icons/YouTube';
+import SEO from '../components/SEO'
 
 const CenteredContainer = styled(Container)`
   text-align: center;
@@ -53,10 +54,17 @@ const CardContainer = styled(Container)`
   margin-bottom: 4rem;
 `
 
-const Kontakt = () => (
+const Kontakt = ({ location }) => (
   <Layout>
     <div className="kontakt-container">
       <Helmet title={`Kontakt | ${config.siteTitle}`} />
+      <SEO
+        location={location}
+        imageSrc={config.siteBanner}
+        title="Инфо за Клубот Сектор909, Сектор909 на социјалните мрежи, локација на клубот. "
+        description="Новости и информации за ноќниот живот во Скопје, новитети во хаус, техно, диско и електронска музика."
+        postSEO
+      />
       <Header slim subtitle="Нешто повеќе за клубот Сектор909">
         Контакт
       </Header>

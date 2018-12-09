@@ -9,6 +9,7 @@ import Header from '../components/Header'
 import Container from '../components/Container'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
+import SEO from '../components/SEO'
 
 const Base = styled.div`
   margin-top: 2.5rem;
@@ -21,11 +22,22 @@ const Blog = ({
   data: {
     allPrismicBlog: { edges: posts },
   },
+  location,
 }) => (
   <Layout>
     <div className="container blog-container">
       <Helmet title={`Blog | ${config.siteTitle}`} />
-      <Header slim subtitle="Новости и информации">
+      <SEO
+        location={location}
+        imageSrc={config.siteBanner}
+        title="Блог на Сектор909, новости од ноќниот живот, интервјуа, нова музика..."
+        description="Новости и информации за ноќниот живот во Скопје, новитети во хаус, техно, диско и електронска музика."
+        postSEO
+      />
+      <Header
+        slim
+        subtitle="Новости и информации за ноќниот живот во Скопје, новитети во клубската музика."
+      >
         Блог
       </Header>
       <Container type="big">

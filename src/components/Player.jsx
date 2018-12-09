@@ -31,6 +31,9 @@ function secondsToTime(secs) {
 
 const Wrapper = styled.div`
   max-width: 900px;
+  .playlist {
+    overflow-x: auto;
+  }
 `
 
 const PlayerControler = styled.div`

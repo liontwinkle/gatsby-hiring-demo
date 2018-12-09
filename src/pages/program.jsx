@@ -9,6 +9,7 @@ import Header from '../components/Header'
 import Container from '../components/Container'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
+import SEO from '../components/SEO'
 
 const Base = styled.div`
   margin-top: 2.5rem;
@@ -21,10 +22,18 @@ const Nastan = ({
   data: {
     allPrismicNastan: { edges: nastani },
   },
+  location,
 }) => (
   <Layout>
     <div className="container blog-container">
       <Helmet title={`Програм | ${config.siteTitle}`} />
+      <SEO
+        location={location}
+        imageSrc={config.siteBanner}
+        title="Настани во Клуб Сектор909"
+        description="Дознај повеќе инфо за настани во Клубот Сектор909, Излет Кафе, како и други настани од оваа организација"
+        postSEO
+      />
       <Header slim subtitle="Идни и Претходни Настани во Клуб Сектор909">
         Настани
       </Header>

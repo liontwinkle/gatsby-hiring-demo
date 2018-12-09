@@ -19,6 +19,9 @@ import SignInForm from '../components/SignIn'
 import AuthUserContext from '../components/Session/AuthUserContext'
 import WithAuthentication from '../components/Session/withAuthentication'
 // import MainLayout from '../layouts'
+import SEO from '../components/SEO'
+import Helmet from 'react-helmet'
+import config from '../../config/website'
 
 const EXCERPT_LENGTH = 140
 
@@ -131,6 +134,14 @@ const Index = ({
   return (
     // <MainLayout>
     <Layout>
+      <Helmet title={`${config.siteTitle}`} />
+      <SEO
+        location={pathname}
+        imageSrc={config.siteBanner}
+        title={''}
+        description={config.siteDescription}
+        postSEO
+      />
       <div>
         <MainHeader file={file} />
         <Container>

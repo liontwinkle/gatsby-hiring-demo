@@ -19,7 +19,6 @@ const SEO = props => {
   const realPrefix = config.pathPrefix === '/' ? '' : config.pathPrefix
   // image = config.siteUrl + realPrefix + image
   // description = config.siteDescription
-  console.log('Image', image)
   const blogURL = config.siteUrl + config.pathPrefix
   const schemaOrgJSONLD = [
     {

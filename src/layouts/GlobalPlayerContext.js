@@ -19,7 +19,8 @@ import '../components/Slider.css'
 import { Flex, Box } from '@rebass/grid/emotion'
 import theme from '../../config/theme'
 import { Link } from 'gatsby'
-import { FaChevronDown } from 'react-icons/fa'
+import { FaChevronRight } from 'react-icons/fa'
+import SpinningPlayer from '../components/SpinningPlayer'
 
 function secondsToTime(secs) {
   secs = Math.round(secs)
@@ -65,6 +66,9 @@ const Wrapper = styled.div`
     color: ${theme.colors.white.light};
     text-align: center;
     margin-bottom: 16px;
+  }
+  .collapse-arrow {
+    cursor: pointer;
   }
 `
 
@@ -221,6 +225,7 @@ class ContextProviderComponent extends React.Component {
       ...defaultContextValue,
       set: this.setData,
       onPlayNext: this.onPlayNext,
+      collapse: false,
     }
     this.findNextUrl = this.findNextUrl.bind(this)
   }
@@ -402,6 +407,11 @@ class ContextProviderComponent extends React.Component {
     this.setState({ data })
   }
 
+  onCollapse = () => {
+    console.log('On Collapse: ', this.state.collapse)
+    this.setState({ collapse: !this.state.collapse })
+  }
+
   render() {
     const {
       // url,
@@ -419,7 +429,7 @@ class ContextProviderComponent extends React.Component {
       playlistLink,
       // index,
     } = this.state.data
-    console.log('STATE: ', this.state.data)
+    console.log('STATE: ', this.state)
     const PlayPauseButton = this.state.data.playing ? FaPause : FaPlay
     const MuteSoundButton = this.state.data.muted ? FaVolumeOff : FaVolumeUp
     const Timer =
@@ -432,111 +442,127 @@ class ContextProviderComponent extends React.Component {
         <span className="timer">-</span>
       )
     if (this.state.data.url) {
-      return (
-        <Provider value={this.state}>
-          <Container>
-            <Content>{this.props.children}</Content>
-            <Wrapper>
-              <Flex flexWrap="wrap">
-                <Box width={1}>
-                  <Flex justifyContent="space-between">
-                    <Box />
-                    <Box>
-                      <Link to={playlistLink}>
-                        <h4>
-                          {playlistType !== 'mixes'
-                            ? playlistName
-                            : `Миксови од ${playlistName}`}
-                        </h4>
-                        <Info>
-                          {this.state.data.artist} - {this.state.data.track}
-                          &nbsp;
-                          {Timer}
-                        </Info>
-                      </Link>
-                    </Box>
-                    <Box w={1 / 7}>
-                      <FaChevronDown color="white" size={30} />
-                    </Box>
-                  </Flex>
-                  <PlayerControler>
-                    <FaFastBackward
-                      onClick={() => this.onPlayNext('backward')}
-                      className="nextPrevButton"
+      if (!this.state.collapse) {
+        return (
+          <Provider value={this.state}>
+            <Container>
+              <Content>{this.props.children}</Content>
+              <Wrapper>
+                <Flex flexWrap="wrap">
+                  <Box width={1}>
+                    <Flex justifyContent="space-between">
+                      <Box />
+                      <Box>
+                        <Link to={playlistLink}>
+                          <h4>
+                            {playlistType !== 'mixes'
+                              ? playlistName
+                              : `Миксови од ${playlistName}`}
+                          </h4>
+                          <Info>
+                            {this.state.data.artist} - {this.state.data.track}
+                            &nbsp;
+                            {Timer}
+                          </Info>
+                        </Link>
+                      </Box>
+                      <Box w={1 / 7}>
+                        <FaChevronRight
+                          color="white"
+                          size={26}
+                          onClick={this.onCollapse}
+                          className="collapse-arrow"
+                        />
+                      </Box>
+                    </Flex>
+                    <PlayerControler>
+                      <FaFastBackward
+                        onClick={() => this.onPlayNext('backward')}
+                        className="nextPrevButton"
+                      />
+                      <PlayPauseButton
+                        className="playPauseButton"
+                        onClick={this.playPause}
+                        // viewBox={'0 0 448 512'}
+                      />
+                      <FaFastForward
+                        className="nextPrevButton"
+                        onClick={() => this.onPlayNext('forward')}
+                      />
+                      <Slider
+                        // step="any"
+                        type="range"
+                        className="seek"
+                        min={0}
+                        max={1}
+                        step={0.000001}
+                        value={played}
+                        allowCross={false}
+                        defaultValue={0}
+                        onChange={this.onSliderChange}
+                        onAfterChange={this.onSeekMouseUp}
+                        onBeforeChange={this.onSeekMouseDown}
+                      />
+                      <MuteSoundButton
+                        size={this.state.muted ? 20 : 25}
+                        onClick={this.toggleMuted}
+                        className="muteButton"
+                      />
+                    </PlayerControler>
+                    <ReactPlayer
+                      ref={this.ref}
+                      className="react-player"
+                      width="0"
+                      height="0"
+                      url={this.state.data.url}
+                      playing={playing}
+                      loop={loop}
+                      playbackRate={playbackRate}
+                      volume={volume}
+                      muted={muted}
+                      onReady={this.onReady}
+                      onStart={() => console.log('onStart')}
+                      onPlay={this.onPlay}
+                      onPause={this.onPause}
+                      onBuffer={() => console.log('onBuffer')}
+                      onSeek={e => console.log('onSeek', e)}
+                      onEnded={() => this.onPlayNext('forward')}
+                      onError={e => console.log('onError', e)}
+                      onProgress={this.onProgress}
+                      onDuration={this.onDuration}
+                      config={{
+                        youtube: { preload: true },
+                        // soundcloud: { preload: true, options: { auto_play: true } },
+                      }}
                     />
-                    <PlayPauseButton
-                      className="playPauseButton"
-                      onClick={this.playPause}
-                      // viewBox={'0 0 448 512'}
-                    />
-                    <FaFastForward
-                      className="nextPrevButton"
-                      onClick={() => this.onPlayNext('forward')}
-                    />
-                    <Slider
-                      // step="any"
-                      type="range"
-                      className="seek"
-                      min={0}
-                      max={1}
-                      step={0.000001}
-                      value={played}
-                      allowCross={false}
-                      defaultValue={0}
-                      onChange={this.onSliderChange}
-                      onAfterChange={this.onSeekMouseUp}
-                      onBeforeChange={this.onSeekMouseDown}
-                    />
-                    <MuteSoundButton
-                      size={this.state.muted ? 20 : 25}
-                      onClick={this.toggleMuted}
-                      className="muteButton"
-                    />
-                  </PlayerControler>
-                  <ReactPlayer
-                    ref={this.ref}
-                    className="react-player"
-                    width="0"
-                    height="0"
-                    url={this.state.data.url}
-                    playing={playing}
-                    loop={loop}
-                    playbackRate={playbackRate}
-                    volume={volume}
-                    muted={muted}
-                    onReady={this.onReady}
-                    onStart={() => console.log('onStart')}
-                    onPlay={this.onPlay}
-                    onPause={this.onPause}
-                    onBuffer={() => console.log('onBuffer')}
-                    onSeek={e => console.log('onSeek', e)}
-                    onEnded={() => this.onPlayNext('forward')}
-                    onError={e => console.log('onError', e)}
-                    onProgress={this.onProgress}
-                    onDuration={this.onDuration}
-                    config={{
-                      youtube: { preload: true },
-                      // soundcloud: { preload: true, options: { auto_play: true } },
-                    }}
-                  />
 
-                  <div className="playlist">
-                    {/* <PlaylistElement
+                    <div className="playlist">
+                      {/* <PlaylistElement
                     playlist={playlist}
                     getActiveTrack={this.load}
                     activeUrl={this.state.url}
                     playing={this.state.playing}
                     djName={this.props.name}
                   /> */}
-                  </div>
-                </Box>
+                    </div>
+                  </Box>
 
-                {/* {tracklistElement} */}
-              </Flex>
-            </Wrapper>
-          </Container>
-        </Provider>
-      )
+                  {/* {tracklistElement} */}
+                </Flex>
+              </Wrapper>
+            </Container>
+          </Provider>
+        )
+      } else {
+        return (
+          <Provider value={this.state}>
+            <Content>{this.props.children}</Content>
+            <div onClick={this.onCollapse}>
+              <SpinningPlayer />
+            </div>
+          </Provider>
+        )
+      }
     }
     return (
       <Provider value={this.state}>

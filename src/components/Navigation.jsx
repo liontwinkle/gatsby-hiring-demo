@@ -9,6 +9,14 @@ import NavigationFirebase from './NavigationFirebase'
 import { TiEquals } from 'react-icons/ti'
 // import { Dropdown, Box } from '@primer/components'
 
+const Wrapper = styled.div`
+  @media (max-width: 500px) {
+    .headroom {
+      padding-left: 0.75rem;
+    }
+  }
+`
+
 const StyledLink = styled(Link)`
   display: flex;
   font-weight: 700;
@@ -17,6 +25,12 @@ const StyledLink = styled(Link)`
     height: 2.5rem;
     margin-bottom: 0;
     width: 2.5rem;
+  }
+  @media (max-width: 500px) {
+    svg {
+      height: 2.75rem;
+      width: 2.75rem;
+    }
   }
 `
 
@@ -131,7 +145,7 @@ class Navigation extends React.Component {
   }
   render() {
     return (
-      <div>
+      <Wrapper>
         <Headroom calcHeightOnResize disableInlineStyles>
           <StyledLink to="/">
             <LogoText>сектор</LogoText>
@@ -157,7 +171,7 @@ class Navigation extends React.Component {
             </div>
           </Nav>
         </Headroom>
-      </div>
+      </Wrapper>
     )
   }
 }

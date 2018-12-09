@@ -42,17 +42,19 @@ class DjContent extends React.Component {
     const djChart = this.props.chart
     const CurrentElement = (() => {
       if (selected === '?tab=charts') {
-        description = djChart.data.title
+        description = `${djChart.data.title} by ${title}`
         return <DjChart chart={djChart} location={this.props.location} />
       }
-      if (selected === '?tab=mixes') description = `Миксови од ${dj.data.name}`
-      return (
-        <DjMixes
-          djName={dj.data.name}
-          mixes={mixes}
-          location={this.props.location}
-        />
-      )
+      if (selected === '?tab=mixes') {
+        description = `Миксови од ${dj.data.name}`
+        return (
+          <DjMixes
+            djName={dj.data.name}
+            mixes={mixes}
+            location={this.props.location}
+          />
+        )
+      }
       if (selected === '?tab=events') return <span>Events</span>
       return bio
     })()
@@ -67,11 +69,11 @@ class DjContent extends React.Component {
           title={title}
           description={description}
         />
-        <UnerlineNav
-          handleClick={(e, el) => this.handleClick(e, el, dj.data.name)}
-          selected={selected}
-        />
         <section id="focus">
+          <UnerlineNav
+            handleClick={(e, el) => this.handleClick(e, el, dj.data.name)}
+            selected={selected}
+          />
           <Box m={2}>{CurrentElement}</Box>
           <Line />
           <Flex flexDirection={['column', 'row']} alignItems="center">
@@ -79,11 +81,8 @@ class DjContent extends React.Component {
               <Text>Сподели со твоите пријатели</Text>
             </Box>
             <Box>
-              <Twitter
-                message="Twitter Message"
-                link="http://www.example.com"
-              />
-              <Facebook link="http://www.example.com" />
+              <Twitter message={description} link={this.props.location.href} />
+              <Facebook link={this.props.location.href} />
             </Box>
           </Flex>
         </section>

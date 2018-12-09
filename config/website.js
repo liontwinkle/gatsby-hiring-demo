@@ -11,7 +11,7 @@ module.exports = {
   siteUrl: 'https://v2--sektor909.netlify.com',
   pathPrefix: '/',
   siteDescription:
-    'Find more info about the program schedule, news, music, blogs, interviews regarding Club Sektor909.',
+    'Клуб Сектор909 на плоштад Скопје, Македонија. Лидер во клубската сцена и ноќниот живот од 2003г. Дознајте повеќе за настани, случувања поврзани со Сектор909',
   // IDs
   googleAnalyticsID: '',
   twitter: 'sektor909',

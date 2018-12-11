@@ -52,6 +52,7 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-layout`,
+    `gatsby-plugin-offline`,
     // {
     //   resolve: `gatsby-source-strapi`,
     //   options: {

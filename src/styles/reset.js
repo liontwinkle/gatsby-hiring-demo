@@ -47,15 +47,18 @@ const reset = css`
     }
   }
   body {
-    color: ${theme.colors.black.base};
-    background-color: ${theme.colors.white.light};
+    // color: ${theme.colors.black.base};
+    // background-color: ${theme.colors.white.light};
+    background-color: #1b1b1b;
+    color: ${theme.colors.white.light};
   }
   ::selection {
     color: ${theme.colors.white.base};
     background-color: ${theme.colors.primary.base};
   }
   a {
-    color: ${theme.colors.primary.dark};
+    // color: ${theme.colors.primary.dark};
+    color: pink;
     transition: ${theme.transitions.default.transition};
     text-decoration: none;
     &:hover,

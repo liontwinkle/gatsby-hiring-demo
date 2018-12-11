@@ -1,5 +1,5 @@
 {
-  "name": "sektor909",
+  "name": "Sektor909",
   "description": "Club Sektor909 official web site",
   "version": "1.0.0",
   "author": "Bozhidar Hristov <bozidar.hristov@gmail.com>",
@@ -24,9 +24,6 @@
     "gatsby-source-filesystem": "^2.0.8",
     "gatsby-source-prismic": "^2.1.0",
     "gatsby-transformer-sharp": "^2.1.8",
-    "i": "^0.3.6",
-    "install": "^0.12.2",
-    "npm": "^6.4.1",
     "polished": "^2.3.0",
     "prop-types": "^15.6.2",
     "rc-slider": "^8.6.3",

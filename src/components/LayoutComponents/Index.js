@@ -41,7 +41,7 @@ export const CardWrapper = styled.article`
     flex-basis: 100%;
     max-width: 100%;
     width: 851px;
-    height: 36rem;
+    height: 33rem;
     &:first-child {
       margin-bottom: 2rem;
     }
@@ -53,7 +53,7 @@ export const CardWrapper = styled.article`
   @media (max-width: ${props => props.theme.breakpoints.m}) {
     flex-basis: 100%;
     max-width: 100%;
-    height: 39rem;
+    height: 36rem;
     &:first-child {
       margin-bottom: 2rem;
     }
@@ -61,7 +61,7 @@ export const CardWrapper = styled.article`
   @media (max-width: ${props => props.theme.breakpoints.s}) {
     flex-basis: 100%;
     max-width: 100%;
-    height: 43rem;
+    height: 40rem;
     &:first-child {
       margin-bottom: 2rem;
     }
@@ -69,7 +69,7 @@ export const CardWrapper = styled.article`
   @media (max-width: ${props => props.theme.breakpoints.xs}) {
     flex-basis: 100%;
     max-width: 100%;
-    height: 50rem;
+    height: 40rem;
     &:first-child {
       margin-bottom: 2rem;
     }

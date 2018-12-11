@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import Wave from './Wave'
+// import Wave from './Wave'
 
 const Wrapper = styled.header`
   background: ${props => props.theme.gradient.rightToLeft};
@@ -44,7 +44,7 @@ const Header = ({ children, subtitle, slim }) => (
       <h1>{children}</h1>
       {subtitle && <Subtitle>{subtitle}</Subtitle>}
     </Text>
-    <Wave />
+    {/* <Wave /> */}
   </Wrapper>
 )
 

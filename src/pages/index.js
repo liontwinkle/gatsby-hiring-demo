@@ -23,7 +23,7 @@ import SEO from '../components/SEO'
 import Helmet from 'react-helmet'
 import config from '../../config/website'
 
-const EXCERPT_LENGTH = 140
+const EXCERPT_LENGTH = 250
 
 const PostsWrapper = styled.div`
   display: flex;
@@ -145,7 +145,6 @@ const Index = ({
       <SEO
         location={pathname}
         imageSrc={config.siteBanner}
-        title={''}
         description={config.siteDescription}
         postSEO
       />

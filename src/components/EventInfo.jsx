@@ -14,7 +14,6 @@ const Information = styled.div`
   h3 {
     display: inline-block;
     // color: ${props => props.theme.colors.black.base};
-    color: black;
     transition: all ${props => props.theme.transitions.default.duration};
     // &:hover {
     //   color: ${props => props.theme.colors.primary.base};
@@ -29,10 +28,10 @@ const marginVertical = css`
 
 const Statistics = styled.div`
   color: ${props => props.theme.colors.black.lighter};
-  h3,
-  h4 {
-    color: ${props => props.theme.colors.black.base};
-  }
+  // h3,
+  // h4 {
+  //   color: ${props => props.theme.colors.black.base};
+  // }
   span,
   h4 {
     margin-left: 0.5rem;

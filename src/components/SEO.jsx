@@ -65,7 +65,9 @@ const SEO = props => {
     <Helmet>
       {/* General Tags */}
       <html lang="mk" />
-      <title>{`${title} | ${config.siteTitle}`}</title>
+      <title>
+        {title ? `${title} | ${config.siteTitle}` : config.siteTitle}
+      </title>
       <meta name="description" content={description} />
       <meta name="image" content={image} />
       <meta charSet="utf-8" />

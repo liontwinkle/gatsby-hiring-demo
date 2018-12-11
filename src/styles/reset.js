@@ -76,10 +76,10 @@ const reset = css`
     }
   }
   h1 {
-    text-shadow: ${theme.shadow.text.big};
+    // text-shadow: ${theme.shadow.text.big};
   }
   h2 {
-    text-shadow: ${theme.shadow.text.small};
+    // text-shadow: ${theme.shadow.text.small};
   }
   blockquote {
     border-left: 5px solid ${theme.colors.primary.base};

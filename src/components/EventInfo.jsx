@@ -5,27 +5,26 @@ import { css } from 'react-emotion'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 // import Tags from './Tags'
-import { GoCalendar, GoLocation } from 'react-icons/go'
+import { GoCalendar, GoLocation, GoSettings } from 'react-icons/go'
 import { CardWrapper } from './LayoutComponents/Index'
 
-const dj = require('../icons/dj.svg')
+// const dj = require('../icons/dj.svg')
 
 const Information = styled.div`
-  h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
+  h3 {
     display: inline-block;
-    color: ${props => props.theme.colors.black.base};
+    // color: ${props => props.theme.colors.black.base};
+    color: black;
     transition: all ${props => props.theme.transitions.default.duration};
-    &:hover {
-      color: ${props => props.theme.colors.primary.base};
-    }
+    // &:hover {
+    //   color: ${props => props.theme.colors.primary.base};
+    // }
   }
 `
 
 const marginVertical = css`
-  margin-bottom: 1rem;
-  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
 `
 
 const Statistics = styled.div`
@@ -34,7 +33,8 @@ const Statistics = styled.div`
   h4 {
     color: ${props => props.theme.colors.black.base};
   }
-  span {
+  span,
+  h4 {
     margin-left: 0.5rem;
     margin-right: 0.5rem;
   }
@@ -69,19 +69,20 @@ const EventInfo = ({
       <Link to={`program/${path}`}>
         <Img alt="" className="flyer" fluid={image.childImageSharp.fluid} />
       </Link>
+      <Statistics>
+        <GoCalendar size={20} />
+        <span>{date}</span>
+        <GoLocation size={20} />
+        {` ${location}`}
+      </Statistics>
       <Information>
         <Link to={`program/${path}`}>
-          <h2>{title}</h2>
+          <h3 className={marginVertical}>{title}</h3>
         </Link>
-        <Statistics>
-          <GoCalendar size={20} />
-          <span>{date}</span>
-          <GoLocation size={20} />
-          {` ${location}`}
-        </Statistics>
         <Statistics className={marginVertical}>
-          <img alt="" src={dj} />
-          <h3 style={{ display: 'inline' }}>{` ${lineup}`}</h3>
+          {/* <img alt="" src={dj} /> */}
+          <GoSettings size={20} />
+          <h4 style={{ display: 'inline' }}>{` ${lineup}`}</h4>
         </Statistics>
         {/* {tags && <Tags tags={tags} />} */}
         <Excerpt>{`${excerpt}...`}</Excerpt>

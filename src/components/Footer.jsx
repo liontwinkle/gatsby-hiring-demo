@@ -3,7 +3,7 @@ import { Link } from 'gatsby'
 import PropTypes from 'prop-types'
 import format from 'date-fns/format'
 import styled from 'styled-components'
-import Wave from './Wave'
+// import Wave from './Wave'
 import Container from './Container'
 
 const Wrapper = styled.footer`
@@ -80,7 +80,7 @@ const Footer = ({ children }) => {
   const date = format(new Date(), 'YYYY')
   return (
     <Wrapper>
-      <Wave orientation="top" />
+      {/* <Wave orientation="top" /> */}
       <Container className="footer-container" type="base">
         <OptionalContent>{children}</OptionalContent>
         <Content>

@@ -21,10 +21,10 @@ const pulse = keyframes`
 export const CardWrapper = styled.article`
   position: relative;
   z-index: 100;
-  border-radius: ${props => props.theme.borderRadius.default};
-  box-shadow: ${props => props.theme.shadow.feature.small.default};
-  transition: ${props => props.theme.transitions.boom.transition};
-  background-color: ${props => props.theme.colors.white.base};
+  // border-radius: ${props => props.theme.borderRadius.default};
+  // box-shadow: ${props => props.theme.shadow.feature.small.default};
+  // transition: ${props => props.theme.transitions.boom.transition};
+  // background-color: ${props => props.theme.colors.white.base};
   height: 20rem;
   margin: 0 auto;
   margin-bottom: 2rem;

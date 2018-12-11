@@ -28,8 +28,8 @@ const StyledLink = styled(Link)`
   }
   @media (max-width: 500px) {
     svg {
-      height: 2.75rem;
-      width: 2.75rem;
+      height: 2.5rem;
+      width: 2.5rem;
     }
   }
 `

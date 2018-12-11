@@ -40,40 +40,47 @@ const Text = styled.p`
   line-height: 2.5rem;
   max-width: 850px;
   margin: 3rem auto;
-  text-shadow: ${props => props.theme.shadow.text.big};
+  // text-shadow: ${props => props.theme.shadow.text.big};
 `
 
 const InfoTextBox = styled(CardWrapper)`
-  height: 250px;
+  height: 200px;
   margin-bottom: 1rem;
   svg {
     margin-right: 0.5rem;
   }
   font-size: 23px;
-  div {
-    margin: 1rem;
-    }
+  .content {
+    margin: 0 auto;
+    // margin: 1rem;
+    width: 350px;
   }
   @media (max-width: 1000px) {
     height: 12rem;
     font-size: 22px;
-    div {
-      margin: 1rem;
+    .content {
+      // margin: 1rem;
+      margin: 1 auto;
+      width: 300px;
     }
   }
   }
   @media (max-width: ${props => props.theme.breakpoints.m}) {
-    height: 14rem;
+    height: 10rem;
     font-size: 20px;
-    div {
-      margin: 1rem;
+    .content {
+      // margin: 1rem;
+      margin: 1 auto;
+      width: 300px;
     }
   }
   @media (max-width: ${props => props.theme.breakpoints.s}) {
-    height: ${props => (props.size === 'l' ? '400px' : '250px')};
+    height: ${props => (props.size === 'l' ? '400px' : '180px')};
     font-size: 18px;
-    div {
-      margin: 0.5rem;
+    .content {
+      // margin: 0.5rem;
+      margin: 0.5 auto;
+      width: 250px;
     }
   }
 `
@@ -83,7 +90,7 @@ const SignInEl = pathname => (
     <PostsWrapper>
       <Text>Најави се со Фејсбук</Text>
       <InfoTextBox>
-        <Box>
+        <Box className="content">
           <h4>Пристап до</h4>
 
           <span className="info-text">

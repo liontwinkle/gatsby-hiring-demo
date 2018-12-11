@@ -81,7 +81,7 @@ const DescriptionText = styled.p`
   line-height: 2.5rem;
   max-width: 850px;
   margin: 3rem auto;
-  text-shadow: ${props => props.theme.shadow.text.big};
+  // text-shadow: ${props => props.theme.shadow.text.big};
 `
 // const CardWrapper = styled.div`
 //   display: flex;

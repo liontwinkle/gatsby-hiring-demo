@@ -1,7 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
-import PropTypes from 'prop-types';
-import Wave from './Wave';
+import React from 'react'
+import styled from 'styled-components'
+import PropTypes from 'prop-types'
+import Wave from './Wave'
 
 const Wrapper = styled.header`
   background: ${props => props.theme.gradient.rightToLeft};
@@ -14,7 +14,7 @@ const Wrapper = styled.header`
   }
   position: relative;
   overflow: hidden;
-`;
+`
 
 const Text = styled.div`
   color: ${props => props.theme.colors.white.base};
@@ -31,12 +31,12 @@ const Text = styled.div`
   padding: 0 2rem;
   margin-bottom: 7rem;
   align-items: center;
-`;
+`
 
 const Subtitle = styled.p`
   max-width: 650px;
   color: ${props => props.theme.tint.white};
-`;
+`
 
 const Header = ({ children, subtitle, slim }) => (
   <Wrapper slim={slim}>
@@ -46,17 +46,17 @@ const Header = ({ children, subtitle, slim }) => (
     </Text>
     <Wave />
   </Wrapper>
-);
+)
 
-export default Header;
+export default Header
 
 Header.propTypes = {
   children: PropTypes.node.isRequired,
   subtitle: PropTypes.string,
   slim: PropTypes.bool,
-};
+}
 
 Header.defaultProps = {
   subtitle: '',
   slim: false,
-};
+}

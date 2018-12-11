@@ -1,6 +1,6 @@
 {
-  "name": "gatsby-starter-default",
-  "description": "Club Sektor909 web-site",
+  "name": "sektor909",
+  "description": "Club Sektor909 official web site",
   "version": "1.0.0",
   "author": "Bozhidar Hristov <bozidar.hristov@gmail.com>",
   "dependencies": {

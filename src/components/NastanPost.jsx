@@ -4,10 +4,10 @@ import styled from 'styled-components'
 import { css } from 'react-emotion'
 import { Link } from 'gatsby'
 import Img from 'gatsby-image'
-import { GoCalendar, GoLocation } from 'react-icons/go'
+import { GoCalendar, GoLocation, GoSettings } from 'react-icons/go'
 // import kebabCase from 'lodash/kebabCase'
 // import { hideS } from '../utils/hide'
-const dj = require('../icons/dj.svg')
+// const dj = require('../icons/dj.svg')
 
 const Wrapper = styled.article`
   display: flex;
@@ -64,12 +64,13 @@ const Image = styled.div`
 const Information = styled.div`
   h1 {
     font-size: 2rem;
-    margin-bottom: 1.25rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
     display: inline-block;
-    color: ${props => props.theme.colors.black.base};
+    color: #ffebda;
     transition: all ${props => props.theme.transitions.default.duration};
     &:hover {
-      color: ${props => props.theme.colors.primary.base};
+      color: #ffab70;
     }
   }
 
@@ -87,7 +88,7 @@ const Statistics = styled.div`
   color: ${props => props.theme.colors.black.lighter};
   h3,
   h4 {
-    color: ${props => props.theme.colors.black.base};
+    color: ${props => props.theme.colors.black.lighter};
     display: inline;
   }
   span {
@@ -105,8 +106,8 @@ const Excerpt = styled.div`
   margin-top: 2rem;
 `
 const marginVertical = css`
-  margin-bottom: 1rem;
-  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
 `
 
 const NastanPost = ({ cover, path, date, info, naslov, location, lineup }) => (
@@ -117,9 +118,6 @@ const NastanPost = ({ cover, path, date, info, naslov, location, lineup }) => (
       </Link>
     </Image>
     <Information>
-      <Link to={`program/${path}`}>
-        <h1>{naslov}</h1>
-      </Link>
       <Statistics>
         <GoCalendar size={20} />
         <span>{date}</span>
@@ -128,8 +126,11 @@ const NastanPost = ({ cover, path, date, info, naslov, location, lineup }) => (
         {/* <span className={hideS}>Kategorie: </span> */}
         {/* <Link to={`/categories/${kebabCase(category)}`}>{category}</Link> */}
       </Statistics>
+      <Link to={`program/${path}`}>
+        <h1>{naslov}</h1>
+      </Link>
       <Statistics className={marginVertical}>
-        <img alt="" src={dj} />
+        <GoSettings size={20} />
         {/* <u>LINE UP:</u> */}
         <h3 style={{ display: 'inline' }}>{` ${lineup}`}</h3>
       </Statistics>

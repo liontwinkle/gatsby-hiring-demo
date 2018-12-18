@@ -10,7 +10,7 @@ const MainHeader = ({ file }) => (
       <h1>#OURGOALISTHEFUTURE</h1>
     </Hero>
     {/* <Wave /> */}
-    <Img fluid={file.childImageSharp.fluid} />
+    {/* <Img fluid={file.childImageSharp.fluid} /> */}
   </MainWrapper>
 )
 

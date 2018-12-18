@@ -181,7 +181,9 @@ const Index = ({
           <Text>
             Сите настани <br />
             <Link to="/program">
-              <Button type="secondary">Програма</Button>
+              <Button background="magenta" size="large" type="secondary">
+                Програма
+              </Button>
             </Link>
           </Text>
         </Container>

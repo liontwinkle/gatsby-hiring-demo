@@ -49,21 +49,21 @@ const reset = css`
   body {
     // color: ${theme.colors.black.base};
     // background-color: ${theme.colors.white.light};
-    background-color: #1b1b1b;
+    background-color: #1b1f23;
     color: ${theme.colors.white.light};
   }
   ::selection {
-    color: ${theme.colors.white.base};
-    background-color: ${theme.colors.primary.base};
+    color: #ffab70;
+    background-color: #fafbfc;
   }
   a {
     // color: ${theme.colors.primary.dark};
-    color: pink;
+    color: #ffebda;
     transition: ${theme.transitions.default.transition};
     text-decoration: none;
     &:hover,
     &:focus {
-      color: ${theme.colors.primary.base};
+      color: #ffab70;
     }
   }
   a:not([href]):not([tabindex]) {

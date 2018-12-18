@@ -78,6 +78,7 @@ export const CardWrapper = styled.article`
 
 export const MainWrapper = styled.div`
   height: 600px;
+  background: ${props => props.theme.gradient.leftToRight};
   position: relative;
   overflow: hidden;
   .gatsby-image-wrapper {

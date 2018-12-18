@@ -70,7 +70,7 @@ class SignInForm extends Component {
         {this.state.loading ? (
           <Loader />
         ) : (
-          <Button onClick={this.onFbSubmit} type="primary">
+          <Button size="large" onClick={this.onFbSubmit} type="primary">
             Најави се
           </Button>
         )}

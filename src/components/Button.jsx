@@ -1,14 +1,15 @@
 // import React from 'react';
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import { ButtonPrimary } from '@primer/components'
 
-const Button = styled.button`
-  background: ${props => props.theme.button[props.type].background};
-  border: none;
-  border-radius: ${props => props.theme.borderRadius.round};
-  // box-shadow: ${props => props.theme.button[props.type].boxShadow};
-  color: ${props => props.theme.colors.white.base};
-  cursor: pointer;
+const Button = styled(ButtonPrimary)`
+  background: #586069;
+  // border: none;
+  // border-radius: ${props => props.theme.borderRadius.round};
+  // // box-shadow: ${props => props.theme.button[props.type].boxShadow};
+  // color: ${props => props.theme.colors.white.base};
+  // cursor: pointer;
   font-family: ${props => props.theme.fontFamily.heading};
   display: inline-block;
   font-size: 1.5rem;
@@ -25,8 +26,7 @@ const Button = styled.button`
   z-index: 10;
   -webkit-appearance: button;
   &:hover {
-    // box-shadow: ${props => props.theme.button[props.type].hover.boxShadow};
-    transform: translateY(-8px);
+    background: #6a737d;
   }
 `
 

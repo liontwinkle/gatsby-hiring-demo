@@ -10,7 +10,8 @@ const Wrapper = styled.footer`
   position: relative;
   padding-top: 10rem;
   padding-bottom: 2rem;
-  background: ${props => props.theme.gradient.rightToLeft};
+  margin-top: 3rem;
+  background: ${props => props.theme.gradient.leftToRight};
   font-family: ${props => props.theme.fontFamily.heading};
 `
 

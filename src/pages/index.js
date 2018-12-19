@@ -178,7 +178,7 @@ const Index = ({
           </PostsWrapper>
           <Text>
             Сите настани <br />
-            <Link to="/program">
+            <Link to="/nastani">
               <Button background="magenta" size="large" type="secondary">
                 Настани
               </Button>

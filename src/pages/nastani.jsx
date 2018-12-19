@@ -5,11 +5,12 @@ import styled from 'styled-components'
 import config from '../../config/website'
 import NastanPost from '../components/NastanPost'
 import Footer from '../components/Footer'
-import Header from '../components/Header'
+// import Header from '../components/Header'
 import Container from '../components/Container'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import SEO from '../components/SEO'
+import MainHeader from '../components/LayoutComponents/MainHeader'
 
 const Base = styled.div`
   margin-top: 2.5rem;
@@ -34,9 +35,13 @@ const Nastan = ({
         description="Дознај повеќе инфо за настани во Клубот Сектор909, Излет Кафе, како и други настани од оваа организација"
         postSEO
       />
-      <Header slim subtitle="Идни и Претходни Настани во Клуб Сектор909">
+      <MainHeader
+        slim
+        title="Настани"
+        subtitle="Идни и Претходни Настани во Клуб Сектор909"
+      >
         Настани
-      </Header>
+      </MainHeader>
       <Container type="big">
         <Base>
           {nastani.map(post => (

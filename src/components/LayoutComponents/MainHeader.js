@@ -1,16 +1,40 @@
 import React from 'react'
+import styled from 'styled-components'
 // import { StaticQuery, graphql } from 'gatsby'
 import { MainWrapper, Hero } from './Index'
 // import Wave from '../Wave'
 import Img from 'gatsby-image'
 
-const MainHeader = ({ file }) => (
+const Text = styled.div`
+  color: ${props => props.theme.colors.white.base};
+  z-index: 1000;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 2rem;
+  margin-bottom: 7rem;
+  align-items: center;
+`
+
+const Subtitle = styled.p`
+  max-width: 650px;
+  color: ${props => props.theme.tint.white};
+`
+
+const MainHeader = ({ title, subtitle }) => (
   <MainWrapper>
     <Hero>
-      <h1>#OURGOALISTHEFUTURE</h1>
+      <Text>
+        <h1>{title}</h1>
+        {subtitle && <Subtitle>{subtitle}</Subtitle>}
+      </Text>
     </Hero>
-    {/* <Wave /> */}
-    {/* <Img fluid={file.childImageSharp.fluid} /> */}
   </MainWrapper>
 )
 

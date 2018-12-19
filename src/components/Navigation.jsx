@@ -152,8 +152,8 @@ class Navigation extends React.Component {
             <Logo />
           </StyledLink>
           <Nav>
-            <Link to="/program" activeClassName="active">
-              Програм
+            <Link to="/nastani" activeClassName="active">
+              Настани
             </Link>
             <Link to="/blog" activeClassName="active">
               Блог

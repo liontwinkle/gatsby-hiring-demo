@@ -125,12 +125,10 @@ const SignInEl = pathname => (
 )
 const Index = ({
   data: {
-    file,
     allPrismicNastan: { edges: nastani },
   },
   location: { pathname },
 }) => {
-  console.log('FILE ', file)
   const WelcomeMessage = ({ username }) => (
     <InfoTextBox size="l">
       <Text>Здраво, {username}</Text>
@@ -149,7 +147,7 @@ const Index = ({
         postSEO
       />
       <div>
-        <MainHeader file={file} />
+        <MainHeader title="#OURGOALISTHEFUTURE" />
         <Container>
           <AuthUserContext.Consumer>
             {authUser =>
@@ -182,7 +180,7 @@ const Index = ({
             Сите настани <br />
             <Link to="/program">
               <Button background="magenta" size="large" type="secondary">
-                Програма
+                Настани
               </Button>
             </Link>
           </Text>
@@ -198,17 +196,6 @@ export default WithAuthentication(Index)
 
 export const pageQuery = graphql`
   query IndexQuery {
-    file(relativePath: { eq: "sektor_2.png" }) {
-      childImageSharp {
-        fluid(
-          maxWidth: 800
-          quality: 75
-          duotone: { highlight: "#262c41", shadow: "#46507a", opacity: 50 }
-        ) {
-          ...GatsbyImageSharpFluid_withWebp_tracedSVG
-        }
-      }
-    }
     allPrismicNastan {
       edges {
         node {

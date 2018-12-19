@@ -97,6 +97,8 @@ module.exports = {
         siteId: '2',
         matomoUrl: 'http://matomo.izletmusic.mk',
         siteUrl: 'https://dark-theme--sektor909.netlify.com/',
+        // localScript: './src/piwik.js',
+        dev: true,
       },
     },
     {

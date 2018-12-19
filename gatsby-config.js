@@ -94,7 +94,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-matomo',
       options: {
-        siteId: 'Sektor909',
+        siteId: '2',
         matomoUrl: 'http://matomo.izletmusic.mk',
         siteUrl: 'https://dark-theme--sektor909.netlify.com/',
       },

@@ -151,7 +151,7 @@ const FeaturedPost = ({ cover, path, from, to, naslov }) => (
     <Image>
       <Img fluid={cover} />
     </Image>
-    <Link to={`/program/${path}`} className={styledLink}>
+    <Link to={`/nastani/${path}`} className={styledLink}>
       <Information>
         <Date>{from}</Date>
         <Date>{to}</Date>

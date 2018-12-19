@@ -65,7 +65,7 @@ const EventInfo = ({
   // }
   return (
     <CardWrapper>
-      <Link to={`program/${path}`}>
+      <Link to={`nastani/${path}`}>
         <Img alt="" className="flyer" fluid={image.childImageSharp.fluid} />
       </Link>
       <Statistics>
@@ -75,7 +75,7 @@ const EventInfo = ({
         {` ${location}`}
       </Statistics>
       <Information>
-        <Link to={`program/${path}`}>
+        <Link to={`nastani/${path}`}>
           <h3 className={marginVertical}>{title}</h3>
         </Link>
         <Statistics className={marginVertical}>

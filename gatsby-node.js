@@ -54,7 +54,7 @@ exports.createPages = ({ graphql, actions }) => {
         }
         result.data.allPrismicNastan.edges.forEach(edge => {
           createPage({
-            path: `program/${edge.node.uid}`,
+            path: `nastani/${edge.node.uid}`,
             component: postPage,
             context: {
               uid: edge.node.uid,

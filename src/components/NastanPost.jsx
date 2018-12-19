@@ -113,7 +113,7 @@ const marginVertical = css`
 const NastanPost = ({ cover, path, date, info, naslov, location, lineup }) => (
   <Wrapper>
     <Image>
-      <Link to={`program/${path}`}>
+      <Link to={`nastani/${path}`}>
         <Img alt="" className="flyer" fluid={cover} />
       </Link>
     </Image>
@@ -126,7 +126,7 @@ const NastanPost = ({ cover, path, date, info, naslov, location, lineup }) => (
         {/* <span className={hideS}>Kategorie: </span> */}
         {/* <Link to={`/categories/${kebabCase(category)}`}>{category}</Link> */}
       </Statistics>
-      <Link to={`program/${path}`}>
+      <Link to={`nastani/${path}`}>
         <h1>{naslov}</h1>
       </Link>
       <Statistics className={marginVertical}>

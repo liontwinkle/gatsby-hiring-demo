@@ -149,7 +149,7 @@ const Description = styled.h2`
 
 const EventSlim = ({ cover, path, from, to, naslov }) => (
   <Wrapper>
-    <Link to={`/program/${path}`} className={styledLink}>
+    <Link to={`/nastani/${path}`} className={styledLink}>
       <Information>
         <Date>{from}</Date>
         <Date>{to}</Date>

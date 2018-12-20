@@ -94,11 +94,11 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-matomo',
       options: {
-        siteId: '2',
-        matomoUrl: 'http://matomo.izletmusic.mk',
+        siteId: '1',
+        matomoUrl: 'https://matomo.izletmusic.mk',
         siteUrl: 'https://dark-theme--sektor909.netlify.com/',
         // localScript: './src/piwik.js',
-        // dev: true,
+        dev: true,
       },
     },
     {

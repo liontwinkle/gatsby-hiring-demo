@@ -5,11 +5,12 @@ import styled from 'styled-components'
 import config from '../../config/website'
 import ItemBlog from '../components/ItemBlog'
 import Footer from '../components/Footer'
-import Header from '../components/Header'
+// import Header from '../components/Header'
 import Container from '../components/Container'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import SEO from '../components/SEO'
+import MainHeader from '../components/LayoutComponents/MainHeader'
 
 const Base = styled.div`
   margin-top: 2.5rem;
@@ -34,12 +35,13 @@ const Blog = ({
         description="Новости и информации за ноќниот живот во Скопје, новитети во хаус, техно, диско и електронска музика."
         postSEO
       />
-      <Header
+      <MainHeader
         slim
+        title="Блог"
         subtitle="Новости и информации за ноќниот живот во Скопје, новитети во клубската музика."
       >
         Блог
-      </Header>
+      </MainHeader>
       <Container type="big">
         <Base>
           {posts.map(post => (

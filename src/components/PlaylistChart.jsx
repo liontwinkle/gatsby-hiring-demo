@@ -9,7 +9,7 @@ import {
 import { GoLinkExternal } from 'react-icons/go'
 
 const Table = styled.table`
-  background: transparent;
+  background: #586069;
   margin: 1rem;
   max-width: 800px;
   margin-left: auto;
@@ -17,7 +17,7 @@ const Table = styled.table`
   th {
     font-weight: 500;
     font-size: 16px;
-    color: ${props => props.theme.colors.black.light};
+    color: #d1d5da;
     text-transform: uppercase;
   }
   .center {
@@ -27,7 +27,7 @@ const Table = styled.table`
     width: 20px;
   }
   a.linkSource {
-    color: ${props => props.theme.colors.black.light};
+    color: #d1d5da;
   }
   a:hover {
     background-color: ${props => props.theme.colors.white.blue};

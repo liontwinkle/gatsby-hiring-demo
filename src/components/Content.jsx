@@ -18,16 +18,15 @@ const Wrapper = styled.div`
     }
   }
   a {
-    color: black;
     box-shadow: inset 0 -2px 0 ${props => props.theme.tint.blue};
     border-bottom: 1px solid ${props => props.theme.tint.blue};
     transition: ${props => props.theme.transitions.default.transition};
     text-decoration: none;
-    &:hover,
-    &:focus {
-      background: ${props => props.theme.tint.blue};
-      color: black;
-    }
+    // &:hover,
+    // &:focus {
+    //   background: ${props => props.theme.tint.blue};
+    //   color: black;
+    // }
   }
   h1 {
     margin-top: 2rem;

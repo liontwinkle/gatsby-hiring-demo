@@ -106,8 +106,8 @@ const Excerpt = styled.div`
   margin-top: 2rem;
 `
 const marginVertical = css`
-  margin-bottom: 0.5rem;
-  margin-top: 0.5rem;
+  margin-bottom: 0.6rem;
+  margin-top: 0.6rem;
 `
 
 const NastanPost = ({ cover, path, date, info, naslov, location, lineup }) => (

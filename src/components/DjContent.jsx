@@ -65,7 +65,7 @@ class DjContent extends React.Component {
           location={this.props.location}
           // postNode={dj}
           postSEO
-          imageSrc={dj.data.avatar.localFile.childImageSharp.fluid.src}
+          imageSrc={dj.data.avatar.localFile.childImageSharp.fixed.src}
           title={title}
           description={description}
         />

@@ -1,7 +1,8 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 // import PropTypes from 'prop-types'
-import styled, { css, keyframes } from 'styled-components'
+import styled, { keyframes } from 'styled-components'
+import { css } from 'react-emotion'
 import Helmet from 'react-helmet'
 import Img from 'gatsby-image'
 // import { Link } from 'gatsby'
@@ -17,11 +18,20 @@ import Footer from '../components/Footer'
 // import { hideS } from '../utils/hide'
 import config from '../../config/website'
 // import { Card } from '../components/Card'
-import { GoCalendar, GoLocation, GoLinkExternal } from 'react-icons/go'
+import {
+  GoCalendar,
+  GoLocation,
+  GoLinkExternal,
+  GoSettings,
+} from 'react-icons/go'
 import Layout from '../components/Layout'
 import { Twitter, Facebook } from 'react-social-sharing'
 import { Flex, Box } from '@rebass/grid/emotion'
-const dj = require('../icons/dj.svg')
+// const dj = require('../icons/dj.svg')
+
+const moveUp = css`
+  transform: translateY(-20%);
+`
 
 const pulse = keyframes`
   0% {
@@ -150,7 +160,9 @@ const Line = styled.div`
 // `
 
 const Card = styled.div`
-  background-color: ${props => props.theme.colors.white.base};
+  // background-color: ${props => props.theme.colors.white.base};
+  transform:translateY(-50%);
+  z-index: 1;
   display: flex;
   flex-direction: column;
   padding: 2rem;
@@ -161,9 +173,7 @@ const Card = styled.div`
   position: relative;
   transition: background-color
     ${props => props.theme.transitions.default.duration};
-  img {
-    height: 4rem;
-    fill: ${props => props.theme.colors.black.blue};
+  svg {
     margin-bottom: 0.5rem;
     margin-right: 0.5rem;
   }
@@ -229,40 +239,41 @@ const Post = ({
               </div>
             </Information>
           </Hero>
-          <Wave />
           <Img fluid={post.data.photo.localFile.childImageSharp.fluid} />
         </Wrapper>
         <Container type="article">
           <Card>
             <h2>
-              <img alt="" src={dj} />
+              <GoSettings size={34} />
               Line Up:
             </h2>
             <div dangerouslySetInnerHTML={{ __html: post.data.lineup.html }} />
           </Card>
-          <Content input={post.data.info.html} />
-          <Line />
-          {/* <Tags tags={post.tags} /> */}
-          <p>
-            <span className={fontBold}>Повеќе: </span>
-            <a
-              rel="noopener noreferrer"
-              target="_blank"
-              href={post.data.facebook_event.url}
-            >
-              Фејсбук Настан
-            </a>
-          </p>
-          <Line />
-          {/* <Tags tags={post.tags} /> */}
-          <Flex flexDirection={['column', 'row']} alignItems="center">
-            <Box>Сподели со твоите пријатели</Box>
-            <Box>
-              <Twitter message={title} link={location.href} />
-              <Facebook link={location.href} />
-              {/* <Link to={`/categories/${kebabCase(post.category)}`}>{post.category}</Link> */}
-            </Box>
-          </Flex>
+          <div className={moveUp}>
+            <Content input={post.data.info.html} />
+            <Line />
+            {/* <Tags tags={post.tags} /> */}
+            <p>
+              <span className={fontBold}>Повеќе: </span>
+              <a
+                rel="noopener noreferrer"
+                target="_blank"
+                href={post.data.facebook_event.url}
+              >
+                Фејсбук Настан
+              </a>
+            </p>
+            <Line />
+            {/* <Tags tags={post.tags} /> */}
+            <Flex flexDirection={['column', 'row']} alignItems="center">
+              <Box>Сподели со твоите пријатели</Box>
+              <Box>
+                <Twitter message={title} link={location.href} />
+                <Facebook link={location.href} />
+                {/* <Link to={`/categories/${kebabCase(post.category)}`}>{post.category}</Link> */}
+              </Box>
+            </Flex>
+          </div>
         </Container>
         <Footer>
           {/* <h2>Lust auf mehr Tutorials & Goodies? Werde ein Patron.</h2>

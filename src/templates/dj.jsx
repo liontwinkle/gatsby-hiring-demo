@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import { keyframes } from 'react-emotion'
+import { keyframes, css } from 'react-emotion'
 import Img from 'gatsby-image'
 import Footer from '../components/Footer'
-import Wave from '../components/Wave'
+// import Wave from '../components/Wave'
 import { Card, Heading, Text } from 'rebass'
 import { Flex } from '@rebass/grid'
 import { Box } from '@rebass/grid/emotion'
@@ -78,6 +78,11 @@ const Image = styled.div`
     height: auto;
     margin: 0px;
     @media (max-width: ${props => props.theme.breakpoints.m}) {
+      max-width: 200px;
+      height: auto;
+      margin: 0px;
+    }
+    @media (max-width: ${props => props.theme.breakpoints.s}) {
       max-width: 100%;
       height: auto;
       margin: 0px;
@@ -92,6 +97,19 @@ const Line = styled.div`
   margin-bottom: 1rem;
 `
 
+const moveUpBig = css`
+  transform: translateY(-35%);
+`
+const moveUpSmall = css`
+  @media (max-width: 500px) {
+    transform: translateY(-10%);
+  }
+`
+
+const centerEl = css`
+  background-color: blue;
+`
+
 const Dj = ({ data: { prismicDj: dj, prismicChart: chart }, location }) => (
   <Layout>
     <div>
@@ -99,72 +117,74 @@ const Dj = ({ data: { prismicDj: dj, prismicChart: chart }, location }) => (
         <Hero>
           <h1>{dj.data.name}</h1>
         </Hero>
-        <Wave />
+        {/* <Wave /> */}
         <Img fluid={dj.data.background_image.localFile.childImageSharp.fluid} />
       </Wrapper>
       <Flex px={2} flexWrap="wrap">
         <Box mr={4} width={[1, 1 / 4]}>
-          <Card>
-            <Image>
-              <Img
-                className="gatsby-image"
-                fluid={dj.data.avatar.localFile.childImageSharp.fluid}
-              />
-            </Image>
-            <Box my={3}>
-              <Heading as="h3">{dj.data.name}</Heading>
-              <Text fontSize={0}>{dj.data.punchline}</Text>
-              <Line />
+          <Flex
+            flexDirection="column"
+            justifyContent="center"
+            alignitems="center"
+          >
+            <Card className={moveUpBig}>
+              <Image>
+                <Img
+                  className="gatsby-image"
+                  fixed={dj.data.avatar.localFile.childImageSharp.fixed}
+                />
+              </Image>
               <Box my={3}>
-                <Flex>
-                  <Box mr={2}>
-                    <SocialLink
-                      type="fb"
-                      link={dj.data.facebook ? dj.data.facebook.url : null}
-                      size={25}
-                    />
-                  </Box>
-                  <Box mx={2}>
-                    <SocialLink
-                      type="tw"
-                      link={dj.data.twitter ? dj.data.twitter.url : null}
-                      size={25}
-                    />
-                  </Box>
-                  <Box mx={2}>
-                    <SocialLink
-                      type="sc"
-                      link={dj.data.soundcloud ? dj.data.soundcloud.url : null}
-                      size={25}
-                    />
-                  </Box>
-                  <Box mx={2}>
-                    <SocialLink
-                      type="mc"
-                      link={dj.data.mixcloud ? dj.data.mixcloud.url : null}
-                      size={25}
-                    />
-                  </Box>
+                <Heading as="h3">{dj.data.name}</Heading>
+                <Text fontSize={0}>{dj.data.punchline}</Text>
+                <Line />
+                <Box my={3}>
+                  <Flex>
+                    <Box mr={2}>
+                      <SocialLink
+                        type="fb"
+                        link={dj.data.facebook ? dj.data.facebook.url : null}
+                        size={25}
+                      />
+                    </Box>
+                    <Box mx={2}>
+                      <SocialLink
+                        type="tw"
+                        link={dj.data.twitter ? dj.data.twitter.url : null}
+                        size={25}
+                      />
+                    </Box>
+                    <Box mx={2}>
+                      <SocialLink
+                        type="sc"
+                        link={
+                          dj.data.soundcloud ? dj.data.soundcloud.url : null
+                        }
+                        size={25}
+                      />
+                    </Box>
+                    <Box mx={2}>
+                      <SocialLink
+                        type="mc"
+                        link={dj.data.mixcloud ? dj.data.mixcloud.url : null}
+                        size={25}
+                      />
+                    </Box>
 
-                  <Box mx={2}>
-                    <SocialLink
-                      type="in"
-                      link={dj.data.instagram ? dj.data.instagram.url : null}
-                      size={25}
-                    />
-                  </Box>
-                </Flex>
+                    <Box mx={2}>
+                      <SocialLink
+                        type="in"
+                        link={dj.data.instagram ? dj.data.instagram.url : null}
+                        size={25}
+                      />
+                    </Box>
+                  </Flex>
+                </Box>
               </Box>
-            </Box>
-          </Card>
+            </Card>
+          </Flex>
         </Box>
-        <Box
-          // style={{
-          //   boxShadow: 'inset 0 0 0 2px',
-          // }}
-          width={[1, 0.7]}
-          // p={2}
-        >
+        <Box className={moveUpSmall} width={[1, 0.7]}>
           <DjContent location={location} dj={dj} chart={chart} />
         </Box>
       </Flex>
@@ -218,12 +238,14 @@ export const DjQuery = graphql`
         avatar {
           localFile {
             childImageSharp {
-              fluid(
-                maxWidth: 800
+              fixed(
+                width: 250
+                height: 250
+                grayscale: true
                 quality: 70
                 traceSVG: { color: "#52555e" }
               ) {
-                ...GatsbyImageSharpFluid_withWebp_tracedSVG
+                ...GatsbyImageSharpFixed_withWebp_tracedSVG
               }
             }
           }

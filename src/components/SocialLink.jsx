@@ -28,9 +28,11 @@ const renderSwitch = type => {
   }
 }
 
-const Link = css({
-  color: theme.colors.black.light,
-})
+const Link = css`
+  svg {
+    color: #d1d5da;
+  }
+`
 
 const SocialLink = ({ type, link, size }) => {
   const Component = renderSwitch(type)

@@ -3,7 +3,7 @@ import { Link } from 'gatsby'
 import styled, { keyframes } from 'styled-components'
 import Img from 'gatsby-image'
 import Footer from '../components/Footer'
-import Wave from '../components/Wave'
+// import Wave from '../components/Wave'
 import Container from '../components/Container'
 import { Card, Heading, Text } from 'rebass'
 import { Box, Flex } from '@rebass/grid/emotion'
@@ -14,6 +14,7 @@ import MainLayout from '../layouts'
 import SEO from '../components/SEO'
 import Helmet from 'react-helmet'
 import config from '../../config/website'
+import MainHeader from '../components/LayoutComponents/MainHeader'
 
 const pulse = keyframes`
   0% {
@@ -113,7 +114,7 @@ const DescriptionText = styled.p`
 // `
 
 const PlainLink = styled(Link)`
-  color: ${theme.colors.black.base};
+  // color: ${theme.colors.black.base};
 `
 
 const Djs = ({
@@ -127,13 +128,14 @@ const Djs = ({
       <Helmet title={`Sektor DJs | ${config.siteTitle}`} />
       <SEO title={'Sektor DJs'} />
       <div>
-        <Wrapper>
+        {/* <Wrapper>
           <Hero>
             <h1>#Resident DJs</h1>
           </Hero>
           <Wave />
           <Img fluid={file.childImageSharp.fluid} />
-        </Wrapper>
+        </Wrapper> */}
+        <MainHeader title="#Resident DJs" />
 
         <Container>
           <DescriptionText>Sektor DJs</DescriptionText>
@@ -149,12 +151,12 @@ const Djs = ({
                   <PlainLink to={`djs/${dj.node.data.name}`}>
                     <Img
                       className="gatsby-image"
-                      fluid={
-                        dj.node.data.avatar.localFile.childImageSharp.fluid
+                      fixed={
+                        dj.node.data.avatar.localFile.childImageSharp.fixed
                       }
                     />
                   </PlainLink>
-                  <Box width={256} m={2} px={2}>
+                  <Box width={256} m={2} px={2} pl={0} ml={0}>
                     <PlainLink to={`djs/${dj.node.data.name}`}>
                       <Heading className="title" as="h3">
                         {dj.node.data.name}
@@ -204,12 +206,14 @@ export const djsQuery = graphql`
 
               localFile {
                 childImageSharp {
-                  fluid(
-                    maxWidth: 800
+                  fixed(
+                    width: 250
+                    height: 250
+                    grayscale: true
                     quality: 70
                     traceSVG: { color: "#52555e" }
                   ) {
-                    ...GatsbyImageSharpFluid_withWebp_tracedSVG
+                    ...GatsbyImageSharpFixed_withWebp_tracedSVG
                   }
                 }
               }

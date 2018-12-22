@@ -24,6 +24,7 @@ import Layout from '../components/Layout'
 import PlayerConsumer from '../layouts/GlobalPlayerContext'
 import { Twitter, Facebook } from 'react-social-sharing'
 import { Flex, Box } from '@rebass/grid/emotion'
+import MainHeader from '../components/LayoutComponents/MainHeader'
 
 const pulse = keyframes`
   0% {
@@ -83,22 +84,22 @@ const Hero = styled.div`
   text-align: center;
 `
 
-// const Information = styled.div`
-//   margin-top: 2rem;
-//   font-family: ${props => props.theme.fontFamily.heading};
-//   a {
-//     color: ${props => props.theme.colors.white.base};
-//     transition: all 0.4s;
-//     border-bottom: 1px solid transparent;
-//     &:hover {
-//       border-bottom: 1px solid white;
-//       color: white;
-//     }
-//     &:focus {
-//       color: white;
-//     }
-//   }
-// `
+const Information = styled.div`
+  margin-top: 2rem;
+  font-family: ${props => props.theme.fontFamily.heading};
+  a {
+    color: ${props => props.theme.colors.white.base};
+    transition: all 0.4s;
+    border-bottom: 1px solid transparent;
+    &:hover {
+      border-bottom: 1px solid white;
+      color: white;
+    }
+    &:focus {
+      color: white;
+    }
+  }
+`
 
 const fontBold = css`
   font-weight: 700;
@@ -201,14 +202,11 @@ class Post extends React.Component {
           <Wrapper>
             <Hero>
               <h1>{post.data.title.text}</h1>
-              {/* <Information>
-            {post.date} &mdash; Lesezeit: {postNode.timeToRead} Min. &mdash; <span className={hideS}>Kategorie: </span>
-            <Link to={`/categories/${kebabCase(post.category)}`}>{post.category}</Link>
-          </Information> */}
+              {/* <Information>Some info</Information> */}
             </Hero>
-            <Wave />
             <Img fluid={post.data.image.localFile.childImageSharp.fluid} />
           </Wrapper>
+          {/* <MainHeader title={post.data.title.text} /> */}
           <Container type="article">
             <Content input={post.data.text.html} />
             {PlaylistPlayer}
@@ -329,9 +327,14 @@ export const BlogQuery = graphql`
           localFile {
             childImageSharp {
               fluid(
-                maxWidth: 900
+                maxWidth: 1400
                 quality: 85
-                duotone: { highlight: "#5ABDFF", shadow: "#3466DB" }
+                traceSVG: { color: "#52555e" }
+                duotone: {
+                  highlight: "#262c41"
+                  shadow: "#46507a"
+                  opacity: 78
+                }
               ) {
                 ...GatsbyImageSharpFluid_withWebp_tracedSVG
               }

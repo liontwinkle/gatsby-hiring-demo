@@ -58,13 +58,11 @@ const Image = styled.div`
 const Information = styled.div`
   h1 {
     font-size: 2rem;
-    margin-bottom: 1.25rem;
+    margin-bottom: 0.6rem;
+    margin-top: 0.6rem;
     display: inline-block;
-    color: ${props => props.theme.colors.black.base};
+    // color: ${props => props.theme.colors.black.base};
     transition: all ${props => props.theme.transitions.default.duration};
-    &:hover {
-      color: ${props => props.theme.colors.primary.base};
-    }
   }
 
   flex-basis: calc(99.9% * 3 / 5 - 1rem);
@@ -102,9 +100,6 @@ const ItemBlog = ({ path, cover, title, date, text, author }) => (
       </Link>
     </Image>
     <Information>
-      <Link to={`blog/${path}`}>
-        <h1>{title}</h1>
-      </Link>
       <Statistics>
         <GoCalendar size={20} />
         <span className="date">{date}</span>
@@ -112,6 +107,9 @@ const ItemBlog = ({ path, cover, title, date, text, author }) => (
         <span className={'author'}>{author}</span>
         {/* <Link to={`/categories/${kebabCase(category)}`}>{category}</Link> */}
       </Statistics>
+      <Link to={`blog/${path}`}>
+        <h1>{title}</h1>
+      </Link>
       <Excerpt>{text}</Excerpt>
     </Information>
   </Wrapper>

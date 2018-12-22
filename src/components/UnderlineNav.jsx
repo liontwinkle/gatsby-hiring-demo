@@ -16,7 +16,7 @@ const Nav = styled.nav`
     margin-right: 16px;
     font-size: 14px;
     line-height: 1.5;
-    color: #586069;
+    color: #d1d5da;
     text-align: center;
     border-bottom: 2px solid;
     border-bottom-color: transparent;
@@ -28,8 +28,13 @@ const Nav = styled.nav`
   }
   .selected {
     font-weight: 600;
-    color: #24292e;
+    color: #fafbfc;
     border-bottom-color: ${props => props.theme.colors.black.light};
+  }
+  .hide-mobile {
+    @media (max-width: ${props => props.theme.breakpoints.s}) {
+      display: none;
+    }
   }
 `
 
@@ -47,7 +52,7 @@ const UnderlineNav = ({ handleClick, selected }) => {
           // href="#focus"
         >
           <IoIosBook size={19} />
-          Bio
+          <span className="hide-mobile">Bio</span>
         </div>
         <div
           onClick={e => handleClick(e, 'charts')}
@@ -55,7 +60,7 @@ const UnderlineNav = ({ handleClick, selected }) => {
           // href="#focus"
         >
           <IoMdStats size={19} />
-          Charts
+          <span className="hide-mobile">Charts</span>
         </div>
         <div
           onClick={e => handleClick(e, 'mixes')}
@@ -63,7 +68,7 @@ const UnderlineNav = ({ handleClick, selected }) => {
           // href="#focus"
         >
           <TiHeadphones size={19} />
-          Mixes
+          <span className="hide-mobile">Mixes</span>
         </div>
         <div
           onClick={e => handleClick(e, 'events')}
@@ -71,7 +76,7 @@ const UnderlineNav = ({ handleClick, selected }) => {
           // href="#focus"
         >
           <IoMdCalendar size={19} />
-          Events
+          <span className="hide-mobile">Events</span>
         </div>
       </Flex>
     </Nav>

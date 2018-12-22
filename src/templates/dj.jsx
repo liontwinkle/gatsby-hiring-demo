@@ -140,44 +140,52 @@ const Dj = ({ data: { prismicDj: dj, prismicChart: chart }, location }) => (
                 <Line />
                 <Box my={3}>
                   <Flex>
-                    <Box mr={2}>
-                      <SocialLink
-                        type="fb"
-                        link={dj.data.facebook ? dj.data.facebook.url : null}
-                        size={25}
-                      />
-                    </Box>
-                    <Box mx={2}>
-                      <SocialLink
-                        type="tw"
-                        link={dj.data.twitter ? dj.data.twitter.url : null}
-                        size={25}
-                      />
-                    </Box>
-                    <Box mx={2}>
-                      <SocialLink
-                        type="sc"
-                        link={
-                          dj.data.soundcloud ? dj.data.soundcloud.url : null
-                        }
-                        size={25}
-                      />
-                    </Box>
-                    <Box mx={2}>
-                      <SocialLink
-                        type="mc"
-                        link={dj.data.mixcloud ? dj.data.mixcloud.url : null}
-                        size={25}
-                      />
-                    </Box>
+                    {dj.data.facebook && (
+                      <Box mr={2}>
+                        <SocialLink
+                          type="fb"
+                          link={dj.data.facebook.url}
+                          size={25}
+                        />
+                      </Box>
+                    )}
+                    {dj.data.twitter && (
+                      <Box mx={2}>
+                        <SocialLink
+                          type="tw"
+                          link={dj.data.twitter.url}
+                          size={25}
+                        />
+                      </Box>
+                    )}
+                    {dj.data.soundcloud && (
+                      <Box mx={2}>
+                        <SocialLink
+                          type="sc"
+                          link={dj.data.soundcloud.url}
+                          size={25}
+                        />
+                      </Box>
+                    )}
+                    {dj.data.mixcloud && (
+                      <Box mx={2}>
+                        <SocialLink
+                          type="mc"
+                          link={dj.data.mixcloud.url}
+                          size={25}
+                        />
+                      </Box>
+                    )}
 
-                    <Box mx={2}>
-                      <SocialLink
-                        type="in"
-                        link={dj.data.instagram ? dj.data.instagram.url : null}
-                        size={25}
-                      />
-                    </Box>
+                    {dj.data.instagram && (
+                      <Box mx={2}>
+                        <SocialLink
+                          type="in"
+                          link={dj.data.instagram.url}
+                          size={25}
+                        />
+                      </Box>
+                    )}
                   </Flex>
                 </Box>
               </Box>

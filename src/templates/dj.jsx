@@ -5,8 +5,8 @@ import Img from 'gatsby-image'
 import Footer from '../components/Footer'
 // import Wave from '../components/Wave'
 import { Card, Heading, Text } from 'rebass'
-import { Flex } from '@rebass/grid'
-import { Box } from '@rebass/grid/emotion'
+// import { Flex } from '@rebass/grid'
+import { Box, Flex } from '@rebass/grid/emotion'
 import { darken } from 'polished'
 import SocialLink from '../components/SocialLink'
 import DjContent from '../components/DjContent'
@@ -102,7 +102,7 @@ const moveUpBig = css`
 `
 const moveUpSmall = css`
   @media (max-width: 500px) {
-    transform: translateY(-10%);
+    transform: translateY(-15%);
   }
 `
 
@@ -114,82 +114,84 @@ const Dj = ({ data: { prismicDj: dj, prismicChart: chart }, location }) => (
   <Layout>
     <div>
       <Wrapper>
-        <Hero>
-          <h1>{dj.data.name}</h1>
-        </Hero>
+        <Hero>{/* <h1>{dj.data.name}</h1> */}</Hero>
         {/* <Wave /> */}
         <Img fluid={dj.data.background_image.localFile.childImageSharp.fluid} />
       </Wrapper>
-      <Flex px={2} flexWrap="wrap">
-        <Box mr={4} width={[1, 1 / 4]}>
-          <Flex
-            flexDirection="column"
-            justifyContent="center"
-            alignitems="center"
-          >
-            <Card className={moveUpBig}>
-              <Image>
-                <Img
-                  className="gatsby-image"
-                  fixed={dj.data.avatar.localFile.childImageSharp.fixed}
-                />
-              </Image>
-              <Box my={3}>
-                <Heading as="h3">{dj.data.name}</Heading>
-                <Text fontSize={0}>{dj.data.punchline}</Text>
-                <Line />
-                <Box my={3}>
-                  <Flex>
-                    {dj.data.facebook && (
-                      <Box mr={2}>
-                        <SocialLink
-                          type="fb"
-                          link={dj.data.facebook.url}
-                          size={25}
-                        />
-                      </Box>
-                    )}
-                    {dj.data.twitter && (
-                      <Box mx={2}>
-                        <SocialLink
-                          type="tw"
-                          link={dj.data.twitter.url}
-                          size={25}
-                        />
-                      </Box>
-                    )}
-                    {dj.data.soundcloud && (
-                      <Box mx={2}>
-                        <SocialLink
-                          type="sc"
-                          link={dj.data.soundcloud.url}
-                          size={25}
-                        />
-                      </Box>
-                    )}
-                    {dj.data.mixcloud && (
-                      <Box mx={2}>
-                        <SocialLink
-                          type="mc"
-                          link={dj.data.mixcloud.url}
-                          size={25}
-                        />
-                      </Box>
-                    )}
+      <Flex
+        flexDirection={['column', 'row']}
+        flexWrap="nowrap"
+        justifyContent="center"
+      >
+        <Box width={[1, 1 / 4]}>
+          <Flex px={2} flexDirection={'row'} justifyContent="center">
+            <Box className="dj-card" mr={[0, 0, 4]}>
+              <Card className={moveUpBig}>
+                <Flex px={2} flexDirection="column" alignItems="center">
+                  <Image>
+                    <Img
+                      className="gatsby-image"
+                      fixed={dj.data.avatar.localFile.childImageSharp.fixed}
+                    />
+                  </Image>
+                  <Box my={3}>
+                    <Heading as="h3">{dj.data.name}</Heading>
+                    <Text fontSize={0}>{dj.data.punchline}</Text>
+                    <Line />
+                    <Box my={3}>
+                      <Flex>
+                        {dj.data.facebook && (
+                          <Box mr={2}>
+                            <SocialLink
+                              type="fb"
+                              link={dj.data.facebook.url}
+                              size={25}
+                            />
+                          </Box>
+                        )}
+                        {dj.data.twitter && (
+                          <Box mx={2}>
+                            <SocialLink
+                              type="tw"
+                              link={dj.data.twitter.url}
+                              size={25}
+                            />
+                          </Box>
+                        )}
+                        {dj.data.soundcloud && (
+                          <Box mx={2}>
+                            <SocialLink
+                              type="sc"
+                              link={dj.data.soundcloud.url}
+                              size={25}
+                            />
+                          </Box>
+                        )}
+                        {dj.data.mixcloud && (
+                          <Box mx={2}>
+                            <SocialLink
+                              type="mc"
+                              link={dj.data.mixcloud.url}
+                              size={25}
+                            />
+                          </Box>
+                        )}
 
-                    {dj.data.instagram && (
-                      <Box mx={2}>
-                        <SocialLink
-                          type="in"
-                          link={dj.data.instagram.url}
-                          size={25}
-                        />
-                      </Box>
-                    )}
-                  </Flex>
-                </Box>
-              </Box>
-            </Card>
+                        {dj.data.instagram && (
+                          <Box mx={2}>
+                            <SocialLink
+                              type="in"
+                              link={dj.data.instagram.url}
+                              size={25}
+                            />
+                          </Box>
+                        )}
+                      </Flex>
+                    </Box>
+                  </Box>
+                </Flex>
+              </Card>
+            </Box>
           </Flex>
         </Box>
         <Box className={moveUpSmall} width={[1, 0.7]}>

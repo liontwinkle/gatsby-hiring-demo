@@ -36,6 +36,7 @@
     "react-helmet": "^5.2.0",
     "react-icons": "^3.2.2",
     "react-images": "^0.5.19",
+    "react-map-gl": "^4.0.5",
     "react-player": "^1.7.0",
     "react-social-sharing": "^2.0.1",
     "react-typography": "^0.16.13",

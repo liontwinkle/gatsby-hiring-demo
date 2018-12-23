@@ -17,6 +17,7 @@ import Layout from '../components/Layout'
 // import YouTube from '../icons/YouTube';
 import SEO from '../components/SEO'
 import MainHeader from '../components/LayoutComponents/MainHeader'
+import Map from '../components/Map'
 
 const CenteredContainer = styled(Container)`
   text-align: center;
@@ -84,6 +85,9 @@ const Kontakt = ({ location }) => (
             </Button>
           </a>
         </CenteredContainer>
+        <Container>
+          <Map />
+        </Container>
         <CardContainer>
           <MyLinkCard link="https://www.facebook.com/sektor909" facebook>
             <Facebook />

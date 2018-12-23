@@ -30,7 +30,7 @@ import { Flex, Box } from '@rebass/grid/emotion'
 // const dj = require('../icons/dj.svg')
 
 const moveUp = css`
-  transform: translateY(-20%);
+  transform: translateY(-5%);
 `
 
 const pulse = keyframes`

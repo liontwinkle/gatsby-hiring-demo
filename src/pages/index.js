@@ -196,7 +196,7 @@ export default WithAuthentication(Index)
 
 export const pageQuery = graphql`
   query IndexQuery {
-    allPrismicNastan {
+    allPrismicNastan(sort: { order: ASC, fields: [data___date] }) {
       edges {
         node {
           id

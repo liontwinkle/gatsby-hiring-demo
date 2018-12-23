@@ -93,7 +93,7 @@ const youtube = css`
 `
 
 const generalStyle = css`
-  background-color: ${theme.colors.white.base};
+  background-color: #959da5;
   display: flex;
   flex-direction: column;
   padding: 2rem;

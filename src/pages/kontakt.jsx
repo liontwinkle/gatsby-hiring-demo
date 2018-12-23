@@ -16,6 +16,7 @@ import Facebook from '../icons/Facebook'
 import Layout from '../components/Layout'
 // import YouTube from '../icons/YouTube';
 import SEO from '../components/SEO'
+import MainHeader from '../components/LayoutComponents/MainHeader'
 
 const CenteredContainer = styled(Container)`
   text-align: center;
@@ -65,17 +66,19 @@ const Kontakt = ({ location }) => (
         description="Новости и информации за ноќниот живот во Скопје, новитети во хаус, техно, диско и електронска музика."
         postSEO
       />
-      <Header slim subtitle="Нешто повеќе за клубот Сектор909">
-        Контакт
-      </Header>
+      <MainHeader
+        slim
+        title="Контакт"
+        subtitle="Нешто повеќе за клубот Сектор909"
+      />
       <Wrapper>
         <Container type="article">
-          <h3>Инфо за клубот.</h3>
+          <h3>За клубот Сектор909</h3>
           <p>Бла бла бла историја...</p>
           <p>Повеќе инфо...</p>
         </Container>
         <CenteredContainer>
-          <a href="mailto:info@sektor.com">
+          <a href="mailto:contact@sektor.com">
             <Button type="primary">
               <Paperplane /> E-Mail
             </Button>

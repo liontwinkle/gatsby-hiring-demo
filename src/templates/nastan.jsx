@@ -341,9 +341,9 @@ export const Nastan = graphql`
               ) {
                 ...GatsbyImageSharpFluid_withWebp_tracedSVG
               }
-              resolutions(width: 140, height: 140) {
-                src
-              }
+              # resolutions(width: 140, height: 140) {
+              #   src
+              # }
             }
           }
         }

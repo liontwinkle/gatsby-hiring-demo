@@ -8,7 +8,7 @@ module.exports = {
   siteShortName: 'Sektor909',
   siteLogo: '/social/909_white.svg',
   siteBanner: '/social/sektor_2.png',
-  siteUrl: 'https://dark-theme--sektor909.netlify.com/',
+  siteUrl: 'www.sektor909.mk',
   pathPrefix: '/',
   siteDescription:
     'Клуб Сектор909 на плоштад Скопје, Македонија. Лидер во клубската сцена и ноќниот живот од 2003г. Дознајте повеќе за настани, случувања поврзани со Сектор909',

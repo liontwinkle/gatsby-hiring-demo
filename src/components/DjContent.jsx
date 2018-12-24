@@ -24,10 +24,10 @@ const Text = styled.span`
 `
 
 class DjContent extends React.Component {
-  handleClick = (e, el, name, scrollTo) => {
+  handleClick = (e, el, name) => {
+    console.log('El, name', el, name)
     e.preventDefault()
     navigate(`/djs/${name}?tab=${el}#focus`)
-    // scrollTo({ id: 'focus' })
   }
   render() {
     const dj = this.props.dj
@@ -71,7 +71,7 @@ class DjContent extends React.Component {
         />
         <section id="focus">
           <UnerlineNav
-            handleClick={(e, el) => this.handleClick(e, el, dj.data.name)}
+            handleClick={(e, el) => this.handleClick(e, el, dj.uid)}
             selected={selected}
           />
           <Box m={2}>{CurrentElement}</Box>

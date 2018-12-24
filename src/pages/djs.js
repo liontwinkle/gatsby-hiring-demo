@@ -119,7 +119,6 @@ const PlainLink = styled(Link)`
 
 const Djs = ({
   data: {
-    file,
     allPrismicDj: { edges: djs },
   },
 }) => (
@@ -148,7 +147,7 @@ const Djs = ({
                   borderRadius={2}
                   boxShadow={theme.shadow.feature.small.default}
                 >
-                  <PlainLink to={`djs/${dj.node.data.name}`}>
+                  <PlainLink to={`djs/${dj.node.uid}`}>
                     <Img
                       className="gatsby-image"
                       fixed={
@@ -157,12 +156,12 @@ const Djs = ({
                     />
                   </PlainLink>
                   <Box width={256} m={2} px={2} pl={0} ml={0}>
-                    <PlainLink to={`djs/${dj.node.data.name}`}>
+                    <PlainLink to={`djs/${dj.node.uid}`}>
                       <Heading className="title" as="h3">
                         {dj.node.data.name}
                       </Heading>
                     </PlainLink>
-                    <Text fontSize={0}>{dj.node.data.punchline}</Text>
+                    {/* <Text fontSize={0}>{dj.node.data.punchline}</Text> */}
                   </Box>
                 </Card>
               </Box>
@@ -179,24 +178,14 @@ export default Djs
 
 export const djsQuery = graphql`
   query DjsQuery {
-    file(relativePath: { eq: "sektor_2.png" }) {
-      childImageSharp {
-        fluid(
-          maxWidth: 900
-          quality: 85
-          duotone: { highlight: "#262c41", shadow: "#46507a", opacity: 50 }
-        ) {
-          ...GatsbyImageSharpFluid_withWebp_tracedSVG
-        }
-      }
-    }
     allPrismicDj {
       edges {
         node {
           id
+          uid
           data {
             name
-            punchline
+            # punchline
             bio {
               html
               text

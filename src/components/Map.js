@@ -11,7 +11,7 @@ class Map extends Component {
       height: 400,
       latitude: 41.99521,
       longitude: 21.43226,
-      zoom: 17,
+      zoom: 15,
     },
   }
 
@@ -28,8 +28,8 @@ class Map extends Component {
             <Marker
               latitude={41.99521}
               longitude={21.43226}
-              offsetLeft={-20}
-              offsetTop={-10}
+              offsetLeft={-10}
+              offsetTop={-20}
             >
               <GoLocation color="black" size={30} />
             </Marker>

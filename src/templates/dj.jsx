@@ -136,7 +136,7 @@ const Dj = ({ data: { prismicDj: dj, prismicChart: chart }, location }) => (
                   </Image>
                   <Box my={3}>
                     <Heading as="h3">{dj.data.name}</Heading>
-                    <Text fontSize={0}>{dj.data.punchline}</Text>
+                    {/* <Text fontSize={0}>{dj.data.punchline}</Text> */}
                     <Line />
                     <Box my={3}>
                       <Flex>
@@ -234,7 +234,7 @@ export const DjQuery = graphql`
           text
           html
         }
-        punchline
+        # punchline
         mixes {
           title
           link {
@@ -264,8 +264,8 @@ export const DjQuery = graphql`
           localFile {
             childImageSharp {
               fluid(
-                maxWidth: 800
-                quality: 70
+                maxWidth: 1600
+                quality: 90
                 traceSVG: { color: "#52555e" }
               ) {
                 ...GatsbyImageSharpFluid_withWebp_tracedSVG

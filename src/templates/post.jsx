@@ -192,13 +192,15 @@ class Post extends React.Component {
       <Layout>
         <div className="post-container">
           <Helmet title={`${post.data.title.text} | ${config.siteTitle}`} />
-          <SEO
-            location={this.props.location}
-            postSEO
-            imageSrc={post.data.image.localFile.childImageSharp.fluid.src}
-            title={post.data.title.text}
-            description={post.data.text.text.slice(0, 200)}
-          />
+          {post.data.image.localFile.childImageSharp.fluid.src && (
+            <SEO
+              location={this.props.location}
+              postSEO
+              imageSrc={post.data.image.localFile.childImageSharp.fluid.src}
+              title={post.data.title.text}
+              description={post.data.text.text.slice(0, 200)}
+            />
+          )}
           <Wrapper>
             <Hero>
               <h1>{post.data.title.text}</h1>

@@ -166,7 +166,10 @@ class Navigation extends React.Component {
                 <TiEquals />
               </button>
               <div className="dropdown-content">
-                <NavigationFirebase />
+                {/* <NavigationFirebase /> */}
+                <Link to="/djs" activeClassName="active">
+                  Диџеи
+                </Link>
               </div>
             </div>
           </Nav>

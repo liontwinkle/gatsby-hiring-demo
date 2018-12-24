@@ -76,7 +76,7 @@ Nastan.propTypes = {
 /* eslint no-undef: "off" */
 export const EventsQuery = graphql`
   query EventsQuery {
-    allPrismicNastan {
+    allPrismicNastan(sort: { order: DESC, fields: [data___date] }) {
       edges {
         node {
           id

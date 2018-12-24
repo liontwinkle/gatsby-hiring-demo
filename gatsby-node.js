@@ -72,7 +72,7 @@ exports.createPages = ({ graphql, actions }) => {
         })
         result.data.allPrismicDj.edges.forEach(edge => {
           createPage({
-            path: `djs/${edge.node.data.name}`,
+            path: `djs/${edge.node.uid}`,
             component: djpage,
             context: {
               uid: edge.node.uid,

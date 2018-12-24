@@ -16,7 +16,7 @@ const SEO = props => {
     image = config.siteUrl + imageSrc
     console.log('Title, description, image', title, description, image)
   }
-  const realPrefix = config.pathPrefix === '/' ? '' : config.pathPrefix
+  // const realPrefix = config.pathPrefix === '/' ? '' : config.pathPrefix
   // image = config.siteUrl + realPrefix + image
   // description = config.siteDescription
   const blogURL = config.siteUrl + config.pathPrefix
@@ -61,6 +61,7 @@ const SEO = props => {
       },
     ])
   }
+  console.log('SEO Image:  in SEO', image)
   return (
     <Helmet>
       {/* General Tags */}

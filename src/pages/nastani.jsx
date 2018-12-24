@@ -51,7 +51,7 @@ const Nastan = ({
               date={post.node.data.date}
               path={post.node.uid}
               naslov={post.node.data.naslov.text}
-              info={post.node.data.info.text}
+              info={post.node.data.info.text.slice(0, 400)}
               lineup={post.node.data.lineup.text}
               location={post.node.data.location.text}
             />

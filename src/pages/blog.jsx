@@ -51,7 +51,7 @@ const Blog = ({
               date={post.node.data.date}
               path={`${post.node.uid}`}
               title={post.node.data.title.text}
-              text={post.node.data.text.text}
+              text={post.node.data.text.text.slice(0, 400)}
               author={post.node.data.author.document[0].data.name}
             />
           ))}

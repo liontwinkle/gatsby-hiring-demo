@@ -188,8 +188,10 @@ class Post extends React.Component {
           return { src: image.image1.localFile.childImageSharp.fluid.src }
         })
       : null
-    console.log('Image', post.data.image.localFile.childImageSharp.fluid.src)
-    const seoImage = post.data.image.localFile.childImageSharp.fluid.src
+    console.log(
+      'POST Image: ',
+      post.data.image.localFile.childImageSharp.fluid.src
+    )
     return (
       <Layout>
         <div className="post-container">
@@ -197,9 +199,13 @@ class Post extends React.Component {
           <SEO
             location={this.props.location}
             postSEO
-            imageSrc={seoImage ? seoImage : null}
-            title={post.data.title.text}
-            description={post.data.text.text.slice(0, 200)}
+            imageSrc={
+              post.data
+                ? post.data.image.localFile.childImageSharp.fluid.src
+                : null
+            }
+            title={post.data ? post.data.title.text : null}
+            description={post.data ? post.data.text.text.slice(0, 200) : null}
           />
           <Wrapper>
             <Hero>

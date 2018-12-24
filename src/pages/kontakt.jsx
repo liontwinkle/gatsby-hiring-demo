@@ -18,6 +18,7 @@ import Layout from '../components/Layout'
 import SEO from '../components/SEO'
 import MainHeader from '../components/LayoutComponents/MainHeader'
 import Map from '../components/Map'
+import { TiPhoneOutline } from 'react-icons/ti'
 
 const CenteredContainer = styled(Container)`
   text-align: center;
@@ -75,9 +76,9 @@ const Kontakt = ({ location }) => (
       <Wrapper>
         <Container type="article">
           <h3>За клубот Сектор909</h3>
+          <p>est. 2003</p>
           <p>
-            Сектор909 постои од 2003. Како зимски клуб се отвора на 27ми
-            Декември, 2018 на нова локација во Лумикс, на плоштад македонија.
+            Резервации на <TiPhoneOutline size={26} /> 070/909-909
           </p>
           {/* <p>Летната локација на клубот</p> */}
         </Container>

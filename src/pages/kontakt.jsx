@@ -78,7 +78,7 @@ const Kontakt = ({ location }) => (
           <h3>За клубот Сектор909</h3>
           <p>est. 2003</p>
           <p>
-            Резервации на <TiPhoneOutline size={26} /> 070/909-909
+            Резервации и информации на <TiPhoneOutline size={26} /> 076/909-909
           </p>
           {/* <p>Летната локација на клубот</p> */}
         </Container>

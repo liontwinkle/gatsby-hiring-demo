@@ -75,7 +75,7 @@ Blog.propTypes = {
 /* eslint no-undef: "off" */
 export const blogQuery = graphql`
   query AllPrismicBlog {
-    allPrismicBlog {
+    allPrismicBlog(sort: { order: DESC, fields: [data___date] }) {
       edges {
         node {
           id

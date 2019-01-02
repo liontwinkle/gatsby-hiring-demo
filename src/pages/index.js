@@ -136,6 +136,11 @@ const Index = ({
       добра музика и провери ја корисничката зона.
     </InfoTextBox>
   )
+  const today = new Date()
+  const upcoming_nastani = nastani.filter(
+    nastan => new Date(nastan.node.data.date) >= today
+  )
+  console.log('UPCOMING: ', upcoming_nastani)
   return (
     // <MainLayout>
     <Layout>
@@ -162,7 +167,7 @@ const Index = ({
         <Container>
           <Text>Тековна програма</Text>
           <PostsWrapper>
-            {nastani.map(post => (
+            {upcoming_nastani.reverse().map(post => (
               <EventInfo
                 key={post.node.uid}
                 title={post.node.data.naslov.text}
@@ -196,7 +201,7 @@ export default WithAuthentication(Index)
 
 export const pageQuery = graphql`
   query IndexQuery {
-    allPrismicNastan(sort: { order: ASC, fields: [data___date] }) {
+    allPrismicNastan(sort: { order: DESC, fields: [data___date] }, limit: 4) {
       edges {
         node {
           id

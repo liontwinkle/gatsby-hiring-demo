@@ -136,9 +136,10 @@ const Index = ({
       добра музика и провери ја корисничката зона.
     </InfoTextBox>
   )
-  const today = new Date()
+  let yesterday = new Date()
+  yesterday.setDate(yesterday.getDate() - 1)
   const upcoming_nastani = nastani.filter(
-    nastan => new Date(nastan.node.data.date) >= today
+    nastan => new Date(nastan.node.data.date) >= yesterday
   )
   console.log('UPCOMING: ', upcoming_nastani)
   return (

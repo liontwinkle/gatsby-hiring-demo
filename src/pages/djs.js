@@ -190,23 +190,23 @@ export const djsQuery = graphql`
               html
               text
             }
-            avatar {
-              url
+            # avatar {
+            #   url
 
-              localFile {
-                childImageSharp {
-                  fixed(
-                    width: 250
-                    height: 250
-                    grayscale: true
-                    quality: 70
-                    traceSVG: { color: "#52555e" }
-                  ) {
-                    ...GatsbyImageSharpFixed_withWebp_tracedSVG
-                  }
-                }
-              }
-            }
+            #   localFile {
+            #     childImageSharp {
+            #       fixed(
+            #         width: 250
+            #         height: 250
+            #         grayscale: true
+            #         quality: 70
+            #         traceSVG: { color: "#52555e" }
+            #       ) {
+            #         ...GatsbyImageSharpFixed_withWebp_tracedSVG
+            #       }
+            #     }
+            #   }
+            # }
           }
         }
       }

@@ -4,6 +4,8 @@
   "version": "1.0.0",
   "author": "Bozhidar Hristov <bozidar.hristov@gmail.com>",
   "dependencies": {
+    "@emotion/core": "^10.0.9",
+    "@emotion/styled": "^10.0.9",
     "@githubprimer/octicons-react": "^8.2.0",
     "@primer/components": "^7.0.0-beta",
     "@rebass/grid": "^6.0.0-4",
@@ -60,5 +62,8 @@
   "devDependencies": {
     "dotenv": "^6.1.0",
     "prettier": "^1.15.2"
+  },
+  "resolutions": {
+    "got": "^9.2.2"
   }
 }

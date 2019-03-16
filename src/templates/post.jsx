@@ -168,6 +168,7 @@ class Post extends React.Component {
   }
   render() {
     const post = this.props.data.prismicBlog
+    console.log('POST', post)
     const { gallery } = post.data
     const playlist = post.data.body ? post.data.body[0] : null
     const PlaylistPlayer = playlist ? (
@@ -188,10 +189,6 @@ class Post extends React.Component {
           return { src: image.image1.localFile.childImageSharp.fluid.src }
         })
       : null
-    console.log(
-      'POST Image: ',
-      post.data.image.localFile.childImageSharp.fluid.src
-    )
     return (
       <Layout>
         <div className="post-container">

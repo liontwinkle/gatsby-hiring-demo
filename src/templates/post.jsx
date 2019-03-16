@@ -341,7 +341,7 @@ export const BlogQuery = graphql`
                 duotone: {
                   highlight: "#262c41"
                   shadow: "#46507a"
-                  opacity: 78
+                  opacity: 45
                 }
               ) {
                 ...GatsbyImageSharpFluid_withWebp_tracedSVG

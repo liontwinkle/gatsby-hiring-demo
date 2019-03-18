@@ -45,6 +45,7 @@ export const CardWrapper = styled.article`
     &:first-child {
       margin-bottom: 2rem;
     }
+    height: 100%;
     .flyer {
       height: 300px;
       margin-bottom: 1rem;
@@ -57,6 +58,7 @@ export const CardWrapper = styled.article`
     &:first-child {
       margin-bottom: 2rem;
     }
+    height: 100%;
   }
   @media (max-width: ${props => props.theme.breakpoints.s}) {
     flex-basis: 100%;
@@ -65,6 +67,7 @@ export const CardWrapper = styled.article`
     &:first-child {
       margin-bottom: 2rem;
     }
+    height: 100%;
   }
   @media (max-width: ${props => props.theme.breakpoints.xs}) {
     flex-basis: 100%;
@@ -73,6 +76,7 @@ export const CardWrapper = styled.article`
     &:first-child {
       margin-bottom: 2rem;
     }
+    height: 100%;
   }
 `
 

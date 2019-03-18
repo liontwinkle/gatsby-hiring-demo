@@ -54,8 +54,9 @@ const Text = styled.p`
   font-size: 1.5rem;
   line-height: 2.5rem;
   max-width: 850px;
-  margin: 3rem auto;
-  // text-shadow: ${props => props.theme.shadow.text.big};
+  margin: auto;
+  margin-top: 2rem;
+  margin-bottom: 4rem;
 `
 
 const InfoTextBox = styled(CardWrapper)`

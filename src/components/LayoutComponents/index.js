@@ -133,24 +133,55 @@ export const Information = styled.div`
       color: white;
     }
   }
-  .date,
-  .author {
+  .subElement {
     svg {
       margin-right: 0.5rem;
     }
+  }
+  .element {
+    margin-right: 0.75rem;
+    margin-left: 0rem;
+    display: inline-block;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
   }
   div.location {
     white-space: nowrap;
     @media (min-width: 500px) {
       display: inline;
     }
-    h3,
-    h4 {
-      display: inline;
-    }
+  }
+  h3,
+  h4 {
+    display: inline;
   }
   .margin {
     margin-left: 0.75rem;
     margin-right: 0.75rem;
+  }
+`
+
+export const Statistics = styled.div`
+  color: ${props => props.theme.colors.black.lighter};
+  // h3,
+  // h4 {
+  //   color: ${props => props.theme.colors.black.base};
+  // }
+  span,
+  h4 {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+  .element {
+    margin-right: 0.75rem;
+    margin-left: 0rem;
+    display:inline-block;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  img {
+    width: 40px;
+    height: 35px;
+    margin-right: 0.5rem;
   }
 `

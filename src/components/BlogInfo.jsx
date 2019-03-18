@@ -4,9 +4,13 @@ import styled from 'styled-components'
 import { css } from 'react-emotion'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
-import { GoCalendar, GoLocation, GoSettings, GoClock } from 'react-icons/go'
-import { GiMoneyStack } from 'react-icons/gi'
+// import Tags from './Tags'
+import { GoCalendar, GoPerson } from 'react-icons/go'
+import { GiMusicalNotes } from 'react-icons/gi'
+import { IoIosImages } from 'react-icons/io'
 import { CardWrapper, Statistics } from './LayoutComponents'
+
+// const dj = require('../icons/dj.svg')
 
 const Information = styled.div`
   h3 {
@@ -29,68 +33,64 @@ const Excerpt = styled.div`
   margin-bottom: 1rem;
 `
 
-const EventInfo = ({
-  lineup,
+const BlogInfo = ({
   path,
   title,
   date,
-  location,
+  author,
   excerpt,
   image,
-  vlez,
-  pocetok,
+  hasGallery,
+  hasPlaylist,
 }) => {
   return (
     <CardWrapper>
-      <Link to={`nastani/${path}`}>
+      <Link to={`blog/${path}`}>
         <Img alt="" className="flyer" fluid={image.childImageSharp.fluid} />
       </Link>
       <Statistics>
         <span className="element">
           <GoCalendar size={20} />
-          <span>{date}</span>
+          <span className="subElement">{date}</span>
         </span>
         <span className="element">
-          <GoClock size={20} />
-          <span>{pocetok}</span>
+          <GoPerson size={20} />
+          <span className="subElement">{author}</span>
         </span>
-        <span className="element">
-          <GoLocation size={20} />
-          <span>{location}</span>
-        </span>
-        <span className="element">
-          <GiMoneyStack size={20} />
-          <span>{vlez}</span>
-        </span>
+        {hasPlaylist && (
+          <span className="element">
+            <GiMusicalNotes size={20} />
+          </span>
+        )}
+        {hasGallery && (
+          <span className="element">
+            <IoIosImages size={20} />
+          </span>
+        )}
       </Statistics>
       <Information>
-        <Link to={`nastani/${path}`}>
+        <Link to={`blog/${path}`}>
           <h3 className={marginVertical}>{title}</h3>
         </Link>
-        <Statistics className={marginVertical}>
-          {/* <img alt="" src={dj} /> */}
+        {/* <Statistics className={marginVertical}>
           <GoSettings size={20} />
           <h4 style={{ display: 'inline' }}>{` ${lineup}`}</h4>
-        </Statistics>
-        <Statistics />
-        {/* {tags && <Tags tags={tags} />} */}
+        </Statistics> */}
         <Excerpt>{`${excerpt}...`}</Excerpt>
       </Information>
     </CardWrapper>
   )
 }
 
-export default EventInfo
+export default BlogInfo
 
-EventInfo.propTypes = {
-  lineup: PropTypes.string.isRequired,
+BlogInfo.propTypes = {
   path: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
-  location: PropTypes.string.isRequired,
-  // inputTags: PropTypes.array.isRequired,
-  // excerpt: PropTypes.string.isRequired,
+  excerpt: PropTypes.string.isRequired,
   image: PropTypes.object.isRequired,
-  vlez: PropTypes.string,
-  pocetok: PropTypes.string,
+  author: PropTypes.string.isRequired,
+  hasGallery: PropTypes.bool.isRequired,
+  hasPlaylist: PropTypes.bool.isRequired,
 }

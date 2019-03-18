@@ -23,11 +23,14 @@ import {
   GoLocation,
   GoLinkExternal,
   GoSettings,
+  GoClock,
 } from 'react-icons/go'
+import { GiMoneyStack } from 'react-icons/gi'
 import Layout from '../components/Layout'
 import { Twitter, Facebook } from 'react-social-sharing'
 import { Flex, Box } from '@rebass/grid/emotion'
 // const dj = require('../icons/dj.svg')
+import { Information } from '../components/LayoutComponents'
 
 const moveUp = css`
   transform: translateY(-5%);
@@ -91,41 +94,6 @@ const Hero = styled.div`
   text-align: center;
 `
 
-const Information = styled.div`
-  margin-top: 2rem;
-  font-family: ${props => props.theme.fontFamily.heading};
-  a.fblink {
-    white-space: nowrap;
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
-    color: ${props => props.theme.colors.white.base};
-    transition: all 0.4s;
-    border-bottom: 1px solid transparent;
-    &:hover {
-      border-bottom: 1px solid white;
-      color: white;
-    }
-    &:focus {
-      color: white;
-    }
-  }
-  .date {
-    svg {
-      margin-right: 0.5rem;
-    }
-  }
-  div.location {
-    white-space: nowrap;
-    @media (min-width: 500px) {
-      display: inline;
-    }
-    h3,
-    h4 {
-      display: inline;
-    }
-  }
-`
-
 const fontBold = css`
   font-weight: 700;
 `
@@ -137,27 +105,6 @@ const Line = styled.div`
   margin-top: 1rem;
   margin-bottom: 1rem;
 `
-// const CardWrapper = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   flex-wrap: wrap;
-//   justify-content: space-between;
-//   margin-bottom: 3rem;
-//   ${Card} {
-//     color: ${props => props.theme.colors.black.base} !important;
-//     margin-bottom: 2rem;
-//     text-align: center;
-//     flex-basis: calc(99.9% * 1 / 2.15 - 1rem);
-//     max-width: calc(99.9% * 1 / 2.15 - 1rem);
-//     width: calc(99.9% * 1 / 2.15 - 1rem);
-//     @media (max-width: 750px) {
-//       flex-basis: 100%;
-//       max-width: 100%;
-//       width: 100%;
-//       margin-bottom: 1.5rem;
-//     }
-//   }
-// `
 
 const Card = styled.div`
   // background-color: ${props => props.theme.colors.white.base};
@@ -190,10 +137,6 @@ const Card = styled.div`
   }
 `
 
-// const Card = styled.div`
-//   ${generalStyle};
-// `
-
 const Post = ({
   pageContext: { uid },
   data: { prismicNastan: post },
@@ -203,7 +146,6 @@ const Post = ({
   if (!post.id) {
     post.id = uid
   }
-  console.log(post.data.photo.url)
   const title = post.data.naslov.text
   const description = post.data.info.text.slice(0, 200)
   const image = post.data.photo.localFile.childImageSharp.fluid.src
@@ -222,21 +164,41 @@ const Post = ({
           <Hero>
             <h1>{title}</h1>
             <Information>
-              <span className="date">
-                <GoCalendar size={20} /> {post.data.date}
+              <span className="element">
+                <span className="subElement">
+                  <GoCalendar size={20} />
+                  <h4>{post.data.date}</h4>
+                </span>
               </span>
-              <a
-                rel="noopener noreferrer"
-                className="fblink"
-                target="_blank"
-                href={post.data.facebook_event.url}
-              >
-                <GoLinkExternal size={20} /> Facebook Event
-              </a>
-              <div className="location">
-                <GoLocation size={20} />
-                <h4>{` ${post.data.location.text}`}</h4>
-              </div>
+              <span className="element">
+                <span className="subElement">
+                  <GoClock size={20} />
+                  <h4>{post.data.pocetok}</h4>
+                </span>
+              </span>
+              <span className="element">
+                <a
+                  rel="noopener noreferrer"
+                  className="fblink subElement"
+                  target="_blank"
+                  href={post.data.facebook_event.url}
+                >
+                  <GoLinkExternal size={20} />
+                  <h4>Facebook Event</h4>
+                </a>
+              </span>
+              <span className="element">
+                <div className="location subElement">
+                  <GoLocation size={20} />
+                  <h4>{post.data.location.text}</h4>
+                </div>
+              </span>
+              <span className="element">
+                <div className="location subElement">
+                  <GiMoneyStack size={20} />
+                  <h4>{post.data.vlez}</h4>
+                </div>
+              </span>
             </Information>
           </Hero>
           <Img fluid={post.data.photo.localFile.childImageSharp.fluid} />
@@ -308,6 +270,8 @@ export const Nastan = graphql`
       id
       uid
       data {
+        vlez
+        pocetok(formatString: "HH:mm")
         naslov {
           html
           text
@@ -336,7 +300,7 @@ export const Nastan = graphql`
                 duotone: {
                   highlight: "#262c41"
                   shadow: "#46507a"
-                  opacity: 78
+                  opacity: 65
                 }
               ) {
                 ...GatsbyImageSharpFluid_withWebp_tracedSVG

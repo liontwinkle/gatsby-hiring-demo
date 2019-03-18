@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 // import { StaticQuery, graphql } from 'gatsby'
-import { MainWrapper, Hero } from './Index'
+import { MainWrapper, Hero } from './index'
 // import Wave from '../Wave'
 import Img from 'gatsby-image'
 

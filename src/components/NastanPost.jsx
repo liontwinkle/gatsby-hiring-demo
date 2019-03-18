@@ -4,7 +4,9 @@ import styled from 'styled-components'
 import { css } from 'react-emotion'
 import { Link } from 'gatsby'
 import Img from 'gatsby-image'
-import { GoCalendar, GoLocation, GoSettings } from 'react-icons/go'
+import { GoCalendar, GoLocation, GoSettings, GoClock } from 'react-icons/go'
+import { GiMoneyStack } from 'react-icons/gi'
+import { Statistics } from '../components/LayoutComponents'
 // import kebabCase from 'lodash/kebabCase'
 // import { hideS } from '../utils/hide'
 // const dj = require('../icons/dj.svg')
@@ -84,23 +86,23 @@ const Information = styled.div`
   }
 `
 
-const Statistics = styled.div`
-  color: ${props => props.theme.colors.black.lighter};
-  h3,
-  h4 {
-    color: ${props => props.theme.colors.black.lighter};
-    display: inline;
-  }
-  span {
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
-  }
-  img {
-    width: 40px;
-    height: 35px;
-    margin-right: 0.5rem;
-  }
-`
+// const Statistics = styled.div`
+//   color: ${props => props.theme.colors.black.lighter};
+//   h3,
+//   h4 {
+//     color: ${props => props.theme.colors.black.lighter};
+//     display: inline;
+//   }
+//   span {
+//     margin-left: 0.5rem;
+//     margin-right: 0.5rem;
+//   }
+//   img {
+//     width: 40px;
+//     height: 35px;
+//     margin-right: 0.5rem;
+//   }
+// `
 
 const Excerpt = styled.div`
   margin-top: 2rem;
@@ -110,7 +112,17 @@ const marginVertical = css`
   margin-top: 0.6rem;
 `
 
-const NastanPost = ({ cover, path, date, info, naslov, location, lineup }) => (
+const NastanPost = ({
+  cover,
+  path,
+  date,
+  info,
+  naslov,
+  location,
+  lineup,
+  pocetok,
+  vlez,
+}) => (
   <Wrapper>
     <Image>
       <Link to={`nastani/${path}`}>
@@ -119,10 +131,22 @@ const NastanPost = ({ cover, path, date, info, naslov, location, lineup }) => (
     </Image>
     <Information>
       <Statistics>
-        <GoCalendar size={20} />
-        <span>{date}</span>
-        <GoLocation size={20} />
-        <span>{location}</span>
+        <span className="element">
+          <GoCalendar size={20} />
+          <span>{date}</span>
+        </span>
+        <span className="element">
+          <GoClock size={20} />
+          <span>{pocetok}</span>
+        </span>
+        <span className="element">
+          <GoLocation size={20} />
+          <span>{location}</span>
+        </span>
+        <span className="element">
+          <GiMoneyStack size={20} />
+          <span>{vlez}</span>
+        </span>
         {/* <span className={hideS}>Kategorie: </span> */}
         {/* <Link to={`/categories/${kebabCase(category)}`}>{category}</Link> */}
       </Statistics>

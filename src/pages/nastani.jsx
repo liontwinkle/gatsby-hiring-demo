@@ -49,6 +49,8 @@ const Nastan = ({
               key={post.node.id}
               cover={post.node.data.photo.localFile.childImageSharp.fluid}
               date={post.node.data.date}
+              pocetok={post.node.data.pocetok}
+              vlez={post.node.data.vlez}
               path={post.node.uid}
               naslov={post.node.data.naslov.text}
               info={post.node.data.info.text.slice(0, 400)}
@@ -82,6 +84,8 @@ export const EventsQuery = graphql`
           id
           uid
           data {
+            vlez
+            pocetok(formatString: "HH:mm")
             naslov {
               html
               text

@@ -5,7 +5,10 @@ import { Link } from 'gatsby'
 import Img from 'gatsby-image'
 // import kebabCase from 'lodash/kebabCase'
 // import { hideS } from '../utils/hide'
-import { GoCalendar, GoPencil } from 'react-icons/go'
+import { GoCalendar, GoPerson } from 'react-icons/go'
+import { GiMusicalNotes } from 'react-icons/gi'
+import { IoIosImages } from 'react-icons/io'
+import { CardWrapper, Statistics } from './LayoutComponents'
 
 const Wrapper = styled.article`
   display: flex;
@@ -75,23 +78,35 @@ const Information = styled.div`
   }
 `
 
-const Statistics = styled.div`
-  color: ${props => props.theme.colors.black.lighter};
-  span.date {
-    margin-left: 0.5rem;
-    margin-right: 1rem;
-  }
-  span.author {
-    margin-left: 0.5rem;
-    margin-right: 1rem;
-  }
-`
+// const Statistics = styled.div`
+//   color: ${props => props.theme.colors.black.lighter};
+//   .subElement {
+//     margin-left: 0.5rem;
+//     margin-right: 1rem;
+//   }
+//   .element {
+//     margin-left: 0rem;
+//     margin-right: 1rem;
+//     display: inline-block;
+//     margin-top: 0.5rem;
+//     margin-bottom: 0.5rem;
+//   }
+// `
 
 const Excerpt = styled.div`
   margin-top: 2rem;
 `
 
-const ItemBlog = ({ path, cover, title, date, text, author }) => (
+const ItemBlog = ({
+  path,
+  cover,
+  title,
+  date,
+  text,
+  author,
+  gallery,
+  playlist,
+}) => (
   <Wrapper>
     <Image>
       <Link to={`blog/${path}`}>
@@ -101,10 +116,28 @@ const ItemBlog = ({ path, cover, title, date, text, author }) => (
     </Image>
     <Information>
       <Statistics>
-        <GoCalendar size={20} />
-        <span className="date">{date}</span>
-        <GoPencil size={20} />
-        <span className={'author'}>{author}</span>
+        <span className="element">
+          <GoCalendar size={20} />
+          <span className="subElement">{date}</span>
+        </span>
+        <span className="element">
+          <GoPerson size={20} />
+          <span className={'subElement'}>{author}</span>
+        </span>
+        <span className="element">
+          {gallery && (
+            <span className="subElement">
+              <IoIosImages size={20} />
+            </span>
+          )}
+        </span>
+        <span className="element">
+          {playlist && (
+            <span className="subElement">
+              <GiMusicalNotes size={20} />
+            </span>
+          )}
+        </span>
         {/* <Link to={`/categories/${kebabCase(category)}`}>{category}</Link> */}
       </Statistics>
       <Link to={`blog/${path}`}>
@@ -128,4 +161,6 @@ ItemBlog.propTypes = {
   text: PropTypes.string.isRequired,
   // images: PropTypes.arrayOf(PropTypes.object),
   author: PropTypes.string.isRequired,
+  gallery: PropTypes.bool,
+  playlist: PropTypes.bool,
 }

@@ -44,17 +44,25 @@ const Blog = ({
       </MainHeader>
       <Container type="big">
         <Base>
-          {posts.map(post => (
-            <ItemBlog
-              key={post.node.data.title.text}
-              cover={post.node.data.image.localFile.childImageSharp.fluid}
-              date={post.node.data.date}
-              path={`${post.node.uid}`}
-              title={post.node.data.title.text}
-              text={post.node.data.text.text.slice(0, 400)}
-              author={post.node.data.author.document[0].data.name}
-            />
-          ))}
+          {posts.map(post => {
+            const hasGallery = post.node.data.gallery[0].image1.localFile
+              ? true
+              : false
+            const hasPlaylist = post.node.data.body ? true : false
+            return (
+              <ItemBlog
+                key={post.node.data.title.text}
+                cover={post.node.data.image.localFile.childImageSharp.fluid}
+                date={post.node.data.date}
+                path={`${post.node.uid}`}
+                title={post.node.data.title.text}
+                text={post.node.data.text.text.slice(0, 400)}
+                author={post.node.data.author.document[0].data.name}
+                gallery={hasGallery}
+                playlist={hasPlaylist}
+              />
+            )
+          })}
         </Base>
       </Container>
       <Footer />
@@ -122,6 +130,16 @@ export const blogQuery = graphql`
                     ) {
                       ...GatsbyImageSharpFluid_withWebp_tracedSVG
                     }
+                  }
+                }
+              }
+            }
+            body {
+              ... on PrismicBlogBodyPlaylist {
+                slice_type
+                primary {
+                  playlist_name {
+                    text
                   }
                 }
               }

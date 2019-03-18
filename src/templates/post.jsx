@@ -24,7 +24,11 @@ import Layout from '../components/Layout'
 import PlayerConsumer from '../layouts/GlobalPlayerContext'
 import { Twitter, Facebook } from 'react-social-sharing'
 import { Flex, Box } from '@rebass/grid/emotion'
-import MainHeader from '../components/LayoutComponents/MainHeader'
+// import MainHeader from '../components/LayoutComponents/MainHeader'
+import { Information } from '../components/LayoutComponents'
+import { GoCalendar, GoPerson } from 'react-icons/go'
+import { GiMusicalNotes } from 'react-icons/gi'
+import { IoIosImages } from 'react-icons/io'
 
 const pulse = keyframes`
   0% {
@@ -84,22 +88,22 @@ const Hero = styled.div`
   text-align: center;
 `
 
-const Information = styled.div`
-  margin-top: 2rem;
-  font-family: ${props => props.theme.fontFamily.heading};
-  a {
-    color: ${props => props.theme.colors.white.base};
-    transition: all 0.4s;
-    border-bottom: 1px solid transparent;
-    &:hover {
-      border-bottom: 1px solid white;
-      color: white;
-    }
-    &:focus {
-      color: white;
-    }
-  }
-`
+// const Information = styled.div`
+//   margin-top: 2rem;
+//   font-family: ${props => props.theme.fontFamily.heading};
+//   a {
+//     color: ${props => props.theme.colors.white.base};
+//     transition: all 0.4s;
+//     border-bottom: 1px solid transparent;
+//     &:hover {
+//       border-bottom: 1px solid white;
+//       color: white;
+//     }
+//     &:focus {
+//       color: white;
+//     }
+//   }
+// `
 
 const fontBold = css`
   font-weight: 700;
@@ -207,7 +211,35 @@ class Post extends React.Component {
           <Wrapper>
             <Hero>
               <h1>{post.data.title.text}</h1>
-              {/* <Information>Some info</Information> */}
+              <Information>
+                <span className="element">
+                  <span className="subElement">
+                    <GoCalendar size={20} />
+                    <h4>{post.data.date}</h4>
+                  </span>
+                </span>
+                <span className="element">
+                  <span className="margin subElement">
+                    <GoPerson size={20} />
+                    <h4>{post.data.author.document[0].data.name}</h4>
+                  </span>
+                </span>
+
+                {images && (
+                  <span className="element">
+                    <span className="subElement">
+                      <IoIosImages size={20} />
+                    </span>
+                  </span>
+                )}
+                {playlist && (
+                  <span className="element">
+                    <span className="subElement">
+                      <GiMusicalNotes size={20} />
+                    </span>
+                  </span>
+                )}
+              </Information>
             </Hero>
             <Img fluid={post.data.image.localFile.childImageSharp.fluid} />
           </Wrapper>

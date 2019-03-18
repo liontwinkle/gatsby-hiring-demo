@@ -7,12 +7,13 @@ import styled from 'styled-components'
 import Button from '../components/Button'
 import Container from '../components/Container'
 import EventInfo from '../components/EventInfo'
+import BlogInfo from '../components/BlogInfo'
 import Footer from '../components/Footer'
 import Layout from '../components/Layout'
 import { graphql } from 'gatsby'
 import MainHeader from '../components/LayoutComponents/MainHeader'
 import { Box } from '@rebass/grid/emotion'
-import { CardWrapper } from '../components/LayoutComponents/Index'
+import { CardWrapper } from '../components/LayoutComponents'
 import { MdAlarm } from 'react-icons/md'
 import { TiGift, TiNotesOutline, TiLockClosedOutline } from 'react-icons/ti'
 import SignInForm from '../components/SignIn'
@@ -25,6 +26,20 @@ import config from '../../config/website'
 
 const EXCERPT_LENGTH = 250
 
+const CenteredHeading = styled.div`
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-align: center;
+    font-family: ${props => props.theme.fontFamily.heading};
+    font-weight: 700;
+    max-width: 850px;
+    margin: 3rem auto;
+  }
+  width: 100%;
+`
+
 const PostsWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -36,7 +51,7 @@ const Text = styled.p`
   text-align: center;
   font-family: ${props => props.theme.fontFamily.heading};
   font-weight: 700;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   line-height: 2.5rem;
   max-width: 850px;
   margin: 3rem auto;
@@ -88,7 +103,9 @@ const InfoTextBox = styled(CardWrapper)`
 const SignInEl = pathname => (
   <div>
     <PostsWrapper>
-      <Text>Најави се со Фејсбук</Text>
+      <CenteredHeading>
+        <h1>Најави се со Фејсбук</h1>
+      </CenteredHeading>
       <InfoTextBox>
         <Box className="content">
           <h4>Пристап до</h4>
@@ -126,6 +143,7 @@ const SignInEl = pathname => (
 const Index = ({
   data: {
     allPrismicNastan: { edges: nastani },
+    allPrismicBlog: { edges: blogs },
   },
   location: { pathname },
 }) => {
@@ -138,10 +156,10 @@ const Index = ({
   )
   let yesterday = new Date()
   yesterday.setDate(yesterday.getDate() - 1)
-  const upcoming_nastani = nastani.filter(
+  const upcomingNastani = nastani.filter(
     nastan => new Date(nastan.node.data.date) >= yesterday
   )
-  console.log('UPCOMING: ', upcoming_nastani)
+  console.log('UPCOMING: ', upcomingNastani)
   return (
     // <MainLayout>
     <Layout>
@@ -155,20 +173,11 @@ const Index = ({
       <div>
         <MainHeader title="#OURGOALISTHEFUTURE" />
         <Container>
-          <AuthUserContext.Consumer>
-            {authUser =>
-              authUser ? (
-                <WelcomeMessage username={authUser.displayName} />
-              ) : (
-                <SignInEl pathname={pathname} authUser={authUser} />
-              )
-            }
-          </AuthUserContext.Consumer>
-        </Container>
-        <Container>
-          <Text>Тековна програма</Text>
+          <CenteredHeading>
+            <h1>Тековна програма</h1>
+          </CenteredHeading>
           <PostsWrapper>
-            {upcoming_nastani.reverse().map(post => (
+            {upcomingNastani.reverse().map(post => (
               <EventInfo
                 key={post.node.uid}
                 title={post.node.data.naslov.text}
@@ -179,6 +188,8 @@ const Index = ({
                 inputTags={['журки', 'жмурки', 'ќурќи']}
                 excerpt={post.node.data.info.text.substring(0, EXCERPT_LENGTH)}
                 image={post.node.data.photo.localFile}
+                vlez={post.node.data.vlez}
+                pocetok={post.node.data.pocetok}
               />
             ))}
           </PostsWrapper>
@@ -190,6 +201,56 @@ const Index = ({
               </Button>
             </Link>
           </Text>
+        </Container>
+        <Container>
+          <CenteredHeading>
+            <h1>Најнови Постови</h1>
+          </CenteredHeading>
+          <PostsWrapper>
+            {blogs.map(post => {
+              const hasGallery = post.node.data.gallery[0].image1.localFile
+                ? true
+                : false
+              const hasPlaylist = post.node.data.body ? true : false
+              return (
+                <BlogInfo
+                  key={post.node.uid}
+                  title={post.node.data.title.text}
+                  path={post.node.uid}
+                  date={post.node.data.date}
+                  author={post.node.data.author.document[0].data.name}
+                  hasGallery={hasGallery}
+                  hasPlaylist={hasPlaylist}
+                  excerpt={post.node.data.text.text.substring(
+                    0,
+                    EXCERPT_LENGTH
+                  )}
+                  image={post.node.data.image.localFile}
+                  // vlez={post.node.data.vlez}
+                  // pocetok={post.node.data.pocetok}
+                />
+              )
+            })}
+          </PostsWrapper>
+          <Text>
+            Сите постови <br />
+            <Link to="/blog">
+              <Button background="magenta" size="large" type="secondary">
+                Блог
+              </Button>
+            </Link>
+          </Text>
+        </Container>
+        <Container>
+          <AuthUserContext.Consumer>
+            {authUser =>
+              authUser ? (
+                <WelcomeMessage username={authUser.displayName} />
+              ) : (
+                <SignInEl pathname={pathname} authUser={authUser} />
+              )
+            }
+          </AuthUserContext.Consumer>
         </Container>
         <Footer />
       </div>
@@ -208,6 +269,8 @@ export const pageQuery = graphql`
           id
           uid
           data {
+            vlez
+            pocetok(formatString: "HH:mm")
             naslov {
               html
               text
@@ -235,6 +298,71 @@ export const pageQuery = graphql`
                     traceSVG: { color: "#52555e" }
                   ) {
                     ...GatsbyImageSharpFluid_withWebp_tracedSVG
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    allPrismicBlog(sort: { order: DESC, fields: [data___date] }, limit: 4) {
+      edges {
+        node {
+          id
+          uid
+          slugs
+          data {
+            date
+            title {
+              html
+              text
+            }
+            text {
+              html
+              text
+            }
+            author {
+              document {
+                data {
+                  name
+                }
+              }
+            }
+            image {
+              localFile {
+                childImageSharp {
+                  fluid(
+                    maxWidth: 900
+                    quality: 85
+                    traceSVG: { color: "#2B2B2F" }
+                  ) {
+                    ...GatsbyImageSharpFluid_withWebp_tracedSVG
+                  }
+                }
+              }
+            }
+            gallery {
+              image1 {
+                localFile {
+                  childImageSharp {
+                    fluid(
+                      maxWidth: 900
+                      quality: 85
+                      traceSVG: { color: "#2B2B2F" }
+                    ) {
+                      ...GatsbyImageSharpFluid_withWebp_tracedSVG
+                    }
+                  }
+                }
+              }
+            }
+            body {
+              ... on PrismicBlogBodyPlaylist {
+                slice_type
+                primary {
+                  playlist_name {
+                    text
                   }
                 }
               }

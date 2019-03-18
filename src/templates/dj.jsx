@@ -227,9 +227,9 @@ export const DjQuery = graphql`
         instagram {
           url
         }
-        # twitter {
-        #   url
-        # }
+        twitter {
+          url
+        }
         bio {
           text
           html
@@ -240,26 +240,26 @@ export const DjQuery = graphql`
           link {
             url
           }
-          # tracklist {
-          #   text
-          #   html
-          # }
+          tracklist {
+            text
+            html
+          }
         }
-        # avatar {
-        #   localFile {
-        #     childImageSharp {
-        #       fixed(
-        #         width: 250
-        #         height: 250
-        #         grayscale: true
-        #         quality: 70
-        #         traceSVG: { color: "#52555e" }
-        #       ) {
-        #         ...GatsbyImageSharpFixed_withWebp_tracedSVG
-        #       }
-        #     }
-        #   }
-        # }
+        avatar {
+          localFile {
+            childImageSharp {
+              fixed(
+                width: 250
+                height: 250
+                grayscale: true
+                quality: 70
+                traceSVG: { color: "#52555e" }
+              ) {
+                ...GatsbyImageSharpFixed_withWebp_tracedSVG
+              }
+            }
+          }
+        }
         background_image {
           localFile {
             childImageSharp {
@@ -280,15 +280,15 @@ export const DjQuery = graphql`
       uid
       data {
         title
-        # dj {
-        #   document {
-        #     id
-        #     uid
-        #     data {
-        #       name
-        #     }
-        #   }
-        # }
+        dj {
+          document {
+            id
+            uid
+            data {
+              name
+            }
+          }
+        }
         image {
           url
         }

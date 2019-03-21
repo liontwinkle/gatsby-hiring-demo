@@ -110,9 +110,9 @@ export const EventsQuery = graphql`
                   fluid(
                     maxWidth: 1400
                     quality: 85
-                    traceSVG: { color: "#52555e" }
-                  ) {
-                    ...GatsbyImageSharpFluid_withWebp_tracedSVG
+                  ) # traceSVG: { color: "#52555e" }
+                  {
+                    ...GatsbyImageSharpFluid_withWebp
                   }
                   fixed(width: 140, height: 140) {
                     src

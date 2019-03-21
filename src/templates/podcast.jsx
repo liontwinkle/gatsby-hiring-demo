@@ -297,14 +297,14 @@ export const BlogQuery = graphql`
               fluid(
                 maxWidth: 1400
                 quality: 85
-                traceSVG: { color: "#52555e" }
-                duotone: {
-                  highlight: "#262c41"
-                  shadow: "#46507a"
-                  opacity: 45
-                }
-              ) {
-                ...GatsbyImageSharpFluid_withWebp_tracedSVG
+              ) # traceSVG: { color: "#52555e" }
+              # duotone: {
+              #   highlight: "#262c41"
+              #   shadow: "#46507a"
+              #   opacity: 45
+              # }
+              {
+                ...GatsbyImageSharpFluid_withWebp
               }
             }
           }
@@ -316,10 +316,9 @@ export const BlogQuery = graphql`
               childImageSharp {
                 fluid(
                   maxWidth: 900
-                  quality: 85
-                  traceSVG: { color: "#2B2B2F" }
+                  quality: 85 # traceSVG: { color: "#2B2B2F" }
                 ) {
-                  ...GatsbyImageSharpFluid_withWebp_tracedSVG
+                  ...GatsbyImageSharpFluid_withWebp
                 }
               }
             }

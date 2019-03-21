@@ -54,7 +54,7 @@ const MainHeader = ({ title, subtitle }) => (
 //           quality: 75
 //           duotone: { highlight: "#262c41", shadow: "#46507a", opacity: 50 }
 //         ) {
-//           ...GatsbyImageSharpFluid_withWebp_tracedSVG
+//           ...GatsbyImageSharpFluid_withWebp
 //         }
 //       }
 //     }

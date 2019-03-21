@@ -41,10 +41,10 @@ class DjContent extends React.Component {
     console.log('SELECTED: ', selected)
     const djChart = this.props.chart
     const CurrentElement = (() => {
-      if (selected === '?tab=charts') {
-        description = `${djChart.data.title} by ${title}`
-        return <DjChart chart={djChart} location={this.props.location} />
-      }
+      // if (selected === '?tab=charts') {
+      //   description = `${djChart.data.title} by ${title}`
+      //   return <DjChart chart={djChart} location={this.props.location} />
+      // }
       if (selected === '?tab=mixes') {
         description = `Миксови од ${dj.data.name}`
         return (

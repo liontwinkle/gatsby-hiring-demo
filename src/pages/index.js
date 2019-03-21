@@ -295,10 +295,9 @@ export const pageQuery = graphql`
                 childImageSharp {
                   fluid(
                     maxWidth: 1400
-                    quality: 85
-                    traceSVG: { color: "#52555e" }
+                    quality: 85 # traceSVG: { color: "#52555e" }
                   ) {
-                    ...GatsbyImageSharpFluid_withWebp_tracedSVG
+                    ...GatsbyImageSharpFluid_withWebp
                   }
                 }
               }
@@ -338,7 +337,7 @@ export const pageQuery = graphql`
                     quality: 85
                     traceSVG: { color: "#2B2B2F" }
                   ) {
-                    ...GatsbyImageSharpFluid_withWebp_tracedSVG
+                    ...GatsbyImageSharpFluid_withWebp
                   }
                 }
               }
@@ -352,7 +351,7 @@ export const pageQuery = graphql`
                       quality: 85
                       traceSVG: { color: "#2B2B2F" }
                     ) {
-                      ...GatsbyImageSharpFluid_withWebp_tracedSVG
+                      ...GatsbyImageSharpFluid_withWebp
                     }
                   }
                 }

@@ -46,7 +46,7 @@ export const pageQuery = graphql`
           quality: 75
           duotone: { highlight: "#262c41", shadow: "#46507a", opacity: 50 }
         ) {
-          ...GatsbyImageSharpFluid_withWebp
+          ...GatsbyImageSharpFluid_withWebp_tracedSVG
         }
       }
     }

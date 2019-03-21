@@ -296,14 +296,14 @@ export const Nastan = graphql`
               fluid(
                 maxWidth: 1400
                 quality: 85
-              ) # traceSVG: { color: "#52555e" }
-              # duotone: {
-              #   highlight: "#262c41"
-              #   shadow: "#46507a"
-              #   opacity: 65
-              # }
-              {
-                ...GatsbyImageSharpFluid_withWebp
+                traceSVG: { color: "#52555e" }
+                duotone: {
+                  highlight: "#262c41"
+                  shadow: "#46507a"
+                  opacity: 65
+                }
+              ) {
+                ...GatsbyImageSharpFluid_withWebp_tracedSVG
               }
               # resolutions(width: 140, height: 140) {
               #   src

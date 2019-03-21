@@ -114,7 +114,7 @@ export const blogQuery = graphql`
                     quality: 85
                     traceSVG: { color: "#2B2B2F" }
                   ) {
-                    ...GatsbyImageSharpFluid_withWebp
+                    ...GatsbyImageSharpFluid_withWebp_tracedSVG
                   }
                 }
               }
@@ -128,7 +128,7 @@ export const blogQuery = graphql`
                       quality: 85
                       traceSVG: { color: "#2B2B2F" }
                     ) {
-                      ...GatsbyImageSharpFluid_withWebp
+                      ...GatsbyImageSharpFluid_withWebp_tracedSVG
                     }
                   }
                 }

@@ -95,6 +95,7 @@ module.exports = {
         trackingId: 'UA-55823404-2',
       },
     },
+    `gatsby-plugin-sitemap`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {

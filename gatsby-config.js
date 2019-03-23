@@ -53,19 +53,6 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-layout`,
     `gatsby-plugin-offline`,
-    // {
-    //   resolve: `gatsby-source-strapi`,
-    //   options: {
-    //     apiURL: `http://localhost:1337`,
-    //     contentTypes: [
-    //       // List of the Content Types you want to be able to request from Gatsby.
-    //       `blog`,
-    //       `user`,
-    //       `programa`,
-    //     ],
-    //     plugins: [`gatsby-transformer-sharp`],
-    //   },
-    // },
     {
       resolve: `gatsby-plugin-styled-components`,
       options: {
@@ -99,6 +86,13 @@ module.exports = {
         siteUrl: 'https://www.sektor909.mk',
         // localScript: '/piwik.js',
         // dev: true,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        // replace "UA-XXXXXXXXX-X" with your own Tracking ID
+        trackingId: 'UA-55823404-2',
       },
     },
     {

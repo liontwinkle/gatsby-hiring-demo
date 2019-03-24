@@ -5,6 +5,7 @@ require('dotenv').config({
 module.exports = {
   siteMetadata: {
     title: `Sektor909`,
+    siteUrl: `https://www.sektor909.mk`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

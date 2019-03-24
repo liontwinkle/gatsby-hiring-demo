@@ -74,23 +74,23 @@ class DjContent extends React.Component {
           title={title}
           description={description}
         />
-        <section id="focus">
-          <UnerlineNav
-            handleClick={(e, el) => this.handleClick(e, el, dj.uid)}
-            selected={selected}
-          />
-          <Box m={2}>{CurrentElement}</Box>
-          <Line />
-          <Flex flexDirection={['column', 'row']} alignItems="center">
-            <Box>
-              <Text>Сподели со твоите пријатели</Text>
-            </Box>
-            <Box>
-              <Twitter message={description} link={this.props.location.href} />
-              <Facebook link={this.props.location.href} />
-            </Box>
-          </Flex>
-        </section>
+        {/* <section id="focus"> */}
+        <UnerlineNav
+          handleClick={(e, el) => this.handleClick(e, el, dj.uid)}
+          selected={selected}
+        />
+        <Box m={2}>{CurrentElement}</Box>
+        <Line />
+        <Flex flexDirection={['column', 'row']} alignItems="center">
+          <Box>
+            <Text>Сподели со твоите пријатели</Text>
+          </Box>
+          <Box>
+            <Twitter message={description} link={this.props.location.href} />
+            <Facebook link={this.props.location.href} />
+          </Box>
+        </Flex>
+        {/* </section> */}
       </div>
     )
   }

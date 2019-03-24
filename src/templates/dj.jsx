@@ -128,12 +128,14 @@ const Dj = ({ data: { prismicDj: dj }, location }) => (
             <Box className="dj-card" mr={[0, 0, 4]}>
               <Card className={moveUpBig}>
                 <Flex px={2} flexDirection="column" alignItems="center">
-                  <Image>
-                    <Img
-                      className="gatsby-image"
-                      fixed={dj.data.avatar.localFile.childImageSharp.fixed}
-                    />
-                  </Image>
+                  <section id="focus">
+                    <Image>
+                      <Img
+                        className="gatsby-image"
+                        fixed={dj.data.avatar.localFile.childImageSharp.fixed}
+                      />
+                    </Image>
+                  </section>
                   <Box my={3}>
                     <Heading as="h3">{dj.data.name}</Heading>
                     {/* <Text fontSize={0}>{dj.data.punchline}</Text> */}

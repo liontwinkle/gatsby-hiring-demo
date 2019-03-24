@@ -8,6 +8,7 @@ import Button from '../components/Button'
 import Container from '../components/Container'
 import EventInfo from '../components/EventInfo'
 import BlogInfo from '../components/BlogInfo'
+import PodcastInfo from '../components/PodcastInfo'
 import Footer from '../components/Footer'
 import Layout from '../components/Layout'
 import { graphql } from 'gatsby'
@@ -145,6 +146,7 @@ const Index = ({
   data: {
     allPrismicNastan: { edges: nastani },
     allPrismicBlog: { edges: blogs },
+    allPrismicPodcast: { edges: podcast },
   },
   location: { pathname },
 }) => {
@@ -238,6 +240,37 @@ const Index = ({
             <Link to="/blog">
               <Button background="magenta" size="large" type="secondary">
                 Блог
+              </Button>
+            </Link>
+          </Text>
+        </Container>
+
+        <Container>
+          <CenteredHeading>
+            <h1>Најнови Подкасти</h1>
+          </CenteredHeading>
+          <PostsWrapper>
+            {podcast.map(post => {
+              return (
+                <PodcastInfo
+                  key={post.node.uid}
+                  title={post.node.data.title.text}
+                  path={post.node.uid}
+                  date={post.node.data.date}
+                  excerpt={post.node.data.text.text.substring(
+                    0,
+                    EXCERPT_LENGTH
+                  )}
+                  image={post.node.data.image.localFile}
+                />
+              )
+            })}
+          </PostsWrapper>
+          <Text>
+            Сите подкасти <br />
+            <Link to="/podcast">
+              <Button background="magenta" size="large" type="secondary">
+                Подкаст
               </Button>
             </Link>
           </Text>
@@ -363,6 +396,42 @@ export const pageQuery = graphql`
                 primary {
                   playlist_name {
                     text
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    allPrismicPodcast(sort: { order: DESC, fields: [data___date] }, limit: 4) {
+      edges {
+        node {
+          uid
+          data {
+            title {
+              text
+              html
+            }
+            text {
+              html
+              text
+            }
+            link {
+              link_type
+              url
+              target
+            }
+            date
+            image {
+              localFile {
+                childImageSharp {
+                  fluid(
+                    maxWidth: 900
+                    quality: 85
+                    traceSVG: { color: "#2B2B2F" }
+                  ) {
+                    ...GatsbyImageSharpFluid_withWebp
                   }
                 }
               }

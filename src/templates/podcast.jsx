@@ -102,28 +102,8 @@ const Line = styled.div`
 
 class Podcast extends React.Component {
   render() {
-    const post = this.props.data.prismicBlog
+    const post = this.props.data.prismicPodcast
     console.log('POST', post)
-    const { gallery } = post.data
-    const playlist = post.data.body ? post.data.body[0] : null
-    const PlaylistPlayer = playlist ? (
-      <PlayerConsumer>
-        {({ data, set }) => (
-          <Player
-            playlist={playlist.items}
-            name={playlist.primary.playlist_name.text}
-            contextData={data}
-            setFunction={set}
-            location={this.props.location}
-          />
-        )}
-      </PlayerConsumer>
-    ) : null
-    const images = gallery[0].image1.localFile
-      ? gallery.map(image => {
-          return { src: image.image1.localFile.childImageSharp.fluid.src }
-        })
-      : null
     return (
       <Layout>
         <div className="post-container">
@@ -149,27 +129,6 @@ class Podcast extends React.Component {
                     <h4>{post.data.date}</h4>
                   </span>
                 </span>
-                <span className="element">
-                  <span className="margin subElement">
-                    <GoPerson size={20} />
-                    <h4>{post.data.author.document[0].data.name}</h4>
-                  </span>
-                </span>
-
-                {images && (
-                  <span className="element">
-                    <span className="subElement">
-                      <IoIosImages size={20} />
-                    </span>
-                  </span>
-                )}
-                {playlist && (
-                  <span className="element">
-                    <span className="subElement">
-                      <GiMusicalNotes size={20} />
-                    </span>
-                  </span>
-                )}
               </Information>
             </Hero>
             <Img fluid={post.data.image.localFile.childImageSharp.fluid} />
@@ -177,34 +136,6 @@ class Podcast extends React.Component {
           {/* <MainHeader title={post.data.title.text} /> */}
           <Container type="article">
             <Content input={post.data.text.html} />
-            {PlaylistPlayer}
-            {images ? (
-              <div>
-                <Grid width={320} gap={24}>
-                  {gallery.map((image, index) => (
-                    <a
-                      key={image.image1.localFile.id}
-                      href={image.image1.localFile.childImageSharp.fluid.src}
-                      onClick={e => this.openLightbox(index, e)}
-                    >
-                      <Img
-                        key={image.image1.localFile.id}
-                        fluid={image.image1.localFile.childImageSharp.fluid}
-                      />
-                    </a>
-                  ))}
-                </Grid>
-                <Lightbox
-                  images={images}
-                  isOpen={this.state.lightboxIsOpen}
-                  onClickPrev={this.gotoPrevious}
-                  onClickNext={this.gotoNext}
-                  onClose={this.closeLightbox}
-                  currentImage={this.state.currentImage}
-                  onClickImage={this.handleClickImage}
-                />
-              </div>
-            ) : null}
             <Line />
             {/* <Tags tags={post.tags} /> */}
             <Flex flexDirection={['column', 'row']} alignItems="center">
@@ -245,36 +176,16 @@ Podcast.propTypes = {
   //   slug: PropTypes.string.isRequired,
   // }),
   data: PropTypes.shape({
-    prismicBlog: PropTypes.object.isRequired,
+    prismicPodcast: PropTypes.object.isRequired,
   }),
 }
 
 /* eslint no-undef: "off" */
-export const BlogQuery = graphql`
+export const PodcastQuery = graphql`
   query SinglePodcast($uid: String!) {
-    prismicBlog(uid: { eq: $uid }) {
-      id
+    prismicPodcast(uid: { eq: $uid }) {
       uid
-      slugs
       data {
-        body {
-          ... on PrismicBlogBodyPlaylist {
-            slice_type
-            primary {
-              playlist_name {
-                html
-                text
-              }
-            }
-            items {
-              link {
-                url
-              }
-              artist
-              track
-            }
-          }
-        }
         date
         title {
           html
@@ -284,45 +195,27 @@ export const BlogQuery = graphql`
           html
           text
         }
-        author {
-          document {
-            data {
-              name
-            }
-          }
-        }
         image {
+          url
           localFile {
             childImageSharp {
               fluid(
                 maxWidth: 1400
                 quality: 85
-              ) # traceSVG: { color: "#52555e" }
-              # duotone: {
-              #   highlight: "#262c41"
-              #   shadow: "#46507a"
-              #   opacity: 45
-              # }
-              {
-                ...GatsbyImageSharpFluid_withWebp
+                traceSVG: { color: "#52555e" }
+                duotone: {
+                  highlight: "#262c41"
+                  shadow: "#46507a"
+                  opacity: 45
+                }
+              ) {
+                ...GatsbyImageSharpFluid_withWebp_tracedSVG
               }
             }
           }
         }
-        gallery {
-          image1 {
-            localFile {
-              id
-              childImageSharp {
-                fluid(
-                  maxWidth: 900
-                  quality: 85 # traceSVG: { color: "#2B2B2F" }
-                ) {
-                  ...GatsbyImageSharpFluid_withWebp
-                }
-              }
-            }
-          }
+        link {
+          url
         }
       }
     }

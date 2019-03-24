@@ -13,6 +13,7 @@ exports.createPages = ({ graphql, actions }) => {
     const postPage = path.resolve('src/templates/nastan.jsx')
     const blogPage = path.resolve('src/templates/post.jsx')
     const djpage = path.resolve('src/templates/dj.jsx')
+    const podcast = path.resolve('src/templates/podcast.jsx')
     resolve(
       graphql(`
         {
@@ -45,6 +46,13 @@ exports.createPages = ({ graphql, actions }) => {
               }
             }
           }
+          allPrismicPodcast {
+            edges {
+              node {
+                uid
+              }
+            }
+          }
         }
       `).then(result => {
         if (result.errors) {
@@ -74,6 +82,15 @@ exports.createPages = ({ graphql, actions }) => {
           createPage({
             path: `djs/${edge.node.uid}`,
             component: djpage,
+            context: {
+              uid: edge.node.uid,
+            },
+          })
+        })
+        result.data.allPrismicPodcast.edges.forEach(edge => {
+          createPage({
+            path: `podcast/${edge.node.uid}`,
+            component: podcast,
             context: {
               uid: edge.node.uid,
             },

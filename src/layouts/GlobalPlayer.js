@@ -300,7 +300,7 @@ class Player extends React.Component {
       duration,
       playbackRate,
     } = this.state
-
+    console.log('IN GLOBAL PLAYER!!!')
     // const PlaylistElement =
     //   this.props.type === 'chart' ? PlaylistChart : Playlist
     // const playlist = this.props.playlist

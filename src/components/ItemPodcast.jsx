@@ -82,7 +82,7 @@ const Excerpt = styled.div`
   margin-top: 2rem;
 `
 
-const ItemBlog = ({
+const ItemPodcast = ({
   path,
   cover,
   title,
@@ -94,7 +94,7 @@ const ItemBlog = ({
 }) => (
   <Wrapper>
     <Image>
-      <Link to={`blog/${path}`}>
+      <Link to={`podcast/${path}`}>
         <Img fluid={cover} />
         {/* <img src={`http://localhost:1337${cover.url}`} /> */}
       </Link>
@@ -105,27 +105,9 @@ const ItemBlog = ({
           <GoCalendar size={20} />
           <span className="subElement">{date}</span>
         </span>
-        <span className="element">
-          <GoPerson size={20} />
-          <span className={'subElement'}>{author}</span>
-        </span>
-        <span className="element">
-          {gallery && (
-            <span className="subElement">
-              <IoIosImages size={20} />
-            </span>
-          )}
-        </span>
-        <span className="element">
-          {playlist && (
-            <span className="subElement">
-              <GiMusicalNotes size={20} />
-            </span>
-          )}
-        </span>
         {/* <Link to={`/categories/${kebabCase(category)}`}>{category}</Link> */}
       </Statistics>
-      <Link to={`blog/${path}`}>
+      <Link to={`podcast/${path}`}>
         <h1>{title}</h1>
       </Link>
       <Excerpt>{text}</Excerpt>
@@ -133,19 +115,19 @@ const ItemBlog = ({
   </Wrapper>
 )
 
-export default ItemBlog
+export default ItemPodcast
 
-ItemBlog.propTypes = {
-  path: PropTypes.string.isRequired,
-  cover: PropTypes.any.isRequired,
-  // category: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
-  // timeToRead: PropTypes.number.isRequired,
-  // tags: PropTypes.array.isRequired,
-  text: PropTypes.string.isRequired,
-  // images: PropTypes.arrayOf(PropTypes.object),
-  author: PropTypes.string.isRequired,
-  gallery: PropTypes.bool,
-  playlist: PropTypes.bool,
-}
+// ItemPodcast.propTypes = {
+//   path: PropTypes.string.isRequired,
+//   cover: PropTypes.any.isRequired,
+//   // category: PropTypes.string.isRequired,
+//   title: PropTypes.string.isRequired,
+//   date: PropTypes.string.isRequired,
+//   // timeToRead: PropTypes.number.isRequired,
+//   // tags: PropTypes.array.isRequired,
+//   text: PropTypes.string.isRequired,
+//   // images: PropTypes.arrayOf(PropTypes.object),
+//   author: PropTypes.string.isRequired,
+//   gallery: PropTypes.bool,
+//   playlist: PropTypes.bool,
+// }

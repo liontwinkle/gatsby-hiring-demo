@@ -83,7 +83,7 @@ const Kontakt = ({ location }) => (
           {/* <p>Летната локација на клубот</p> */}
         </Container>
         <CenteredContainer>
-          <a href="mailto:contact@sektor.com">
+          <a href="mailto:contact@sektor909.mk">
             <Button type="primary">
               <Paperplane /> E-Mail
             </Button>

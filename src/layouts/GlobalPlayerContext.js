@@ -375,7 +375,7 @@ class ContextProviderComponent extends React.Component {
       : null
     let data = { ...this.state.data }
     data.url = url
-    data.playing = false
+    // data.playing = false
     data.loaded = 0
     data.played = 0
     data.artist = artist
@@ -418,7 +418,7 @@ class ContextProviderComponent extends React.Component {
       playlistLink,
       // index,
     } = this.state.data
-    console.log('STATE: ', this.state)
+    console.log('IN GLOBAL PLAYER!!!')
     const PlayPauseButton = this.state.data.playing ? FaPause : FaPlay
     const MuteSoundButton = this.state.data.muted ? FaVolumeOff : FaVolumeUp
     const Timer =
@@ -438,8 +438,8 @@ class ContextProviderComponent extends React.Component {
             <ReactPlayer
               ref={this.ref}
               className="react-player"
-              width="0"
-              height="0"
+              // width="400px"
+              // height="400px"
               url={this.state.data.url}
               playing={playing}
               loop={loop}
@@ -458,7 +458,13 @@ class ContextProviderComponent extends React.Component {
               onDuration={this.onDuration}
               config={{
                 youtube: { preload: true },
-                // soundcloud: { preload: true, options: { auto_play: true } },
+                soundcloud: { preload: true },
+              }}
+              style={{
+                zIndex: -100,
+                position: 'fixed',
+                width: '2px',
+                height: '2px',
               }}
             />
             {!this.state.collapse ? (

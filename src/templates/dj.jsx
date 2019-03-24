@@ -110,7 +110,7 @@ const centerEl = css`
   background-color: blue;
 `
 
-const Dj = ({ data: { prismicDj: dj, prismicChart: chart }, location }) => (
+const Dj = ({ data: { prismicDj: dj }, location }) => (
   <Layout>
     <div>
       <Wrapper>
@@ -195,7 +195,7 @@ const Dj = ({ data: { prismicDj: dj, prismicChart: chart }, location }) => (
           </Flex>
         </Box>
         <Box className={moveUpSmall} width={[1, 0.7]}>
-          <DjContent location={location} dj={dj} chart={chart} />
+          <DjContent location={location} dj={dj} />
         </Box>
       </Flex>
       <Footer />
@@ -273,32 +273,30 @@ export const DjQuery = graphql`
             }
           }
         }
-      }
-    }
-    prismicChart(uid: { eq: "november-dj-chart" }) {
-      id
-      uid
-      data {
-        title
-        dj {
-          document {
+        charts {
+          chart {
             id
             uid
-            data {
-              name
+            document {
+              id
+              data {
+                title
+                image {
+                  alt
+                  copyright
+                  url
+                }
+                chart {
+                  artist
+                  track
+                  album
+                  label
+                  link {
+                    url
+                  }
+                }
+              }
             }
-          }
-        }
-        image {
-          url
-        }
-        chart {
-          artist
-          track
-          label
-          album
-          link {
-            url
           }
         }
       }

@@ -39,12 +39,16 @@ class DjContent extends React.Component {
       ? this.props.location.search
       : '?tab=bio'
     console.log('SELECTED: ', selected)
-    const djChart = this.props.chart
+    const djCharts = dj.data.charts
     const CurrentElement = (() => {
-      // if (selected === '?tab=charts') {
-      //   description = `${djChart.data.title} by ${title}`
-      //   return <DjChart chart={djChart} location={this.props.location} />
-      // }
+      if (selected === '?tab=charts') {
+        const charts = djCharts.map(chart => {
+          const djChart = chart.chart.document[0]
+          description = `${djChart.data.title} by ${title}`
+          return <DjChart chart={djChart} location={this.props.location} />
+        })
+        return <div>{charts}</div>
+      }
       if (selected === '?tab=mixes') {
         description = `Миксови од ${dj.data.name}`
         return (
@@ -58,6 +62,7 @@ class DjContent extends React.Component {
       if (selected === '?tab=events') return <span>Events</span>
       return bio
     })()
+    console.log('Current Element', CurrentElement)
     return (
       <div>
         <Helmet title={`${dj.data.name} | ${config.siteTitle}`} />

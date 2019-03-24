@@ -99,11 +99,11 @@ const Footer = ({ children }) => {
               Facebook
             </a>
             <a
-              href="https://www.mixcloud.com/sektor909/"
+              href="https://www.soundcloud.com/sektor909-official/"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Mixcloud
+              Soundcloud
             </a>
             <a
               href="https://www.twitter.com/sektor909"

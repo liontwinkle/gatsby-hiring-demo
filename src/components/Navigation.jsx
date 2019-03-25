@@ -170,6 +170,9 @@ class Navigation extends React.Component {
                 <Link to="/djs" activeClassName="active">
                   Диџеи
                 </Link>
+                <Link to="/podcast" activeClassName="active">
+                  Подкаст
+                </Link>
               </div>
             </div>
           </Nav>

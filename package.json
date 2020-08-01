@@ -1,8 +1,7 @@
 {
-  "name": "Sektor909",
-  "description": "Club Sektor909 official web site",
+  "name": "Gatsby-hiring-demo",
+  "description": "hiring demo web site",
   "version": "1.0.0",
-  "author": "Bozhidar Hristov <bozidar.hristov@gmail.com>",
   "dependencies": {
     "@emotion/core": "^10.0.9",
     "@emotion/styled": "^10.0.9",
@@ -53,9 +52,6 @@
     "typography": "^0.16.17",
     "typography-theme-de-young": "^0.16.9"
   },
-  "keywords": [
-    "sektor909, sektor, skopje, clubbing, gatsby"
-  ],
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
